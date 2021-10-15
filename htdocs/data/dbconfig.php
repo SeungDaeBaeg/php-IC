@@ -16,7 +16,7 @@ if($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
     define('G5_MYSQL_DB', 'inburstshop');
     define('G5_MYSQL_SET_MODE', true);
 } else {
-    //리얼 서
+    //리얼 서버
     define('G5_MYSQL_HOST', 'localhost');
     define('G5_MYSQL_USER', 'inburstshop');
     define('G5_MYSQL_PASSWORD', 'inburstshop!@!@13');
