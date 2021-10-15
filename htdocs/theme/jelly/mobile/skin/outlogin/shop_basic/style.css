@@ -1,0 +1,75 @@
+@charset "utf-8";
+.ol {display:none;text-align:left;}
+
+.ol .btn_close {position:absolute;top:0;right:0;width:55px;height:55px;background:none;color:#aaa;font-size:16px;border:0;z-index:964999}
+.ol .btn_close:hover{color:#000}
+
+.ol_before_wr {position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;background:rgba(0,0,0,0.6);text-align:center;padding:20px;z-index:944999}
+#ol_before{position:absolute;top:50%;left:50%;width:450px;height:500px;margin-left:-225px;margin-top:-250px;padding:45px;background:#fff;text-align:center}
+#ol_before h2{font-size:28px;margin:20px 0;font-size:1.846em}
+#ol_before .btn_close{position:absolute;top:0;right:0;width:60px;height:60px;background:#fff;border:0;color: #ccc;font-size: 18px;}
+#ol_before .btn_close:hover{color:#666}
+#ol_before fieldset {position:relative}
+#ol_id {display:block;width:100%}
+.ol_idlabel {color:#333;}
+#ol_pw {display:block;;width:100%;margin:10px 0}
+.ol_pwlabel {color:#333;}
+#auto_login {}
+#auto_login_label {letter-spacing:-0.1em}
+#ol_submit {width:100%;height:52px;font-size:14px;font-weight:900;}
+.btn_join{display:block;line-height:52px;width:100%;font-size:14px;margin:5px 0;font-weight:900}
+#ol_svc {text-align:center;margin:10px 0 0}
+#ol_svc a{display:inline-block;color:#333;margin:0 5px 5px;text-decoration:underline}
+#ol_auto {position:relative;margin:20px 0;text-align:left;color:#555}
+#ol_auto label {letter-spacing:-0.1em}
+#ol_auto input {width:13px;height:13px;vertical-align:bottom} 
+
+#ol_after{background:#fff}
+#ol_after h2{position:absolute;font-size:0;text-indent:-9999em;line-height:0;overflow:hidden}
+#ol_after .btn_close {height:76px}
+#ol_after_hd{text-align:left;position:relative;padding:20px;padding-left:70px;border-bottom:1px solid #eee;line-height:36px}
+#ol_after_hd strong {display:block;font-weight:500}
+#ol_after_hd .profile_img{display:inline-block;position:absolute;top:20px;left:20px;margin:0 0 10px}
+#ol_after_hd .profile_img img{border-radius:50%;width:36px;height:36px;}
+#ol_after_info{position:absolute;bottom:-5px;right:-5px;text-align:center;background:#fff;color:#717583;width:25px;height:25px;line-height:25px;font-size:13px;border-radius:50%}
+
+#ol_after_private {margin:0;padding:0;list-style:none;padding:10px}
+#ol_after_private:after {display:block;visibility:hidden;clear:both;content:""}
+#ol_after_private li {position:relative;float:left;width:33.33333%;padding:10px}
+#ol_after_private a {background:#f3f3f3;color:#727280;line-height:20px;display:block;text-align:center;padding:20px 0;position:relative;}
+#ol_after_private a:hover{background:#fafafa;color:#f05858}
+#ol_after_private i{display:block;font-size:15px;margin: 5px 0}
+#ol_after_private strong{position:absolute;bottom:-10px;left:0;text-align:center;display:block;width:100%}
+#ol_after_private strong span{display:inline-block;line-height:20px;font-size:11px;font-weight:300;background:#ffbe53;color:#fff;padding:0 8px;border-radius:30px}
+#ol_after_private #ol_after_pt span{background:#8bc34a}
+#ol_after_private #ol_after_memo span{background:#673ab7}
+
+#ol_after_ul{border-top:1px solid #eee;;padding:10px 0}
+#ol_after_ul li{display:block;line-height:40px}
+#ol_after_ul li a{color:#727280;display:block;font-weight:300} 
+#ol_after_ul li a:hover{background:#f3f3f3;color:#000}
+#ol_after_ul i{width:55px;text-align:center;font-size:15px}
+
+#ol_after_btn {position:absolute;top:24px;right:60px}
+#ol_after_btn a{display:inline-block;padding:0 10px;line-height:30px;vertical-align:top}
+
+
+@media (min-width: 970px){
+    #ol_after{;position:absolute;top:60px;right:0;width:300px;background:#fff;z-index:99999;
+    -webkit-box-shadow:0 2px 15px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.2)}
+}
+
+
+@media (max-width: 969px){
+    #ol_before{width:90%;margin-left:-45%;}
+    #ol_after{display:block !important}
+    #ol_after .btn_close{display:none}
+    #ol_after_hd{padding:10px;padding-left: 55px;}
+    #ol_after_btn{top:12px;right:55px}
+    #ol_after_hd .profile_img{top:10px;left:10px}
+    #ol_before{padding:30px}
+    #ol_before h2{font-size:1.5em}
+
+}
