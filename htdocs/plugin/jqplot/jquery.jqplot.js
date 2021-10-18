@@ -1328,7 +1328,6 @@
                 }
             }
             else {
-                // TODO: figure out what to do with null values
                 // probably involve keeping nulls in data array
                 // and then updating renderers to break line
                 // when it hits null value.
@@ -5835,7 +5834,6 @@
                         var fasopts = $.extend(true, {}, opts, {fill:false, closePath:false});
                         this.renderer.shapeRenderer.draw(ctx, fasgd, fasopts);
                         //////////
-                        // TODO: figure out some way to do shadows nicely
                         // if (shadow) {
                         //     this.renderer.shadowRenderer.draw(ctx, fasgd, fasopts);
                         // }
@@ -11269,7 +11267,6 @@
 
         // invalid strings - treat as "normal" speed
         if ( typeof speed === "string" && !$.jqplot.effects.effect[ speed ] ) {
-            // TODO: remove in 2.0 (#7115)
             if ( backCompat && $.jqplot.effects[ speed ] ) {
                 return false;
             }
@@ -11325,7 +11322,6 @@
                 }
             }
 
-            // TODO: remove this check in 2.0, effectMethod will always be true
             if ( effectMethod ) {
                 return queue === false ? this.each( run ) : this.queue( queue || "fx", run );
             } else {

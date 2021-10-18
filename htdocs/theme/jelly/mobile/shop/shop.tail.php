@@ -93,6 +93,6 @@ include_once(G5_THEME_PATH.'/tail.sub.php');
 
 <script>
 $("#cate_btn").on("click", function() {
-        $("#category").show();
-    });
+    $("#category").show();
+});
 </script>

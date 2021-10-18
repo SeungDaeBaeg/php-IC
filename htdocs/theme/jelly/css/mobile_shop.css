@@ -81,7 +81,7 @@ box-shadow: 0 2px 9px rgba(0,0,0,0.1)}
 
 
 #hd_btn {position:absolute;top:15px;right:0}
-#hd_btn button{height:45px;line-height:45px;width:45px;background:none;border:0;vertical-align:top}
+#logo button{height:45px;line-height:45px;width:45px;background:none;border:0;vertical-align:top}
 #hd_btn  i{font-size:18px}
 #hd_btn a{display:inline-block;line-height:45px;width:45px;text-align:center;vertical-align:top}
 #btn_cartop{position:relative}
@@ -92,12 +92,12 @@ box-shadow: 0 2px 9px rgba(0,0,0,0.1)}
 .hd_admin a:hover{background:#ff0000}
 
 @media (max-width: 969px){
-    
+
     #hd_wr {padding:15px; }
     #logo{float:none;margin:0}
     #logo img{height:25px;width:auto}
     #hd_btn{top:0;right:10px}
-    #hd_btn button{width:40px;height:55px}
+    #logo button{width:40px;height:25px}
     #hd_btn a{line-height:55px}
     #btn_cartop .cart-count{top:7px}
     #hd_btn .btn_ol{width:40px}
@@ -1026,3 +1026,6 @@ box-shadow: 0 0 8px rgba(65,98,255,0.8);}
 .ft_nabi > .ft_item > .star_icon {background: url(../img/star.png);background-size: 100% 100%;}
 .ft_nabi > .ft_item > .myinfo_icon {background: url(../img/myinfo.png);background-size: 100% 100%;}
 .ft_nabi > .ft_item > .heart_icon {background: url(../img/heart.png);background-size: 100% 100%;}
+
+/* 중단 메뉴 바 */
+#main_middle_menu > button {width:25%;height:60px;float:left;}

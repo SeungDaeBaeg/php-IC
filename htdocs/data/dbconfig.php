@@ -1,14 +1,18 @@
 <?php
 if (!defined('_GNUBOARD_')) exit;
 
-if($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
+define("SERVER_LOCAL", "127.0.0.1");
+define("SERVER_STAGING", "175.126.147.43");
+define("SERVER_REAL", "175.126.147.43");
+
+if($_SERVER['REMOTE_ADDR'] == SERVER_LOCAL) {
     //디벨롭 서버
     define('G5_MYSQL_HOST', '175.126.147.43');
     define('G5_MYSQL_USER', 'inburstshop');
     define('G5_MYSQL_PASSWORD', 'inburstshop!@!@13');
     define('G5_MYSQL_DB', 'inburstshop');
     define('G5_MYSQL_SET_MODE', true);
-} else if($_SERVER['REMOTE_ADDR'] == '175.126.147.43') {
+} else if($_SERVER['REMOTE_ADDR'] == SERVER_STAGING) {
     //스테이징 서버
     define('G5_MYSQL_HOST', '175.126.147.43');
     define('G5_MYSQL_USER', 'inburstshop');
@@ -23,8 +27,6 @@ if($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
     define('G5_MYSQL_DB', 'inburstshop');
     define('G5_MYSQL_SET_MODE', true);
 }
-
-echo G5_MYSQL_HOST;
 
 define('G5_TABLE_PREFIX', 'g5_');
 

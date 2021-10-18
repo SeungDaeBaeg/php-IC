@@ -2,6 +2,10 @@
 /*******************************************************************************
 ** 공통 변수, 상수, 코드
 *******************************************************************************/
+
+//composer require
+require 'vendor/autoload.php';
+
 error_reporting( E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_ERROR | E_WARNING | E_PARSE | E_USER_ERROR | E_USER_WARNING );
 
 // 보안설정이나 프레임이 달라도 쿠키가 통하도록 설정
@@ -150,15 +154,22 @@ if (file_exists($dbconfig_file)) {
     include_once($dbconfig_file);
     include_once(G5_LIB_PATH.'/common.lib.php');    // 공통 라이브러리
 
-    $connect_db = sql_connect(G5_MYSQL_HOST, G5_MYSQL_USER, G5_MYSQL_PASSWORD) or die('MySQL Connect Error!!!');
-    $select_db  = sql_select_db(G5_MYSQL_DB, $connect_db) or die('MySQL DB Error!!!');
+//    $connect_db = sql_connect(G5_MYSQL_HOST, G5_MYSQL_USER, G5_MYSQL_PASSWORD) or die('MySQL Connect Error!!!');
+//    $select_db  = sql_select_db(G5_MYSQL_DB, $connect_db) or die('MySQL DB Error!!!');
+
+    $db = ADONewConnection('mysqli');
+    $db->connect(G5_MYSQL_HOST,G5_MYSQL_USER,G5_MYSQL_PASSWORD,G5_MYSQL_DB);
+
+//    if($_SERVER['REMOTE_ADDR'] == SERVER_LOCAL || $_SERVER['REMOTE_ADDR'] == SERVER_STAGING) {
+//        $db->debug = true;
+//    }
 
     // mysql connect resource $g5 배열에 저장 - 명랑폐인님 제안
-    $g5['connect_db'] = $connect_db;
+    $g5['connect_db'] = $db;
 
-    sql_set_charset(G5_DB_CHARSET, $connect_db);
-    if(defined('G5_MYSQL_SET_MODE') && G5_MYSQL_SET_MODE) sql_query("SET SESSION sql_mode = ''");
-    if (defined('G5_TIMEZONE')) sql_query(" set time_zone = '".G5_TIMEZONE."'");
+    sql_set_charset(G5_DB_CHARSET, $db);
+    //if(defined('G5_MYSQL_SET_MODE') && G5_MYSQL_SET_MODE) sql_query("SET SESSION sql_mode = ''");
+    //if (defined('G5_TIMEZONE')) sql_query(" set time_zone = '".G5_TIMEZONE."'");
 } else {
 ?>
 
@@ -334,7 +345,7 @@ if( $config['cf_cert_use'] || (defined('G5_YOUNGCART_VER') && G5_YOUNGCART_VER) 
         {
             global $g5;
 
-            $res = @session_start($options);
+            $res = session_start($options);
 
             // IE 브라우저 또는 엣지브라우저 또는 IOS 모바일과 http환경에서는 secure; SameSite=None을 설정하지 않습니다.
             if( preg_match('/Edge/i', $_SERVER['HTTP_USER_AGENT']) || preg_match('/(iPhone|iPod|iPad).*AppleWebKit.*Safari/i', $_SERVER['HTTP_USER_AGENT']) || preg_match('~MSIE|Internet Explorer~i', $_SERVER['HTTP_USER_AGENT']) || preg_match('~Trident/7.0(; Touch)?; rv:11.0~',$_SERVER['HTTP_USER_AGENT']) || ! (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') ){
@@ -353,7 +364,6 @@ if( $config['cf_cert_use'] || (defined('G5_YOUNGCART_VER') && G5_YOUNGCART_VER) 
             return $res;
         }
     }
-
     session_start_samesite();
 } else {
     @session_start();
@@ -483,7 +493,6 @@ if (isset($_REQUEST['gr_id'])) {
     $gr_id = '';
 }
 //===================================
-
 
 // 자동로그인 부분에서 첫로그인에 포인트 부여하던것을 로그인중일때로 변경하면서 코드도 대폭 수정하였습니다.
 if (isset($_SESSION['ss_mb_id']) && $_SESSION['ss_mb_id']) { // 로그인중이라면

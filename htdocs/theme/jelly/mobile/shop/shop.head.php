@@ -20,7 +20,27 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 
 
     <div id="hd_wr">
-        <div id="logo"><a href="<?php echo G5_SHOP_URL; ?>/"><img src="<?php echo G5_DATA_URL; ?>/common/mobile_logo_img" alt="<?php echo $config['cf_title']; ?> 메인"></a></div>
+        <div id="logo">
+            <div style="position:relative;width:100%;height:25px;float:left;text-align: center;">
+                <div style="position:absolute;left:0px;top:0px;height:25px;">
+                    <i class="fa fa-money"><span style="margin-left:0.2rem;">21,000원</span></i><span class="sound_only">분류열기</span>
+                </div>
+                <a href="<?php echo G5_SHOP_URL; ?>/"><img src="<?php echo G5_DATA_URL; ?>/common/logo.jpg" alt="<?php echo $config['cf_title']; ?> 메인"></a>
+                <div id="top_left_alram" style="position:absolute;right:0px;top:0px;height:25px;line-height:25px;">
+                    <p><i class="fa fa-bell"></i><span class="sound_only">알람</span></p>
+                </div>
+            </div>
+<!--            <div style="width:10%;height:25px;float:left;">-->
+<!--                <button type="button" id="btn_cate"><i class="fa fa-bars"></i><span class="sound_only">분류열기</span></button>-->
+<!--            </div>-->
+        </div>
+
+        <!-- @todo: 상품 검색창 -->
+        <div>
+            <input type="text"  style="width:79%;"/>
+            <button style="width:20%">검색</button>
+        </div>
+
         <?php include_once(G5_THEME_MSHOP_PATH.'/category.php'); // 분류 ?>
              <div id="hd_sch">
                 <button type="button" class="btn_close"><i class="fa fa-times"></i></button>
@@ -36,11 +56,9 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
                     </form>
                      <?php
                     $save_file = G5_DATA_PATH.'/cache/theme/jelly/keyword.php';
-                    if(is_file($save_file))
-                        include($save_file);
-
-                    if(!empty($keyword)) {
+                    if(is_file($save_file)) include($save_file);
                     ?>
+                    <?php if(!empty($keyword)) { ?>
                     <div id="ppl_word">
                         <h3>인기검색어</h3>
                         <ol class="slides">
@@ -58,12 +76,10 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
                 <?php } ?>
                 </div>
             </div>
-            <div id="hd_btn">
-
-                <button type="button" id="btn_cate"><i class="fa fa-bars"></i><span class="sound_only">분류열기</span></button>
-                <button type="button" id="btn_sch"><i class="fa fa-search"></i><span class="sound_only">검색열기</span></button>
-                <a href="<?php echo G5_SHOP_URL; ?>/cart.php" id="btn_cartop"><i class="fa fa-shopping-cart"></i><span class="sound_only">장바구니</span><span class="cart-count"><?php echo get_boxcart_datas_count(); ?></span></a>
-            </div>
+<!--            <div id="hd_btn">-->
+<!--                <button type="button" id="btn_sch"><i class="fa fa-search"></i><span class="sound_only">검색열기</span></button>-->
+<!--                <a href="--><?php //echo G5_SHOP_URL; ?><!--/cart.php" id="btn_cartop"><i class="fa fa-shopping-cart"></i><span class="sound_only">장바구니</span><span class="cart-count">--><?php //echo get_boxcart_datas_count(); ?><!--</span></a>-->
+<!--            </div>-->
         </div>
 
         <script>

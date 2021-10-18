@@ -13,6 +13,12 @@ else {
     $g5_head_title .= " | ".$config['cf_title'];
 }
 
+if($_SERVER['REMOTE_ADDR'] == SERVER_LOCAL) {
+    $g5_head_title .= ' 로컬서버';
+} else if($_SERVER['REMOTE_ADDR'] == SERVER_STAGING) {
+    $g5_head_title .= ' 테스트서버';
+}
+
 // 현재 접속자
 // 게시판 제목에 ' 포함되면 오류 발생
 $g5['lo_location'] = addslashes($g5['title']);

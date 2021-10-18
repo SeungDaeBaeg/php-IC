@@ -502,7 +502,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
         $arrConditionalStyles = $phpSheet->getConditionalStylesCollection();
         if (!empty($arrConditionalStyles)) {
             $arrConditional = array();
-            // @todo CFRule & CFHeader
+
             // Write CFHEADER record
             $this->writeCFHeader();
             // Write ConditionalFormattingTable records

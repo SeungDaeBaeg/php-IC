@@ -12,7 +12,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">',
 
   
     <div id="sev_tit" class="bx-pager">
-         <h2>이벤트</h2>
+         <h2>이벤트 2</h2>
         <?php
         $k = 0;
         $hsql = " select ev_id, ev_subject, ev_subject_strong from {$g5['g5_shop_event_table']} where ev_use = '1' order by ev_id desc  limit 5";
