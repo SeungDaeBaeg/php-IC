@@ -1662,10 +1662,10 @@ function sql_fetch_array(&$result) {
     return $row;
 }
 
-function sql_fetch_arrays($query, &$res = array()) {
+function sql_fetch_arrays($query, &$res = array(), $params = array()) {
     global $g5;
 
-    $result = $g5['connect_db']->execute($query);
+    $result = $g5['connect_db']->execute($query, $params);
 
     while($list = $result->FetchRow()) {
         //print_r($list);
