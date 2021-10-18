@@ -257,7 +257,7 @@ box-shadow:0 5px 10px rgba(0, 0, 0, .15);}
 .ft_copy{float:left}
 
 
-#ft_to_top{position:fixed;bottom:10px;right:10px;width:40px;line-height:40px;background:#fff;opacity:0.6;text-align:center;border-radius:30px;
+#ft_to_top{position:fixed;bottom:60px;right:10px;width:40px;line-height:40px;background:#5083BA;opacity:0.6;text-align:center;border-radius:30px;
 -webkit-box-shadow:1px 1px 1px rgba(0,0,0,0.2);        
 -moz-box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
 box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
@@ -1017,3 +1017,12 @@ box-shadow: 0 0 8px rgba(65,98,255,0.8);}
 #m_pv_sod_frm .btn_confirm{margin:10px}
 #m_pv_sod_frm .btn_confirm .btn_submit{width:100%;height: 45px;font-size: 1.167em;font-weight: bold;margin:0 0 3px;}
 #m_pv_sod_frm .btn_confirm .btn_cancel{width:100%;height: 45px;line-height: 43px;font-size: 1.167em;font-weight: bold;padding:0}
+
+/* 하단 네이게이션바 */
+.ft_nabi {background-color: #F2F2F2;position: fixed;bottom: 0;width: 100%;display: flex;justify-content: space-around;padding: 5px 0 5px 0;}
+.ft_nabi > .ft_item > .ft_nabi_txt {text-align: center;}
+.ft_nabi > .ft_item > .ft_item_icon {height: 25px;}
+.ft_nabi > .ft_item > .category_icon {background: url(../img/category.png);background-size: 100% 100%;}
+.ft_nabi > .ft_item > .star_icon {background: url(../img/star.png);background-size: 100% 100%;}
+.ft_nabi > .ft_item > .myinfo_icon {background: url(../img/myinfo.png);background-size: 100% 100%;}
+.ft_nabi > .ft_item > .heart_icon {background: url(../img/heart.png);background-size: 100% 100%;}

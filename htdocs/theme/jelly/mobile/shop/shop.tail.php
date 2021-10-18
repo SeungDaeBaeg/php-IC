@@ -9,8 +9,27 @@ $admin = get_admin("super");
 </div><!-- container End -->
 
 <div id="ft">
-    <div class="ft_notice"><?php echo latest('theme/shop_basic', 'notice', 4, 23); ?></div>
-   <div class="ft_wr">
+    <div class="ft_nabi">
+        <div class="ft_item" id="cate_btn">
+            <div class="ft_item_icon category_icon"></div>
+            <div class="ft_nabi_txt">카테고리</div>
+        </div>
+        <div class="ft_item">
+            <div class="ft_item_icon star_icon"></div>
+            <div class="ft_nabi_txt">추천상품</div>
+        </div>
+        <div class="ft_item">
+            <div class="ft_item_icon myinfo_icon"></div>    
+            <div class="ft_nabi_txt">내정보</div>
+        </div>
+        <div class="ft_item">
+            <div class="ft_item_icon heart_icon"></div>    
+            <div class="ft_nabi_txt">나의찜</div>
+        </div>
+    </div>
+
+    <!-- <div class="ft_notice"><?php echo latest('theme/shop_basic', 'notice', 4, 23); ?></div>
+    <div class="ft_wr">
         <ul>
              <li class="ft_box">
                 <h2>고객센터</h2>
@@ -52,7 +71,7 @@ $admin = get_admin("super");
             <div class="ft_copy">Copyright &copy; 2001-2013 <?php echo $default['de_admin_company_name']; ?>. All Rights Reserved. </div>
         </div>
        
-     </div>
+     </div> -->
      <a href="#" id="ft_to_top"><i class="fa fa-arrow-up" aria-hidden="true"></i><span class="sound_only">상단으로</span></a>
 
 </div>
@@ -71,3 +90,9 @@ if ($config['cf_analytics']) {
 <?php
 include_once(G5_THEME_PATH.'/tail.sub.php');
 ?>
+
+<script>
+$("#cate_btn").on("click", function() {
+        $("#category").show();
+    });
+</script>
