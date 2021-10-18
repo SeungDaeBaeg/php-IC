@@ -10,9 +10,16 @@ SELECT  it_img1, it_name, it_img1
 FROM    g5_shop_item
 WHERE   it_soldout = 0
 AND     it_stock_qty > 0";
-$res    = sql_query($query);
-$rows   = sql_fetch_array($res);
+//$res    = sql_query($query);
+//$rows   = sql_fetch_array($res);
 
+
+sql_fetch_arrays("
+    SELECT  it_img1, it_name, it_img1
+    FROM    g5_shop_item
+    WHERE   it_soldout = 0
+    AND     it_stock_qty > 0
+", $res);
 ?>
 
 <?php foreach($res as $v) { ?>

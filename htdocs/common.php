@@ -159,6 +159,7 @@ if (file_exists($dbconfig_file)) {
 
     $db = ADONewConnection('mysqli');
     $db->connect(G5_MYSQL_HOST,G5_MYSQL_USER,G5_MYSQL_PASSWORD,G5_MYSQL_DB);
+    $db->setFetchMode(ADODB_FETCH_ASSOC);
 
 //    if($_SERVER['REMOTE_ADDR'] == SERVER_LOCAL || $_SERVER['REMOTE_ADDR'] == SERVER_STAGING) {
 //        $db->debug = true;

@@ -1662,6 +1662,16 @@ function sql_fetch_array(&$result) {
     return $row;
 }
 
+function sql_fetch_arrays($query, &$res = array()) {
+    global $g5;
+
+    $result = $g5['connect_db']->execute($query);
+
+    while($list = $result->FetchRow()) {
+        //print_r($list);
+        $res[] = $list;
+    }
+}
 
 // $result에 대한 메모리(memory)에 있는 내용을 모두 제거한다.
 // sql_free_result()는 결과로부터 얻은 질의 값이 커서 많은 메모리를 사용할 염려가 있을 때 사용된다.
