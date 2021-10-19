@@ -25,7 +25,7 @@ if ($_POST['act_button'] == "선택SMS전송") {
         $ss_id = isset($_POST['ss_id'][$k]) ? (int) $_POST['ss_id'][$k] : 0;
 
         $sql = " select a.ss_id, a.ss_hp, a.ss_send, b.it_id, b.it_name
-                    from {$g5['g5_shop_item_stocksms_table']} a left join {$g5['g5_shop_item_table']} b on ( a.it_id = b.it_id )
+                    from {$g5['g5_shop_item_stocksms_table']} a left join g5_shop_item b on ( a.it_id = b.it_id )
                     where a.ss_id = '$ss_id' ";
         $row = sql_fetch($sql);
 

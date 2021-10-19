@@ -4,7 +4,7 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
 <ul>
 <?php
-$sql = " select * from {$g5['g5_shop_category_table']} where ca_use = '1' and length(ca_id) = '2' order by ca_id asc ";
+$sql = " select * from g5_shop_category where ca_use = '1' and length(ca_id) = '2' order by ca_id asc ";
 $result = sql_query($sql);
 
 for($i=0; $row=sql_fetch_array($result); $i++) {

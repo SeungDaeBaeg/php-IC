@@ -37,7 +37,7 @@ $result = sql_query($sql);
             continue;
 
         if($row['cp_method'] == 1) {
-            $sql = " select ca_name from {$g5['g5_shop_category_table']} where ca_id = '{$row['cp_target']}' ";
+            $sql = " select ca_name from g5_shop_category where ca_id = '{$row['cp_target']}' ";
             $ca = sql_fetch($sql);
             $cp_target = $ca['ca_name'].'의 상품할인';
         } else if($row['cp_method'] == 2) {

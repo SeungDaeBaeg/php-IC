@@ -30,7 +30,7 @@ for($i=0;$i<=10;$i++){
     $ca['ca_'.$i] = '';
 }
 
-$sql_common = " from {$g5['g5_shop_category_table']} ";
+$sql_common = " from g5_shop_category ";
 if ($is_admin != 'super')
     $sql_common .= " where ca_mb_id = '{$member['mb_id']}' ";
 
@@ -45,7 +45,7 @@ if ($w == "")
 
     $len2 = $len + 1;
 
-    $sql = " select MAX(SUBSTRING(ca_id,$len2,2)) as max_subid from {$g5['g5_shop_category_table']}
+    $sql = " select MAX(SUBSTRING(ca_id,$len2,2)) as max_subid from g5_shop_category
               where SUBSTRING(ca_id,1,$len) = '$ca_id' ";
     $row = sql_fetch($sql);
 
@@ -65,7 +65,7 @@ if ($w == "")
 
     if ($ca_id) // 2단계이상 분류
     {
-        $sql = " select * from {$g5['g5_shop_category_table']} where ca_id = '$ca_id' ";
+        $sql = " select * from g5_shop_category where ca_id = '$ca_id' ";
         $ca = sql_fetch($sql);
         $html_title = $ca['ca_name'] . " 하위분류추가";
         $ca['ca_name'] = "";
@@ -90,7 +90,7 @@ if ($w == "")
 }
 else if ($w == "u")
 {
-    $sql = " select * from {$g5['g5_shop_category_table']} where ca_id = '$ca_id' ";
+    $sql = " select * from g5_shop_category where ca_id = '$ca_id' ";
     $ca = sql_fetch($sql);
     if (! (isset($ca['ca_id']) && $ca['ca_id']))
         alert("자료가 없습니다.");
@@ -110,28 +110,28 @@ if ($w == 'u') $pg_anchor .= '<li><a href="#frm_etc">기타설정</a></li>';
 $pg_anchor .= '</ul>';
 
 // 쿠폰 적용 불가 설정 필드 추가
-if(!sql_query(" select ca_nocoupon from {$g5['g5_shop_category_table']} limit 1 ", false)) {
-    sql_query(" ALTER TABLE `{$g5['g5_shop_category_table']}`
+if(!sql_query(" select ca_nocoupon from g5_shop_category limit 1 ", false)) {
+    sql_query(" ALTER TABLE `g5_shop_category`
                     ADD `ca_nocoupon` tinyint(4) NOT NULL DEFAULT '0' AFTER `ca_adult_use` ", true);
 }
 
 // 스킨 디렉토리 필드 추가
-if(!sql_query(" select ca_skin_dir from {$g5['g5_shop_category_table']} limit 1 ", false)) {
-    sql_query(" ALTER TABLE `{$g5['g5_shop_category_table']}`
+if(!sql_query(" select ca_skin_dir from g5_shop_category limit 1 ", false)) {
+    sql_query(" ALTER TABLE `g5_shop_category`
                     ADD `ca_skin_dir` varchar(255) NOT NULL DEFAULT '' AFTER `ca_name`,
                     ADD `ca_mobile_skin_dir` varchar(255) NOT NULL DEFAULT '' AFTER `ca_skin_dir` ", true);
 }
 
 // 분류 출력순서 필드 추가
-if(!sql_query(" select ca_order from {$g5['g5_shop_category_table']} limit 1 ", false)) {
-    sql_query(" ALTER TABLE `{$g5['g5_shop_category_table']}`
+if(!sql_query(" select ca_order from g5_shop_category limit 1 ", false)) {
+    sql_query(" ALTER TABLE `g5_shop_category`
                     ADD `ca_order` int(11) NOT NULL DEFAULT '0' AFTER `ca_name` ", true);
-    sql_query(" ALTER TABLE `{$g5['g5_shop_category_table']}` ADD INDEX(`ca_order`) ", true);
+    sql_query(" ALTER TABLE `g5_shop_category` ADD INDEX(`ca_order`) ", true);
 }
 
 // 모바일 상품 출력줄수 필드 추가
-if(!sql_query(" select ca_mobile_list_row from {$g5['g5_shop_category_table']} limit 1 ", false)) {
-    sql_query(" ALTER TABLE `{$g5['g5_shop_category_table']}`
+if(!sql_query(" select ca_mobile_list_row from g5_shop_category limit 1 ", false)) {
+    sql_query(" ALTER TABLE `g5_shop_category`
                     ADD `ca_mobile_list_row` int(11) NOT NULL DEFAULT '0' AFTER `ca_mobile_list_mod` ", true);
 }
 

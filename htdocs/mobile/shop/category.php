@@ -5,7 +5,7 @@ function get_mshop_category($ca_id, $len)
 {
     global $g5;
 
-    $sql = " select ca_id, ca_name from {$g5['g5_shop_category_table']}
+    $sql = " select ca_id, ca_name from g5_shop_category
                 where ca_use = '1' ";
     if($ca_id)
         $sql .= " and ca_id like '$ca_id%' ";

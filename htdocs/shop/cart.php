@@ -83,7 +83,7 @@ include_once('./_head.php');
                         b.ca_id,
                         b.ca_id2,
                         b.ca_id3
-                   from {$g5['g5_shop_cart_table']} a left join {$g5['g5_shop_item_table']} b on ( a.it_id = b.it_id )
+                   from {$g5['g5_shop_cart_table']} a left join g5_shop_item b on ( a.it_id = b.it_id )
                   where a.od_id = '$s_cart_id' ";
         $sql .= " group by a.it_id ";
         $sql .= " order by a.ct_id ";

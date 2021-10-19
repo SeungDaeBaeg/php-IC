@@ -72,7 +72,7 @@ for ($i=0; $i<$post_ca_id_count; $i++)
         $posts[$key] = (isset($_POST[$key]) && isset($_POST[$key][$i])) ? $_POST[$key][$i] : '';
     }
     
-    $sql = " update {$g5['g5_shop_category_table']}
+    $sql = " update g5_shop_category
                 set ca_name             = '".$p_ca_name."',
                     ca_mb_id            = '".sql_real_escape_string(strip_tags(clean_xss_attributes($posts['ca_mb_id'])))."',
                     ca_use              = '".sql_real_escape_string(strip_tags($posts['ca_use']))."',

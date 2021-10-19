@@ -21,7 +21,7 @@ if ($stx != "") {
         $page = 1;
 }
 
-$sql_common = " from {$g5['g5_shop_category_table']} ";
+$sql_common = " from g5_shop_category ";
 if ($is_admin != 'super')
     $sql_search .= " $where ca_mb_id = '{$member['mb_id']}' ";
 $sql_common .= $sql_search;
@@ -120,7 +120,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
             $class = 'class="name_lbl"'; // 2단 이상 분류의 label 에 스타일 부여 - 지운아빠 2013-04-02
             // 상위단계의 분류명
             $p_ca_id = substr($row['ca_id'], 0, $level*2);
-            $sql = " select ca_name from {$g5['g5_shop_category_table']} where ca_id = '$p_ca_id' ";
+            $sql = " select ca_name from g5_shop_category where ca_id = '$p_ca_id' ";
             $temp = sql_fetch($sql);
             $p_ca_name = $temp['ca_name'].'의하위';
         } else {
@@ -138,7 +138,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
             $s_del = '<a href="./categoryformupdate.php?w=d&amp;ca_id='.$row['ca_id'].'&amp;'.$qstr.'" onclick="return delete_confirm(this);" class="btn btn_02"><span class="sound_only">'.get_text($row['ca_name']).' </span>삭제</a> ';
 
         // 해당 분류에 속한 상품의 수
-        $sql1 = " select COUNT(*) as cnt from {$g5['g5_shop_item_table']}
+        $sql1 = " select COUNT(*) as cnt from g5_shop_item
                       where ca_id = '{$row['ca_id']}'
                       or ca_id2 = '{$row['ca_id']}'
                       or ca_id3 = '{$row['ca_id']}' ";

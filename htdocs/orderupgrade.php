@@ -22,7 +22,7 @@ if(!sql_query(" select it_sc_type from {$g5['g5_shop_cart_table']} limit 1 ", fa
 
     for($i=0; $row=sql_fetch_array($result); $i++) {
         $sql = " select it_id, it_sc_type, it_sc_method, it_sc_price, it_sc_minimum, it_sc_qty
-                    from {$g5['g5_shop_item_table']}
+                    from g5_shop_item
                     where it_id = '{$row['it_id']}' ";
         $it = sql_fetch($sql);
 

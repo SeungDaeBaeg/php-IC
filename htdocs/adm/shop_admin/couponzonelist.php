@@ -96,7 +96,7 @@ $colspan = 9;
                 $cp_target = get_text($row3['it_name']);
                 break;
             case '1':
-                $sql3 = " select ca_name from {$g5['g5_shop_category_table']} where ca_id = '{$row['cp_target']}' ";
+                $sql3 = " select ca_name from g5_shop_category where ca_id = '{$row['cp_target']}' ";
                 $row3 = sql_fetch($sql3);
                 $cp_method = '카테고리할인';
                 $cp_target = get_text($row3['ca_name']);

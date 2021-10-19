@@ -31,7 +31,7 @@ if ($w == "u")
 
     // 등록된 이벤트 상품
     $sql = " select b.it_id, b.it_name
-                from {$g5['g5_shop_event_item_table']} a left join {$g5['g5_shop_item_table']} b on ( a.it_id = b.it_id )
+                from {$g5['g5_shop_event_item_table']} a left join g5_shop_item b on ( a.it_id = b.it_id )
                 where a.ev_id = '$ev_id' ";
     $res_item = sql_query($sql);
 }
@@ -54,7 +54,7 @@ else
 
 // 분류리스트
 $category_select = '';
-$sql = " select * from {$g5['g5_shop_category_table']} ";
+$sql = " select * from g5_shop_category ";
 if ($is_admin != 'super')
     $sql .= " where ca_mb_id = '{$member['mb_id']}' ";
 $sql .= " order by ca_order, ca_id ";

@@ -10,7 +10,7 @@ if(isset($it['it_id']) && $it['it_id']) {
     $gubun = isset($_POST['gubun']) ? clean_xss_tags($_POST['gubun'], 1, 1) : 'wear';
     
     if ( $it_id ){
-        $sql = " select it_id, it_info_gubun, it_info_value from {$g5['g5_shop_item_table']} where it_id = '$it_id' ";
+        $sql = " select it_id, it_info_gubun, it_info_value from g5_shop_item where it_id = '$it_id' ";
         if( $items = sql_fetch($sql) ) {
             $it = $items;
         }

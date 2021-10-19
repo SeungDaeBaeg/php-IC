@@ -46,7 +46,7 @@ ob_start();
                         b.ca_id2,
                         b.ca_id3,
                         b.it_notax
-                   from {$g5['g5_shop_cart_table']} a left join {$g5['g5_shop_item_table']} b on ( a.it_id = b.it_id )
+                   from {$g5['g5_shop_cart_table']} a left join g5_shop_item b on ( a.it_id = b.it_id )
                   where a.od_id = '$s_cart_id'
                     and a.ct_select = '1' ";
         $sql .= " group by a.it_id ";

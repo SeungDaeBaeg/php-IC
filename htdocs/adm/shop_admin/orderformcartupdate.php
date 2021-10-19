@@ -58,7 +58,7 @@ for ($i=0; $i<$cnt; $i++)
                               and io_id = '{$ct['io_id']}'
                               and io_type = '{$ct['io_type']}' ";
             } else {
-                $sql = " update {$g5['g5_shop_item_table']}
+                $sql = " update g5_shop_item
                             set it_stock_qty = it_stock_qty + '$diff_qty'
                             where it_id = '{$ct['it_id']}' ";
             }
@@ -90,7 +90,7 @@ for ($i=0; $i<$cnt; $i++)
                               and io_id = '{$ct['io_id']}'
                               and io_type = '{$ct['io_type']}' ";
             } else {
-                $sql = " update {$g5['g5_shop_item_table']}
+                $sql = " update g5_shop_item
                             set it_stock_qty = it_stock_qty + '{$ct['ct_qty']}'
                             where it_id = '{$ct['it_id']}' ";
             }
@@ -112,7 +112,7 @@ for ($i=0; $i<$cnt; $i++)
                               and io_id = '{$ct['io_id']}'
                               and io_type = '{$ct['io_type']}' ";
             } else {
-                $sql = " update {$g5['g5_shop_item_table']}
+                $sql = " update g5_shop_item
                             set it_stock_qty = it_stock_qty - '{$ct['ct_qty']}'
                             where it_id = '{$ct['it_id']}' ";
             }
@@ -123,7 +123,7 @@ for ($i=0; $i<$cnt; $i++)
         else if ($ct_status == '품절') {
             $stock_use = 1;
             // 재고에서 뺀다.
-            $sql =" update {$g5['g5_shop_item_table']} set it_stock_qty = 0 where it_id = '{$ct['it_id']}' ";
+            $sql =" update g5_shop_item set it_stock_qty = 0 where it_id = '{$ct['it_id']}' ";
             sql_query($sql);
         } */
     }
@@ -165,7 +165,7 @@ if(is_array($arr_it_id) && !empty($arr_it_id)) {
         $sql2 = " select sum(ct_qty) as sum_qty from {$g5['g5_shop_cart_table']} where it_id = '$it_id' and ct_status = '완료' ";
         $row2 = sql_fetch($sql2);
 
-        $sql3 = " update {$g5['g5_shop_item_table']} set it_sum_qty = '{$row2['sum_qty']}' where it_id = '$it_id' ";
+        $sql3 = " update g5_shop_item set it_sum_qty = '{$row2['sum_qty']}' where it_id = '$it_id' ";
         sql_query($sql3);
     }
 }

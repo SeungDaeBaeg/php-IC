@@ -34,7 +34,7 @@ include_once('./_head.php');
     <div class="list_02">
         <ul>
         <?php
-        $sql  = " select a.wi_id, a.wi_time, b.* from {$g5['g5_shop_wish_table']} a left join {$g5['g5_shop_item_table']} b on ( a.it_id = b.it_id ) ";
+        $sql  = " select a.wi_id, a.wi_time, b.* from {$g5['g5_shop_wish_table']} a left join g5_shop_item b on ( a.it_id = b.it_id ) ";
         $sql .= " where a.mb_id = '{$member['mb_id']}' order by a.wi_id desc ";
         $result = sql_query($sql);
         for ($i=0; $row = sql_fetch_array($result); $i++) {

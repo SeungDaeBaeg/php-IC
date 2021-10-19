@@ -4,7 +4,7 @@ include_once('./_common.php');
 $pattern = '#[/\'\"%=*\#\(\)\|\+\&\!\$~\{\}\[\]`;:\?\^\,]#';
 $it_id  = isset($_POST['it_id']) ? preg_replace($pattern, '', $_POST['it_id']) : '';
 
-$sql = " select * from {$g5['g5_shop_item_table']} where it_id = '$it_id' and it_use = '1' ";
+$sql = " select * from g5_shop_item where it_id = '$it_id' and it_use = '1' ";
 $it = sql_fetch($sql);
 $it_point = get_item_point($it);
 

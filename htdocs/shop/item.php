@@ -28,7 +28,7 @@ if (!($it['ca_use'] && $it['it_use'])) {
 include_once(G5_LIB_PATH.'/iteminfo.lib.php');
 
 // 분류 테이블에서 분류 상단, 하단 코드를 얻음
-$sql = " select ca_skin_dir, ca_include_head, ca_include_tail, ca_cert_use, ca_adult_use from {$g5['g5_shop_category_table']} where ca_id = '{$it['ca_id']}' ";
+$sql = " select ca_skin_dir, ca_include_head, ca_include_tail, ca_cert_use, ca_adult_use from g5_shop_category where ca_id = '{$it['ca_id']}' ";
 $ca = sql_fetch($sql);
 
 // 본인인증, 성인인증체크
@@ -60,7 +60,7 @@ if (!$saved) {
 
 // 조회수 증가
 if (get_cookie('ck_it_id') != $it_id) {
-    sql_query(" update {$g5['g5_shop_item_table']} set it_hit = it_hit + 1 where it_id = '$it_id' "); // 1증가
+    sql_query(" update g5_shop_item set it_hit = it_hit + 1 where it_id = '$it_id' "); // 1증가
     set_cookie("ck_it_id", $it_id, 3600); // 1시간동안 저장
 }
 
@@ -144,7 +144,7 @@ else
 
 
 // 이전 상품보기
-$sql = " select it_id, it_name from {$g5['g5_shop_item_table']} where it_id > '$it_id' and SUBSTRING(ca_id,1,4) = '".substr($it['ca_id'],0,4)."' and it_use = '1' order by it_id asc limit 1 ";
+$sql = " select it_id, it_name from g5_shop_item where it_id > '$it_id' and SUBSTRING(ca_id,1,4) = '".substr($it['ca_id'],0,4)."' and it_use = '1' order by it_id asc limit 1 ";
 $row = sql_fetch($sql);
 if (isset($row['it_id']) && $row['it_id']) {
     $prev_title = '이전상품<span class="sound_only"> '.$row['it_name'].'</span>';
@@ -157,7 +157,7 @@ if (isset($row['it_id']) && $row['it_id']) {
 }
 
 // 다음 상품보기
-$sql = " select it_id, it_name from {$g5['g5_shop_item_table']} where it_id < '$it_id' and SUBSTRING(ca_id,1,4) = '".substr($it['ca_id'],0,4)."' and it_use = '1' order by it_id desc limit 1 ";
+$sql = " select it_id, it_name from g5_shop_item where it_id < '$it_id' and SUBSTRING(ca_id,1,4) = '".substr($it['ca_id'],0,4)."' and it_use = '1' order by it_id desc limit 1 ";
 $row = sql_fetch($sql);
 if (isset($row['it_id']) && $row['it_id']) {
     $next_title = '다음 상품<span class="sound_only"> '.$row['it_name'].'</span>';
@@ -184,7 +184,7 @@ $item_qa_count = $row['cnt'];
 
 // 관련상품의 개수를 얻음
 if($default['de_rel_list_use']) {
-    $sql = " select count(*) as cnt from {$g5['g5_shop_item_relation_table']} a left join {$g5['g5_shop_item_table']} b on (a.it_id2=b.it_id) where a.it_id = '{$it['it_id']}' and  b.it_use='1' ";
+    $sql = " select count(*) as cnt from {$g5['g5_shop_item_relation_table']} a left join g5_shop_item b on (a.it_id2=b.it_id) where a.it_id = '{$it['it_id']}' and  b.it_use='1' ";
     $row = sql_fetch($sql);
     $item_relation_count = $row['cnt'];
 }

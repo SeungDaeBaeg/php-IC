@@ -11,7 +11,7 @@ if(!$ca_id && !$it_name)
     die('<p>상품의 분류를 선택하시거나 상품명을 입력하신 후 검색하여 주십시오.</p>');
 
 $sql = " select it_id, it_name
-           from {$g5['g5_shop_item_table']}
+           from g5_shop_item
           where (1) ";
 if($ca_id)
     $sql .= " and ( ca_id like '$ca_id%' or ca_id2 like '$ca_id%' or ca_id3 like '$ca_id%' ) ";

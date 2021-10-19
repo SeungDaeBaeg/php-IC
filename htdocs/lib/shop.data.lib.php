@@ -10,7 +10,7 @@ function get_shop_item($it_id, $is_cache=false, $add_query=''){
     $item = $is_cache ? $g5_object->get('shop', $it_id, $add_query_key) : null;
 
     if( !$item ){
-        $sql = " select * from {$g5['g5_shop_item_table']} where it_id = '{$it_id}' $add_query ";
+        $sql = " select * from g5_shop_item where it_id = '{$it_id}' $add_query ";
         $item = sql_fetch($sql);
 
         $g5_object->set('shop', $it_id, $item, $add_query_key);
@@ -32,9 +32,9 @@ function get_shop_item_with_category($it_id, $seo_title='', $add_query=''){
     global $g5, $default;
 
     if( $seo_title ){
-        $sql = " select a.*, b.ca_name, b.ca_use from {$g5['g5_shop_item_table']} a, {$g5['g5_shop_category_table']} b where a.it_seo_title = '".sql_real_escape_string(generate_seo_title($seo_title))."' and a.ca_id = b.ca_id $add_query";
+        $sql = " select a.*, b.ca_name, b.ca_use from g5_shop_item a, g5_shop_category b where a.it_seo_title = '".sql_real_escape_string(generate_seo_title($seo_title))."' and a.ca_id = b.ca_id $add_query";
     } else {
-        $sql = " select a.*, b.ca_name, b.ca_use from {$g5['g5_shop_item_table']} a, {$g5['g5_shop_category_table']} b where a.it_id = '$it_id' and a.ca_id = b.ca_id $add_query";
+        $sql = " select a.*, b.ca_name, b.ca_use from g5_shop_item a, g5_shop_category b where a.it_id = '$it_id' and a.ca_id = b.ca_id $add_query";
     }
     
     $item = sql_fetch($sql);
@@ -143,7 +143,7 @@ function get_shop_category_array($is_cache=false){
 function get_shop_category_sql($ca_id, $len){
     global $g5;
 
-    $sql = " select * from {$g5['g5_shop_category_table']}
+    $sql = " select * from g5_shop_category
                 where ca_use = '1' ";
     if($ca_id)
         $sql .= " and ca_id like '$ca_id%' ";

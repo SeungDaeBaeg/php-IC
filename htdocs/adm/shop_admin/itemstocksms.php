@@ -119,7 +119,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
     for ($i=0; $row=sql_fetch_array($result); $i++)
     {
         // 상품정보
-        $sql = " select it_name from {$g5['g5_shop_item_table']} where it_id = '{$row['it_id']}' ";
+        $sql = " select it_name from g5_shop_item where it_id = '{$row['it_id']}' ";
         $it = sql_fetch($sql);
 
         if($it['it_name'])

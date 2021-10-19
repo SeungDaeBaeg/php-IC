@@ -6,7 +6,7 @@ include_once(G5_MSHOP_PATH.'/_head.php');
 
 // QUERY 문에 공통적으로 들어가는 내용
 // 상품명에 검색어가 포한된것과 상품판매가능인것만
-$sql_common = " from {$g5['g5_shop_item_table']} a, {$g5['g5_shop_category_table']} b ";
+$sql_common = " from g5_shop_item a, g5_shop_category b ";
 
 $where = array();
 $where[] = " (a.ca_id = b.ca_id and a.it_use = 1 and b.ca_use = 1) ";

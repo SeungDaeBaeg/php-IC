@@ -7,7 +7,7 @@ if( isset($sort) && ! in_array($sort, array('it_sum_qty', 'it_price', 'it_use_av
 }
 
 $sql = " select *
-           from {$g5['g5_shop_category_table']}
+           from g5_shop_category
           where ca_id = '$ca_id'
             and ca_use = '1'  ";
 $ca = sql_fetch($sql);
@@ -87,7 +87,7 @@ var g5_shop_url = "<?php echo G5_SHOP_URL; ?>";
     $best_skin = G5_MSHOP_SKIN_PATH.'/list.best.10.skin.php';
 
     $sql = " select *
-                from {$g5['g5_shop_item_table']}
+                from g5_shop_item
                 where ( ca_id like '$ca_id%' or ca_id2 like '$ca_id%' or ca_id3 like '$ca_id%' )
                   and it_use = '1'
                   and it_type4 = '1'
@@ -109,7 +109,7 @@ var g5_shop_url = "<?php echo G5_SHOP_URL; ?>";
     else
         $order_by = 'it_order, it_id desc';
 
-    $error = '<p class="sct_noitem">등록된 상품이 없습니다.</p>';
+    $error = '<p class="sct_noitem">등록된 상품이 없습니다.2</p>';
 
     // 리스트 스킨
     $skin_file = is_include_path_check($skin_dir.'/'.$ca['ca_mobile_skin']) ? $skin_dir.'/'.$ca['ca_mobile_skin'] : $skin_dir.'/list.10.skin.php';

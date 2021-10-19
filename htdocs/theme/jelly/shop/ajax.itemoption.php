@@ -1,7 +1,7 @@
 <?php
 include_once('./_common.php');
 
-$sql = " select * from {$g5['g5_shop_item_table']} where it_id = '$it_id' ";
+$sql = " select * from g5_shop_item where it_id = '$it_id' ";
 $it = sql_fetch($sql);
 
 if(!$it['it_id'])

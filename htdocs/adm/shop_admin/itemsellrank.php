@@ -29,7 +29,7 @@ $sql  = " select a.it_id,
                  SUM(IF(ct_status = '반품',ct_qty, 0)) as ct_status_8,
                  SUM(IF(ct_status = '품절',ct_qty, 0)) as ct_status_9,
                  SUM(ct_qty) as ct_status_sum
-            from {$g5['g5_shop_cart_table']} a, {$g5['g5_shop_item_table']} b ";
+            from {$g5['g5_shop_cart_table']} a, g5_shop_item b ";
 $sql .= " where a.it_id = b.it_id ";
 if ($fr_date && $to_date)
 {
@@ -77,7 +77,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 <select name="sel_ca_id" id="sel_ca_id">
     <option value=''>전체분류</option>
     <?php
-    $sql1 = " select ca_id, ca_name from {$g5['g5_shop_category_table']} order by ca_order, ca_id ";
+    $sql1 = " select ca_id, ca_name from g5_shop_category order by ca_order, ca_id ";
     $result1 = sql_query($sql1);
     for ($i=0; $row1=sql_fetch_array($result1); $i++) {
         $len = strlen($row1['ca_id']) / 2 - 1;

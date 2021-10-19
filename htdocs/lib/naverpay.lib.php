@@ -128,7 +128,7 @@ class naverpay_register
         $this->keys = $keys;
 
         foreach($keys as $it_id) {
-            $sql = " select * from {$g5['g5_shop_item_table']} where it_id = '$it_id' and it_use = '1' and it_soldout = '0' and it_tel_inq = '0' ";
+            $sql = " select * from g5_shop_item where it_id = '$it_id' and it_use = '1' and it_soldout = '0' and it_tel_inq = '0' ";
             $it = sql_fetch($sql);
             if(!$it['it_id'])
                 continue;

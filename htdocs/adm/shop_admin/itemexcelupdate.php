@@ -96,7 +96,7 @@ if($is_upload_file) {
         }
 
         // it_id 중복체크
-        $sql2 = " select count(*) as cnt from {$g5['g5_shop_item_table']} where it_id = '$it_id' ";
+        $sql2 = " select count(*) as cnt from g5_shop_item where it_id = '$it_id' ";
         $row2 = sql_fetch($sql2);
         if(isset($row2['cnt']) && $row2['cnt']) {
             $fail_it_id[] = $it_id;
@@ -107,7 +107,7 @@ if($is_upload_file) {
         }
 
         // 기본분류체크
-        $sql2 = " select count(*) as cnt from {$g5['g5_shop_category_table']} where ca_id = '$ca_id' ";
+        $sql2 = " select count(*) as cnt from g5_shop_category where ca_id = '$ca_id' ";
         $row2 = sql_fetch($sql2);
         if(! (isset($row2['cnt']) && $row2['cnt'])) {
             $fail_it_id[] = $it_id;
@@ -115,7 +115,7 @@ if($is_upload_file) {
             continue;
         }
 
-        $sql = " INSERT INTO {$g5['g5_shop_item_table']}
+        $sql = " INSERT INTO g5_shop_item
                      SET it_id = '$it_id',
                          ca_id = '$ca_id',
                          ca_id2 = '$ca_id2',

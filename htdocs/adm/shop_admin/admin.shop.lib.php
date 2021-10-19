@@ -13,7 +13,7 @@ function add_io_stock($it_id, $ct_qty, $io_id="", $io_type=0)
                       and io_id = '{$io_id}'
                       and io_type = '{$io_type}' ";
     } else {
-        $sql = " update {$g5['g5_shop_item_table']}
+        $sql = " update g5_shop_item
                     set it_stock_qty = it_stock_qty + '{$ct_qty}'
                     where it_id = '{$it_id}' ";
     }
@@ -33,7 +33,7 @@ function subtract_io_stock($it_id, $ct_qty, $io_id="", $io_type=0)
                       and io_id = '{$io_id}'
                       and io_type = '{$io_type}' ";
     } else {
-        $sql = " update {$g5['g5_shop_item_table']}
+        $sql = " update g5_shop_item
                     set it_stock_qty = it_stock_qty - '{$ct_qty}'
                     where it_id = '{$it_id}' ";
     }

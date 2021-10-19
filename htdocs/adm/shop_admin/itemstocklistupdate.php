@@ -26,7 +26,7 @@ for ($i=0; $i<$count_post_it_id; $i++)
     $it_stock_sms = isset($_POST['it_stock_sms'][$i]) ? (int) $_POST['it_stock_sms'][$i] : 0;
     $it_id = isset($_POST['it_id'][$i]) ? safe_replace_regex($_POST['it_id'][$i], 'it_id') : '';
 
-    $sql = "update {$g5['g5_shop_item_table']}
+    $sql = "update g5_shop_item
                set it_stock_qty    = '".$it_stock_qty."',
                    it_noti_qty     = '".$it_noti_qty."',
                    it_use          = '".$it_use."',

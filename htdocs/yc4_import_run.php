@@ -435,7 +435,7 @@ document.onkeydown = noRefresh ;
                 $comma = ',';
             }
 
-            sql_query(" INSERT INTO {$g5['g5_shop_category_table']} SET $sql_common, ca_skin = 'list.10.skin.php' ");
+            sql_query(" INSERT INTO g5_shop_category SET $sql_common, ca_skin = 'list.10.skin.php' ");
         }
         echo '<li>category table 복사</li>'.PHP_EOL;
 
@@ -505,7 +505,7 @@ document.onkeydown = noRefresh ;
                 }
             }
 
-            sql_query(" INSERT INTO {$g5['g5_shop_item_table']} SET $sql_common ");
+            sql_query(" INSERT INTO g5_shop_item SET $sql_common ");
 
             // 사용후기의 확인된 건수를 상품테이블에 저장
             update_use_cnt($row['it_id']);
@@ -583,7 +583,7 @@ document.onkeydown = noRefresh ;
                 $ct_price = $row2['ct_amount'];
 
                 // 상품명
-                $it = sql_fetch(" select it_name from {$g5['g5_shop_item_table']} where it_id = '{$row2['it_id']}' ");
+                $it = sql_fetch(" select it_name from g5_shop_item where it_id = '{$row2['it_id']}' ");
                 $it_name = addslashes($it['it_name']);
 
                 // 주문옵션

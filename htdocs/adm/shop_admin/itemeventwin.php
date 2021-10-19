@@ -27,7 +27,7 @@ include_once(G5_PATH.'/head.sub.php');
         <tbody>
         <?php
         $sql = " select b.it_id, b.it_name, b.it_use from {$g5['g5_shop_event_item_table']} a
-                   left join {$g5['g5_shop_item_table']} b on (a.it_id=b.it_id)
+                   left join g5_shop_item b on (a.it_id=b.it_id)
                   where a.ev_id = '$ev_id'
                   order by b.it_id desc ";
         $result = sql_query($sql);

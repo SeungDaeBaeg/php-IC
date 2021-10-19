@@ -50,7 +50,7 @@ $gt = ">>>";
 $shop_url = G5_SHOP_URL;
 $data_url = G5_DATA_URL;
 
-$sql =" select * from {$g5['g5_shop_item_table']} where it_use = '1' and it_soldout = '0' order by ca_id";
+$sql =" select * from g5_shop_item where it_use = '1' and it_soldout = '0' order by ca_id";
 $result = sql_query($sql);
 $totcnt = sql_num_rows($result);
 
@@ -60,7 +60,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 {
     $cate1 = $cate2 = $cate3 = $cate4 = "";
 
-    $row2 = sql_fetch(" select ca_id, ca_name from {$g5['g5_shop_category_table']} where ca_id = '".substr($row['ca_id'],0,2)."' ");
+    $row2 = sql_fetch(" select ca_id, ca_name from g5_shop_category where ca_id = '".substr($row['ca_id'],0,2)."' ");
     $cate1 = $row2['ca_name'];
     $caid1 = $row2['ca_id'];
 
@@ -68,19 +68,19 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $caid2 = $caid3 = $caid4 = "";
 
     if (strlen($row['ca_id']) >= 8) {
-        $row2 = sql_fetch(" select ca_id, ca_name from {$g5['g5_shop_category_table']} where ca_id = '".substr($row['ca_id'],0,8)."' ");
+        $row2 = sql_fetch(" select ca_id, ca_name from g5_shop_category where ca_id = '".substr($row['ca_id'],0,8)."' ");
         $cate4 = $row2['ca_name'];
         $caid4 = $row2['ca_id'];
     }
 
     if (strlen($row['ca_id']) >= 6) {
-        $row2 = sql_fetch(" select ca_id, ca_name from {$g5['g5_shop_category_table']} where ca_id = '".substr($row['ca_id'],0,6)."' ");
+        $row2 = sql_fetch(" select ca_id, ca_name from g5_shop_category where ca_id = '".substr($row['ca_id'],0,6)."' ");
         $cate3 = $row2['ca_name'];
         $caid3 = $row2['ca_id'];
     }
 
     if (strlen($row['ca_id']) >= 4) {
-        $row2 = sql_fetch(" select ca_id, ca_name from {$g5['g5_shop_category_table']} where ca_id = '".substr($row['ca_id'],0,4)."' ");
+        $row2 = sql_fetch(" select ca_id, ca_name from g5_shop_category where ca_id = '".substr($row['ca_id'],0,4)."' ");
         $cate2 = $row2['ca_name'];
         $caid2 = $row2['ca_id'];
     }

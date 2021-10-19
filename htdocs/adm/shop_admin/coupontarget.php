@@ -25,14 +25,14 @@ $g5['title'] = $html_title.'검색';
 include_once(G5_PATH.'/head.sub.php');
 
 if($sch_target == 1) {
-    $sql_common = " from {$g5['g5_shop_category_table']} ";
+    $sql_common = " from g5_shop_category ";
     $sql_where = " where ca_use = '1' and ca_nocoupon = '0' ";
     if($sch_word)
         $sql_where .= " and ca_name like '%".sql_real_escape_string($sch_word)."%' ";
     $sql_select = " select ca_id as t_id, ca_name as t_name ";
     $sql_order = " order by ca_order, ca_name ";
 } else {
-    $sql_common = " from {$g5['g5_shop_item_table']} ";
+    $sql_common = " from g5_shop_item ";
     $sql_where = " where it_use = '1' and it_nocoupon = '0' ";
     if($sch_word)
         $sql_where .= " and it_name like '%".sql_real_escape_string($sch_word)."%' ";

@@ -125,7 +125,7 @@ if($is_member) {
         // 분류할인인지
         if($cp['cp_method']) {
             $sql2 = " select it_id, ca_id, ca_id2, ca_id3
-                        from {$g5['g5_shop_item_table']}
+                        from g5_shop_item
                         where it_id = '$it_id' ";
             $row2 = sql_fetch($sql2);
 

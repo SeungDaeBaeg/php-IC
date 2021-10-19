@@ -37,7 +37,7 @@ for($i=0; $i<$count; $i++) {
     $opt_count = count($_POST['io_id'][$it_id]);
 
     // 상품정보
-    $sql = " select * from {$g5['g5_shop_item_table']} where it_id = '$it_id' ";
+    $sql = " select * from g5_shop_item where it_id = '$it_id' ";
     $it = sql_fetch($sql);
     if(!$it['it_id'])
         die(json_encode(array('error' => '상품정보가 존재하지 않습니다.')));

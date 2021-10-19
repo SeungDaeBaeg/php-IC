@@ -28,7 +28,7 @@ if ($sel_ca_id != "") {
     $sql_search .= " $where ca_id like '$sel_ca_id%' ";
 }
 
-$sql_common = " from {$g5['g5_shop_item_table']} a
+$sql_common = " from g5_shop_item a
                 left join {$g5['g5_shop_event_item_table']} b on (a.it_id=b.it_id and b.ev_id='$ev_id') ";
 $sql_common .= $sql_search;
 
@@ -100,7 +100,7 @@ if($ev_id) {
 <select name="sel_ca_id" id="sel_ca_id">
     <option value=''>전체분류</option>
     <?php
-    $sql1 = " select ca_id, ca_name from {$g5['g5_shop_category_table']} order by ca_order, ca_id ";
+    $sql1 = " select ca_id, ca_name from g5_shop_category order by ca_order, ca_id ";
     $result1 = sql_query($sql1);
     for ($i=0; $row1=sql_fetch_array($result1); $i++)
     {

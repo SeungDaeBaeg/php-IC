@@ -20,7 +20,7 @@ for ($i=0; $i<$count_post_it_id; $i++)
 
     $it_id = isset($_POST['it_id'][$i]) ? safe_replace_regex($_POST['it_id'][$i], 'it_id') : '';
 
-    $sql = "update {$g5['g5_shop_item_table']}
+    $sql = "update g5_shop_item
                set it_type1 = '".$it_type1."',
                    it_type2 = '".$it_type2."',
                    it_type3 = '".$it_type3."',

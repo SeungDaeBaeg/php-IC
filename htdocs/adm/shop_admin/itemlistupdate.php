@@ -41,7 +41,7 @@ if ($post_act_button == "선택수정") {
         $p_it_id = isset($_POST['it_id'][$k]) ? preg_replace('/[^a-z0-9_\-]/i', '', $_POST['it_id'][$k]) : '';
 
         if ($is_admin != 'super') {     // 최고관리자가 아니면 체크
-            $sql = "select a.it_id, b.ca_mb_id from {$g5['g5_shop_item_table']} a , {$g5['g5_shop_category_table']} b where (a.ca_id = b.ca_id) and a.it_id = '$p_it_id'";
+            $sql = "select a.it_id, b.ca_mb_id from g5_shop_item a , g5_shop_category b where (a.ca_id = b.ca_id) and a.it_id = '$p_it_id'";
             $checks = sql_fetch($sql);
 
             if( ! $checks['ca_mb_id'] || $checks['ca_mb_id'] !== $member['mb_id'] ){
@@ -49,7 +49,7 @@ if ($post_act_button == "선택수정") {
             }
         }
 
-        $sql = "update {$g5['g5_shop_item_table']}
+        $sql = "update g5_shop_item
                    set ca_id          = '".sql_real_escape_string($p_ca_id)."',
                        ca_id2         = '".sql_real_escape_string($p_ca_id2)."',
                        ca_id3         = '".sql_real_escape_string($p_ca_id3)."',

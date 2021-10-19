@@ -177,13 +177,13 @@ require_once(G5_PATH.'/head.sub.php');
             include(G5_SHOP_PATH.'/index.php');
             break;
         case 'ca_list':
-            $sql = " select ca_id from {$g5['g5_shop_category_table']} where ca_use = '1' order by ca_id limit 1 ";
+            $sql = " select ca_id from g5_shop_category where ca_use = '1' order by ca_id limit 1 ";
             $tmp = sql_fetch($sql);
             $ca_id = $tmp['ca_id'];
             include(G5_SHOP_PATH.'/list.php');
             break;
         case 'item':
-            $sql = " select it_id from {$g5['g5_shop_item_table']} where it_use = '1' order by it_id desc limit 1 ";
+            $sql = " select it_id from g5_shop_item where it_use = '1' order by it_id desc limit 1 ";
             $tmp = sql_fetch($sql);
             $_GET['it_id'] = $tmp['it_id'];
             include(G5_SHOP_PATH.'/item.php');

@@ -7,7 +7,11 @@ class url {
      * @param $filename
      * @return string
      */
-    public static function getItemUrl($filename) {
+    public static function getThumbnailUrl(string $filename): string {
         return G5_DATA_URL . '/item/' . $filename;
+    }
+
+    public static function getDetailUrl(int $itId): string {
+        return G5_SHOP_URL . '/item.php?it_id=' . $itId;
     }
 }

@@ -11,7 +11,7 @@ if ($it_id)
 }
 else if ($ca_id)
 {
-    $sql = " select ca_name from {$g5['g5_shop_category_table']} where ca_id = '$ca_id' ";
+    $sql = " select ca_name from g5_shop_category where ca_id = '$ca_id' ";
     $row = sql_fetch($sql);
     $code = $ca_id;
     $name = $row['ca_name'];

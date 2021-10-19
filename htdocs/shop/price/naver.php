@@ -40,7 +40,7 @@ ob_start();
 
 echo "id{$tab}title{$tab}price_pc{$tab}link{$tab}image_link{$tab}category_name1{$tab}category_name2{$tab}category_name3{$tab}category_name4{$tab}brand{$tab}maker{$tab}origin{$tab}point{$tab}review_count{$tab}shipping{$tab}class{$tab}update_time";
 
-$sql =" select * from {$g5['g5_shop_item_table']} where it_use = '1' and it_soldout = '0' and it_tel_inq = '0' and it_price > '0' order by ca_id";
+$sql =" select * from g5_shop_item where it_use = '1' and it_soldout = '0' and it_tel_inq = '0' and it_price > '0' order by ca_id";
 $result = sql_query($sql);
 
 for ($i=0; $row=sql_fetch_array($result); $i++)
@@ -49,24 +49,24 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $caid1 = $caid2 = $caid3 = $caid4 = '';
 
     $caid1 = substr($row['ca_id'],0,2);
-    $row2  = sql_fetch(" select ca_name from {$g5['g5_shop_category_table']} where ca_id = '$caid1' ");
+    $row2  = sql_fetch(" select ca_name from g5_shop_category where ca_id = '$caid1' ");
     $cate1 = $row2['ca_name'];
 
     if (strlen($row['ca_id']) >= 8) {
         $caid4 = substr($row['ca_id'],0,8);
-        $row2  = sql_fetch(" select ca_name from {$g5['g5_shop_category_table']} where ca_id = '$caid4' ");
+        $row2  = sql_fetch(" select ca_name from g5_shop_category where ca_id = '$caid4' ");
         $cate4 = $row2['ca_name'];
     }
 
     if (strlen($row['ca_id']) >= 6) {
         $caid3 = substr($row['ca_id'],0,6);
-        $row2  = sql_fetch(" select ca_name from {$g5['g5_shop_category_table']} where ca_id = '$caid3' ");
+        $row2  = sql_fetch(" select ca_name from g5_shop_category where ca_id = '$caid3' ");
         $cate3 = $row2['ca_name'];
     }
 
     if (strlen($row['ca_id']) >= 4) {
         $caid2 = substr($row['ca_id'],0,4);
-        $row2  = sql_fetch(" select ca_name from {$g5['g5_shop_category_table']} where ca_id = '$caid2' ");
+        $row2  = sql_fetch(" select ca_name from g5_shop_category where ca_id = '$caid2' ");
         $cate2 = $row2['ca_name'];
     }
 

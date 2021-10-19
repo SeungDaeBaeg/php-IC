@@ -24,9 +24,9 @@ $ca_id3 = isset($_POST['ca_id3']) ? preg_replace('/[^0-9a-z]/i', '', $_POST['ca_
 
 if ($is_admin != 'super') {     // 최고관리자가 아니면 체크
     if( $w === '' ){
-        $sql = "select ca_mb_id from {$g5['g5_shop_category_table']} where ca_id = '$ca_id'";
+        $sql = "select ca_mb_id from g5_shop_category where ca_id = '$ca_id'";
     } else {
-        $sql = "select b.ca_mb_id from {$g5['g5_shop_item_table']} a , {$g5['g5_shop_category_table']} b where (a.ca_id = b.ca_id) and a.it_id = '$it_id'";
+        $sql = "select b.ca_mb_id from g5_shop_item a , g5_shop_category b where (a.ca_id = b.ca_id) and a.it_id = '$it_id'";
     }
     $checks = sql_fetch($sql);
 
@@ -39,7 +39,7 @@ $it_img1 = $it_img2 = $it_img3 = $it_img4 = $it_img5 = $it_img6 = $it_img7 = $it
 // 파일정보
 if($w == "u") {
     $sql = " select it_img1, it_img2, it_img3, it_img4, it_img5, it_img6, it_img7, it_img8, it_img9, it_img10
-                from {$g5['g5_shop_item_table']}
+                from g5_shop_item
                 where it_id = '$it_id' ";
     $file = sql_fetch($sql);
 
@@ -435,7 +435,7 @@ if ($w == "")
 
     $sql_common .= " , it_time = '".G5_TIME_YMDHIS."' ";
     $sql_common .= " , it_update_time = '".G5_TIME_YMDHIS."' ";
-    $sql = " insert {$g5['g5_shop_item_table']}
+    $sql = " insert g5_shop_item
                 set it_id = '$it_id',
 					$sql_common	";
     sql_query($sql);
@@ -443,7 +443,7 @@ if ($w == "")
 else if ($w == "u")
 {
     $sql_common .= " , it_update_time = '".G5_TIME_YMDHIS."' ";
-    $sql = " update {$g5['g5_shop_item_table']}
+    $sql = " update g5_shop_item
                 set $sql_common
               where it_id = '$it_id' ";
     sql_query($sql);
@@ -453,7 +453,7 @@ else if ($w == "d")
 {
     if ($is_admin != 'super')
     {
-        $sql = " select it_id from {$g5['g5_shop_item_table']} a, {$g5['g5_shop_category_table']} b
+        $sql = " select it_id from g5_shop_item a, g5_shop_category b
                   where a.it_id = '$it_id'
                     and a.ca_id = b.ca_id
                     and b.ca_mb_id = '{$member['mb_id']}' ";
@@ -576,11 +576,11 @@ if(is_checked('chk_ca_9'))                      $ca_fields .= " , it_9_subj = '$
 if(is_checked('chk_ca_10'))                     $ca_fields .= " , it_10_subj = '$it_10_subj', it_10 = '$it_10' ";
 
 if($ca_fields) {
-    sql_query(" update {$g5['g5_shop_item_table']} set it_name = it_name {$ca_fields} where ca_id = '$ca_id' ");
+    sql_query(" update g5_shop_item set it_name = it_name {$ca_fields} where ca_id = '$ca_id' ");
     if($ca_id2)
-        sql_query(" update {$g5['g5_shop_item_table']} set it_name = it_name {$ca_fields} where ca_id2 = '$ca_id2' ");
+        sql_query(" update g5_shop_item set it_name = it_name {$ca_fields} where ca_id2 = '$ca_id2' ");
     if($ca_id3)
-        sql_query(" update {$g5['g5_shop_item_table']} set it_name = it_name {$ca_fields} where ca_id3 = '$ca_id3' ");
+        sql_query(" update g5_shop_item set it_name = it_name {$ca_fields} where ca_id3 = '$ca_id3' ");
 }
 
 // 모든 상품 동일 옵션 적용
@@ -628,7 +628,7 @@ if(is_checked('chk_all_9'))                      $all_fields .= " , it_9_subj = 
 if(is_checked('chk_all_10'))                     $all_fields .= " , it_10_subj = '$it_10_subj', it_10 = '$it_10' ";
 
 if($all_fields) {
-    sql_query(" update {$g5['g5_shop_item_table']} set it_name = it_name {$all_fields} ");
+    sql_query(" update g5_shop_item set it_name = it_name {$all_fields} ");
 }
 
 $is_seo_title_edit = $w ? true : false;

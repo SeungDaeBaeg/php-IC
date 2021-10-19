@@ -9,7 +9,7 @@ $ca_id = isset($_REQUEST['ca_id']) ? safe_replace_regex($_REQUEST['ca_id'], 'ca_
 $data = array();
 
 $sql = " select *
-           from {$g5['g5_shop_category_table']}
+           from g5_shop_category
           where ca_id = '$ca_id'
             and ca_use = '1'  ";
 $ca = sql_fetch($sql);

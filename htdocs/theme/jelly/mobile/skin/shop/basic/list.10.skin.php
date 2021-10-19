@@ -25,7 +25,9 @@ $li_width = ($is_gallery_list === 'gallery') ? intval(100 / $this->list_mod) : 1
 $li_width_style = ' style="width:'.$li_width.'%;"';
 $ul_sct_class = ($is_gallery_list === 'gallery') ? 'sct_10' : 'sct_20';
 
-for ($i=0; $row=sql_fetch_array($result); $i++) {
+$i = 0;
+
+foreach($list as $i => $row) {
     if ($i == 0) {
         if ($this->css) {
             echo "<ul id=\"sct_wrap\" class=\"{$this->css}\">\n";
@@ -110,9 +112,9 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     echo "</div></li>\n";
 }
 
-if ($i > 0) echo "</ul>\n";
+if(count($list) > 0) echo "</ul>\n";
 
-if($i == 0) echo "<p class=\"sct_noitem\">등록된 상품이 없습니다.</p>\n";
+if(count($list) <= 0) echo "<p class=\"sct_noitem\">등록된 상품이 없습니다.</p>\n";
 ?>
 <!-- } 상품진열 10 끝 -->
 

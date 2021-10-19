@@ -29,7 +29,7 @@ if ($sel_field == "")  $sel_field = "it_name";
 if ($sort1 == "") $sort1 = "it_stock_qty";
 if ($sort2 == "") $sort2 = "asc";
 
-$sql_common = "  from {$g5['g5_shop_item_table']} ";
+$sql_common = "  from g5_shop_item ";
 $sql_common .= $sql_search;
 
 // 테이블의 전체 레코드수만 얻음
@@ -76,7 +76,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 <select name="sel_ca_id" id="sel_ca_id">
     <option value=''>전체분류</option>
     <?php
-    $sql1 = " select ca_id, ca_name from {$g5['g5_shop_category_table']} order by ca_order, ca_id ";
+    $sql1 = " select ca_id, ca_name from g5_shop_category order by ca_order, ca_id ";
     $result1 = sql_query($sql1);
     for ($i=0; $row1=sql_fetch_array($result1); $i++) {
         $len = strlen($row1['ca_id']) / 2 - 1;

@@ -114,7 +114,7 @@ for($k=0; $cp=sql_fetch_array($res); $k++) {
             <?php
             $sql = " select *
                        from {$g5['g5_shop_wish_table']} a,
-                            {$g5['g5_shop_item_table']} b
+                            g5_shop_item b
                       where a.mb_id = '{$member['mb_id']}'
                         and a.it_id  = b.it_id
                       order by a.wi_id desc

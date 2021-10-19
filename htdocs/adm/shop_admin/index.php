@@ -263,7 +263,7 @@ function get_max_value($arr)
             // 재고부족 상품
             $item_noti = 0;
             $sql = " select count(*) as cnt
-                        from {$g5['g5_shop_item_table']}
+                        from g5_shop_item
                         where it_use = '1'
                           and it_option_subject = ''
                           and it_stock_qty <= it_noti_qty ";

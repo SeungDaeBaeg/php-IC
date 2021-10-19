@@ -14,8 +14,9 @@ if (G5_IS_MOBILE) {
     return;
 }
 
-$sql = " select * from {$g5['g5_shop_category_table']} where ca_id = '$ca_id' and ca_use = '1'  ";
+$sql = " select * from g5_shop_category where ca_id = '$ca_id' and ca_use = '1'  ";
 $ca = sql_fetch($sql);
+
 if (! (isset($ca['ca_id']) && $ca['ca_id']))
     alert('등록된 분류가 없습니다.');
 
@@ -79,6 +80,7 @@ var itemlist_ca_id = "<?php echo $ca_id; ?>";
     $nav_skin = $skin_dir.'/navigation.skin.php';
     if(!is_file($nav_skin))
         $nav_skin = G5_SHOP_SKIN_PATH.'/navigation.skin.php';
+
     include $nav_skin;
 
     // 상단 HTML

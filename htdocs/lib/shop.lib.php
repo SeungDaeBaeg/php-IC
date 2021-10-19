@@ -261,6 +261,7 @@ class item_list
 
             $sql = $this->query;
             $result = sql_query($sql);
+
             $this->total_count = @sql_num_rows($result);
 
         } else {
@@ -294,11 +295,11 @@ class item_list
 
             if ($this->event) {
                 $sql_select = " select {$this->fields} ";
-                $sql_common = " from `{$g5['g5_shop_event_item_table']}` a left join `{$g5['g5_shop_item_table']}` b on (a.it_id = b.it_id) ";
+                $sql_common = " from `{$g5['g5_shop_event_item_table']}` a left join `g5_shop_item` b on (a.it_id = b.it_id) ";
                 $where[] = " a.ev_id = '{$this->event}' ";
             } else {
                 $sql_select = " select {$this->fields} ";
-                $sql_common = " from `{$g5['g5_shop_item_table']}` ";
+                $sql_common = " from `g5_shop_item` ";
             }
             $sql_where = " where " . implode(" and ", $where);
             $sql_limit = " limit " . $this->from_record . " , " . ($this->list_mod * $this->list_row);
@@ -341,6 +342,7 @@ class item_list
             include($file);
             $content = ob_get_contents();
             ob_end_clean();
+
             return $content;
         }
     }
@@ -536,7 +538,7 @@ function get_it_stock_qty($it_id)
 {
     global $g5;
 
-    $sql = " select it_stock_qty from {$g5['g5_shop_item_table']} where it_id = '$it_id' ";
+    $sql = " select it_stock_qty from g5_shop_item where it_id = '$it_id' ";
     $row = sql_fetch($sql);
     $jaego = (int)$row['it_stock_qty'];
 
@@ -766,7 +768,7 @@ function display_type($type, $list_skin='', $list_mod='', $list_row='', $img_wid
 
     // 1.02.00
     // it_order 추가
-    $sql = " select * from {$g5['g5_shop_item_table']} where it_use = '1' and it_type{$type} = '1' ";
+    $sql = " select * from g5_shop_item where it_use = '1' and it_type{$type} = '1' ";
     if ($ca_id) $sql .= " and ca_id like '$ca_id%' ";
     $sql .= " order by it_order, it_id desc limit $items ";
     $result = sql_query($sql);
@@ -801,7 +803,7 @@ function mobile_display_type($type, $skin_file, $list_row, $img_width, $img_heig
 
     // 1.02.00
     // it_order 추가
-    $sql = " select * from {$g5['g5_shop_item_table']} where it_use = '1' and it_type{$type} = '1' ";
+    $sql = " select * from g5_shop_item where it_use = '1' and it_type{$type} = '1' ";
     if ($ca_id) $sql .= " and ca_id like '$ca_id%' ";
     $sql .= " order by it_order, it_id desc limit $items ";
     $result = sql_query($sql);
@@ -830,7 +832,7 @@ function display_category($no, $list_mod, $list_row, $img_width, $img_height, $c
     // 상품수
     $items = $list_mod * $list_row;
 
-    $sql = " select * from {$g5['g5_shop_item_table']} where it_use = '1'";
+    $sql = " select * from g5_shop_item where it_use = '1'";
     if ($ca_id)
         $sql .= " and ca_id LIKE '{$ca_id}%' ";
     $sql .= " order by it_order, it_id desc limit $items ";
@@ -1223,7 +1225,7 @@ function display_event($no, $event, $list_mod, $list_row, $img_width, $img_heigh
 
     // 1.02.00
     // b.it_order 추가
-    $sql = " select b.* from {$g5['g5_shop_event_item_table']} a, {$g5['g5_shop_item_table']} b where a.it_id = b.it_id and b.it_use = '1' and a.ev_id = '$event' ";
+    $sql = " select b.* from {$g5['g5_shop_event_item_table']} a, g5_shop_item b where a.it_id = b.it_id and b.it_use = '1' and a.ev_id = '$event' ";
     if ($ca_id) $sql .= " and ca_id = '$ca_id' ";
     $sql .= " order by b.it_order, a.it_id desc limit $items ";
     $result = sql_query($sql);
@@ -1257,7 +1259,7 @@ function get_goods($cart_id)
     global $g5;
 
     // 상품명만들기
-    $row = sql_fetch(" select a.it_id, b.it_name from {$g5['g5_shop_cart_table']} a, {$g5['g5_shop_item_table']} b where a.it_id = b.it_id and a.od_id = '$cart_id' order by ct_id limit 1 ");
+    $row = sql_fetch(" select a.it_id, b.it_name from {$g5['g5_shop_cart_table']} a, g5_shop_item b where a.it_id = b.it_id and a.od_id = '$cart_id' order by ct_id limit 1 ");
     // 상품명에 "(쌍따옴표)가 들어가면 오류 발생함
     $goods['it_id'] = $row['it_id'];
     $goods['full_name']= $goods['name'] = addslashes($row['it_name']);
@@ -1436,7 +1438,7 @@ function relation_item($it_id, $width, $height, $rows=3)
     if(!$it_id)
         return $str;
 
-    $sql = " select b.it_id, b.it_name, b.it_price, b.it_tel_inq from {$g5['g5_shop_item_relation_table']} a left join {$g5['g5_shop_item_table']} b on ( a.it_id2 = b.it_id ) where a.it_id = '$it_id' order by ir_no asc limit 0, $rows ";
+    $sql = " select b.it_id, b.it_name, b.it_price, b.it_tel_inq from {$g5['g5_shop_item_relation_table']} a left join g5_shop_item b on ( a.it_id2 = b.it_id ) where a.it_id = '$it_id' order by ir_no asc limit 0, $rows ";
     $result = sql_query($sql);
 
     for($i=0; $row=sql_fetch_array($result); $i++) {
@@ -1858,7 +1860,7 @@ function get_item_sendcost2($it_id, $price, $qty)
     global $g5, $default;
 
     $sql = " select it_id, it_sc_type, it_sc_method, it_sc_price, it_sc_minimum, it_sc_qty
-                from {$g5['g5_shop_item_table']}
+                from g5_shop_item
                 where it_id = '$it_id' ";
     $it = sql_fetch($sql);
     if(!$it['it_id'])
@@ -2032,7 +2034,7 @@ function shop_member_cert_check($id, $type)
                 if(!$ca_id)
                     continue;
 
-                $sql = " select ca_cert_use, ca_adult_use from {$g5['g5_shop_category_table']} where ca_id = '$ca_id' ";
+                $sql = " select ca_cert_use, ca_adult_use from g5_shop_category where ca_id = '$ca_id' ";
                 $row = sql_fetch($sql);
 
                 // 본인확인체크
@@ -2062,7 +2064,7 @@ function shop_member_cert_check($id, $type)
 
             break;
         case 'list':
-            $sql = " select * from {$g5['g5_shop_category_table']} where ca_id = '$id' ";
+            $sql = " select * from g5_shop_category where ca_id = '$id' ";
             $ca = sql_fetch($sql);
 
             // 본인확인체크
@@ -2124,7 +2126,7 @@ function update_use_cnt($it_id)
 {
     global $g5;
     $row = sql_fetch(" select count(*) as cnt from {$g5['g5_shop_item_use_table']} where it_id = '{$it_id}' and is_confirm = 1 ");
-    return sql_query(" update {$g5['g5_shop_item_table']} set it_use_cnt = '{$row['cnt']}' where it_id = '{$it_id}' ");
+    return sql_query(" update g5_shop_item set it_use_cnt = '{$row['cnt']}' where it_id = '{$it_id}' ");
 }
 
 
@@ -2134,7 +2136,7 @@ function update_use_avg($it_id)
     global $g5;
     $row = sql_fetch(" select count(*) as cnt, sum(is_score) as total from {$g5['g5_shop_item_use_table']} where it_id = '{$it_id}' and is_confirm = 1 ");
     $average = ($row['total'] && $row['cnt']) ? $row['total'] / $row['cnt'] : 0;
-    return sql_query(" update {$g5['g5_shop_item_table']} set it_use_avg = '$average' where it_id = '{$it_id}' ");
+    return sql_query(" update g5_shop_item set it_use_avg = '$average' where it_id = '{$it_id}' ");
 }
 
 //오늘본상품 데이터
@@ -2234,7 +2236,7 @@ function get_wishlist_datas($mb_id, $is_cache=false)
     }
 
     $cache[$mb_id] = array();
-    $sql  = " select a.it_id, b.it_name from {$g5['g5_shop_wish_table']} a, {$g5['g5_shop_item_table']} b ";
+    $sql  = " select a.it_id, b.it_name from {$g5['g5_shop_wish_table']} a, g5_shop_item b ";
     $sql .= " where a.mb_id = '".$mb_id."' and a.it_id  = b.it_id order by a.wi_id desc ";
     $result = sql_query($sql);
     for ($i=0; $row=sql_fetch_array($result); $i++)
@@ -2269,7 +2271,7 @@ function get_wishlist_count_by_item($it_id='')
 
     if( !$it_id ) return 0;
 
-    $sql = "select count(a.it_id) as num from {$g5['g5_shop_wish_table']} a, {$g5['g5_shop_item_table']} b where a.it_id  = b.it_id and b.it_id = '$it_id'";
+    $sql = "select count(a.it_id) as num from {$g5['g5_shop_wish_table']} a, g5_shop_item b where a.it_id  = b.it_id and b.it_id = '$it_id'";
 
     $row = sql_fetch($sql);
 

@@ -29,7 +29,7 @@ if ($file = $ca_include_tail) {
 }
 
 if( $ca_id ){
-    $sql = " select * from {$g5['g5_shop_category_table']} where ca_id = '$ca_id' ";
+    $sql = " select * from g5_shop_category where ca_id = '$ca_id' ";
     $ca = sql_fetch($sql);
 
     if ($ca && ($ca['ca_include_head'] !== $ca_include_head || $ca['ca_include_tail'] !== $ca_include_tail) && function_exists('get_admin_captcha_by') && get_admin_captcha_by()){
@@ -188,7 +188,7 @@ if ($w == "")
     // 소문자로 변환
     $ca_id = strtolower($ca_id);
 
-    $sql = " insert {$g5['g5_shop_category_table']}
+    $sql = " insert g5_shop_category
                 set ca_id   = '$ca_id',
                     ca_name = '$ca_name',
                     $sql_common ";
@@ -196,7 +196,7 @@ if ($w == "")
 }
 else if ($w == "u")
 {
-    $sql = " update {$g5['g5_shop_category_table']}
+    $sql = " update g5_shop_category
                 set ca_name = '$ca_name',
                     $sql_common
               where ca_id = '$ca_id' ";
@@ -205,7 +205,7 @@ else if ($w == "u")
     // 하위분류를 똑같은 설정으로 반영
     if (isset($_POST['sub_category']) && $_POST['sub_category']) {
         $len = strlen($ca_id);
-        $sql = " update {$g5['g5_shop_category_table']}
+        $sql = " update g5_shop_category
                     set $sql_common
                   where SUBSTRING(ca_id,1,$len) = '$ca_id' ";
         if ($is_admin != 'super')
@@ -218,7 +218,7 @@ else if ($w == "d")
     // 분류의 길이
     $len = strlen($ca_id);
 
-    $sql = " select COUNT(*) as cnt from {$g5['g5_shop_category_table']}
+    $sql = " select COUNT(*) as cnt from g5_shop_category
               where SUBSTRING(ca_id,1,$len) = '$ca_id'
                 and ca_id <> '$ca_id' ";
     $row = sql_fetch($sql);
@@ -226,7 +226,7 @@ else if ($w == "d")
         alert("이 분류에 속한 하위 분류가 있으므로 삭제 할 수 없습니다.\\n\\n하위분류를 우선 삭제하여 주십시오.");
 
     $str = $comma = "";
-    $sql = " select it_id from {$g5['g5_shop_item_table']} where ca_id = '$ca_id' ";
+    $sql = " select it_id from g5_shop_item where ca_id = '$ca_id' ";
     $result = sql_query($sql);
     $i=0;
     while ($row = sql_fetch_array($result))
@@ -241,7 +241,7 @@ else if ($w == "d")
         alert("이 분류와 관련된 상품이 총 {$i} 건 존재하므로 상품을 삭제한 후 분류를 삭제하여 주십시오.\\n\\n$str");
 
     // 분류 삭제
-    $sql = " delete from {$g5['g5_shop_category_table']} where ca_id = '$ca_id' ";
+    $sql = " delete from g5_shop_category where ca_id = '$ca_id' ";
     sql_query($sql);
 }
 
