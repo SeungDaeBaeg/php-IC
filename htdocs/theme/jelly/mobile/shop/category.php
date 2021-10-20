@@ -18,110 +18,30 @@ function get_mshop_category($ca_id, $len)
 <div id="category" class="menu">
     <button type="button" class="menu_close"><i class="fa fa-times" aria-hidden="true"></i><span class="sound_only">카테고리닫기</span></button>
     <div class="btn_login">
-        <?php if ($is_member) { ?>
-            <button type="button" id="btn_user" class="btn_ol"><?php echo get_member_profile_img($member['mb_id']); ?><span class="txt"><?php echo $member['mb_id'] ?> 님 </span><span class="sound_only">사용자메뉴 열기</span></button>
-        <?php } else { ?>
-            <button type="button" class="btn_ol">로그인</button>
-            <a href="<?php echo G5_BBS_URL; ?>/register.php" class="btn_ol">회원가입</a>
-        <?php } ?>
-
+        <input type="text" placeholder="상품을 검색하세요" />
+        <button>검색</button>
     </div>
 
     <?=outlogin('theme/shop_basic', true) // 외부 로그인 ?>
 
     <div class="menu_wr">
-
-     <h2>카테고리</h2>
-       <?php
-        $mshop_ca_href = G5_SHOP_URL.'/list.php?ca_id=';
-        $mshop_ca_res1 = sql_query(get_mshop_category('', 2));
-        for($i=0; $mshop_ca_row1=sql_fetch_array($mshop_ca_res1); $i++) {
-            if($i == 0)
-                echo '<ul class="cate">'.PHP_EOL;
-        ?>
+        <ul class="cate">
             <li>
-                <a href="<?php echo $mshop_ca_href.$mshop_ca_row1['ca_id']; ?>"><?php echo get_text($mshop_ca_row1['ca_name']); ?></a>
-                <?php
-                $mshop_ca_res2 = sql_query(get_mshop_category($mshop_ca_row1['ca_id'], 4));
-                if(sql_num_rows($mshop_ca_res2))
-                    echo '<button class="sub_ct_toggle ct_op">'.get_text($mshop_ca_row1['ca_name']).' 하위분류 열기</button>'.PHP_EOL;
-
-                for($j=0; $mshop_ca_row2=sql_fetch_array($mshop_ca_res2); $j++) {
-                    if($j == 0)
-                        echo '<ul class="sub_cate sub_cate1">'.PHP_EOL;
-                ?>
-                    <li>
-                        <a href="<?php echo $mshop_ca_href.$mshop_ca_row2['ca_id']; ?>"><?php echo get_text($mshop_ca_row2['ca_name']); ?></a>
-                        <?php
-                        $mshop_ca_res3 = sql_query(get_mshop_category($mshop_ca_row2['ca_id'], 6));
-                        if(sql_num_rows($mshop_ca_res3))
-                            echo '<button type="button" class="sub_ct_toggle ct_op">'.get_text($mshop_ca_row2['ca_name']).' 하위분류 열기</button>'.PHP_EOL;
-
-                        for($k=0; $mshop_ca_row3=sql_fetch_array($mshop_ca_res3); $k++) {
-                            if($k == 0)
-                                echo '<ul class="sub_cate sub_cate2">'.PHP_EOL;
-                        ?>
-                            <li>
-                                <a href="<?php echo $mshop_ca_href.$mshop_ca_row3['ca_id']; ?>"><?php echo get_text($mshop_ca_row3['ca_name']); ?></a>
-                                <?php
-                                $mshop_ca_res4 = sql_query(get_mshop_category($mshop_ca_row3['ca_id'], 8));
-                                if(sql_num_rows($mshop_ca_res4))
-                                    echo '<button type="button" class="sub_ct_toggle ct_op">'.get_text($mshop_ca_row3['ca_name']).' 하위분류 열기</button>'.PHP_EOL;
-
-                                for($m=0; $mshop_ca_row4=sql_fetch_array($mshop_ca_res4); $m++) {
-                                    if($m == 0)
-                                        echo '<ul class="sub_cate sub_cate3">'.PHP_EOL;
-                                ?>
-                                    <li>
-                                        <a href="<?php echo $mshop_ca_href.$mshop_ca_row4['ca_id']; ?>"><?php echo get_text($mshop_ca_row4['ca_name']); ?></a>
-                                        <?php
-                                        $mshop_ca_res5 = sql_query(get_mshop_category($mshop_ca_row4['ca_id'], 10));
-                                        if(sql_num_rows($mshop_ca_res5))
-                                            echo '<button type="button" class="sub_ct_toggle ct_op">'.get_text($mshop_ca_row4['ca_name']).' 하위분류 열기</button>'.PHP_EOL;
-
-                                        for($n=0; $mshop_ca_row5=sql_fetch_array($mshop_ca_res5); $n++) {
-                                            if($n == 0)
-                                                echo '<ul class="sub_cate sub_cate4">'.PHP_EOL;
-                                        ?>
-                                            <li>
-                                                <a href="<?php echo $mshop_ca_href.$mshop_ca_row5['ca_id']; ?>"><?php echo get_text($mshop_ca_row5['ca_name']); ?></a>
-                                            </li>
-                                        <?php
-                                        }
-
-                                        if($n > 0)
-                                            echo '</ul>'.PHP_EOL;
-                                        ?>
-                                    </li>
-                                <?php
-                                }
-
-                                if($m > 0)
-                                    echo '</ul>'.PHP_EOL;
-                                ?>
-                            </li>
-                        <?php
-                        }
-
-                        if($k > 0)
-                            echo '</ul>'.PHP_EOL;
-                        ?>
-                    </li>
-                <?php
-                }
-
-                if($j > 0)
-                    echo '</ul>'.PHP_EOL;
-                ?>
+                <a>추천</a>
             </li>
-        <?php
-        }
-
-        if($i > 0)
-            echo '</ul>'.PHP_EOL;
-        else
-            echo '<p>등록된 분류가 없습니다.</p>'.PHP_EOL;
-        ?>
+            <li>
+                <a>이벤트</a>
+            </li>
+            <li>
+                <a>마이샵</a>
+            </li>
+            <li>
+                <a>리포트</a>
+            </li>
+            <li>
+                <a>출금관리</a>
+            </li>
+        </ul>
 
     </div>
 </div>

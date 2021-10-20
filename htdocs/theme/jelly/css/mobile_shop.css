@@ -1029,3 +1029,17 @@ box-shadow: 0 0 8px rgba(65,98,255,0.8);}
 
 /* 중단 메뉴 바 */
 #main_middle_menu > button {width:25%;height:60px;float:left;}
+
+.visible-mobile, .visible-pc {
+    display:none;
+}
+@media (max-width: 969px){
+    .visible-mobile {
+        display:block;
+    }
+}
+@media (min-width: 969px){
+    .visible-pc {
+        display:block;
+    }
+}

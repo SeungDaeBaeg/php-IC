@@ -22,7 +22,7 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
     <div id="hd_wr">
         <div id="logo">
             <div style="position:relative;width:100%;height:25px;float:left;text-align: center;">
-                <div style="position:absolute;left:0px;top:0px;height:25px;">
+                <div class="visible-mobile" style="position:absolute;left:0px;top:0px;height:25px;">
                     <? if(!empty(data::getLoginInfo())) { ?>
                         <i class="fa fa-money">
                             <a href="/influencer/withdraw.php">
@@ -40,7 +40,7 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
                 </a>
 
                 <? if(!empty(data::getLoginInfo())) { ?>
-                    <div id="top_left_alram" style="position:absolute;right:0px;top:0px;height:25px;line-height:25px;">
+                    <div id="top_left_alram" class="visible-mobile" style="position:absolute;right:0px;top:0px;height:25px;line-height:25px;">
                         <p><i class="fa fa-bell"></i><span class="sound_only">알람</span></p>
                     </div>
                 <? } ?>
@@ -50,13 +50,38 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 <!--            </div>-->
         </div>
 
-        <!-- @todo: [승대] 상품 검색창 -->
-        <div>
+        <!-- @todo: [승대] 상품 모바일용 검색창 -->
+        <div class="visible-mobile">
             <input type="text"  style="width:79%;"/>
             <button style="width:20%">검색</button>
         </div>
 
+        <div class="visible-pc">
+            <!-- PC 상단 -->
+
+            <? if(!empty(data::getLoginInfo())) { ?>
+                <i class="fa fa-money">
+                    <a href="/influencer/withdraw.php">
+                        <span style="margin-left:0.2rem;"><?=number_format(data::getLoginMember()['mb_save_money'])?>원</span>
+                    </a>
+                </i>
+
+                | <a>이용가이드</a>
+                | <span><?=data::getLoginMember()['mb_name']?>님</span>
+                | <a href="<?=G5_BBS_URL?>/logout.php">로그아웃</a>
+                | <a>나의 찜</a>
+                | <a>알림</a>
+                | <a>마이페이지</a>
+            <? } else { ?>
+                <a class="btn_ol">로그인</a>
+            <? } ?>
+
+            | <a>문의센터</a>
+        </div>
+
+
         <?php include_once(G5_THEME_MSHOP_PATH.'/category.php'); // 분류 ?>
+
              <div id="hd_sch">
                 <button type="button" class="btn_close"><i class="fa fa-times"></i></button>
                 <div class="hd_sch_wr">
