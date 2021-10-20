@@ -28,6 +28,11 @@ $mb_nick        = isset($_POST['mb_nick']) ? trim(strip_tags($_POST['mb_nick']))
 $mb_email       = isset($_POST['mb_email']) ? trim($_POST['mb_email']) : '';
 $mb_name        = isset($_POST['mb_name']) ? clean_xss_tags(trim(strip_tags($_POST['mb_name']))) : '';
 $mb_email       = get_email_address($mb_email);
+$mb_phone       = isset($_POST['mb_phone']) ? trim($_POST['mb_phone']) : '';
+$mb_referer     = isset($_POST['mb_referer']) ? trim($_POST['mb_referer']) : '';
+$mb_channel     = isset($_POST['mb_channel']) ? trim($_POST['mb_channel']) : '';
+$mb_category    = isset($_POST['mb_category']) ? trim($_POST['mb_category']) : '';
+$mb_influencer  = isset($_POST['mb_influencer']) ? trim($_POST['mb_influencer']) : 'N';
 
 // 이름, 닉네임에 utf-8 이외의 문자가 포함됐다면 오류
 // 서버환경에 따라 정상적으로 체크되지 않을 수 있음.
@@ -94,7 +99,7 @@ $mb_mailling = (isset($_POST['mb_mailling']) && $_POST['mb_mailling']) ? 1 : 0;
 $mb_open = (isset($_POST['mb_open']) && $_POST['mb_open']) ? 1 : 0;
 
 // 회원정보 입력
-$sql = " insert into {$g5['member_table']}
+$sql = " insert into g5_member
             set mb_id = '{$mb_id}',
                 mb_password = '".get_encrypt_string($mb_password)."',
                 mb_name = '{$mb_name}',
@@ -110,7 +115,13 @@ $sql = " insert into {$g5['member_table']}
                 mb_mailling = '{$mb_mailling}',
                 mb_sms = '0',
                 mb_open = '{$mb_open}',
-                mb_open_date = '".G5_TIME_YMD."' ";
+                mb_open_date = '".G5_TIME_YMD."',
+                mb_hp = '{$mb_phone}',
+                mb_recommend = '{$mb_referer}',
+                mb_sns_channel = '{$mb_channel}',
+                mb_category = '{$mb_category}',
+                mb_is_influencer = '{$mb_influencer}'
+        ";
 
 $result = sql_query($sql, false);
 

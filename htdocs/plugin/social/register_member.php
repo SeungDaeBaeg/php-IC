@@ -53,6 +53,6 @@ $required = ($w=='') ? 'required' : '';
 $readonly = ($w=='u') ? 'readonly' : '';
 $login_url = '';
 
-include_once(get_social_skin_path().'/social_register_member.skin.php');
+include_once(get_social_skin_path().'/social_register_member_ic.php');
 
 include_once(G5_BBS_PATH.'/_tail.php');
