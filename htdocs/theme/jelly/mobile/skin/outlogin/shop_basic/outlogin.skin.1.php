@@ -6,9 +6,17 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
 ?>
 <div class="ol tnb_con ol_before_wr">
 <aside id="ol_before" class="ol">
-    <h2>회원로그인</h2>
+    <img src="<?php echo G5_DATA_URL; ?>/common/logo.jpg">
+    <div>
+        전상품 최저가 보장<br>
+        365일 할인구매<br>
+        SNS 채널 등록만 하면, 혜택이 쏟아진다<br>
+    </div>
+    <!-- todo 소셜계정으로 로그인 PPT 17페이지 -->
+    <div><?php require_once (G5_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/social/social_outlogin.skin.1.php'); ?></div>
+    <div>비회원 주문조회</div>
     <!-- 로그인 전 외부로그인 시작 -->
-    <form name="foutlogin" action="<?php echo $outlogin_action_url ?>" onsubmit="return fhead_submit(this);" method="post" autocomplete="off">
+    <!-- <form name="foutlogin" action="<?php echo $outlogin_action_url ?>" onsubmit="return fhead_submit(this);" method="post" autocomplete="off">
     <button type="button" class="btn_close"><i class="fa fa-times"></i><span class="sound_only">닫기</span></button>
     <fieldset>
         <input type="hidden" name="url" value="<?php echo $outlogin_url ?>">
@@ -25,10 +33,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
 
         <div id="ol_svc">
             <a href="<?php echo G5_BBS_URL ?>/password_lost.php" id="ol_password_lost">회원정보찾기</a>
-        </div>
-
+        </div>        
     </fieldset>
-    </form>
+    </form> -->
 </aside>
 </div>
 <script>

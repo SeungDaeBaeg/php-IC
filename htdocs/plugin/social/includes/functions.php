@@ -60,7 +60,6 @@ function get_social_callbackurl($provider, $no_domain=false, $no_params=false){
 function social_return_from_provider_page( $provider, $login_action_url, $mb_id, $mb_password, $url, $use_popup=2 ){
 
     $ref = $_SERVER['HTTP_REFERER'];
-
     if( !G5_SOCIAL_USE_POPUP || strpos($ref, 'login_check.php') !== false ){
         if( get_session('social_login_redirect') ){
             unset($_SESSION['social_login_redirect']);
@@ -69,7 +68,6 @@ function social_return_from_provider_page( $provider, $login_action_url, $mb_id,
             set_session('social_login_redirect', 1);
         }
     }
-    
     $img_url = G5_SOCIAL_LOGIN_URL.'/img/';
     include_once(G5_SOCIAL_LOGIN_PATH.'/includes/loading.php');
 }
@@ -234,7 +232,7 @@ function social_user_profile_replace( $mb_id, $provider, $profile ){
         'provider'  => "'".  $provider . "'",
         'object_sha'    => "'". $object_sha . "'",
         'mp_register_day' => ! empty($row) ? "'".$row['mp_register_day']."'" : "'". G5_TIME_YMDHIS . "'",
-        'mp_latest_day' => "'". G5_TIME_YMDHIS . "'",
+        'mp_latest_day' => "'". G5_TIME_YMDHIS . "'"
     );
 
     $fields = array( 
@@ -247,11 +245,10 @@ function social_user_profile_replace( $mb_id, $provider, $profile ){
 
     foreach( (array) $profile as $key => $value ){
         $key = strtolower($key);
-
         if( in_array( $key, $fields ) )
         {
             $value = (string) $value;
-            $table_data[ $key ] = "'". sql_real_escape_string($value). "'";
+            $table_data[ $key ] = "'". $value. "'";
         }
     }
     
@@ -259,11 +256,9 @@ function social_user_profile_replace( $mb_id, $provider, $profile ){
     $values = implode( ", ", array_values( $table_data )  );
 
     $sql = "REPLACE INTO {$g5['social_profile_table']} ($fields) VALUES ($values) ";
-
-    sql_query($sql);
+    sql_fetch($sql);
 
     return sql_insert_id();
-
 }
 
 function social_build_provider_config($provider){
@@ -536,7 +531,7 @@ function social_check_login_before($p_service=''){
             $mb_id = $user_provider['mb_id'];
             //이미 소셜로 가입된 데이터가 있다면 password를 필요하지 않으니, 패스워드를 무작위 생성하여 넘깁니다.
             $mb_password = sha1( str_shuffle( "0123456789abcdefghijklmnoABCDEFGHIJ" ) );
-
+            
             echo social_return_from_provider_page( $provider_name, $login_action_url, $mb_id, $mb_password, $url, $use_popup );
             exit;
 
