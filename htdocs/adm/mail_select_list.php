@@ -60,7 +60,7 @@ $ma_last_option .= "||mb_level_from={$mb_level_from}";
 $ma_last_option .= "||mb_level_to={$mb_level_to}";
 $ma_last_option .= "||gr_id={$gr_id}";
 
-sql_query(" update {$g5['mail_table']} set ma_last_option = '{$ma_last_option}' where ma_id = '{$ma_id}' ");
+sql_query(" update g5_mail set ma_last_option = '{$ma_last_option}' where ma_id = '{$ma_id}' ");
 
 $g5['title'] = "메일발송 대상 회원";
 include_once('./admin.head.php');

@@ -9,7 +9,7 @@ auth_check_menu($auth, $sub_menu, 'r');
 
 $ma_id = isset($_GET['ma_id']) ? (int) $_GET['ma_id'] : 0;
 
-$sql = " select * from {$g5['mail_table']} where ma_id = '$ma_id' ";
+$sql = " select * from g5_mail where ma_id = '$ma_id' ";
 $ma = sql_fetch($sql);
 if (!$ma['ma_id'])
     alert('보내실 내용을 선택하여 주십시오.');

@@ -5,17 +5,17 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0);
 ?>
 
-<?php if($config['cf_kakao_js_apikey']) { ?>
+<? if($config['cf_kakao_js_apikey']) { ?>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script src="<?php echo G5_JS_URL; ?>/kakaolink.js"></script>
+<script src="<?=G5_JS_URL?>/kakaolink.js"></script>
 <script>
     // 사용할 앱의 Javascript 키를 설정해 주세요.
-    Kakao.init("<?php echo $config['cf_kakao_js_apikey']; ?>");
+    Kakao.init("<?=$config['cf_kakao_js_apikey']?>");
 </script>
-<?php } ?>
+<? } ?>
 
-<form name="fitem" action="<?php echo $action_url; ?>" method="post" onsubmit="return fitem_submit(this);">
-<input type="hidden" name="it_id[]" value="<?php echo $it['it_id']; ?>">
+<form name="fitem" action="<?=$action_url?>" method="post" onsubmit="return fitem_submit(this);">
+<input type="hidden" name="it_id[]" value="<?=$it['it_id']?>">
 <input type="hidden" name="sw_direct">
 <input type="hidden" name="url">
 
@@ -81,106 +81,159 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
         <h2>상품간략정보</h2>
         <div class="sit_ov_wr">
 
-            <strong id="sit_title"><?php echo stripslashes($it['it_name']); ?></strong>
-            <?php if($it['it_basic']) { ?><p id="sit_desc"><?php echo $it['it_basic']; ?></p><?php } ?>
-            <?php if($is_orderable) { ?>
-            <p id="sit_opt_info">
-                상품 선택옵션 <?php echo $option_count; ?> 개, 추가옵션 <?php echo $supply_count; ?> 개
-            </p>
-            <?php } ?>
+            <strong id="sit_title"><?=stripslashes($it['it_name'])?></strong>
+
+            <!-- @todo [승대] PPT 10P DESC 2 -->
+
+            <div class="sit_price">
+                <? if (!$it['it_use']) { // 판매가능이 아닐 경우 ?>
+                    <div class="price_wr price_no">
+                        <strong>판매가격</strong>
+                        <span>판매중지</span>
+                    </div>
+                <? } else if ($it['it_tel_inq']) { // 전화문의일 경우 ?>
+                    <div class="price_wr price_call">
+                        <strong>판매가격</strong>
+                        <span>전화문의</span>
+                    </div>
+                <? } else { // 전화문의가 아닐 경우?>
+                    <? if ($it['it_cust_price'] > 0) { // 1.00.03?>
+                        <div class="price_wr price_og">
+                            <strong>시중가격</strong>
+                            <span><?=display_price($it['it_cust_price'])?></span>
+                        </div>
+                        <div class="price_wr price">
+                            <strong>판매가격</strong>
+                            <span>
+                                <?=display_price(get_price($it))?>
+
+                                <?=util::percent($it['it_cust_price'], $it['it_price'])?>% 할인
+                            </span>
+                        </div>
+                    <? } else { ?>
+                        <div class="price_wr price">
+                            <strong>판매가격</strong>
+                            <span>
+                                <?=display_price(get_price($it))?>
+                            </span>
+                        </div>
+                    <? } ?>
+
+                    <input type="hidden" id="it_price" value="<?=get_price($it)?>">
+
+                <? } ?>
+            </div>
+
+            <div>
+                <? if($it['it_sc_type'] == 1 || $it['it_sc_price'] <= 0) { ?>
+                    무료 배송
+                <? } else { ?>
+                    배송비 <?=number_format($it['it_sc_price'])?>원
+                <? } ?>
+
+                <? if($it['it_earn_price'] > 0 && $it['it_earn_percent'] > 0) { ?>
+                    <p>제품 판매 <?=number_format($it['it_earn_price'])?>원 적립
+                        <? if($it['it_earn_percent'] > 0) { ?>
+                            (<?=$it['it_earn_percent']?>% 적립)
+                        <? } ?>
+                    </p>
+                <? } ?>
+            </div>
+
+            <div class="sit_ov_tbl">
+                <div>
+                    <a>판매가이드</a>
+                    <a>상품정보</a>
+                    <a>교환/환불</a>
+                </div>
+            </div>
+
+            <!--판매가이드 -->
+            <div class="site_ov_tbl">
+
+            </div>
+
+            <!--상품정보 -->
+            <div class="site_ov_tbl">
+
+            </div>
+
+            <!--배송정보 -->
+            <div class="site_ov_tbl">
+
+            </div>
+
+            <? if($is_orderable) { ?>
+                <p id="sit_opt_info">
+                    상품 선택옵션 <?=$option_count?> 개, 추가옵션 <?=$supply_count?> 개
+                </p>
+            <? } ?>
 
             <?php
             $sns_title = get_text($it['it_name']).' | '.get_text($config['cf_title']);
             $sns_url  = G5_SHOP_URL.'/item.php?it_id='.$it['it_id'];
             if ($score = get_star_image($it['it_id'])) { ?>
-                <img src="<?php echo G5_SHOP_URL; ?>/img/s_star<?php echo $score?>.png" alt="" class="sit_star" width="100">(리뷰<strong><?php echo $it['it_use_cnt']; ?></strong>건)
+                <img src="<?=G5_SHOP_URL?>/img/s_star<?=$score?>.png" alt="" class="sit_star" width="100">(리뷰<strong><?=$it['it_use_cnt']?></strong>건)
+            <? } ?>
 
-            <?php } ?>
-            <div class="sit_icon_wr"><?php echo item_icon2($it); ?></div>
 
-            <div class="sit_price">
-                <?php if (!$it['it_use']) { // 판매가능이 아닐 경우 ?>
-                <div class="price_wr price_no">
-                    <strong>판매가격</strong>
-                    <span>판매중지</span>
-                </div>
-                <?php } else if ($it['it_tel_inq']) { // 전화문의일 경우 ?>
-                <div class="price_wr price_call">
-                    <strong>판매가격</strong>
-                    <span>전화문의</span>
-                </div>
-                <?php } else { // 전화문의가 아닐 경우?>
-                <?php if ($it['it_cust_price']) { // 1.00.03?>
-                <div class="price_wr price_og">
-                    <strong>시중가격</strong>
-                    <span><?php echo display_price($it['it_cust_price']); ?></span>
-                </div>
-                <?php } ?>
-                <div class="price_wr price">
-                    <strong>판매가격</strong>
-                    <span>
-                        <?php echo display_price(get_price($it)); ?>
-                        <input type="hidden" id="it_price" value="<?php echo get_price($it); ?>">
-                    </span>
-                </div>
-                <?php } ?>
-            </div>
+
             <div class="sit_ov_tbl">
                 <table>
       
                 <tbody>
-                <?php if ($it['it_maker']) { ?>
-                <tr>
-                    <th scope="row">제조사</th>
-                    <td><?php echo $it['it_maker']; ?></td>
-                </tr>
-                <?php } ?>
+                    <? if ($it['it_maker']) { ?>
+                        <tr>
+                            <th scope="row">제조사</th>
+                            <td><?=$it['it_maker']?></td>
+                        </tr>
+                    <? } ?>
 
-                <?php if ($it['it_origin']) { ?>
-                <tr>
-                    <th scope="row">원산지</th>
-                    <td><?php echo $it['it_origin']; ?></td>
-                </tr>
-                <?php } ?>
+                    <? if ($it['it_origin']) { ?>
+                        <tr>
+                            <th scope="row">원산지</th>
+                            <td><?=$it['it_origin']?></td>
+                        </tr>
+                    <? } ?>
 
-                <?php if ($it['it_brand']) { ?>
-                <tr>
-                    <th scope="row">브랜드</th>
-                    <td><?php echo $it['it_brand']; ?></td>
-                </tr>
-                <?php } ?>
-                <?php if ($it['it_model']) { ?>
-                <tr>
-                    <th scope="row">모델</th>
-                    <td><?php echo $it['it_model']; ?></td>
-                </tr>
-                <?php } ?>
+                    <? if ($it['it_brand']) { ?>
+                        <tr>
+                            <th scope="row">브랜드</th>
+                            <td><?=$it['it_brand']?></td>
+                        </tr>
+                    <? } ?>
+                    <? if ($it['it_model']) { ?>
+                        <tr>
+                            <th scope="row">모델</th>
+                            <td><?=$it['it_model']?></td>
+                        </tr>
+                    <? } ?>
                 
 
-                <?php
-                /* 재고 표시하는 경우 주석 해제
-                <tr>
-                    <th scope="row">재고수량</th>
-                    <td><?php echo number_format(get_it_stock_qty($it_id)); ?> 개</td>
-                </tr>
-                */
-                ?>
+                    <?php
+                    /* 재고 표시하는 경우 주석 해제
+                    <tr>
+                        <th scope="row">재고수량</th>
+                        <td><?=number_format(get_it_stock_qty($it_id))?> 개</td>
+                    </tr>
+                    */
+                    ?>
 
-                <?php if ($config['cf_use_point']) { // 포인트 사용한다면 ?>
-                <tr>
-                    <th scope="row"><label for="disp_point">포인트</label></th>
-                    <td>
-                        <?php
-                        if($it['it_point_type'] == 2) {
-                            echo '구매금액(추가옵션 제외)의 '.$it['it_point'].'%';
-                        } else {
-                            $it_point = get_item_point($it);
-                            echo number_format($it_point).'점';
-                        }
-                        ?>
-                    </td>
-                </tr>
-                <?php } ?>
+                    <? if ($config['cf_use_point']) { // 포인트 사용한다면 ?>
+                        <tr>
+                            <th scope="row"><label for="disp_point">포인트</label></th>
+                            <td>
+                                <?php
+                                if($it['it_point_type'] == 2) {
+                                    echo '구매금액(추가옵션 제외)의 '.$it['it_point'].'%';
+                                } else {
+                                    $it_point = get_item_point($it);
+                                    echo number_format($it_point).'점';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                    <? } ?>
                 <?php
                 $ct_send_cost_label = '배송비결제';
 
@@ -201,21 +254,21 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
                 }
                 ?>
                 <tr>
-                    <th><?php echo $ct_send_cost_label; ?></th>
-                    <td><?php echo $sc_method; ?></td>
+                    <th><?=$ct_send_cost_label?></th>
+                    <td><?=$sc_method?></td>
                 </tr>
-                <?php if($it['it_buy_min_qty']) { ?>
+                <? if($it['it_buy_min_qty']) { ?>
                 <tr>
-                    <th>최소구매수량</th>
-                    <td><?php echo number_format($it['it_buy_min_qty']); ?> 개</td>
-                </tr>
-                <?php } ?>
-                <?php if($it['it_buy_max_qty']) { ?>
+                        <th>최소구매수량</th>
+                        <td><?=number_format($it['it_buy_min_qty'])?> 개</td>
+                    </tr>
+                <? } ?>
+                <? if($it['it_buy_max_qty']) { ?>
                 <tr>
                     <th>최대구매수량</th>
-                    <td><?php echo number_format($it['it_buy_max_qty']); ?> 개</td>
+                    <td><?=number_format($it['it_buy_max_qty'])?> 개</td>
                 </tr>
-                <?php } ?>
+                <? } ?>
                 </tbody>
                 </table>
             </div>
@@ -228,18 +281,23 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 
         <div id="sit_star_sns">
 
-            <a href="javascript:item_wish(document.fitem, '<?php echo $it['it_id']; ?>');" id="sit_btn_wish"><i class="fa fa-heart-o" aria-hidden="true"></i><span class="sound_only"> 위시리스트</span></a>
-            <button type="button" class="btn_sns_share"><i class="fa fa-share-alt" aria-hidden="true"></i><span class="sound_only">sns 공유</span></button>
-            <div class="sns_area">
-                <?php echo get_sns_share_link('facebook', $sns_url, $sns_title, G5_MSHOP_SKIN_URL.'/img/facebook.png'); ?>
-                <?php echo get_sns_share_link('twitter', $sns_url, $sns_title, G5_MSHOP_SKIN_URL.'/img/twitter.png'); ?>
-                <?php echo get_sns_share_link('googleplus', $sns_url, $sns_title, G5_MSHOP_SKIN_URL.'/img/gplus.png'); ?>
-                <?php echo get_sns_share_link('kakaotalk', $sns_url, $sns_title, G5_MSHOP_SKIN_URL.'/img/sns_kakao.png'); ?>
-                <?php
-                $href = G5_SHOP_URL.'/iteminfo.php?it_id='.$it_id;
-                ?> 
-                <a href="javascript:popup_item_recommend('<?php echo $it['it_id']; ?>');" id="sit_btn_rec"><i class="fa fa-envelope-o" aria-hidden="true"></i><span class="sound_only">추천하기</span></a>
-            </div>
+            <!-- @todo 공유하기 start-->
+<!--            <a href="javascript:item_wish(document.fitem, '--><?php //echo $it['it_id']?><!--');" id="sit_btn_wish"><i class="fa fa-heart-o" aria-hidden="true"></i><span class="sound_only"> 위시리스트</span></a>-->
+<!--            <button type="button" class="btn_sns_share"><i class="fa fa-share-alt" aria-hidden="true"></i><span class="sound_only">sns 공유</span></button>-->
+            <!-- 공유하기 end -->
+
+            <? if(false) { //@todo 추천하기 ?>
+                <div class="sns_area">
+                    <?=get_sns_share_link('facebook', $sns_url, $sns_title, G5_MSHOP_SKIN_URL.'/img/facebook.png')?>
+                    <?=get_sns_share_link('twitter', $sns_url, $sns_title, G5_MSHOP_SKIN_URL.'/img/twitter.png')?>
+                    <?=get_sns_share_link('googleplus', $sns_url, $sns_title, G5_MSHOP_SKIN_URL.'/img/gplus.png')?>
+                    <?=get_sns_share_link('kakaotalk', $sns_url, $sns_title, G5_MSHOP_SKIN_URL.'/img/sns_kakao.png')?>
+                    <?php
+                    $href = G5_SHOP_URL.'/iteminfo.php?it_id='.$it_id;
+                    ?>
+                    <a href="javascript:popup_item_recommend('<?=$it['it_id']?>');" id="sit_btn_rec"><i class="fa fa-envelope-o" aria-hidden="true"></i><span class="sound_only">추천하기</span></a>
+                </div>
+            <? } ?>
         </div>
 
         <script>
@@ -286,7 +344,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
             }
             ?>
 
-            <?php if ($it['it_use'] && !$it['it_tel_inq'] && !$is_soldout) { ?>
+            <? if ($it['it_use'] && !$it['it_tel_inq'] && !$is_soldout) { ?>
             <div id="sit_sel_option">
             <?php
             if(!$option_item) {
@@ -295,18 +353,18 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
             ?>
                 <ul id="sit_opt_added">
                     <li class="sit_opt_list">
-                        <input type="hidden" name="io_type[<?php echo $it_id; ?>][]" value="0">
-                        <input type="hidden" name="io_id[<?php echo $it_id; ?>][]" value="">
-                        <input type="hidden" name="io_value[<?php echo $it_id; ?>][]" value="<?php echo $it['it_name']; ?>">
+                        <input type="hidden" name="io_type[<?=$it_id?>][]" value="0">
+                        <input type="hidden" name="io_id[<?=$it_id?>][]" value="">
+                        <input type="hidden" name="io_value[<?=$it_id?>][]" value="<?=$it['it_name']?>">
                         <input type="hidden" class="io_price" value="0">
-                        <input type="hidden" class="io_stock" value="<?php echo $it['it_stock_qty']; ?>">
+                        <input type="hidden" class="io_stock" value="<?=$it['it_stock_qty']?>">
                         <div class="opt_name">
-                            <span class="sit_opt_subj"><?php echo $it['it_name']; ?></span>
+                            <span class="sit_opt_subj"><?=$it['it_name']?></span>
                         </div>
                         <div class="opt_count">
-                            <label for="ct_qty_<?php echo $i; ?>" class="sound_only">수량</label>
+                            <label for="ct_qty_<?=$i?>" class="sound_only">수량</label>
                            <button type="button" class="sit_qty_minus"><i class="fa fa-minus" aria-hidden="true"></i><span class="sound_only">감소</span></button>
-                            <input type="text" name="ct_qty[<?php echo $it_id; ?>][]" value="<?php echo $it['it_buy_min_qty']; ?>" id="ct_qty_<?php echo $i; ?>" class="num_input" size="5">
+                            <input type="text" name="ct_qty[<?=$it_id?>][]" value="<?=$it['it_buy_min_qty']?>" id="ct_qty_<?=$i?>" class="num_input" size="5">
                             <button type="button" class="sit_qty_plus"><i class="fa fa-plus" aria-hidden="true"></i><span class="sound_only">증가</span></button>
                             <span class="sit_opt_prc">+0원</span>
                         </div>
@@ -317,178 +375,107 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
                     price_calculate();
                 });
                 </script>
-            <?php } ?>
+            <? } ?>
             </div>
 
             <div id="sit_tot_price"></div>
-            <?php } ?>
+            <? } ?>
 
-            <?php if($is_soldout) { ?>
+            <? if($is_soldout) { ?>
             <p id="sit_ov_soldout">상품의 재고가 부족하여 구매할 수 없습니다.</p>
-            <?php } ?>
+            <? } ?>
 
             <div id="sit_ov_btn">
-                <?php if ($is_orderable) { ?>
+                <? if ($is_orderable) { ?>
                 <button type="submit" onclick="document.pressed=this.value;" value="장바구니" id="sit_btn_cart" class="btn_b03">장바구니</button>
                 <button type="submit" onclick="document.pressed=this.value;" value="바로구매" id="sit_btn_buy" class="btn_b02">바로구매</button>
-                <?php } ?>
-                <?php if(!$is_orderable && $it['it_soldout'] && $it['it_stock_sms']) { ?>
-                <a href="javascript:popup_stocksms('<?php echo $it['it_id']; ?>');" id="sit_btn_buy" class="btn_b02">재입고알림</a>
-                <?php } ?>
+                <? } ?>
+                <? if(!$is_orderable && $it['it_soldout'] && $it['it_stock_sms']) { ?>
+                <a href="javascript:popup_stocksms('<?=$it['it_id']?>');" id="sit_btn_buy" class="btn_b02">재입고알림</a>
+                <? } ?>
 
-                <?php if ($naverpay_button_js) { ?>
-                <div class="naverpay-item"><?php echo $naverpay_request_js.$naverpay_button_js; ?></div>
-                <?php } ?>
+                <? if ($naverpay_button_js) { ?>
+                <div class="naverpay-item"><?=$naverpay_request_js.$naverpay_button_js?></div>
+                <? } ?>
             </div>
         </div>
     </section>
 
     </section>
 
-    <div id="sit_buy_op"><button type="button" id="buy_op_btn" class="btn_b02">구매하기</button></div>
+    <div id="sit_buy_op">
+        <!-- @todo: [승대] 인플루언서 센터 PPT 12P, 하단 구매버튼 코딩작업 -->
+        <div style="position: absolute; bottom: 4em; left: 0em; width:100%;">
+            <? if(data::getLoginMember()['mb_is_influencer'] == 'Y') { ?>
+                <button type="button" class="btn_b02" style="width:24%;height:30px;">샘플신청</button>
+                <button type="button" class="btn_b02" style="width:24%;height:30px;">찜하기</button>
+                <button type="button" class="btn_b02" style="width:24%;height:30px;">마이샵</button>
+                <button type="button" class="btn_b02" style="width:24%;height:30px;">판매링크</button>
+            <? } else { ?>
+                <button type="button" id="buy_op_btn" class="btn_b02">
+                    구매하기
+                </button>
+            <? } ?>
+        </div>
+    </div>
    
     <script>
-
-    $(document).ready(function(){
-        $("#buy_op_btn").click(function(){
-            $("#sit_buy").slideToggle();
+        $(document).ready(function(){
+            $("#buy_op_btn").click(function(){
+                $("#sit_buy").slideToggle();
+            });
+            $("#sit_buy .btn_close").click(function(){
+                $("#sit_buy").slideToggle();
+            });
         });
-        $("#sit_buy .btn_close").click(function(){
-            $("#sit_buy").slideToggle();
-        });
-    });
     </script>
 </div>
 
-<!-- 다른 상품 보기 시작 { -->
-<div id="sit_siblings">
-    <?php
-    if ($prev_href || $next_href) {
-        echo $prev_href.$prev_title.$prev_href2;
-        echo $next_href.$next_title.$next_href2;
-    } else {
-        echo '<span class="sound_only">이 분류에 등록된 다른 상품이 없습니다.</span>';
-    }
-    ?>
-</div>
-<!-- } 다른 상품 보기 끝 -->
-
-<?php if($default['de_mobile_rel_list_use']) { ?>
-<!-- 관련상품 시작 { -->
-<section id="sit_rel">
-    <h2>관련상품</h2>
-    <div class="sct_wrap">
-        <?php
-        $rel_skin_file = $skin_dir.'/'.$default['de_mobile_rel_list_skin'];
-        if(!is_file($rel_skin_file))
-            $rel_skin_file = G5_MSHOP_SKIN_PATH.'/'.$default['de_mobile_rel_list_skin'];
-
-        $sql = " select b.* from {$g5['g5_shop_item_relation_table']} a left join g5_shop_item b on (a.it_id2=b.it_id) where a.it_id = '{$it['it_id']}' and b.it_use='1' ";
-        $list = new item_list($rel_skin_file, $default['de_mobile_rel_list_mod'], 0, $default['de_mobile_rel_img_width'], $default['de_mobile_rel_img_height']);
-        $list->set_query($sql);
-        echo $list->run();
-        ?>
-    </div>
-</section>
-<!-- } 관련상품 끝 -->
-<?php } ?>
-
-
 <div id="sit_tab">
     <ul class="tab_tit">
-        <li><button type="button" rel="#sit_inf" class="selected">상품정보</button></li>
-        <li><button type="button" rel="#sit_use">사용후기</button></li>
-        <li><button type="button" rel="#sit_qa">상품문의</button></li>
-        <li><button type="button" rel="#sit_dvex">배송/교환</button></li>
+        <li><button type="button" rel="#sit_gui" class="selected">판매가이드</button></li>
+        <li><button type="button" rel="#sit_inf" class="">상품정보</button></li>
+        <li><button type="button" rel="#sit_dvex" class="">배송정보</button></li>
     </ul>
     <ul class="tab_con">
 
-        <!-- 상품 정보 시작 { -->
+        <!-- 판매가이드 시작 -->
+        <li id="sit_gui">
+            <h2 class="contents_tit"><span>판매 가이드</span></h2>
+
+            <div id="sit_inf_sell_guide">
+                <?=conv_content($it['it_sell_guide'], 1)?>
+            </div>
+        </li>
+
+        <!-- 상품 정보 시작  -->
         <li id="sit_inf">
             <h2 class="contents_tit"><span>상품 정보</span></h2>
 
-            <?php if ($it['it_explan']) { // 상품 상세설명 ?>
-            <h3>상품 상세설명</h3>
-            <div id="sit_inf_explan">
-                <?php echo conv_content($it['it_explan'], 1); ?>
-            </div>
-            <?php } ?>
+            <? if ($it['it_explan']) { // 상품 상세설명 ?>
+                <h3>상품 상세설명</h3>
 
-
-            <?php
-            if ($it['it_info_value']) { // 상품 정보 고시
-                $info_data = unserialize(stripslashes($it['it_info_value']));
-                if(is_array($info_data)) {
-                    $gubun = $it['it_info_gubun'];
-                    $info_array = $item_info[$gubun]['article'];
-            ?>
-            <h3>상품 정보 고시</h3>
-            <table id="sit_inf_open">
-            <tbody>
-            <?php
-            foreach($info_data as $key=>$val) {
-                $ii_title = $info_array[$key][0];
-                $ii_value = $val;
-            ?>
-            <tr>
-                <th scope="row"><?php echo $ii_title; ?></th>
-                <td><?php echo $ii_value; ?></td>
-            </tr>
-            <?php } //foreach?>
-            </tbody>
-            </table>
-            <!-- 상품정보고시 end -->
-            <?php
-                } else {
-                    if($is_admin) {
-                        echo '<p>상품 정보 고시 정보가 올바르게 저장되지 않았습니다.<br>config.php 파일의 G5_ESCAPE_FUNCTION 설정을 addslashes 로<br>변경하신 후 관리자 &gt; 상품정보 수정에서 상품 정보를 다시 저장해주세요. </p>';
-                    }
-                }
-            } //if
-            ?>
-
-        </li>
-        <!-- 사용후기 시작 { -->
-        <li id="sit_use">
-            <h2 class="sound_only">사용후기</h2>
-
-            <div id="itemuse"><?php include_once(G5_SHOP_PATH.'/itemuse.php'); ?></div>
-        </li>
-        <!-- } 사용후기 끝 -->
-
-        <!-- 상품문의 시작 { -->
-        <li id="sit_qa">
-            <h2 class="sound_only">상품문의</h2>
-
-            <div id="itemqa"><?php include_once(G5_SHOP_PATH.'/itemqa.php'); ?></div>
-        </li>
-        <!-- } 상품문의 끝 -->
-
-        <?php if ($default['de_baesong_content']) { // 배송정보 내용이 있다면 ?>
-        <!-- 배송정보 시작 { -->
-        <li id="sit_dvex">
-            <h2>배송/교환정보</h2>
-            <div id="sit_dvr">
-                <h3>배송정보</h3>
-
-                <?php echo conv_content($default['de_baesong_content'], 1); ?>
-            </div>
-            <!-- } 배송정보 끝 -->
-            <?php } ?>
-
-
-            <?php if ($default['de_change_content']) { // 교환/반품 내용이 있다면 ?>
-            <!-- 교환/반품 시작 { -->
-            <div id="sit_ex">
-                <h3>교환/반품</h3>
-
-                <?php echo conv_content($default['de_change_content'], 1); ?>
-            </div>
-            <!-- } 교환/반품 끝 -->
-            <?php } ?>
+                <div id="sit_inf_explan">
+                    <?=conv_content($it['it_explan'], 1)?>
+                </div>
+            <? } ?>
         </li>
     </ul>
+    <ul>
+        <li style="margin: 0 auto;max-width: 1200px;padding: 20px;text-align: left;">
+            <? if ($default['de_baesong_content']) { // 배송정보 내용이 있다면 ?>
+                <!-- 배송정보 시작 { -->
+                <div>
+                    <h3>배송정보</h3>
+                    <?=conv_content($default['de_baesong_content'], 1)?>
+                </div>
+                <!-- } 배송정보 끝 -->
+            <? } ?>
+        </li>
+    </ul>
+
 </div>
+
 <script>
 $(function (){
     $(".tab_con>li").hide();
@@ -529,8 +516,8 @@ $(function(){
 // 상품보관
 function item_wish(f, it_id)
 {
-    f.url.value = "<?php echo G5_SHOP_URL; ?>/wishupdate.php?it_id="+it_id;
-    f.action = "<?php echo G5_SHOP_URL; ?>/wishupdate.php";
+    f.url.value = "<?=G5_SHOP_URL?>/wishupdate.php?it_id="+it_id;
+    f.action = "<?=G5_SHOP_URL?>/wishupdate.php";
     f.submit();
 }
 
@@ -540,11 +527,11 @@ function popup_item_recommend(it_id)
     if (!g5_is_member)
     {
         if (confirm("회원만 추천하실 수 있습니다."))
-            document.location.href = "<?php echo G5_BBS_URL; ?>/login.php?url=<?php echo urlencode(G5_SHOP_URL."/item.php?it_id=$it_id"); ?>";
+            document.location.href = "<?=G5_BBS_URL?>/login.php?url=<?=urlencode(G5_SHOP_URL."/item.php?it_id=$it_id")?>";
     }
     else
     {
-        url = "<?php echo G5_SHOP_URL; ?>/itemrecommend.php?it_id=" + it_id;
+        url = "<?=G5_SHOP_URL?>/itemrecommend.php?it_id=" + it_id;
         opt = "scrollbars=yes,width=616,height=420,top=10,left=10";
         popup_window(url, "itemrecommend", opt);
     }
@@ -553,7 +540,7 @@ function popup_item_recommend(it_id)
 // 재입고SMS 알림
 function popup_stocksms(it_id)
 {
-    url = "<?php echo G5_SHOP_URL; ?>/itemstocksms.php?it_id=" + it_id;
+    url = "<?=G5_SHOP_URL?>/itemstocksms.php?it_id=" + it_id;
     opt = "scrollbars=yes,width=616,height=420,top=10,left=10";
     popup_window(url, "itemstocksms", opt);
 }
@@ -573,8 +560,8 @@ function fsubmit_check(f)
 
     var val, io_type, result = true;
     var sum_qty = 0;
-    var min_qty = parseInt(<?php echo $it['it_buy_min_qty']; ?>);
-    var max_qty = parseInt(<?php echo $it['it_buy_max_qty']; ?>);
+    var min_qty = parseInt(<?=$it['it_buy_min_qty']?>);
+    var max_qty = parseInt(<?=$it['it_buy_max_qty']?>);
     var $el_type = $("input[name^=io_type]");
 
     $("input[name^=ct_qty]").each(function(index) {
@@ -623,7 +610,7 @@ function fsubmit_check(f)
 // 바로구매, 장바구니 폼 전송
 function fitem_submit(f)
 {
-    f.action = "<?php echo $action_url; ?>";
+    f.action = "<?=$action_url?>";
     f.target = "";
 
     if (document.pressed == "장바구니") {
@@ -645,8 +632,8 @@ function fitem_submit(f)
 
     var val, io_type, result = true;
     var sum_qty = 0;
-    var min_qty = parseInt(<?php echo $it['it_buy_min_qty']; ?>);
-    var max_qty = parseInt(<?php echo $it['it_buy_max_qty']; ?>);
+    var min_qty = parseInt(<?=$it['it_buy_min_qty']?>);
+    var max_qty = parseInt(<?=$it['it_buy_max_qty']?>);
     var $el_type = $("input[name^=io_type]");
 
     $("input[name^=ct_qty]").each(function(index) {
@@ -696,4 +683,4 @@ $("#container").removeClass("container").addClass("view-container");
 
 </script>
 <?php /* 2017 리뉴얼한 테마 적용 스크립트입니다. 기존 스크립트를 오버라이드 합니다. */ ?>
-<script src="<?php echo G5_JS_URL; ?>/shop.override.js"></script>
+<script src="<?=G5_JS_URL?>/shop.override.js"></script>

@@ -4,7 +4,7 @@ include_once('./_common.php');
 
 auth_check_menu($auth, $sub_menu, 'r');
 
-$sql_common = " from {$g5['mail_table']} ";
+$sql_common = " from g5_mail ";
 
 // 테이블의 전체 레코드수만 얻음
 $sql = " select COUNT(*) as cnt {$sql_common} ";

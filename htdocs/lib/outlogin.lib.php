@@ -2,7 +2,7 @@
 if (!defined('_GNUBOARD_')) exit;
 
 // 외부로그인
-function outlogin($skin_dir='basic')
+function outlogin($skin_dir='basic', $is_login)
 {
     global $config, $member, $g5, $urlencode, $is_admin, $is_member;
     
@@ -55,10 +55,11 @@ function outlogin($skin_dir='basic')
     $outlogin_action_url = G5_HTTPS_BBS_URL.'/login_check.php';
     
     ob_start();
-    if ($is_member)
+    if ($is_member && $is_login === true)
         include_once ($outlogin_skin_path.'/outlogin.skin.2.php');
-    else // 로그인 전이라면
+    else if($is_login === false)// 로그인 전이라면
         include_once ($outlogin_skin_path.'/outlogin.skin.1.php');
+
     $content = ob_get_contents();
     ob_end_clean();
 

@@ -30,6 +30,7 @@ $it = array(
 'it_sell_email'=>'',
 'it_shop_memo'=>'',
 'it_info_gubun'=>'',
+'it_sell_guide'=>'',
 'it_explan'=>'',
 'it_point_type'=>0,
 'it_cust_price'=>0,
@@ -499,6 +500,10 @@ if(!sql_query(" select it_skin from g5_shop_item limit 1", false)) {
                 <?php echo help("네이버쇼핑에 입점한 경우 네이버쇼핑 상품ID를 입력하시면 네이버페이와 연동됩니다.<br>일부 쇼핑몰의 경우 네이버쇼핑 상품ID 대신 쇼핑몰 상품ID를 입력해야 하는 경우가 있습니다.<br>네이버페이 연동과정에서 이 부분에 대한 안내가 이뤄지니 안내받은 대로 값을 입력하시면 됩니다."); ?>
                 <input type="text" name="ec_mall_pid" value="<?php echo get_text($it['ec_mall_pid']); ?>" id="ec_mall_pid" class="frm_input" size="20">
             </td>
+        </tr>
+        <tr>
+            <th scope="row">판매가이드</th>
+            <td colspan="2"> <?php echo editor_html('it_sell_guide', get_text(html_purifier($it['it_sell_guide']), 0)); ?></td>
         </tr>
         <tr>
             <th scope="row">상품설명</th>
@@ -1900,6 +1905,7 @@ function fitemformcheck(f)
 
     $("input[name=ev_list]").val(ev);
 
+    <?php echo get_editor_js('it_sell_guide'); ?>
     <?php echo get_editor_js('it_explan'); ?>
     <?php echo get_editor_js('it_mobile_explan'); ?>
     <?php echo get_editor_js('it_head_html'); ?>

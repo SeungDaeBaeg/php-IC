@@ -19,16 +19,18 @@ function get_mshop_category($ca_id, $len)
     <button type="button" class="menu_close"><i class="fa fa-times" aria-hidden="true"></i><span class="sound_only">카테고리닫기</span></button>
     <div class="btn_login">
         <?php if ($is_member) { ?>
-        <button type="button" id="btn_user" class="btn_ol"><?php echo get_member_profile_img($member['mb_id']); ?><span class="txt"><?php echo $member['mb_id'] ?> 님 </span><span class="sound_only">사용자메뉴 열기</span></button>
+            <button type="button" id="btn_user" class="btn_ol"><?php echo get_member_profile_img($member['mb_id']); ?><span class="txt"><?php echo $member['mb_id'] ?> 님 </span><span class="sound_only">사용자메뉴 열기</span></button>
         <?php } else { ?>
-        <button type="button" class="btn_ol">로그인</button>
-        <a href="<?php echo G5_BBS_URL; ?>/register.php" class="btn_ol">회원가입</a>
+            <button type="button" class="btn_ol">로그인</button>
+            <a href="<?php echo G5_BBS_URL; ?>/register.php" class="btn_ol">회원가입</a>
         <?php } ?>
 
     </div>
-    <?php echo outlogin('theme/shop_basic'); // 외부 로그인 ?>
+
+    <?=outlogin('theme/shop_basic', true) // 외부 로그인 ?>
+
     <div class="menu_wr">
-        
+
      <h2>카테고리</h2>
        <?php
         $mshop_ca_href = G5_SHOP_URL.'/list.php?ca_id=';
@@ -122,9 +124,9 @@ function get_mshop_category($ca_id, $len)
         ?>
 
     </div>
-
-
 </div>
+
+<?=outlogin('theme/shop_basic', false) // 외부 로그인 ?>
 <script>
 $(function (){
 

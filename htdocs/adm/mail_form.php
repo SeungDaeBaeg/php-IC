@@ -14,7 +14,7 @@ if ($w == 'u') {
     $html_title .= '수정';
     $readonly = ' readonly';
 
-    $sql = " select * from {$g5['mail_table']} where ma_id = '{$ma_id}' ";
+    $sql = " select * from g5_mail where ma_id = '{$ma_id}' ";
     $ma = sql_fetch($sql);
     if (!$ma['ma_id'])
         alert('등록된 자료가 없습니다.');

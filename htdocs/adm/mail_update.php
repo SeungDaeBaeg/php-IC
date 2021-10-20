@@ -15,7 +15,7 @@ $ma_content = isset($_POST['ma_content']) ? $_POST['ma_content'] : '';
 
 if ($w == '')
 {
-    $sql = " insert {$g5['mail_table']}
+    $sql = " insert g5_mail
                 set ma_subject = '{$ma_subject}',
                      ma_content = '{$ma_content}',
                      ma_time = '".G5_TIME_YMDHIS."',
@@ -24,7 +24,7 @@ if ($w == '')
 }
 else if ($w == 'u')
 {
-    $sql = " update {$g5['mail_table']}
+    $sql = " update g5_mail
                 set ma_subject = '{$ma_subject}',
                      ma_content = '{$ma_content}',
                      ma_time = '".G5_TIME_YMDHIS."',
@@ -34,7 +34,7 @@ else if ($w == 'u')
 }
 else if ($w == 'd')
 {
-	$sql = " delete from {$g5['mail_table']} where ma_id = '{$ma_id}' ";
+	$sql = " delete from g5_mail where ma_id = '{$ma_id}' ";
     sql_query($sql);
 }
 

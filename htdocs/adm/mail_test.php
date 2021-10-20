@@ -19,7 +19,7 @@ $mb_id = $member['mb_id'];
 $email = $member['mb_email'];
 $ma_id = isset($_REQUEST['ma_id']) ? (int) $_REQUEST['ma_id'] : 0;
 
-$sql = "select ma_subject, ma_content from {$g5['mail_table']} where ma_id = '{$ma_id}' ";
+$sql = "select ma_subject, ma_content from g5_mail where ma_id = '{$ma_id}' ";
 $ma = sql_fetch($sql);
 
 $subject = $ma['ma_subject'];

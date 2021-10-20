@@ -252,7 +252,7 @@ function get_mail_content_db($ma_id, $is_cache=false){
         return $cache[$key];
     }
 
-    $sql = " select * from {$g5['mail_table']} where ma_id = '{$ma_id}' ";
+    $sql = " select * from g5_mail where ma_id = '{$ma_id}' ";
 
     $cache[$key] = sql_fetch($sql);
 

@@ -37,7 +37,7 @@ $select_member_list = isset($_POST['ma_list']) ? trim($_POST['ma_list']) : '';
 $member_list = explode("\n", conv_unescape_nl($select_member_list));
 
 // 메일내용 가져오기
-$sql = "select ma_subject, ma_content from {$g5['mail_table']} where ma_id = '$ma_id' ";
+$sql = "select ma_subject, ma_content from g5_mail where ma_id = '$ma_id' ";
 $ma = sql_fetch($sql);
 
 $subject = $ma['ma_subject'];

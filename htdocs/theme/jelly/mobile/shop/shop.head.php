@@ -23,19 +23,34 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
         <div id="logo">
             <div style="position:relative;width:100%;height:25px;float:left;text-align: center;">
                 <div style="position:absolute;left:0px;top:0px;height:25px;">
-                    <i class="fa fa-money"><span style="margin-left:0.2rem;">21,000원</span></i><span class="sound_only">분류열기</span>
+                    <? if(!empty(data::getLoginInfo())) { ?>
+                        <i class="fa fa-money">
+                            <a href="/influencer/withdraw.php">
+                                <span style="margin-left:0.2rem;"><?=number_format(data::getLoginMember()['mb_save_money'])?>원</span>
+                            </a>
+                        </i>
+                        <span class="sound_only">분류열기</span>
+                    <? } else { ?>
+                        <a class="btn_ol">로그인</a>
+                    <? } ?>
                 </div>
-                <a href="<?php echo G5_SHOP_URL; ?>/"><img src="<?php echo G5_DATA_URL; ?>/common/logo.jpg" alt="<?php echo $config['cf_title']; ?> 메인"></a>
-                <div id="top_left_alram" style="position:absolute;right:0px;top:0px;height:25px;line-height:25px;">
-                    <p><i class="fa fa-bell"></i><span class="sound_only">알람</span></p>
-                </div>
+
+                <a href="<?php echo G5_SHOP_URL; ?>/">
+                    <img src="<?php echo G5_DATA_URL; ?>/common/logo.jpg" alt="<?php echo $config['cf_title']; ?> 메인">
+                </a>
+
+                <? if(!empty(data::getLoginInfo())) { ?>
+                    <div id="top_left_alram" style="position:absolute;right:0px;top:0px;height:25px;line-height:25px;">
+                        <p><i class="fa fa-bell"></i><span class="sound_only">알람</span></p>
+                    </div>
+                <? } ?>
             </div>
 <!--            <div style="width:10%;height:25px;float:left;">-->
 <!--                <button type="button" id="btn_cate"><i class="fa fa-bars"></i><span class="sound_only">분류열기</span></button>-->
 <!--            </div>-->
         </div>
 
-        <!-- @todo: 상품 검색창 -->
+        <!-- @todo: [승대] 상품 검색창 -->
         <div>
             <input type="text"  style="width:79%;"/>
             <button style="width:20%">검색</button>
@@ -46,7 +61,7 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
                 <button type="button" class="btn_close"><i class="fa fa-times"></i></button>
                 <div class="hd_sch_wr">
                     <form name="frmsearch1" action="<?php echo G5_SHOP_URL; ?>/search.php" onsubmit="return search_submit(this);">
-                
+
                     <div class="sch_inner">
                         <h2>상품 검색</h2>
                         <label for="sch_str" class="sound_only">상품명<strong class="sound_only"> 필수</strong></label>
@@ -94,10 +109,13 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
             return true;
         }
         </script>
-        
+
    </div>
 
-    <?php if ($is_admin) { ?><div class="hd_admin"><a href="<?php echo G5_ADMIN_URL; ?>" target="_blank">관리자</a> <a href="<?php echo G5_THEME_ADM_URL ?>" target="_blank">테마관리</a></div> <?php } ?>
+    <?php if (false) { ?>
+        <div class="hd_admin"><a href="<?php echo G5_ADMIN_URL; ?>" target="_blank">관리자</a> <a href="<?php echo G5_THEME_ADM_URL ?>" target="_blank">테마관리</a></div>
+    <?php } ?>
+
     <script>
     $( document ).ready( function() {
         var jbOffset = $( '#hd_wr' ).offset();
