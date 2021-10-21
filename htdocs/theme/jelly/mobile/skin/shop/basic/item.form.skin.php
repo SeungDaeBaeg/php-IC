@@ -140,29 +140,6 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
                 <? } ?>
             </div>
 
-            <div class="sit_ov_tbl">
-                <div>
-                    <a>판매가이드</a>
-                    <a>상품정보</a>
-                    <a>교환/환불</a>
-                </div>
-            </div>
-
-            <!--판매가이드 -->
-            <div class="site_ov_tbl">
-
-            </div>
-
-            <!--상품정보 -->
-            <div class="site_ov_tbl">
-
-            </div>
-
-            <!--배송정보 -->
-            <div class="site_ov_tbl">
-
-            </div>
-
             <? if($is_orderable) { ?>
                 <p id="sit_opt_info">
                     상품 선택옵션 <?=$option_count?> 개, 추가옵션 <?=$supply_count?> 개
@@ -175,109 +152,6 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
             if ($score = get_star_image($it['it_id'])) { ?>
                 <img src="<?=G5_SHOP_URL?>/img/s_star<?=$score?>.png" alt="" class="sit_star" width="100">(리뷰<strong><?=$it['it_use_cnt']?></strong>건)
             <? } ?>
-
-
-
-            <div class="sit_ov_tbl">
-                <table>
-      
-                <tbody>
-                    <? if ($it['it_maker']) { ?>
-                        <tr>
-                            <th scope="row">제조사</th>
-                            <td><?=$it['it_maker']?></td>
-                        </tr>
-                    <? } ?>
-
-                    <? if ($it['it_origin']) { ?>
-                        <tr>
-                            <th scope="row">원산지</th>
-                            <td><?=$it['it_origin']?></td>
-                        </tr>
-                    <? } ?>
-
-                    <? if ($it['it_brand']) { ?>
-                        <tr>
-                            <th scope="row">브랜드</th>
-                            <td><?=$it['it_brand']?></td>
-                        </tr>
-                    <? } ?>
-                    <? if ($it['it_model']) { ?>
-                        <tr>
-                            <th scope="row">모델</th>
-                            <td><?=$it['it_model']?></td>
-                        </tr>
-                    <? } ?>
-                
-
-                    <?php
-                    /* 재고 표시하는 경우 주석 해제
-                    <tr>
-                        <th scope="row">재고수량</th>
-                        <td><?=number_format(get_it_stock_qty($it_id))?> 개</td>
-                    </tr>
-                    */
-                    ?>
-
-                    <? if ($config['cf_use_point']) { // 포인트 사용한다면 ?>
-                        <tr>
-                            <th scope="row"><label for="disp_point">포인트</label></th>
-                            <td>
-                                <?php
-                                if($it['it_point_type'] == 2) {
-                                    echo '구매금액(추가옵션 제외)의 '.$it['it_point'].'%';
-                                } else {
-                                    $it_point = get_item_point($it);
-                                    echo number_format($it_point).'점';
-                                }
-                                ?>
-                            </td>
-                        </tr>
-                    <? } ?>
-                <?php
-                $ct_send_cost_label = '배송비결제';
-
-                if($it['it_sc_type'] == 1)
-                    $sc_method = '무료배송';
-                else {
-                    if($it['it_sc_method'] == 1)
-                        $sc_method = '수령후 지불';
-                    else if($it['it_sc_method'] == 2) {
-                        $ct_send_cost_label = '<label for="ct_send_cost">배송비결제</label>';
-                        $sc_method = '<select name="ct_send_cost" id="ct_send_cost">
-                                          <option value="0">주문시 결제</option>
-                                          <option value="1">수령후 지불</option>
-                                      </select>';
-                    }
-                    else
-                        $sc_method = '주문시 결제';
-                }
-                ?>
-                <tr>
-                    <th><?=$ct_send_cost_label?></th>
-                    <td><?=$sc_method?></td>
-                </tr>
-                <? if($it['it_buy_min_qty']) { ?>
-                <tr>
-                        <th>최소구매수량</th>
-                        <td><?=number_format($it['it_buy_min_qty'])?> 개</td>
-                    </tr>
-                <? } ?>
-                <? if($it['it_buy_max_qty']) { ?>
-                <tr>
-                    <th>최대구매수량</th>
-                    <td><?=number_format($it['it_buy_max_qty'])?> 개</td>
-                </tr>
-                <? } ?>
-                </tbody>
-                </table>
-            </div>
-            <script>
-            $(".btn_ist").click(function(){
-                $(".sit_ov_tbl table").toggle();
-            });
-            </script>
-        </div>
 
         <div id="sit_star_sns">
 

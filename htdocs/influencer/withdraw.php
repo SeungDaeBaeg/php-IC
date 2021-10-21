@@ -7,6 +7,31 @@ include_once('./_common.php');
 
 define("_INDEX_", TRUE);
 include_once(G5_SHOP_PATH.'/shop.head.php');
+
+//출금 가능한 수익금
+sql_fetch_arrays("
+    SELECT  SUM(commission) AS today_commission
+    FROM    g5_translog
+    WHERE   yyyymmdd = ?
+    AND     mb_no = ?
+", $translog, array(
+    date('Ymd'),
+    data::getLoginMember()['mb_no']
+));
+$todayCommission = $translog[0]['today_commission'] ?? 0;
+
+//수익금 리스트 구하기
+sql_fetch_arrays("
+    SELECT  SUM(commission) AS today_commission
+    FROM    g5_translog
+    WHERE   yyyymmdd = ?
+    AND     mb_no = ?
+", $translog, array(
+    date('Ymd'),
+    data::getLoginMember()['mb_no']
+));
+
+
 ?>
 
 <!--content start-->
@@ -18,11 +43,11 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
     </tr>
     <tr>
         <th>오늘 발생한 수익금</th>
-        <td>1,000원</td>
+        <td><?=number_format($todayCommission)?>원</td>
     </tr>
     <tr>
-        <th>오늘 발생한 수익금</th>
-        <td>10,000원</td>
+        <th>출금 가능한 수익금</th>
+        <td><?=number_format(data::getLoginMember()['mb_save_money'])?>원</td>
     </tr>
 </table>
 
@@ -40,9 +65,6 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
     <button>조회</button>
 
     <!-- 엑셀 다운로드는 구현안하기로 했음 -->
-
-    <p>수익금 : 10,000</p>
-    <p>수익금 : 1,000</p>
 </div>
 
 <hr/>

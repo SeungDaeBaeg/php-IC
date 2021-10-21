@@ -53,7 +53,7 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
         <!-- @todo: [승대] 상품 모바일용 검색창 -->
         <div class="visible-mobile">
             <input type="text"  style="width:79%;"/>
-            <button style="width:20%">검색</button>
+            <button style="width:20%">검색2</button>
         </div>
 
         <div class="visible-pc">

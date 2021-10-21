@@ -1020,6 +1020,7 @@ box-shadow: 0 0 8px rgba(65,98,255,0.8);}
 
 /* 하단 네이게이션바 */
 .ft_nabi {background-color: #F2F2F2;position: fixed;bottom: 0;width: 100%;display: flex;justify-content: space-around;padding: 5px 0 5px 0;}
+.ft_nabi > .ft_item { width:25%; float:left;}
 .ft_nabi > .ft_item > .ft_nabi_txt {text-align: center;}
 .ft_nabi > .ft_item > .ft_item_icon {height: 25px;}
 .ft_nabi > .ft_item > .category_icon {background: url(../img/category.png);background-size: 100% 100%;}
@@ -1028,7 +1029,7 @@ box-shadow: 0 0 8px rgba(65,98,255,0.8);}
 .ft_nabi > .ft_item > .heart_icon {background: url(../img/heart.png);background-size: 100% 100%;}
 
 /* 중단 메뉴 바 */
-#main_middle_menu > button {width:25%;height:60px;float:left;}
+#main_middle_menu > a > button {width:25%;height:60px;float:left;}
 
 .visible-mobile, .visible-pc {
     display:none;

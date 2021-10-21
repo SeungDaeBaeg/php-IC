@@ -9,7 +9,7 @@ $admin = get_admin("super");
 </div><!-- container End -->
 
 <div id="ft">
-    <div class="ft_nabi">
+    <div class="ft_nabi visible-mobile">
         <div class="ft_item" id="cate_btn">
             <div class="ft_item_icon category_icon"></div>
             <div class="ft_nabi_txt">카테고리</div>

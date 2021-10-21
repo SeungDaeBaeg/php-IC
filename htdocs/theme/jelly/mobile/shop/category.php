@@ -36,10 +36,10 @@ function get_mshop_category($ca_id, $len)
                 <a>마이샵</a>
             </li>
             <li>
-                <a>리포트</a>
+                <a href="/influencer/report.php">리포트</a>
             </li>
             <li>
-                <a>출금관리</a>
+                <a href="/influencer/withdraw.php">출금관리</a>
             </li>
         </ul>
 
