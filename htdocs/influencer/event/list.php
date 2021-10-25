@@ -53,7 +53,7 @@ $img_src_url = G5_DATA_URL.'/event/';
             getLink(_this);
         }
         else if(ids[0] === 'join') {
-            //ajaxCall('post','<? echo $ajax_event_url ?>',{action:'getPartyById',ev_id:ids[1]},getPartyByIdCB);
+            //ajaxCall('post','<?=$ajax_event_url ?>',{action:'getPartyById',ev_id:ids[1]},getPartyByIdCB);
             location.href = '/influencer/event/party.php?ev_id=' + ids[1];
         }
     }
@@ -70,7 +70,7 @@ $img_src_url = G5_DATA_URL.'/event/';
 
         getListparam['type'] = type;
 
-        data.ajaxCall('post','<? echo $ajax_event_url ?>',getListparam,getListCB);
+        data.ajaxCall('post','<?=$ajax_event_url ?>',getListparam,getListCB);
     }
 
     function getListCB(res) {
@@ -98,11 +98,11 @@ $img_src_url = G5_DATA_URL.'/event/';
             getListparam['order'] = 'new';
             _this.textContent = '최신순';
         }
-        data.ajaxCall('post','<? echo $ajax_event_url ?>',getListparam,getListCB);
+        data.ajaxCall('post','<?=$ajax_event_url ?>',getListparam,getListCB);
     }
 
     function gridList(item) {        
-        const imgSrc = '<? echo $img_src_url ?>';
+        const imgSrc = '<?=$img_src_url ?>';
         const _html = `
         <div class="event_item_box">
             <div class="event_item_thumbnail">
@@ -140,8 +140,8 @@ $img_src_url = G5_DATA_URL.'/event/';
         typeBox.innerHTML = _html;        
     }
 
-    data.ajaxCall('post','<? echo $ajax_event_url ?>',{action:'getCodeName'},getCodeNameCB);
-    data.ajaxCall('post','<? echo $ajax_event_url ?>',getListparam,getListCB);
+    data.ajaxCall('post','<?=$ajax_event_url ?>',{action:'getCodeName'},getCodeNameCB);
+    data.ajaxCall('post','<?=$ajax_event_url ?>',getListparam,getListCB);
 
         
 </script>
