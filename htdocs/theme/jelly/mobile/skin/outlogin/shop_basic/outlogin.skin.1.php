@@ -12,7 +12,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
             365일 할인구매<br>
             SNS 채널 등록만 하면, 혜택이 쏟아진다<br>
         </div>
-        <!-- todo 소셜계정으로 로그인 PPT 17페이지 -->
+        <!-- todo [승대] 소셜계정으로 로그인 PPT 17페이지 -->
         <div><?php require_once (G5_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/social/social_outlogin.skin.1.php'); ?></div>
         <div>비회원 주문조회</div>
         <!-- 로그인 전 외부로그인 시작 -->
