@@ -41,7 +41,7 @@ $img_src_url = G5_DATA_URL.'/event/';
     }
 
     function btnClick(_this) {
-        removeClass(_this.parentNode.children,'selected');
+        util.removeClass(_this.parentNode.children,'selected');
         _this.classList.add('selected');
         const ids = _this.id.split('_');
         if(ids[0] === 'type') {
@@ -60,8 +60,8 @@ $img_src_url = G5_DATA_URL.'/event/';
     }
 
     function getLink(_this) {
-        clipboardCopy(_this.getAttribute('target-link'));
-        showModal('info','판매링크가<br> 복사 되었습니다.');
+        util.clipboardCopy(_this.getAttribute('target-link'));
+        util.showModal('info','판매링크가<br> 복사 되었습니다.');
     }
 
     function getTypeList(types) {
@@ -71,7 +71,7 @@ $img_src_url = G5_DATA_URL.'/event/';
 
         getListparam['type'] = type;
 
-        ajaxCall('post','<? echo $ajax_event_url ?>',getListparam,getListCB);
+        data.ajaxCall('post','<? echo $ajax_event_url ?>',getListparam,getListCB);
     }
 
     function getListCB(res) {
@@ -99,7 +99,7 @@ $img_src_url = G5_DATA_URL.'/event/';
             getListparam['order'] = 'new';
             _this.textContent = '최신순';
         }
-        ajaxCall('post','<? echo $ajax_event_url ?>',getListparam,getListCB);
+        data.ajaxCall('post','<? echo $ajax_event_url ?>',getListparam,getListCB);
     }
 
     function gridList(item) {        
@@ -141,8 +141,8 @@ $img_src_url = G5_DATA_URL.'/event/';
         typeBox.innerHTML = _html;        
     }
 
-    ajaxCall('post','<? echo $ajax_event_url ?>',{action:'getCodeName'},getCodeNameCB);
-    ajaxCall('post','<? echo $ajax_event_url ?>',getListparam,getListCB);
+    data.ajaxCall('post','<? echo $ajax_event_url ?>',{action:'getCodeName'},getCodeNameCB);
+    data.ajaxCall('post','<? echo $ajax_event_url ?>',getListparam,getListCB);
 
         
 </script>

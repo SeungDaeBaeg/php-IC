@@ -3,7 +3,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 ?>
 
 <div id="main_middle_menu">
-    <a href="/influencer/event.php">
+    <a href="/influencer/event/list.php">
         <button>이벤트</button>
     </a>
     <a href="/influencer/myshop.php">
