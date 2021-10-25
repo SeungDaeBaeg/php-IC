@@ -1,5 +1,5 @@
 <?php
-include_once('../common.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/common.php');
 
 if (isset($_REQUEST['sort']) && !preg_match("/(--|#|\/\*|\*\/)/", $_REQUEST['sort']))  {
     $sort = trim($_REQUEST['sort']);

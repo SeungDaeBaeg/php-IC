@@ -12,4 +12,80 @@ class util {
         if($total <= 0 || $used <= 0) return 0;
         return 100 - round($used / $total * 100, $decimal);
     }
+
+    /**
+     * 리퀘스트 파라미터 체크
+     *
+     * @param mixed $param
+     * @param mixed $callbackOrMsg
+     *
+     * @return string|null
+     */
+    public static function paramCheck($param, $callbackOrMsg = '') {
+
+        if(is_array($param)) {
+            $r = array();
+            foreach($param as $k => $p) {
+                $r[$p] = $_REQUEST[$p] ?? '';
+            }
+            return $r;
+        } else if(is_string($param)) {;
+            if(empty($_REQUEST[$param]) && gettype($callbackOrMsg) === 'string' && trim($callbackOrMsg) !== '') {
+                util::alert($callbackOrMsg, true);
+            } else if(empty($_REQUEST[$param]) && gettype($callbackOrMsg) === 'object') {
+                $callbackOrMsg();
+                exit();
+            }
+
+            return $_REQUEST[$param] ?? null;
+        }
+    }
+
+    /**
+     * 로그인 체크 함수
+     *
+     * @param bool $return
+     * @return bool
+     */
+    public static function loginCheck(bool $return = false) {
+        $isLogin = data::isLogin();
+
+        if($return) {
+            return $isLogin;
+        } else {
+            if(!$isLogin) {
+                echo "<script>alert('로그인을 진행해주세요.');</script>";
+                exit();
+            }
+        }
+    }
+
+    /**
+     * 알럿 창
+     *
+     * @param string $msg
+     * @param bool   $exit
+     */
+    public static function alert(string $msg, bool $exit = false): void {
+        if($msg !== '') {
+            echo "<script>";
+            echo "alert('".$msg."');";
+            echo "</script>";
+        }
+
+        if($exit) {
+            exit();
+        }
+    }
+
+    /**
+     * 로케이션
+     * @param string $link
+     */
+    public static function location(string $link = '/'): void {
+        echo "<script>";
+        echo "window.parent.location.href = '".$link."';";
+        echo "</script>";
+        exit();
+    }
 }

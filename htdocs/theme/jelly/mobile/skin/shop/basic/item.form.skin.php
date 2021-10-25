@@ -256,7 +256,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
             <? } ?>
 
             <? if($is_soldout) { ?>
-            <p id="sit_ov_soldout">상품의 재고가 부족하여 구매할 수 없습니다.</p>
+                <p id="sit_ov_soldout">상품의 재고가 부족하여 구매할 수 없습니다.</p>
             <? } ?>
 
             <div id="sit_ov_btn">
@@ -281,9 +281,11 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
         <!-- @todo: [승대] 인플루언서 센터 PPT 12P, 하단 구매버튼 코딩작업 -->
         <div style="position: absolute; bottom: 4em; left: 0em; width:100%;">
             <? if(data::getLoginMember()['mb_is_influencer'] == 'Y') { ?>
-                <button type="button" class="btn_b02" style="width:24%;height:30px;">샘플신청</button>
-                <button type="button" class="btn_b02" style="width:24%;height:30px;">찜하기</button>
-                <button type="button" class="btn_b02" style="width:24%;height:30px;">마이샵</button>
+                <a href="/influencer/item_detail_navi/sample_subscription.php?it_id=<?=$it['it_id']?>">
+                    <button type="button" class="btn_b02" style="width:24%;height:30px;">샘플신청</button>
+                </a>
+                <button type="button" id="btn_zzim" class="btn_b02" style="width:24%;height:30px;">찜하기</button>
+                <button type="button" id="btn_myshop" class="btn_b02" style="width:24%;height:30px;">마이샵</button>
                 <button type="button" class="btn_b02" style="width:24%;height:30px;">판매링크</button>
             <? } else { ?>
                 <button type="button" id="buy_op_btn" class="btn_b02">
@@ -554,6 +556,15 @@ function fitem_submit(f)
 }
 
 $("#container").removeClass("container").addClass("view-container");
+
+$("#btn_zzim").click(function() {
+   util.formSubmit('/influencer/item_detail_navi/zzim.php', [
+       {name: "it_id",  value: "<?=$it['it_id']?>",  validation: "상품 아이디가 존재하지 않습니다."},
+   ]);
+});
+$("#btn_myshop").click(function() {
+    alert("마이샵은 준비중입니다.");
+})
 
 </script>
 <?php /* 2017 리뉴얼한 테마 적용 스크립트입니다. 기존 스크립트를 오버라이드 합니다. */ ?>

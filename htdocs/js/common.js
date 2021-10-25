@@ -69,7 +69,7 @@ function number_format(data)
     var cutlen = 3;
     var comma = ',';
     var i;
-    
+
     data = data + '';
 
     var sign = data.match(/^[\+\-]/);
@@ -416,7 +416,7 @@ var win_zip = function(frm_name, frm_zip, frm_addr1, frm_addr2, frm_addr3, frm_j
         if(of[frm_jibeon] !== undefined){
             of[frm_jibeon].value = data.userSelectedType;
         }
-        
+
         setTimeout(function(){
             of[frm_addr2].focus();
         } , 100);
@@ -732,6 +732,63 @@ function get_write_token(bo_table)
 
     return token;
 }
+
+/**
+ * 자주쓰는 함수를 모아놓은 오브젝
+ */
+var util = {
+    /**
+     * form submit 헬퍼 함수
+     *
+        util.formSubmit("php", [
+           {name: "zip_code", value:$("#zip_code").val(),  validation: function() { alert("주소를 입력해주세요"); }}
+        ]);
+     * @param url
+     * @param obj
+     * @returns {boolean}
+     */
+    formSubmit: function(url, obj) {
+        if(typeof obj !== 'object' || obj.length <= 0) return false;
+        var frm = document.createElement("form");
+
+        frm.setAttribute("method", "post");
+        frm.setAttribute("action", url);
+        frm.setAttribute("target", "formSubmitIframe");
+
+        var isSubmit = true;
+
+        $.each(obj, function(k, o) {
+            if(typeof o.validation === 'string' && _.isEmpty(o.value)) {
+                isSubmit = false;
+                return false;
+            } else if(typeof o.validation === 'function') {
+                if(!o.validation(o.value)) {
+                    isSubmit = false;
+                    return false;
+                }
+            }
+
+            var i = document.createElement("input");
+            i.setAttribute("type", "hidden");
+            i.setAttribute("name", o.name);
+            i.setAttribute("value", o.value);
+            frm.appendChild(i);
+        });
+
+        if(isSubmit) {
+            document.body.appendChild(frm);
+            frm.submit();
+        }
+    },
+    /**
+     * URL 형식 체크 함수
+     * @param string
+     * @returns {boolean}
+     */
+    isValidURL: function(url) {
+        return (url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g) !== null);
+    }
+};
 
 $(function() {
     $(document).on("click", "form[name=fwrite] input:submit, form[name=fwrite] button:submit, form[name=fwrite] input:image", function() {

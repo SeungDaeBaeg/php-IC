@@ -20,6 +20,9 @@ $(function() {
 </script>
 <![endif]-->
 
+<!-- form submit용 hidden iframe -->
+<iframe name="formSubmitIframe" style="visibility: hidden;display: none;"></iframe>
+
 </body>
 </html>
 <?php echo html_end(); // HTML 마지막 처리 함수 : 반드시 넣어주시기 바랍니다. ?>

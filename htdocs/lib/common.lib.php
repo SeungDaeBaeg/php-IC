@@ -1662,15 +1662,55 @@ function sql_fetch_array(&$result) {
     return $row;
 }
 
-function sql_fetch_arrays($query, &$res = array(), $params = array()) {
+/**
+ * SQL 쿼리의 단일 결과값을 레퍼런스 배열로 리턴
+ * @param string $query
+ * @param array  $res
+ * @param array  $params
+ */
+function sql_fetch_data(string $query, &$res = array(), array $params = array()) {
+    sql_fetch_arrays($query,$res, $params);
+    $res = $res[0] ?? array();
+}
+
+/**
+ * SQL 쿼리의 복수 결과값을 2차원 레퍼런스 배열로 리턴
+ * @param string $query
+ * @param array  $res
+ * @param array  $params
+ */
+function sql_fetch_arrays(string $query, &$res = array(), array $params = array()): void {
     global $g5;
 
     $result = $g5['connect_db']->execute($query, $params);
 
     while($list = $result->FetchRow()) {
-        //print_r($list);
         $res[] = $list;
     }
+}
+
+/**
+ * SQL INSERT
+ * @param string $table
+ * @param array  $record
+ *
+ * @return int|null
+ */
+function sql_insert(string $table, array $record): ?int {
+    global $g5;
+    $g5['connect_db']->autoExecute($table, $record, 'INSERT');
+    return $g5['connect_db']->insert_Id();
+}
+
+/**
+ * SQL UPDATE
+ * @param string $table
+ * @param array  $record
+ * @param string $where
+ */
+function sql_update(string $table, array $record, string $where): void {
+    global $g5;
+    $g5['connect_db']->autoExecute($table, $record, 'UPDATE', $where);
 }
 
 // $result에 대한 메모리(memory)에 있는 내용을 모두 제거한다.

@@ -3,7 +3,7 @@
 class data {
 
     /**
-     * 로그인 정보 가져오기
+     * 로그인 정보
      * @return array|null
      */
     public static function getLoginInfo(): ?array {
@@ -19,7 +19,7 @@ class data {
     }
 
     /**
-     * 로그인한 회원 정보 가져오기
+     * 로그인한 회원 정보
      * @return array
      */
     public static function getLoginMember(): ?array {
@@ -35,5 +35,22 @@ class data {
         }
 
         return $r[0] ?? null;
+    }
+
+    /**
+     * 로그인 여부
+     * @return bool
+     */
+    public static function isLogin(): bool {
+        return !empty(data::getLoginInfo()['login_id']);
+    }
+
+    /**
+     * 인플루언서 회원 여부
+     * @return bool
+     */
+    public static function isInfluencer(): ?bool {
+        if(empty(data::getLoginInfo()['login_id'])) return null;
+        return data::getLoginMember()['mb_is_influencer'] === 'Y';
     }
 }
