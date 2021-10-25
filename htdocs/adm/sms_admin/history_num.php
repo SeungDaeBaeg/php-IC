@@ -33,21 +33,21 @@ $vnum = $total_count - (($page-1) * $page_size);
 include_once(G5_ADMIN_PATH.'/admin.head.php');
 ?>
 
-<form name="search_form" method="get" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" class="local_sch01 local_sch" >
+<form name="search_form" method="get" action="<?=$_SERVER['SCRIPT_NAME']; ?>" class="local_sch01 local_sch" >
 <label for="st" class="sound_only">검색대상</label>
 <select name="st" id="st">
-    <option value="hs_name"<?php echo get_selected('hs_name', $st); ?>>이름</option>
-    <option value="hs_hp"<?php echo get_selected('hs_hp', $st); ?>>휴대폰번호</option>
-    <option value="bk_no"<?php echo get_selected('bk_no', $st); ?>>고유번호</option>
+    <option value="hs_name"<?=get_selected('hs_name', $st); ?>>이름</option>
+    <option value="hs_hp"<?=get_selected('hs_hp', $st); ?>>휴대폰번호</option>
+    <option value="bk_no"<?=get_selected('bk_no', $st); ?>>고유번호</option>
 </select>
 <label for="sv" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-<input type="text" name="sv" value="<?php echo $sv; ?>" id="sv" required class="required frm_input">
+<input type="text" name="sv" value="<?=$sv; ?>" id="sv" required class="required frm_input">
 <input type="submit" value="검색" class="btn_submit">
 </form>
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">번호</th>
@@ -65,7 +65,7 @@ include_once(G5_ADMIN_PATH.'/admin.head.php');
      <tbody>
         <?php if (!$total_count) { ?>
         <tr>
-            <td colspan="<?php echo $colspan; ?>" class="empty_table" >
+            <td colspan="<?=$colspan; ?>" class="empty_table" >
                 데이터가 없습니다.
             </td>
         </tr>
@@ -87,18 +87,18 @@ include_once(G5_ADMIN_PATH.'/admin.head.php');
         else
             $mb_id = '비회원';
     ?>
-    <tr class="<?php echo $bg; ?>">
-        <td class="td_num"><?php echo $vnum--; ?></td>
-        <td class="td_mbname"><?php echo $bg_name; ?></td>
-        <td class="td_mbname"><a href="./num_book_write.php?w=u&amp;bk_no=<?php echo $res['bk_no']; ?>"><?php echo $res['hs_name']; ?></a></td>
-        <td class="td_mbid"><?php echo $mb_id; ?></td>
-        <td class="td_numbig"><?php echo $res['hs_hp']; ?></td>
-        <td class="td_datetime"><?php echo date('Y-m-d H:i', strtotime($write['wr_datetime']))?></td>
-        <td class="td_boolean"><?php echo $write['wr_booking']!='0000-00-00 00:00:00'?"<span title='{$write['wr_booking']}'>예약</span>":'';?></td>
-        <td class="td_boolean"><?php echo $res['hs_flag']?'성공':'실패'?></td>
-        <td class="td_left"><span title="<?php echo $write['wr_message']?>"><?php echo $write['wr_message']?></span></td>
+    <tr class="<?=$bg; ?>">
+        <td class="td_num"><?=$vnum--; ?></td>
+        <td class="td_mbname"><?=$bg_name; ?></td>
+        <td class="td_mbname"><a href="./num_book_write.php?w=u&amp;bk_no=<?=$res['bk_no']; ?>"><?=$res['hs_name']; ?></a></td>
+        <td class="td_mbid"><?=$mb_id; ?></td>
+        <td class="td_numbig"><?=$res['hs_hp']; ?></td>
+        <td class="td_datetime"><?=date('Y-m-d H:i', strtotime($write['wr_datetime']))?></td>
+        <td class="td_boolean"><?=$write['wr_booking']!='0000-00-00 00:00:00'?"<span title='{$write['wr_booking']}'>예약</span>":'';?></td>
+        <td class="td_boolean"><?=$res['hs_flag']?'성공':'실패'?></td>
+        <td class="td_left"><span title="<?=$write['wr_message']?>"><?=$write['wr_message']?></span></td>
         <td class="td_mng td_mng_s">
-            <a href="./history_view.php?page=<?php echo $page; ?>&amp;st=<?php echo $st; ?>&amp;sv=<?php echo $sv; ?>&amp;wr_no=<?php echo $res['wr_no']; ?>" class="btn btn_03">수정</a>
+            <a href="./history_view.php?page=<?=$page; ?>&amp;st=<?=$st; ?>&amp;sv=<?=$sv; ?>&amp;wr_no=<?=$res['wr_no']; ?>" class="btn btn_03">수정</a>
         </td>
     </tr>
     <?php } ?>
@@ -106,7 +106,7 @@ include_once(G5_ADMIN_PATH.'/admin.head.php');
     </table>
 </div>
 
-<?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, $_SERVER['SCRIPT_NAME']."?st=$st&amp;sv=$sv&amp;page="); ?>
+<?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, $_SERVER['SCRIPT_NAME']."?st=$st&amp;sv=$sv&amp;page="); ?>
 
 <?php
 include_once(G5_ADMIN_PATH.'/admin.tail.php');

@@ -9,9 +9,9 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     // 요청종류 : 승인(pay)/취소,매입(mod) 요청시 사용
 ?>
     <input type="hidden" name="req_tx"          value="pay">
-    <input type="hidden" name="site_cd"         value="<?php echo $default['de_kcp_mid']; ?>">
-    <input type="hidden" name="site_name"       value="<?php echo $g_conf_site_name; ?>">
-    <input type="hidden" name="def_site_cd"     value="<?php echo $default['de_kcp_mid']; ?>">
+    <input type="hidden" name="site_cd"         value="<?=$default['de_kcp_mid']; ?>">
+    <input type="hidden" name="site_name"       value="<?=$g_conf_site_name; ?>">
+    <input type="hidden" name="def_site_cd"     value="<?=$default['de_kcp_mid']; ?>">
 
     <!-- <input type="hidden" name="KCP_PAY_MODULE"  value="kcp_web" > -->
 <?php
@@ -22,9 +22,9 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     */
 ?>
     <input type="hidden" name="pay_method"  value="">
-    <input type="hidden" name="ordr_idxx"   value="<?php echo $od_id; ?>">
-    <input type="hidden" name="good_name"   value="<?php echo $goods; ?>">
-    <input type="hidden" name="good_mny"    value="<?php echo $tot_price; ?>">
+    <input type="hidden" name="ordr_idxx"   value="<?=$od_id; ?>">
+    <input type="hidden" name="good_name"   value="<?=$goods; ?>">
+    <input type="hidden" name="good_mny"    value="<?=$tot_price; ?>">
     <input type="hidden" name="buyr_name"   value="">
     <input type="hidden" name="buyr_mail"   value="">
     <input type="hidden" name="buyr_tel1"   value="">
@@ -113,16 +113,16 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     <input type="hidden" name="escw_used" value="Y">
 
     <!-- 에스크로 결제처리 모드 : 에스크로: Y, 일반: N, KCP 설정 조건: O -->
-    <input type="hidden" name="pay_mod" value="<?php echo ($default['de_escrow_use']?"O":"N"); ?>">
+    <input type="hidden" name="pay_mod" value="<?=($default['de_escrow_use']?"O":"N"); ?>">
 
     <!-- 배송 소요일 : 예상 배송 소요일을 입력 -->
     <input type="hidden" name="deli_term" value="03">
 
     <!-- 장바구니 상품 개수 : 장바구니에 담겨있는 상품의 개수를 입력 -->
-    <input type="hidden" name="bask_cntx" value="<?php echo (int)$goods_count + 1; ?>">
+    <input type="hidden" name="bask_cntx" value="<?=(int)$goods_count + 1; ?>">
 
     <!-- 장바구니 상품 상세 정보 (자바 스크립트 샘플(create_goodInfo()) 참고) -->
-    <input type="hidden" name="good_info" value="<?php echo $good_info; ?>">
+    <input type="hidden" name="good_info" value="<?=$good_info; ?>">
 
 <?php
     /* = -------------------------------------------------------------------------- = */
@@ -175,7 +175,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
          ※ 해당 은행을 결제창에서 보이게 합니다.(은행코드는 매뉴얼을 참조) */
 ?>
 
-<input type="hidden" name="kcp_noint"       value="<?php echo ($default['de_card_noint_use'] ? '' : 'N'); ?>">
+<input type="hidden" name="kcp_noint"       value="<?=($default['de_card_noint_use'] ? '' : 'N'); ?>">
 
 <?php
 if($default['de_tax_flag_use']) {
@@ -190,9 +190,9 @@ if($default['de_tax_flag_use']) {
        (good_mny = comm_tax_mny + comm_vat_mny + comm_free_mny) */
 ?>
     <input type="hidden" name="tax_flag"          value="TG03">     <!-- 변경불가    -->
-    <input type="hidden" name="comm_tax_mny"	  value="<?php echo $comm_tax_mny; ?>">         <!-- 과세금액    -->
-    <input type="hidden" name="comm_vat_mny"      value="<?php echo $comm_vat_mny; ?>">         <!-- 부가세	    -->
-    <input type="hidden" name="comm_free_mny"     value="<?php echo $comm_free_mny; ?>">        <!-- 비과세 금액 -->
+    <input type="hidden" name="comm_tax_mny"	  value="<?=$comm_tax_mny; ?>">         <!-- 과세금액    -->
+    <input type="hidden" name="comm_vat_mny"      value="<?=$comm_vat_mny; ?>">         <!-- 부가세	    -->
+    <input type="hidden" name="comm_free_mny"     value="<?=$comm_free_mny; ?>">        <!-- 비과세 금액 -->
 <?php
 }
 ?>

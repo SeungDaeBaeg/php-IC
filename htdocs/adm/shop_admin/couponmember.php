@@ -45,7 +45,7 @@ $qstr1 = 'mb_name='.urlencode($mb_name);
     <form name="fmember" method="get">
     <div id="scp_list_find">
         <label for="mb_name">회원이름</label>
-        <input type="text" name="mb_name" id="mb_name" value="<?php echo get_text($mb_name); ?>" class="frm_input required" required size="20">
+        <input type="text" name="mb_name" id="mb_name" value="<?=get_text($mb_name); ?>" class="frm_input required" required size="20">
         <input type="submit" value="검색" class="btn_frmline">
     </div>
     <div class="tbl_head01 tbl_wrap new_win_con">
@@ -63,9 +63,9 @@ $qstr1 = 'mb_name='.urlencode($mb_name);
         for($i=0; $row=sql_fetch_array($result); $i++) {
         ?>
         <tr>
-            <td class="td_mbname"><?php echo get_text($row['mb_name']); ?></td>
-            <td class="td_left"><?php echo $row['mb_id']; ?></td>
-            <td class="scp_find_select td_mng td_mng_s"><button type="button" class="btn btn_03" onclick="sel_member_id('<?php echo $row['mb_id']; ?>');">선택</button></td>
+            <td class="td_mbname"><?=get_text($row['mb_name']); ?></td>
+            <td class="td_left"><?=$row['mb_id']; ?></td>
+            <td class="scp_find_select td_mng td_mng_s"><button type="button" class="btn btn_03" onclick="sel_member_id('<?=$row['mb_id']; ?>');">선택</button></td>
         </tr>
         <?php
         }
@@ -78,7 +78,7 @@ $qstr1 = 'mb_name='.urlencode($mb_name);
     </div>
     </form>
 
-    <?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, '?'.$qstr1.'&amp;page='); ?>
+    <?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, '?'.$qstr1.'&amp;page='); ?>
 
     <div class="btn_confirm01 btn_confirm win_btn">
         <button type="button" onclick="window.close();" class="btn_close btn">닫기</button>

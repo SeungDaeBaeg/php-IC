@@ -67,15 +67,15 @@ function grouplist_submit(f)
 
 </script>
 
-<form name="group<?php echo isset($res['fg_no']) ? $res['fg_no'] : ''; ?>" method="post" action="./form_group_update.php" class="local_sch03 local_sch">
-<input type="hidden" name="fg_no" value="<?php echo isset($res['fg_no']) ? $res['fg_no'] : ''; ?>">
+<form name="group<?=isset($res['fg_no']) ? $res['fg_no'] : ''; ?>" method="post" action="./form_group_update.php" class="local_sch03 local_sch">
+<input type="hidden" name="fg_no" value="<?=isset($res['fg_no']) ? $res['fg_no'] : ''; ?>">
 <div>
     <label for="fg_name">그룹명<strong class="sound_only"> 필수</strong></label>
     <input type="text" id="fg_name" name="fg_name" required class="required frm_input">
     <input type="submit" value="추가" class="btn_submit">
 </div>
 <div class="sch_last">
-    <span class="count_add01">건수 : <?php echo $total_count ?></span>
+    <span class="count_add01">건수 : <?=$total_count ?></span>
 </div>
 </form>
 
@@ -83,12 +83,12 @@ function grouplist_submit(f)
     <p>그룹명순으로 정렬됩니다.</p>
 </div>
 
-<form name="group<?php echo isset($group[$i]['fg_no']) ? $group[$i]['fg_no'] : ''; ?>" method="post" action="./form_group_update.php" onsubmit="return grouplist_submit(this);">
+<form name="group<?=isset($group[$i]['fg_no']) ? $group[$i]['fg_no'] : ''; ?>" method="post" action="./form_group_update.php" onsubmit="return grouplist_submit(this);">
 <input type="hidden" name="w" value="u">
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">
@@ -109,13 +109,13 @@ function grouplist_submit(f)
     <tr>
         <td></td>
         <td>미분류</td>
-        <td><?php echo number_format($res['cnt'])?></td>
+        <td><?=number_format($res['cnt'])?></td>
         <td class="td_mng">
             <label for="select_fg_no_999" class="sound_only">그룹명</label>
             <select name="select_fg_no_999" id="select_fg_no_999" onchange="move(0, '미분류', this);">
                 <option value=""></option>
                 <?php for ($i=0; $i<count($group); $i++) { ?>
-                <option value="<?php echo $group[$i]['fg_no']?>"> <?php echo $group[$i]['fg_name']?> </option>
+                <option value="<?=$group[$i]['fg_no']?>"> <?=$group[$i]['fg_name']?> </option>
                 <?php } ?>
             </select>
         </td>
@@ -128,34 +128,34 @@ function grouplist_submit(f)
     for ($i=0; $i<count($group); $i++) {
         $bg = 'bg'.(($i + 1)%2);
     ?>
-    <tr class="<?php echo $bg; ?>">
+    <tr class="<?=$bg; ?>">
         <td class="td_mng">
-            <input type="hidden" name="fg_no[<?php echo $i ?>]" value="<?php echo $group[$i]['fg_no']?>" id="fg_no_<?php echo $i ?>">
-            <label for="chk_<?php echo $i ?>" class="sound_only"><?php echo $group[$i]['fg_name']?></label>
-            <input type="checkbox" name="chk[]" value="<?php echo $i ?>" id="chk_<?php echo $i ?>">
+            <input type="hidden" name="fg_no[<?=$i ?>]" value="<?=$group[$i]['fg_no']?>" id="fg_no_<?=$i ?>">
+            <label for="chk_<?=$i ?>" class="sound_only"><?=$group[$i]['fg_name']?></label>
+            <input type="checkbox" name="chk[]" value="<?=$i ?>" id="chk_<?=$i ?>">
         </td>
         <td class="td_left">
-            <label for="fg_name_<?php echo $i; ?>" class="sound_only">그룹명</label>
-            <input type="text" name="fg_name[<?php echo $i; ?>]" value="<?php echo get_sanitize_input($group[$i]['fg_name']); ?>" id="fg_name_<?php echo $i; ?>" class="frm_input">
-            <input type="checkbox" name="fg_member[<?php echo $i; ?>]" value="1" id="fg_member_<?php echo $i; ?>" <?php if ($group[$i]['fg_member']) echo 'checked';?>>
-            <label for="fg_member_<?php echo $i; ?>">회원</label>
+            <label for="fg_name_<?=$i; ?>" class="sound_only">그룹명</label>
+            <input type="text" name="fg_name[<?=$i; ?>]" value="<?=get_sanitize_input($group[$i]['fg_name']); ?>" id="fg_name_<?=$i; ?>" class="frm_input">
+            <input type="checkbox" name="fg_member[<?=$i; ?>]" value="1" id="fg_member_<?=$i; ?>" <?php if ($group[$i]['fg_member']) echo 'checked';?>>
+            <label for="fg_member_<?=$i; ?>">회원</label>
         </td>
         <td >
-            <?php echo number_format($group[$i]['fg_count'])?>
+            <?=number_format($group[$i]['fg_count'])?>
         </td>
         <td class="td_mng">
-            <label for="select_fg_no_<?php echo $i; ?>" class="sound_only">그룹명</label>
-            <select name="select_fg_no[<?php echo $i; ?>]" id="select_fg_no_<?php echo $i; ?>" onchange="move(<?php echo $group[$i]['fg_no']?>, '<?php echo $group[$i]['fg_name']?>', this);">
+            <label for="select_fg_no_<?=$i; ?>" class="sound_only">그룹명</label>
+            <select name="select_fg_no[<?=$i; ?>]" id="select_fg_no_<?=$i; ?>" onchange="move(<?=$group[$i]['fg_no']?>, '<?=$group[$i]['fg_name']?>', this);">
                 <option value=''></option>
                 <option value='0'>미분류</option>
                 <?php for ($j=0; $j<count($group); $j++) { ?>
                 <?php if ($group[$i]['fg_no']==$group[$j]['fg_no']) continue; ?>
-                <option value="<?php echo $group[$j]['fg_no']?>"> <?php echo $group[$j]['fg_name']?></option>
+                <option value="<?=$group[$j]['fg_no']?>"> <?=$group[$j]['fg_name']?></option>
                 <?php } ?>
             </select>
         </td>
         <td class="td_mng td_mng_s">
-            <a href="./form_list.php?fg_no=<?php echo $group[$i]['fg_no']?>" class="btn btn_03">보기</a>
+            <a href="./form_list.php?fg_no=<?=$group[$i]['fg_no']?>" class="btn btn_03">보기</a>
         </td>
     </tr>
     <?php } ?>

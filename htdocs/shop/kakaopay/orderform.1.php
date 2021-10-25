@@ -40,10 +40,10 @@ if($default['de_tax_flag_use']) {
 ?>
 
 <input type="hidden" name="version" value="1.0" >
-<input type="hidden" name="mid" value="<?php echo $default['de_kakaopay_mid']; ?>">
-<input type="hidden" name="goodname" value="<?php echo isset($goods) ? get_text($goods) : ''; ?>">
-<input type="hidden" name="oid" value="<?php echo $od_id; ?>">
-<input type="hidden" name="price" value="<?php echo $tot_price; ?>" >
+<input type="hidden" name="mid" value="<?=$default['de_kakaopay_mid']; ?>">
+<input type="hidden" name="goodname" value="<?=isset($goods) ? get_text($goods) : ''; ?>">
+<input type="hidden" name="oid" value="<?=$od_id; ?>">
+<input type="hidden" name="price" value="<?=$tot_price; ?>" >
 <input type="hidden" name="currency" value="WON" >
 
 <input type="hidden" name="buyername"   value="">
@@ -57,16 +57,16 @@ if($default['de_tax_flag_use']) {
 
 <input type="hidden" name="timestamp"   value="">
 <input type="hidden" name="signature"   value="">
-<input type="hidden" name="returnUrl"   value="<?php echo $returnUrl; ?>">
+<input type="hidden" name="returnUrl"   value="<?=$returnUrl; ?>">
 <input type="hidden" name="mKey"        value="" >
 <input type="hidden" name="gopaymethod" value="">
-<input type="hidden" name="acceptmethod" value="<?php echo $acceptmethod; ?>">
+<input type="hidden" name="acceptmethod" value="<?=$acceptmethod; ?>">
 <input type="hidden" name="charset"     value="UTF-8">
 <input type="hidden" name="payViewType" value="overlay">
-<input type="hidden" name="closeUrl"    value="<?php echo $closeUrl; ?>">
-<input type="hidden" name="popupUrl"    value="<?php echo $popupUrl; ?>">
-<input type="hidden" name="nointerest"  value="<?php echo $cardNoInterestQuota ?>" >
-<input type="hidden" name="quotabase"   value="<?php echo $cardQuotaBase ?>" >	
+<input type="hidden" name="closeUrl"    value="<?=$closeUrl; ?>">
+<input type="hidden" name="popupUrl"    value="<?=$popupUrl; ?>">
+<input type="hidden" name="nointerest"  value="<?=$cardNoInterestQuota ?>" >
+<input type="hidden" name="quotabase"   value="<?=$cardQuotaBase ?>" >
 <?php if($default['de_tax_flag_use']) { ?>
 <input type="hidden" name="tax"         value="">
 <input type="hidden" name="taxfree"     value="">

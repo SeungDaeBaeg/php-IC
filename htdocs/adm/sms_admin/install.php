@@ -10,7 +10,7 @@ $setup = (isset($_POST['setup']) && $_POST['setup']) ? 1 : 0;
 
 include_once(G5_ADMIN_PATH.'/admin.head.php');
 ?>
-<form name="hidden_form" method="post" action="<?php echo $_SERVER['SCRIPT_NAME']?>">
+<form name="hidden_form" method="post" action="<?=$_SERVER['SCRIPT_NAME']?>">
 <input type="hidden" name="setup">
 </form>
 <?php

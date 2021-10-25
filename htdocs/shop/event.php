@@ -30,9 +30,9 @@ if ($is_admin)
 ?>
 
 <script>
-var itemlist_ca_id = "<?php echo $ev_id; ?>";
+var itemlist_ca_id = "<?=$ev_id; ?>";
 </script>
-<script src="<?php echo G5_JS_URL; ?>/shop.list.js"></script>
+<script src="<?=G5_JS_URL; ?>/shop.list.js"></script>
 
 <!-- 이벤트 시작 { -->
 <?php

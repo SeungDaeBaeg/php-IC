@@ -17,19 +17,19 @@ $email_msg = $is_exists_email ? '등록할 이메일이 중복되었습니다.�
 <!-- 회원정보 입력/수정 시작 { -->
 <div class="mbskin" id="register_member">
 
-    <script src="<?php echo G5_JS_URL ?>/jquery.register_form.js"></script>
+    <script src="<?=G5_JS_URL ?>/jquery.register_form.js"></script>
     
     <!-- 새로가입 시작 -->
-    <form id="fregisterform" name="fregisterform" action="<?php echo $register_action_url; ?>" onsubmit="return fregisterform_submit(this);" method="post" enctype="multipart/form-data" autocomplete="off">
-    <input type="hidden" name="w" value="<?php echo $w; ?>">
-    <input type="hidden" name="url" value="<?php echo $urlencode; ?>">
-    <input type="hidden" name="mb_name" value="<?php echo $user_nick; ?>" >
-    <input type="hidden" name="provider" value="<?php echo $provider_name;?>" >
+    <form id="fregisterform" name="fregisterform" action="<?=$register_action_url; ?>" onsubmit="return fregisterform_submit(this);" method="post" enctype="multipart/form-data" autocomplete="off">
+    <input type="hidden" name="w" value="<?=$w; ?>">
+    <input type="hidden" name="url" value="<?=$urlencode; ?>">
+    <input type="hidden" name="mb_name" value="<?=$user_nick; ?>" >
+    <input type="hidden" name="provider" value="<?=$provider_name;?>" >
     <input type="hidden" name="action" value="register">
 
-    <input type="hidden" name="mb_id" value="<?php echo $user_id; ?>" id="reg_mb_id">
-    <input type="hidden" name="mb_nick_default" value="<?php echo isset($user_nick)?get_text($user_nick):''; ?>">
-    <input type="hidden" name="mb_nick" value="<?php echo isset($user_nick)?get_text($user_nick):''; ?>" id="reg_mb_nick">
+    <input type="hidden" name="mb_id" value="<?=$user_id; ?>" id="reg_mb_id">
+    <input type="hidden" name="mb_nick_default" value="<?=isset($user_nick)?get_text($user_nick):''; ?>">
+    <input type="hidden" name="mb_nick" value="<?=isset($user_nick)?get_text($user_nick):''; ?>" id="reg_mb_nick">
 
     <div class="toggle">
         <div class="toggle-title">
@@ -37,7 +37,7 @@ $email_msg = $is_exists_email ? '등록할 이메일이 중복되었습니다.�
 		<span class="title-name"><input type="checkbox" name="agree" value="1" id="agree11"> <label for="agree11">회원가입약관</label></span>
         </div>
         <div class="toggle-inner">
-            <p><?php echo conv_content($config['cf_stipulation'], 0); ?></p>
+            <p><?=conv_content($config['cf_stipulation'], 0); ?></p>
         </div>
     </div>  <!-- END OF TOGGLE -->
     <div class="toggle">
@@ -46,7 +46,7 @@ $email_msg = $is_exists_email ? '등록할 이메일이 중복되었습니다.�
 		<span class="title-name"><input type="checkbox" name="agree2" value="1" id="agree21"> <label for="agree21">개인정보처리방침안내</label></span>
         </div>
         <div class="toggle-inner">
-            <p><?php echo conv_content($config['cf_privacy'], 0); ?></p>
+            <p><?=conv_content($config['cf_privacy'], 0); ?></p>
         </div>
     </div>  <!-- END OF TOGGLE -->
     <div class="all_agree">
@@ -60,8 +60,8 @@ $email_msg = $is_exists_email ? '등록할 이메일이 중복되었습니다.�
         <tr>
             <th scope="row"><label for="reg_mb_email">E-mail<strong class="sound_only">필수</strong></label></th>
             <td>
-                <input type="text" name="mb_email" value="<?php echo isset($user_email)?$user_email:''; ?>" id="reg_mb_email" required class="frm_input email required" size="70" maxlength="100" placeholder="이메일을 입력해주세요." >
-                <p class="email_msg"><?php echo $email_msg; ?></p>
+                <input type="text" name="mb_email" value="<?=isset($user_email)?$user_email:''; ?>" id="reg_mb_email" required class="frm_input email required" size="70" maxlength="100" placeholder="이메일을 입력해주세요." >
+                <p class="email_msg"><?=$email_msg; ?></p>
             </td>
         </tr>
 
@@ -70,7 +70,7 @@ $email_msg = $is_exists_email ? '등록할 이메일이 중복되었습니다.�
     </div>
 
     <div class="btn_top top">
-        <a href="<?php echo G5_URL ?>" class="btn_cancel">취소</a>
+        <a href="<?=G5_URL ?>" class="btn_cancel">취소</a>
         <input type="submit" value="회원가입" id="btn_submit" class="btn_submit" accesskey="s">
     </div>
     </form>
@@ -96,9 +96,9 @@ $email_msg = $is_exists_email ? '등록할 이메일이 중복되었습니다.�
             <span class="txt">닫기</span>
         </button>
         <div class="connect-fg">
-            <form method="post" action="<?php echo $login_action_url ?>" onsubmit="return social_obj.flogin_submit(this);">
-            <input type="hidden" id="url" name="url" value="<?php echo $login_url ?>">
-            <input type="hidden" id="provider" name="provider" value="<?php echo $provider_name ?>">
+            <form method="post" action="<?=$login_action_url ?>" onsubmit="return social_obj.flogin_submit(this);">
+            <input type="hidden" id="url" name="url" value="<?=$login_url ?>">
+            <input type="hidden" id="provider" name="provider" value="<?=$provider_name ?>">
             <input type="hidden" id="action" name="action" value="social_account_linking">
 
             <div class="connect-title">기존 계정에 연결하기</div>

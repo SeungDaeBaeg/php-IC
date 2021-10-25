@@ -6,7 +6,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 ?>
 
 <div id="mb_confirm" class="mbskin">
-    <h1><?php echo $g5['title'] ?></h1>
+    <h1><?=$g5['title'] ?></h1>
 
     <p>
         <strong>비밀번호를 한번 더 입력해주세요.</strong>
@@ -17,13 +17,13 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
         <?php }  ?>
     </p>
 
-    <form name="fmemberconfirm" action="<?php echo $url ?>" onsubmit="return fmemberconfirm_submit(this);" method="post">
-    <input type="hidden" name="mb_id" value="<?php echo $member['mb_id'] ?>">
+    <form name="fmemberconfirm" action="<?=$url ?>" onsubmit="return fmemberconfirm_submit(this);" method="post">
+    <input type="hidden" name="mb_id" value="<?=$member['mb_id'] ?>">
     <input type="hidden" name="w" value="u">
 
     <fieldset>
         회원아이디
-        <span id="mb_confirm_id"><?php echo $member['mb_id'] ?></span>
+        <span id="mb_confirm_id"><?=$member['mb_id'] ?></span>
         <input type="password" name="mb_password" id="mb_confirm_pw" placeholder="비밀번호(필수)" required class="frm_input" size="15" maxLength="20">
         <input type="submit" value="확인" id="btn_submit" class="btn_submit">
     </fieldset>

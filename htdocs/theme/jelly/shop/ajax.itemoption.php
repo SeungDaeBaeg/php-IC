@@ -29,16 +29,16 @@ ob_start();
 ?>
 <div class="sct_cartop_wr">
     <h3>옵션선택</h3>
-    <form name="fcart" method="post" action="<?php echo $action_url; ?>">
-    <input type="hidden" name="it_id[]" value="<?php echo $it['it_id']; ?>">
-    <input type="hidden" name="it_name[]" value="<?php echo stripslashes($it['it_name']); ?>">
-    <input type="hidden" name="it_price[]" value="<?php echo get_price($it); ?>">
-    <input type="hidden" name="it_stock[]" value="<?php echo get_it_stock_qty($it['it_id']); ?>">
-    <input type="hidden" name="io_type[<?php echo $it['it_id']; ?>][]" value="0">
-    <input type="hidden" name="io_id[<?php echo $it['it_id']; ?>][]" value="">
-    <input type="hidden" name="io_value[<?php echo $it['it_id']; ?>][]" value="">
-    <input type="hidden" name="io_price[<?php echo $it['it_id']; ?>][]" value="">
-    <input type="hidden" name="ct_qty[<?php echo $it['it_id']; ?>][]" value="<?php echo $item_ct_qty; ?>">
+    <form name="fcart" method="post" action="<?=$action_url; ?>">
+    <input type="hidden" name="it_id[]" value="<?=$it['it_id']; ?>">
+    <input type="hidden" name="it_name[]" value="<?=stripslashes($it['it_name']); ?>">
+    <input type="hidden" name="it_price[]" value="<?=get_price($it); ?>">
+    <input type="hidden" name="it_stock[]" value="<?=get_it_stock_qty($it['it_id']); ?>">
+    <input type="hidden" name="io_type[<?=$it['it_id']; ?>][]" value="0">
+    <input type="hidden" name="io_id[<?=$it['it_id']; ?>][]" value="">
+    <input type="hidden" name="io_value[<?=$it['it_id']; ?>][]" value="">
+    <input type="hidden" name="io_price[<?=$it['it_id']; ?>][]" value="">
+    <input type="hidden" name="ct_qty[<?=$it['it_id']; ?>][]" value="<?=$item_ct_qty; ?>">
     <input type="hidden" name="sw_direct" value="0">
         <?php
         if($option_item) {

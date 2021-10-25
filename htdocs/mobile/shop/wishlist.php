@@ -44,28 +44,28 @@ include_once(G5_MSHOP_PATH.'/_head.php');
     ?>
 
         <li>
-            <div class="wish_img"><a href="<?php echo shop_item_url($row['it_id']); ?>"><?php echo $image; ?></a></div>
+            <div class="wish_img"><a href="<?=shop_item_url($row['it_id']); ?>"><?=$image; ?></a></div>
             <div class="wish_info">
-                <a href="<?php echo shop_item_url($row['it_id']); ?>" class="wish_prd"><?php echo stripslashes($row['it_name']); ?></a>
-                <span class="info_price"><?php echo display_price(get_price($row), $row['it_tel_inq'])."\n"; ?></span>
-                <span class="info_date"><?php echo substr($row['wi_time'], 2, 17); ?></span>
+                <a href="<?=shop_item_url($row['it_id']); ?>" class="wish_prd"><?=stripslashes($row['it_name']); ?></a>
+                <span class="info_price"><?=display_price(get_price($row), $row['it_tel_inq'])."\n"; ?></span>
+                <span class="info_date"><?=substr($row['wi_time'], 2, 17); ?></span>
             
                 <div class="wish_chk">
                     <?php if(is_soldout($row['it_id'])) { // 품절검사?>
                     <span class="sold_out">품절</span>
                     <?php } else { //품절이 아니면 체크할수 있도록한다 ?>
 					<div class="chk_box">
-                    	<input type="checkbox" name="chk_it_id[<?php echo $i; ?>]" value="1" id="chk_it_id_<?php echo $i; ?>" onclick="out_cd_check(this, '<?php echo $out_cd; ?>');" class="selec_chk">
-                    	<label for="chk_it_id_<?php echo $i; ?>"><span></span><b class="sound_only"><?php echo $row['it_name']; ?></b></label>
+                    	<input type="checkbox" name="chk_it_id[<?=$i; ?>]" value="1" id="chk_it_id_<?=$i; ?>" onclick="out_cd_check(this, '<?=$out_cd; ?>');" class="selec_chk">
+                    	<label for="chk_it_id_<?=$i; ?>"><span></span><b class="sound_only"><?=$row['it_name']; ?></b></label>
                     </div>
                     <?php } ?>
-                    <input type="hidden" name="it_id[<?php echo $i; ?>]" value="<?php echo $row['it_id']; ?>">
-                    <input type="hidden" name="io_type[<?php echo $row['it_id']; ?>][0]" value="0">
-                    <input type="hidden" name="io_id[<?php echo $row['it_id']; ?>][0]" value="">
-                    <input type="hidden" name="io_value[<?php echo $row['it_id']; ?>][0]" value="<?php echo $row['it_name']; ?>">
-                    <input type="hidden" name="ct_qty[<?php echo $row['it_id']; ?>][0]" value="1">
+                    <input type="hidden" name="it_id[<?=$i; ?>]" value="<?=$row['it_id']; ?>">
+                    <input type="hidden" name="io_type[<?=$row['it_id']; ?>][0]" value="0">
+                    <input type="hidden" name="io_id[<?=$row['it_id']; ?>][0]" value="">
+                    <input type="hidden" name="io_value[<?=$row['it_id']; ?>][0]" value="<?=$row['it_name']; ?>">
+                    <input type="hidden" name="ct_qty[<?=$row['it_id']; ?>][0]" value="1">
                 </div>
-                <span class="wish_del"><a href="<?php echo G5_SHOP_URL; ?>/wishupdate.php?w=d&amp;wi_id=<?php echo $row['wi_id']; ?>"><i class="fa fa-trash" aria-hidden="true"></i><span class="sound_only">삭제</span></a></span>
+                <span class="wish_del"><a href="<?=G5_SHOP_URL; ?>/wishupdate.php?w=d&amp;wi_id=<?=$row['wi_id']; ?>"><i class="fa fa-trash" aria-hidden="true"></i><span class="sound_only">삭제</span></a></span>
             </div>
 
         </li>

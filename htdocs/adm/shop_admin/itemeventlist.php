@@ -70,14 +70,14 @@ if($ev_id) {
 ?>
 
 <div class="local_ov01 local_ov">
-    <?php echo $listall; ?>
-    <span class="btn_ov01"><span class="ov_txt">전체 이벤트</span><span class="ov_num"> <?php echo $total_count; ?>건</span></span>  
+    <?=$listall; ?>
+    <span class="btn_ov01"><span class="ov_txt">전체 이벤트</span><span class="ov_num"> <?=$total_count; ?>건</span></span>
 </div>
 
 <form name="flist" class="local_sch01 local_sch" autocomplete="off">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
 <label for="ev_id" class="sound_only">이벤트</label>
-<select name="ev_id" id="ev_id" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
+<select name="ev_id" id="ev_id" action="<?=$_SERVER['SCRIPT_NAME']; ?>">
     <?php
     // 이벤트 옵션처리
     $event_option = "<option value=''>이벤트를 선택하세요</option>";
@@ -93,8 +93,8 @@ if($ev_id) {
 </form>
 
 <form name="flist" class="local_sch01 local_sch" autocomplete="off">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
-<input type="hidden" name="ev_id" value="<?php echo $ev_id; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
+<input type="hidden" name="ev_id" value="<?=$ev_id; ?>">
 
 <label for="sel_ca_id" class="sound_only">분류선택</label>
 <select name="sel_ca_id" id="sel_ca_id">
@@ -114,37 +114,37 @@ if($ev_id) {
 
 <label for="sel_field" class="sound_only">검색대상</label>
 <select name="sel_field" id="sel_field">
-    <option value="it_name" <?php echo get_selected($sel_field, 'it_name'); ?>>상품명</option>
-    <option value="a.it_id" <?php echo get_selected($sel_field, 'a.it_id'); ?>>상품코드</option>
+    <option value="it_name" <?=get_selected($sel_field, 'it_name'); ?>>상품명</option>
+    <option value="a.it_id" <?=get_selected($sel_field, 'a.it_id'); ?>>상품코드</option>
 </select>
 
 <label for="search" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-<input type="text" name="search" value="<?php echo $search; ?>" id="search" required class="frm_input required">
+<input type="text" name="search" value="<?=$search; ?>" id="search" required class="frm_input required">
 <input type="submit" value="검색" class="btn_submit">
 
 </form>
 
 <div class="local_desc01 local_desc">
-    <p>상품을 이벤트별로 일괄 처리합니다. <?php echo ($ev_title ? '현재 선택된 이벤트는 '.$ev_title.'입니다.' : '이벤트를 선택해 주세요.'); ?></p>
+    <p>상품을 이벤트별로 일괄 처리합니다. <?=($ev_title ? '현재 선택된 이벤트는 '.$ev_title.'입니다.' : '이벤트를 선택해 주세요.'); ?></p>
 </div>
 
 <form name="fitemeventlistupdate" method="post" action="./itemeventlistupdate.php" onsubmit="return fitemeventlistupdatecheck(this)">
-<input type="hidden" name="ev_id" value="<?php echo $ev_id; ?>">
-<input type="hidden" name="sel_ca_id" value="<?php echo $sel_ca_id; ?>">
-<input type="hidden" name="sel_field" value="<?php echo $sel_field; ?>">
-<input type="hidden" name="search" value="<?php echo $search; ?>">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
-<input type="hidden" name="sort1" value="<?php echo $sort1; ?>">
-<input type="hidden" name="sort2" value="<?php echo $sort2; ?>">
+<input type="hidden" name="ev_id" value="<?=$ev_id; ?>">
+<input type="hidden" name="sel_ca_id" value="<?=$sel_ca_id; ?>">
+<input type="hidden" name="sel_field" value="<?=$sel_field; ?>">
+<input type="hidden" name="search" value="<?=$search; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
+<input type="hidden" name="sort1" value="<?=$sort1; ?>">
+<input type="hidden" name="sort2" value="<?=$sort2; ?>">
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">이벤트</th>
-        <th scope="col"><a href="<?php echo title_sort("a.it_id") . '&amp;'.$qstr1.'&amp;ev_id='.$ev_id; ?>">상품코드</a></th>
-        <th scope="col"><a href="<?php echo title_sort("it_name") . '&&amp;'.$qstr1.'&amp;ev_id='.$ev_id; ?>">상품명</a></th>
+        <th scope="col"><a href="<?=title_sort("a.it_id") . '&amp;'.$qstr1.'&amp;ev_id='.$ev_id; ?>">상품코드</a></th>
+        <th scope="col"><a href="<?=title_sort("it_name") . '&&amp;'.$qstr1.'&amp;ev_id='.$ev_id; ?>">상품명</a></th>
     </tr>
     </thead>
     <tbody>
@@ -159,14 +159,14 @@ if($ev_id) {
         $bg = 'bg'.($i%2);
     ?>
 
-    <tr class="<?php echo $bg; ?>">
+    <tr class="<?=$bg; ?>">
         <td class="td_chk2">
-            <input type="hidden" name="it_id[<?php echo $i; ?>]" value="<?php echo $row['it_id']; ?>">
-            <label for="ev_chk_<?php echo $i; ?>" class="sound_only">이벤트 사용</label>
-            <input type="checkbox" name="ev_chk[<?php echo $i; ?>]" value="1" id="ev_chk_<?php echo $i; ?>" <?php echo ($row['ev_id'] ? "checked" : ""); ?>>
+            <input type="hidden" name="it_id[<?=$i; ?>]" value="<?=$row['it_id']; ?>">
+            <label for="ev_chk_<?=$i; ?>" class="sound_only">이벤트 사용</label>
+            <input type="checkbox" name="ev_chk[<?=$i; ?>]" value="1" id="ev_chk_<?=$i; ?>" <?=($row['ev_id'] ? "checked" : ""); ?>>
         </td>
-        <td class="td_num"><a href="<?php echo $href; ?>"><?php echo $row['it_id']; ?></a></td>
-        <td class="td_left"><a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?> <?php echo cut_str(stripslashes($row['it_name']), 60, "&#133"); ?></a></td>
+        <td class="td_num"><a href="<?=$href; ?>"><?=$row['it_id']; ?></a></td>
+        <td class="td_left"><a href="<?=$href; ?>"><?=get_it_image($row['it_id'], 50, 50); ?> <?=cut_str(stripslashes($row['it_name']), 60, "&#133"); ?></a></td>
     </tr>
 
     <?php
@@ -182,7 +182,7 @@ if($ev_id) {
 <div class="local_desc01 local_desc">
     <p>
         <?php if ($ev_title) { ?>
-         현재 선택된 이벤트는 <strong><?php echo $ev_title; ?></strong>입니다.<br>
+         현재 선택된 이벤트는 <strong><?=$ev_title; ?></strong>입니다.<br>
          선택된 이벤트의 상품 수정 내용을 반영하시려면 일괄수정 버튼을 누르십시오.
         <?php } else { ?>
         이벤트를 선택하지 않으셨습니다. <strong>수정 내용을 반영하기 전에 이벤트를 선택해주십시오.</strong><br>
@@ -196,7 +196,7 @@ if($ev_id) {
 
 </form>
 
-<?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
+<?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
 
 <script>
 function fitemeventlistupdatecheck(f)

@@ -51,11 +51,11 @@ $ct_cert->mf_clear();
 </head>
 
 <body oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;">
-<form name="form_auth" method="post" action="<?php echo $cert_url ?>">
+<form name="form_auth" method="post" action="<?=$cert_url ?>">
 <!-- 유저네임 -->
 <input type="hidden" name="user_name"    value="" />
 <!-- 주문번호 -->
-<input type="hidden" name="ordr_idxx"    value="<?php echo $ordr_idxx ?>">
+<input type="hidden" name="ordr_idxx"    value="<?=$ordr_idxx ?>">
 <!-- 요청종류 -->
 <input type="hidden" name="req_tx"       value="cert"/>
 <!-- 인증종류 -->
@@ -67,9 +67,9 @@ $ct_cert->mf_clear();
 <input type="hidden" name="fix_commid"      value="KTF"/>
 -->
 <!-- 사이트코드 -->
-<input type="hidden" name="site_cd"      value="<?php echo $site_cd; ?>" />
+<input type="hidden" name="site_cd"      value="<?=$site_cd; ?>" />
 <!-- Ret_URL : 인증결과 리턴 페이지 ( 가맹점 URL 로 설정해 주셔야 합니다. ) -->
-<input type="hidden" name="Ret_URL"      value="<?php echo G5_KCPCERT_URL; ?>/kcpcert_result.php" />
+<input type="hidden" name="Ret_URL"      value="<?=G5_KCPCERT_URL; ?>/kcpcert_result.php" />
 <!-- cert_otp_use 필수 ( 메뉴얼 참고)
      Y : 실명 확인 + OTP 점유 확인 , N : 실명 확인 only
 -->
@@ -85,7 +85,7 @@ $ct_cert->mf_clear();
 <input type="hidden" name="res_cd"       value=""/>
 <input type="hidden" name="res_msg"      value=""/>
 
-<input type="hidden" name="up_hash" value="<?php echo $up_hash; ?>"/>
+<input type="hidden" name="up_hash" value="<?=$up_hash; ?>"/>
 
 <!-- up_hash 검증 을 위한 필드 -->
 <input type="hidden" name="veri_up_hash" value=""/>
@@ -139,7 +139,7 @@ function cert_page()
             frm.target = "auth_popup";
         }
 
-        frm.action="<?php echo $cert_url; ?>";
+        frm.action="<?=$cert_url; ?>";
         frm.submit();
     }
 }

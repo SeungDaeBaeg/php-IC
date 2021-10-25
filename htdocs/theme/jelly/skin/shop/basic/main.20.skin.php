@@ -11,7 +11,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
 ?>
 
 <!-- 이전 재생 정지 다음 버튼 시작 { -->
-<ul id="btn_smt_<?php echo $this->type; ?>" class="sctrl">
+<ul id="btn_smt_<?=$this->type; ?>" class="sctrl">
     <li><button type="button" class="sctrl_play">효과재생<span></span></button></li>
     <li><button type="button" class="sctrl_stop">효과정지<span></span></button></li>
 </ul>
@@ -243,13 +243,13 @@ if($i == 1) echo "<p class=\"sct_noitem\">등록된 상품이 없습니다.</p>\
 }(jQuery));
 
 $(function() {
-    $("#smt_<?php echo $this->type; ?>").topRolling();
+    $("#smt_<?=$this->type; ?>").topRolling();
     // 기본 설정값을 변경하려면 아래처럼 사용
-    //$("#smt_<?php echo $this->type; ?>").topRolling({ interval: 2000, duration: 800 });
+    //$("#smt_<?=$this->type; ?>").topRolling({ interval: 2000, duration: 800 });
 
     // 애니메이션 play
-    $("#btn_smt_<?php echo $this->type; ?> button.sctrl_play").on("click", function() {
-        $("#btn_smt_<?php echo $this->type; ?> button.sctrl_stop").data("stop", false);
+    $("#btn_smt_<?=$this->type; ?> button.sctrl_play").on("click", function() {
+        $("#btn_smt_<?=$this->type; ?> button.sctrl_stop").data("stop", false);
 
         var id = $(this).closest(".sctrl").attr("id").replace("btn_", "");
         $("#"+id).topRolling();
@@ -257,7 +257,7 @@ $(function() {
     });
 
     // 애니메이션 stop
-    $("#btn_smt_<?php echo $this->type; ?> button.sctrl_stop").on("click", function() {
+    $("#btn_smt_<?=$this->type; ?> button.sctrl_stop").on("click", function() {
         if($(this).parent().siblings().find(".sctrl_on").size() > 0) {
             $(this).parent().siblings().find("span").removeClass("sctrl_on").html("");
             $(this).children().addClass("sctrl_on").html("<b class=\"sound_only\">선택됨</b>");

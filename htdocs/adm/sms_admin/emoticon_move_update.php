@@ -50,13 +50,13 @@ $opener_href = './form_list.php?page='.$page;
 ?>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <script>
-alert("<?php echo $msg; ?>");
-opener.document.location.href = "<?php echo $opener_href; ?>";
+alert("<?=$msg; ?>");
+opener.document.location.href = "<?=$opener_href; ?>";
 window.close();
 </script>
 <noscript>
 <p>
-    <?php echo $msg; ?>
+    <?=$msg; ?>
 </p>
-<a href="<?php echo $opener_href; ?>">돌아가기</a>
+<a href="<?=$opener_href; ?>">돌아가기</a>
 </noscript>

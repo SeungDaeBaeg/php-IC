@@ -45,33 +45,33 @@ $(function(){
 </script>
 
 <div class="local_ov01 local_ov">
-    <?php echo $listall ?>
-    <span class="btn_ov01"><span class="ov_txt">건수</span><span class="ov_num">  <?php echo number_format($total_count) ?>개</span></span>
+    <?=$listall ?>
+    <span class="btn_ov01"><span class="ov_txt">건수</span><span class="ov_num">  <?=number_format($total_count) ?>개</span></span>
 </div>
 
 <form name="fsearch" id="fsearch" class="local_sch02 local_sch" method="get">
 <div class="sch_last">
     <strong>기간별검색</strong>
-    <input type="text" name="fr_date" value="<?php echo $fr_date ?>" id="fr_date" class="frm_input" size="11" maxlength="10">
+    <input type="text" name="fr_date" value="<?=$fr_date ?>" id="fr_date" class="frm_input" size="11" maxlength="10">
     <label for="fr_date" class="sound_only">시작일</label>
     ~
-    <input type="text" name="to_date" value="<?php echo $to_date ?>" id="to_date" class="frm_input" size="11" maxlength="10">
+    <input type="text" name="to_date" value="<?=$to_date ?>" id="to_date" class="frm_input" size="11" maxlength="10">
     <label for="to_date" class="sound_only">종료일</label>
     <input type="submit" class="btn_sch2" value="검색">
 </div>
 </form>
 
 <form name="fpopularrank" id="fpopularrank" method="post">
-<input type="hidden" name="sst" value="<?php echo $sst ?>">
-<input type="hidden" name="sod" value="<?php echo $sod ?>">
-<input type="hidden" name="sfl" value="<?php echo $sfl ?>">
-<input type="hidden" name="stx" value="<?php echo $stx ?>">
-<input type="hidden" name="page" value="<?php echo $page ?>">
-<input type="hidden" name="token" value="<?php echo isset($token) ? $token : ''; ?>">
+<input type="hidden" name="sst" value="<?=$sst ?>">
+<input type="hidden" name="sod" value="<?=$sod ?>">
+<input type="hidden" name="sfl" value="<?=$sfl ?>">
+<input type="hidden" name="stx" value="<?=$stx ?>">
+<input type="hidden" name="page" value="<?=$page ?>">
+<input type="hidden" name="token" value="<?=isset($token) ? $token : ''; ?>">
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">순위</th>
@@ -89,9 +89,9 @@ $(function(){
     ?>
 
     <tr>
-        <td class="td_num"><?php echo $rank ?></td>
-        <td class="td_left"><?php echo $word ?></td>
-        <td class="td_num"><?php echo $row['cnt'] ?></td>
+        <td class="td_num"><?=$rank ?></td>
+        <td class="td_left"><?=$word ?></td>
+        <td class="td_num"><?=$row['cnt'] ?></td>
     </tr>
 
     <?php

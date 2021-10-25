@@ -51,23 +51,23 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 ?>
 
 <div id="copymove" class="new_win">
-    <h1 id="win_title"><?php echo $g5['title'] ?></h1>
+    <h1 id="win_title"><?=$g5['title'] ?></h1>
     <form name="fboardmoveall" method="post" action="./move_update.php" onsubmit="return fboardmoveall_submit(this);">
-    <input type="hidden" name="sw" value="<?php echo $sw ?>">
-    <input type="hidden" name="bo_table" value="<?php echo $bo_table ?>">
-    <input type="hidden" name="wr_id_list" value="<?php echo $wr_id_list ?>">
-    <input type="hidden" name="sfl" value="<?php echo $sfl ?>">
-    <input type="hidden" name="stx" value="<?php echo $stx ?>">
-    <input type="hidden" name="spt" value="<?php echo $spt ?>">
-    <input type="hidden" name="sst" value="<?php echo $sst ?>">
-    <input type="hidden" name="sod" value="<?php echo $sod ?>">
-    <input type="hidden" name="page" value="<?php echo $page ?>">
-    <input type="hidden" name="act" value="<?php echo $act ?>">
-    <input type="hidden" name="url" value="<?php echo get_text(clean_xss_tags($_SERVER['HTTP_REFERER'])); ?>">
+    <input type="hidden" name="sw" value="<?=$sw ?>">
+    <input type="hidden" name="bo_table" value="<?=$bo_table ?>">
+    <input type="hidden" name="wr_id_list" value="<?=$wr_id_list ?>">
+    <input type="hidden" name="sfl" value="<?=$sfl ?>">
+    <input type="hidden" name="stx" value="<?=$stx ?>">
+    <input type="hidden" name="spt" value="<?=$spt ?>">
+    <input type="hidden" name="sst" value="<?=$sst ?>">
+    <input type="hidden" name="sod" value="<?=$sod ?>">
+    <input type="hidden" name="page" value="<?=$page ?>">
+    <input type="hidden" name="act" value="<?=$act ?>">
+    <input type="hidden" name="url" value="<?=get_text(clean_xss_tags($_SERVER['HTTP_REFERER'])); ?>">
 
     <div class="tbl_head01 tbl_wrap">
         <table>
-        <caption><?php echo $act ?>할 게시판을 한개 이상 선택하여 주십시오.</caption>
+        <caption><?=$act ?>할 게시판을 한개 이상 선택하여 주십시오.</caption>
         <thead>
         <tr>
             <th scope="col">
@@ -86,19 +86,19 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
                 $atc_bg = 'copymove_currentbg';
             }
         ?>
-        <tr class="<?php echo $atc_bg; ?>">
+        <tr class="<?=$atc_bg; ?>">
             <td class="td_chk">
-                <label for="chk<?php echo $i ?>" class="sound_only"><?php echo $list[$i]['bo_table'] ?></label>
-                <input type="checkbox" value="<?php echo $list[$i]['bo_table'] ?>" id="chk<?php echo $i ?>" name="chk_bo_table[]">
+                <label for="chk<?=$i ?>" class="sound_only"><?=$list[$i]['bo_table'] ?></label>
+                <input type="checkbox" value="<?=$list[$i]['bo_table'] ?>" id="chk<?=$i ?>" name="chk_bo_table[]">
             </td>
             <td>
-                <label for="chk<?php echo $i ?>">
+                <label for="chk<?=$i ?>">
                     <?php
                     echo $list[$i]['gr_subject'] . ' &gt; ';
                     $save_gr_subject = $list[$i]['gr_subject'];
                     ?>
-                    <?php echo $list[$i]['bo_subject'] ?> (<?php echo $list[$i]['bo_table'] ?>)
-                    <?php echo $atc_mark; ?>
+                    <?=$list[$i]['bo_subject'] ?> (<?=$list[$i]['bo_table'] ?>)
+                    <?=$atc_mark; ?>
                 </label>
             </td>
         </tr>
@@ -108,7 +108,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     </div>
 
     <div class="win_btn">
-        <input type="submit" value="<?php echo $act ?>" id="btn_submit" class="btn_submit">
+        <input type="submit" value="<?=$act ?>" id="btn_submit" class="btn_submit">
     </div>
     </form>
 

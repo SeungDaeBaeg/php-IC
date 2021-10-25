@@ -14,7 +14,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$popular_skin_url.'/style.css">',
     ?>
     
     <div>
-        <a href="<?php echo G5_BBS_URL ?>/search.php?sfl=wr_subject&amp;sop=and&amp;stx=<?php echo urlencode($list[$i]['pp_word']) ?>"><?php echo get_text($list[$i]['pp_word']); ?></a>
+        <a href="<?=G5_BBS_URL ?>/search.php?sfl=wr_subject&amp;sop=and&amp;stx=<?=urlencode($list[$i]['pp_word']) ?>"><?=get_text($list[$i]['pp_word']); ?></a>
     </div>
     
     <?php

@@ -33,10 +33,10 @@ include_once(G5_PLUGIN_PATH.'/jquery-ui/datepicker.php');
             <option value="">전체</option>
         </select>
         <label for="fr_date" class="sound_only">기간 시작일</label>
-        <input type="text" name="fr_date" value="<?php echo date("Ymd"); ?>" id="fr_date" required class="required frm_input" size="10" maxlength="8">
+        <input type="text" name="fr_date" value="<?=date("Ymd"); ?>" id="fr_date" required class="required frm_input" size="10" maxlength="8">
         ~
         <label for="to_date" class="sound_only">기간 종료일</label>
-        <input type="text" name="to_date" value="<?php echo date("Ymd"); ?>" id="to_date" required class="required frm_input" size="10" maxlength="8">
+        <input type="text" name="to_date" value="<?=date("Ymd"); ?>" id="to_date" required class="required frm_input" size="10" maxlength="8">
         <input type="submit" value="출력 (새창)" class="btn_submit">
 
         </form>

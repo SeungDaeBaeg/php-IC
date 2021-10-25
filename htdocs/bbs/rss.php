@@ -47,8 +47,8 @@ echo '<?xml version="1.0" encoding="utf-8" ?>'."\n";
 ?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <channel>
-<title><?php echo specialchars_replace($config['cf_title'].' &gt; '.$subj1.' &gt; '.$subj2); ?></title>
-<link><?php echo specialchars_replace(get_pretty_url($bo_table)); ?></link>
+<title><?=specialchars_replace($config['cf_title'].' &gt; '.$subj1.' &gt; '.$subj2); ?></title>
+<link><?=specialchars_replace(get_pretty_url($bo_table)); ?></link>
 <description>테스트 버전 0.2 (2004-04-26)</description>
 <language>ko</language>
 
@@ -69,17 +69,17 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 ?>
 
 <item>
-<title><?php echo specialchars_replace($row['wr_subject']); ?></title>
-<link><?php echo specialchars_replace(get_pretty_url($bo_table, $row['wr_id'])); ?></link>
-<description><![CDATA[<?php echo $file ?><?php echo conv_content($row['wr_content'], $html) ?>]]></description>
-<dc:creator><?php echo specialchars_replace($row['wr_name']) ?></dc:creator>
+<title><?=specialchars_replace($row['wr_subject']); ?></title>
+<link><?=specialchars_replace(get_pretty_url($bo_table, $row['wr_id'])); ?></link>
+<description><![CDATA[<?=$file ?><?=conv_content($row['wr_content'], $html) ?>]]></description>
+<dc:creator><?=specialchars_replace($row['wr_name']) ?></dc:creator>
 <?php
 $date = $row['wr_datetime'];
 // rss 리더 스킨으로 호출하면 날짜가 제대로 표시되지 않음
 //$date = substr($date,0,10) . "T" . substr($date,11,8) . "+09:00";
 $date = date('r', strtotime($date));
 ?>
-<dc:date><?php echo $date ?></dc:date>
+<dc:date><?=$date ?></dc:date>
 </item>
 
 <?php

@@ -22,11 +22,11 @@ check_url_host($url3);
 ?>
 
 <script>
-var conf = "<?php echo strip_tags($msg); ?>";
+var conf = "<?=strip_tags($msg); ?>";
 if (confirm(conf)) {
-    document.location.replace("<?php echo $url1; ?>");
+    document.location.replace("<?=$url1; ?>");
 } else {
-    document.location.replace("<?php echo $url2; ?>");
+    document.location.replace("<?=$url2; ?>");
 }
 </script>
 
@@ -34,17 +34,17 @@ if (confirm(conf)) {
 <article id="confirm_check">
 <header>
     <hgroup>
-        <h1><?php echo get_text(strip_tags($header)); ?></h1> <!-- 수행 중이던 작업 내용 -->
+        <h1><?=get_text(strip_tags($header)); ?></h1> <!-- 수행 중이던 작업 내용 -->
         <h2>아래 내용을 확인해 주세요.</h2>
     </hgroup>
 </header>
 <p>
-    <?php echo get_text(strip_tags($msg)); ?>
+    <?=get_text(strip_tags($msg)); ?>
 </p>
 
-<a href="<?php echo $url1; ?>">확인</a>
-<a href="<?php echo $url2; ?>">취소</a><br><br>
-<a href="<?php echo $url3; ?>">돌아가기</a>
+<a href="<?=$url1; ?>">확인</a>
+<a href="<?=$url2; ?>">취소</a><br><br>
+<a href="<?=$url3; ?>">돌아가기</a>
 </article>
 </noscript>
 

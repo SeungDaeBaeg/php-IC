@@ -19,9 +19,9 @@ include_once('./head.php');
     ?>
         <li class="li_clear">
             <div class="li_wr">
-                <span class="rank"><?php echo ($i + 1); ?></span>
-                <label for="word_<?php echo $i; ?>" class="sound_only">검색어</label>
-                <input type="text" name="word[]" id="word_<?php echo $i; ?>" class="frm_input" value="<?php echo get_text($keyword[$i]); ?>">
+                <span class="rank"><?=($i + 1); ?></span>
+                <label for="word_<?=$i; ?>" class="sound_only">검색어</label>
+                <input type="text" name="word[]" id="word_<?=$i; ?>" class="frm_input" value="<?=get_text($keyword[$i]); ?>">
             </div>
         </li>
     <?php

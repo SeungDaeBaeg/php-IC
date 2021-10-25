@@ -7,7 +7,7 @@ $list_count = (is_array($list) && $list) ? count($list) : 0;
 ?>
 
 <div class="lat">
-    <h2 class="lat_title"><a href="<?php echo get_pretty_url($bo_table); ?>"><?php echo $bo_subject ?></a></h2>
+    <h2 class="lat_title"><a href="<?=get_pretty_url($bo_table); ?>"><?=$bo_subject ?></a></h2>
     <ul>
     <?php for ($i=0; $i<$list_count; $i++) {  ?>
         <li class="basic_li">
@@ -36,8 +36,8 @@ $list_count = (is_array($list) && $list) ? count($list) : 0;
 
             ?>
             <div class="lt_info">
-				<span class="lt_nick"><?php echo $list[$i]['name'] ?></span>
-            	<span class="lt_date"><?php echo $list[$i]['datetime2'] ?></span>              
+				<span class="lt_nick"><?=$list[$i]['name'] ?></span>
+            	<span class="lt_date"><?=$list[$i]['datetime2'] ?></span>
             </div>
         </li>
     <?php }  ?>
@@ -45,6 +45,6 @@ $list_count = (is_array($list) && $list) ? count($list) : 0;
     <li class="empty_li">게시물이 없습니다.</li>
     <?php }  ?>
     </ul>
-    <a href="<?php echo get_pretty_url($bo_table); ?>" class="lt_more"><span class="sound_only"><?php echo $bo_subject ?></span>더보기</a>
+    <a href="<?=get_pretty_url($bo_table); ?>" class="lt_more"><span class="sound_only"><?=$bo_subject ?></span>더보기</a>
 
 </div>

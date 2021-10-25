@@ -72,7 +72,7 @@ $ajax_token = md5($tmp_str.$_SERVER['REMOTE_ADDR'].dirname(dirname(__FILE__).'/'
         </td>
     </tr>
     <tr>
-        <th scope="row"><label for=""><?php echo G5_VERSION; ?> 재설치</label></th>
+        <th scope="row"><label for=""><?=G5_VERSION; ?> 재설치</label></th>
         <td>
             <input name="g5_install" type="checkbox" value="1" id="g5_install">재설치
         </td>
@@ -88,7 +88,7 @@ $ajax_token = md5($tmp_str.$_SERVER['REMOTE_ADDR'].dirname(dirname(__FILE__).'/'
 
     <table class="ins_frm">
     <caption>최고관리자 정보입력</caption>
-    <input type="hidden" name="ajax_token" value="<?php echo $ajax_token; ?>" >
+    <input type="hidden" name="ajax_token" value="<?=$ajax_token; ?>" >
     <colgroup>
         <col style="width:150px">
         <col>
@@ -122,7 +122,7 @@ $ajax_token = md5($tmp_str.$_SERVER['REMOTE_ADDR'].dirname(dirname(__FILE__).'/'
     </table>
 
     <p>
-        <strong class="st_strong">주의! 이미 <?php echo G5_VERSION ?>가 존재한다면 DB 자료가 망실되므로 주의하십시오.</strong><br>
+        <strong class="st_strong">주의! 이미 <?=G5_VERSION ?>가 존재한다면 DB 자료가 망실되므로 주의하십시오.</strong><br>
         주의사항을 이해했으며, 그누보드 설치를 계속 진행하시려면 다음을 누르십시오.
     </p>
 

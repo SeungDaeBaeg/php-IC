@@ -25,7 +25,7 @@ $colspan = 7;
 <div class="local_desc01 local_desc">
     <p>
         <b>테스트</b>는 등록된 최고관리자의 이메일로 테스트 메일을 발송합니다.<br>
-        현재 등록된 메일은 총 <?php echo $total_count ?>건입니다.<br>
+        현재 등록된 메일은 총 <?=$total_count ?>건입니다.<br>
         <strong>주의) 수신자가 동의하지 않은 대량 메일 발송에는 적합하지 않습니다. 수십건 단위로 발송해 주십시오.</strong>
     </p>
 </div>
@@ -34,7 +34,7 @@ $colspan = 7;
 <form name="fmaillist" id="fmaillist" action="./mail_delete.php" method="post">
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col"><input type="checkbox" name="chkall" value="1" id="chkall" title="현재 페이지 목록 전체선택" onclick="check_all(this.form)"></th>
@@ -56,17 +56,17 @@ $colspan = 7;
         $bg = 'bg'.($i%2);
     ?>
 
-    <tr class="<?php echo $bg; ?>">
+    <tr class="<?=$bg; ?>">
         <td class="td_chk">
-            <label for="chk_<?php echo $i; ?>" class="sound_only"><?php echo $row['ma_subject']; ?> 메일</label>
-            <input type="checkbox" id="chk_<?php echo $i ?>" name="chk[]" value="<?php echo $row['ma_id'] ?>">
+            <label for="chk_<?=$i; ?>" class="sound_only"><?=$row['ma_subject']; ?> 메일</label>
+            <input type="checkbox" id="chk_<?=$i ?>" name="chk[]" value="<?=$row['ma_id'] ?>">
         </td>
-        <td class="td_num_c"><?php echo $num ?></td>
-        <td class="td_left"><a href="./mail_form.php?w=u&amp;ma_id=<?php echo $row['ma_id'] ?>"><?php echo $row['ma_subject'] ?></a></td>
-        <td class="td_datetime"><?php echo $row['ma_time'] ?></td>
-        <td class="td_test"><a href="./mail_test.php?ma_id=<?php echo $row['ma_id'] ?>">테스트</a></td>
-        <td class="td_send"><a href="./mail_select_form.php?ma_id=<?php echo $row['ma_id'] ?>">보내기</a></td>
-        <td class="td_mng"><?php echo $s_vie ?></td>
+        <td class="td_num_c"><?=$num ?></td>
+        <td class="td_left"><a href="./mail_form.php?w=u&amp;ma_id=<?=$row['ma_id'] ?>"><?=$row['ma_subject'] ?></a></td>
+        <td class="td_datetime"><?=$row['ma_time'] ?></td>
+        <td class="td_test"><a href="./mail_test.php?ma_id=<?=$row['ma_id'] ?>">테스트</a></td>
+        <td class="td_send"><a href="./mail_select_form.php?ma_id=<?=$row['ma_id'] ?>">보내기</a></td>
+        <td class="td_mng"><?=$s_vie ?></td>
     </tr>
 
     <?php

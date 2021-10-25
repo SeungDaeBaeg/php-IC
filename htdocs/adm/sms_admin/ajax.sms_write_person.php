@@ -92,7 +92,7 @@ while ($res = sql_fetch_array($qry)) array_push($group, $res);
     <tbody>
     <?php if (!$total_count) { ?>
     <tr>
-        <td colspan="<?php echo $colspan?>" class="td_mbstat">데이터가 없습니다.</td>
+        <td colspan="<?=$colspan?>" class="td_mbstat">데이터가 없습니다.</td>
     </tr>
     <?php
     }
@@ -108,18 +108,18 @@ while ($res = sql_fetch_array($qry)) array_push($group, $res);
         else
             $group_name = $tmp['bg_name'];
     ?>
-    <tr class="<?php echo $bg; ?>">
+    <tr class="<?=$bg; ?>">
         <td class="td_chk">
-            <label for="bk_no_<?php echo $res['bk_no']; ?>" class="sound_only"><?php echo get_text($res['bk_name']) ?></label>
-            <input type="checkbox" name="bk_no" value="<?php echo $res['bk_no']?>" id="bk_no_<?php echo $res['bk_no']; ?>">
+            <label for="bk_no_<?=$res['bk_no']; ?>" class="sound_only"><?=get_text($res['bk_name']) ?></label>
+            <input type="checkbox" name="bk_no" value="<?=$res['bk_no']?>" id="bk_no_<?=$res['bk_no']; ?>">
         </td>
-        <!-- <td class="td_name"><?php echo $group_name?></td> -->
-        <td class="td_mbname"><?php echo get_text($res['bk_name']) ?></td>
-        <td><?php echo $res['bk_hp']?></td>
-        <!-- <td class="td_boolean"><?php echo $res['bk_receipt'] ? '수신' : '거부'?></td> -->
-        <!-- <td class="td_boolean"><?php echo $res['bk_receipt'] ? '예' : ''?></td> -->
-        <td class="td_boolean"><?php echo $res['mb_id'] ? '회원' : '비회원'?></td>
-        <td class="td_mngsmall"><button type="button" class="btn_frmline" onclick="sms_obj.person_add(<?php echo $res['bk_no']?>, '<?php echo get_text($res['bk_name']) ?>', '<?php echo $res['bk_hp']?>')">추가</button></td>
+        <!-- <td class="td_name"><?=$group_name?></td> -->
+        <td class="td_mbname"><?=get_text($res['bk_name']) ?></td>
+        <td><?=$res['bk_hp']?></td>
+        <!-- <td class="td_boolean"><?=$res['bk_receipt'] ? '수신' : '거부'?></td> -->
+        <!-- <td class="td_boolean"><?=$res['bk_receipt'] ? '예' : ''?></td> -->
+        <td class="td_boolean"><?=$res['mb_id'] ? '회원' : '비회원'?></td>
+        <td class="td_mngsmall"><button type="button" class="btn_frmline" onclick="sms_obj.person_add(<?=$res['bk_no']?>, '<?=get_text($res['bk_name']) ?>', '<?=$res['bk_hp']?>')">추가</button></td>
     </tr>
     <?php } ?>
     </tbody>
@@ -135,35 +135,35 @@ while ($res = sql_fetch_array($qry)) array_push($group, $res);
     <span class="pg" id="person_pg"></span>
 </nav>
 
-<form name="search_form" id="sms_person_form" method="get" action="<?php echo $_SERVER['SCRIPT_NAME']?>">
-<input type="hidden" name="total_pg" value="<?php echo $total_page?>">
-<input type="hidden" name="page" value="<?php echo $page?>">
+<form name="search_form" id="sms_person_form" method="get" action="<?=$_SERVER['SCRIPT_NAME']?>">
+<input type="hidden" name="total_pg" value="<?=$total_page?>">
+<input type="hidden" name="page" value="<?=$page?>">
 
 <label for="bg_no" class="sound_only">그룹</label>
 <select name="bg_no" id="bg_no">
-    <option value=""<?php echo get_selected('', $bg_no); ?>> 전체 </option>
-    <option value="1"<?php echo get_selected(1, $bg_no); ?>> <?php echo $no_group['bg_name']?> (<?php echo number_format($no_group['bg_receipt'])?> 명) </option>
+    <option value=""<?=get_selected('', $bg_no); ?>> 전체 </option>
+    <option value="1"<?=get_selected(1, $bg_no); ?>> <?=$no_group['bg_name']?> (<?=number_format($no_group['bg_receipt'])?> 명) </option>
     <?php for($i=0; $i<count($group); $i++) {?>
-    <option value="<?php echo $group[$i]['bg_no']?>" <?php echo get_selected($bg_no, $group[$i]['bg_no']); ?>> <?php echo $group[$i]['bg_name']?> (<?php echo number_format($group[$i]['bg_receipt'])?> 명) </option>
+    <option value="<?=$group[$i]['bg_no']?>" <?=get_selected($bg_no, $group[$i]['bg_no']); ?>> <?=$group[$i]['bg_name']?> (<?=number_format($group[$i]['bg_receipt'])?> 명) </option>
     <?php } ?>
 </select>
 
 <label for="stt" class="sound_only">검색대상</label>
 <select name="st" id="stt">
-    <option value="all"<?php echo get_selected('all', $st); ?>>이름 + 번호</option>
-    <option value="name"<?php echo get_selected('name', $st); ?>>이름</option>
-    <option value="hp"<?php echo get_selected('hp', $st); ?>>번호</option>
+    <option value="all"<?=get_selected('all', $st); ?>>이름 + 번호</option>
+    <option value="name"<?=get_selected('name', $st); ?>>이름</option>
+    <option value="hp"<?=get_selected('hp', $st); ?>>번호</option>
 </select>
 
 <label for="svv" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-<input type="text" size="15" name="sv" value="<?php echo $sv?>" id="svv" required class="required frm_input">
+<input type="text" size="15" name="sv" value="<?=$sv?>" id="svv" required class="required frm_input">
 <input type="submit" value="검색" class="btn_submit btn">
 </form>
 
 <!--
-총 건수 : <?php echo number_format($total_count)?> /
-회원 : <?php echo number_format($member_count)?> /
-비회원 : <?php echo number_format($no_member_count)?> /
-수신 : <?php echo number_format($receipt_count)?> /
-거부 : <?php echo number_format($reject_count)?>
+총 건수 : <?=number_format($total_count)?> /
+회원 : <?=number_format($member_count)?> /
+비회원 : <?=number_format($no_member_count)?> /
+수신 : <?=number_format($receipt_count)?> /
+거부 : <?=number_format($reject_count)?>
 -->

@@ -94,12 +94,12 @@ if ($resultCode == 200) {
 ?>
 <html>
 <body>
-<form name="frm" method="get" action="<?php echo $wishUrl; ?>">
-<input type="hidden" name="SHOP_ID" value="<?php echo $default['de_naverpay_mid']; ?>">
+<form name="frm" method="get" action="<?=$wishUrl; ?>">
+<input type="hidden" name="SHOP_ID" value="<?=$default['de_naverpay_mid']; ?>">
 <?php
 for($i=0; $i<$count; $i++) {
 ?>
-<input type="hidden" name="ITEM_ID" value="<?php echo $itemIdList[$i]; ?>">
+<input type="hidden" name="ITEM_ID" value="<?=$itemIdList[$i]; ?>">
 <?php
 }
 ?>

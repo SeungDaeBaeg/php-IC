@@ -50,7 +50,7 @@ if($file_exists = run_replace('exists_view_image', $file_exists, $filepath, $edi
 }
 ?>
 
-<div class="bbs-view-image"><?php echo $img ?></div>
+<div class="bbs-view-image"><?=$img ?></div>
 
 <script>
 
@@ -73,8 +73,8 @@ $.fn.imgLoad = function(callback) {
 
     $(".bbs-view-image img").imgLoad(function(){
 
-        var win_w = <?php echo $width ?>;
-        var win_h = <?php echo $height ?> + 70;
+        var win_w = <?=$width ?>;
+        var win_h = <?=$height ?> + 70;
 
         if( !win_w || !win_h ){
             win_w = $(this).width();

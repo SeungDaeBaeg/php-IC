@@ -42,7 +42,7 @@ $result = sql_query($sql);
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?></caption>
+    <caption><?=$g5['title']; ?></caption>
     <thead>
     <tr>
         <th scope="col">주문번호</th>
@@ -86,19 +86,19 @@ $result = sql_query($sql);
         }
     ?>
         <tr>
-            <td class="td_alignc"><a href="./orderform.php?od_id=<?php echo $row['od_id']; ?>"><?php echo $row['od_id']; ?></a></td>
-            <td class="td_name"><?php echo $href; ?><?php echo $row['od_name']; ?></a></td>
-            <td class="td_numsum"><?php echo number_format($row['orderprice']); ?></td>
-            <td class="td_numincome"><?php echo number_format($row['couponprice']); ?></td>
-            <td class="td_numincome"><?php echo number_format($receipt_bank); ?></td>
-            <td class="td_numincome"><?php echo number_format($receipt_vbank); ?></td>
-            <td class="td_numincome"><?php echo number_format($receipt_iche); ?></td>
-            <td class="td_numincome"><?php echo number_format($receipt_card); ?></td>
-            <td class="td_numincome"><?php echo number_format($receipt_easy); ?></td>
-            <td class="td_numincome"><?php echo number_format($receipt_hp); ?></td>
-            <td class="td_numincome"><?php echo number_format($row['od_receipt_point']); ?></td>
-            <td class="td_numcancel1"><?php echo number_format($row['od_cancel_price']); ?></td>
-            <td class="td_numrdy"><?php echo number_format($row['od_misu']); ?></td>
+            <td class="td_alignc"><a href="./orderform.php?od_id=<?=$row['od_id']; ?>"><?=$row['od_id']; ?></a></td>
+            <td class="td_name"><?=$href; ?><?=$row['od_name']; ?></a></td>
+            <td class="td_numsum"><?=number_format($row['orderprice']); ?></td>
+            <td class="td_numincome"><?=number_format($row['couponprice']); ?></td>
+            <td class="td_numincome"><?=number_format($receipt_bank); ?></td>
+            <td class="td_numincome"><?=number_format($receipt_vbank); ?></td>
+            <td class="td_numincome"><?=number_format($receipt_iche); ?></td>
+            <td class="td_numincome"><?=number_format($receipt_card); ?></td>
+            <td class="td_numincome"><?=number_format($receipt_easy); ?></td>
+            <td class="td_numincome"><?=number_format($receipt_hp); ?></td>
+            <td class="td_numincome"><?=number_format($row['od_receipt_point']); ?></td>
+            <td class="td_numcancel1"><?=number_format($row['od_cancel_price']); ?></td>
+            <td class="td_numrdy"><?=number_format($row['od_misu']); ?></td>
         </tr>
     <?php
         $tot['orderprice']    += $row['orderprice'];
@@ -122,17 +122,17 @@ $result = sql_query($sql);
     <tfoot>
     <tr>
         <td colspan="2">합 계</td>
-        <td class="td_num_right"><?php echo number_format($tot['orderprice']); ?></td>
-        <td class="td_num_right"><?php echo number_format($tot['coupon']); ?></td>
-        <td class="td_num_right"><?php echo number_format($tot['receipt_bank']); ?></td>
-        <td class="td_num_right"><?php echo number_format($tot['receipt_vbank']); ?></td>
-        <td class="td_num_right"><?php echo number_format($tot['receipt_iche']); ?></td>
-        <td class="td_num_right"><?php echo number_format($tot['receipt_card']); ?></td>
-        <td class="td_num_right"><?php echo number_format($tot['receipt_easy']); ?></td>
-        <td class="td_num_right"><?php echo number_format($tot['receipt_hp']); ?></td>
-        <td class="td_num_right"><?php echo number_format($tot['receipt_point']); ?></td>
-        <td class="td_num_right"><?php echo number_format($tot['ordercancel']); ?></td>
-        <td class="td_num_right"><?php echo number_format($tot['misu']); ?></td>
+        <td class="td_num_right"><?=number_format($tot['orderprice']); ?></td>
+        <td class="td_num_right"><?=number_format($tot['coupon']); ?></td>
+        <td class="td_num_right"><?=number_format($tot['receipt_bank']); ?></td>
+        <td class="td_num_right"><?=number_format($tot['receipt_vbank']); ?></td>
+        <td class="td_num_right"><?=number_format($tot['receipt_iche']); ?></td>
+        <td class="td_num_right"><?=number_format($tot['receipt_card']); ?></td>
+        <td class="td_num_right"><?=number_format($tot['receipt_easy']); ?></td>
+        <td class="td_num_right"><?=number_format($tot['receipt_hp']); ?></td>
+        <td class="td_num_right"><?=number_format($tot['receipt_point']); ?></td>
+        <td class="td_num_right"><?=number_format($tot['ordercancel']); ?></td>
+        <td class="td_num_right"><?=number_format($tot['misu']); ?></td>
     </tr>
     </tfoot>
     </table>

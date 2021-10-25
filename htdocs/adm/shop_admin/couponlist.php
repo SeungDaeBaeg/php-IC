@@ -51,33 +51,33 @@ include_once (G5_ADMIN_PATH.'/admin.head.php');
 $colspan = 9;
 ?>
 <div class="local_ov">
-    <span class="btn_ov01"><span class="ov_txt">전체 </span><span class="ov_num"> <?php echo number_format($total_count) ?> 개</span></span>
+    <span class="btn_ov01"><span class="ov_txt">전체 </span><span class="ov_num"> <?=number_format($total_count) ?> 개</span></span>
 </div>
 <form name="fsearch" id="fsearch" class="local_sch01 local_sch" method="get">
 
 <select name="sfl" title="검색대상">
-    <option value="mb_id"<?php echo get_selected($sfl, "mb_id"); ?>>회원아이디</option>
-    <option value="cp_subject"<?php echo get_selected($sfl, "cp_subject"); ?>>쿠폰이름</option>
-    <option value="cp_id"<?php echo get_selected($sfl, "cp_id"); ?>>쿠폰코드</option>
+    <option value="mb_id"<?=get_selected($sfl, "mb_id"); ?>>회원아이디</option>
+    <option value="cp_subject"<?=get_selected($sfl, "cp_subject"); ?>>쿠폰이름</option>
+    <option value="cp_id"<?=get_selected($sfl, "cp_id"); ?>>쿠폰코드</option>
 </select>
 <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-<input type="text" name="stx" value="<?php echo $stx ?>" id="stx" required class="required frm_input">
+<input type="text" name="stx" value="<?=$stx ?>" id="stx" required class="required frm_input">
 <input type="submit" class="btn_submit" value="검색">
 </form>
 
 
 
 <form name="fcouponlist" id="fcouponlist" method="post" action="./couponlist_delete.php" onsubmit="return fcouponlist_submit(this);">
-<input type="hidden" name="sst" value="<?php echo $sst; ?>">
-<input type="hidden" name="sod" value="<?php echo $sod; ?>">
-<input type="hidden" name="sfl" value="<?php echo $sfl; ?>">
-<input type="hidden" name="stx" value="<?php echo $stx; ?>">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
+<input type="hidden" name="sst" value="<?=$sst; ?>">
+<input type="hidden" name="sod" value="<?=$sod; ?>">
+<input type="hidden" name="sfl" value="<?=$sfl; ?>">
+<input type="hidden" name="stx" value="<?=$stx; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
 <input type="hidden" name="token" value="">
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?></caption>
+    <caption><?=$g5['title']; ?></caption>
     <thead>
     <tr>
         <th scope="col">
@@ -88,8 +88,8 @@ $colspan = 9;
         <th scope="col">쿠폰코드</th>
         <th scope="col">쿠폰이름</th>
         <th scope="col">적용대상</th>
-        <th scope="col"><?php echo subject_sort_link('mb_id') ?>회원아이디</a></th>
-        <th scope="col"><?php echo subject_sort_link('cp_end') ?>사용기한</a></th>
+        <th scope="col"><?=subject_sort_link('mb_id') ?>회원아이디</a></th>
+        <th scope="col"><?=subject_sort_link('cp_end') ?>사용기한</a></th>
         <th scope="col">사용회수</th>
         <th scope="col">관리</th>
     </tr>
@@ -130,20 +130,20 @@ $colspan = 9;
         $bg = 'bg'.($i%2);
     ?>
 
-    <tr class="<?php echo $bg; ?>">
+    <tr class="<?=$bg; ?>">
         <td class="td_chk">
-            <input type="hidden" id="cp_id_<?php echo $i; ?>" name="cp_id[<?php echo $i; ?>]" value="<?php echo $row['cp_id']; ?>">
-            <input type="checkbox" id="chk_<?php echo $i; ?>" name="chk[]" value="<?php echo $i; ?>" title="내역선택">
+            <input type="hidden" id="cp_id_<?=$i; ?>" name="cp_id[<?=$i; ?>]" value="<?=$row['cp_id']; ?>">
+            <input type="checkbox" id="chk_<?=$i; ?>" name="chk[]" value="<?=$i; ?>" title="내역선택">
         </td>
-        <td><?php echo $cp_method; ?></td>
-        <td><?php echo $row['cp_id']; ?></td>
-        <td class="td_left"><?php echo $row['cp_subject']; ?></td>
-        <td><?php echo $cp_target; ?></td>
-        <td class="td_name sv_use"><div><?php echo $row['mb_id']; ?></div></td>
-        <td class="td_datetime"><?php echo substr($row['cp_start'], 2, 8); ?> ~ <?php echo substr($row['cp_end'], 2, 8); ?></td>
-        <td class="td_cntsmall"><?php echo number_format($used_count); ?></td>
+        <td><?=$cp_method; ?></td>
+        <td><?=$row['cp_id']; ?></td>
+        <td class="td_left"><?=$row['cp_subject']; ?></td>
+        <td><?=$cp_target; ?></td>
+        <td class="td_name sv_use"><div><?=$row['mb_id']; ?></div></td>
+        <td class="td_datetime"><?=substr($row['cp_start'], 2, 8); ?> ~ <?=substr($row['cp_end'], 2, 8); ?></td>
+        <td class="td_cntsmall"><?=number_format($used_count); ?></td>
         <td class="td_mng td_mng_s">
-            <a href="./couponform.php?w=u&amp;cp_id=<?php echo $row['cp_id']; ?>&amp;<?php echo $qstr; ?>" class="btn btn_03"><span class="sound_only"><?php echo $row['cp_id']; ?> </span>수정</a>
+            <a href="./couponform.php?w=u&amp;cp_id=<?=$row['cp_id']; ?>&amp;<?=$qstr; ?>" class="btn btn_03"><span class="sound_only"><?=$row['cp_id']; ?> </span>수정</a>
         </td>
     </tr>
 
@@ -163,7 +163,7 @@ $colspan = 9;
 
 </form>
 
-<?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
+<?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
 
 <script>
 function fcouponlist_submit(f)

@@ -26,7 +26,7 @@ function get_mshop_category($ca_id, $len)
                 echo '<ul class="cate">'.PHP_EOL;
         ?>
             <li class="cate_li_1">
-                <a href="<?php echo $mshop_ca_href.$mshop_ca_row1['ca_id']; ?>" class="cate_li_1_a"><?php echo get_text($mshop_ca_row1['ca_name']); ?></a>
+                <a href="<?=$mshop_ca_href.$mshop_ca_row1['ca_id']; ?>" class="cate_li_1_a"><?=get_text($mshop_ca_row1['ca_name']); ?></a>
                 <?php
                 $mshop_ca_res2 = sql_query(get_mshop_category($mshop_ca_row1['ca_id'], 4));
 
@@ -35,7 +35,7 @@ function get_mshop_category($ca_id, $len)
                         echo '<ul class="sub_cate sub_cate1">'.PHP_EOL;
                 ?>
                     <li class="cate_li_2">
-                        <a href="<?php echo $mshop_ca_href.$mshop_ca_row2['ca_id']; ?>"><?php echo get_text($mshop_ca_row2['ca_name']); ?></a>
+                        <a href="<?=$mshop_ca_href.$mshop_ca_row2['ca_id']; ?>"><?=get_text($mshop_ca_row2['ca_name']); ?></a>
                     </li>
                 <?php
                 }

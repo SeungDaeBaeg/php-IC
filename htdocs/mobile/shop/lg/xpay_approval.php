@@ -147,12 +147,12 @@ include_once(G5_PATH.'/head.sub.php');
 /*
 * iframe으로 결제창을 호출하시기를 원하시면 iframe으로 설정 (변수명 수정 불가)
 */
-    var LGD_window_type = '<?php echo $CST_WINDOW_TYPE; ?>';
+    var LGD_window_type = '<?=$CST_WINDOW_TYPE; ?>';
 /*
 * 수정불가
 */
 function launchCrossPlatform(){
-    lgdwin = open_paymentwindow(document.getElementById('LGD_PAYINFO'), '<?php echo $CST_PLATFORM; ?>', LGD_window_type);
+    lgdwin = open_paymentwindow(document.getElementById('LGD_PAYINFO'), '<?=$CST_PLATFORM; ?>', LGD_window_type);
 }
 /*
 * FORM 명만  수정 가능

@@ -21,9 +21,9 @@ if(G5_COMMUNITY_USE === false) {
         // 테마의 스킨을 사용하려면 theme/basic 과 같이 지정
         echo latest('theme/notice', 'notice', 4, 13);
         ?>
-        <?php echo outlogin('theme/basic'); // 외부 로그인, 테마의 스킨을 사용하려면 스킨을 theme/basic 과 같이 지정 ?>
-        <?php echo poll('theme/basic'); // 설문조사, 테마의 스킨을 사용하려면 스킨을 theme/basic 과 같이 지정 ?>
-        <?php echo visit('theme/basic'); // 접속자집계, 테마의 스킨을 사용하려면 스킨을 theme/basic 과 같이 지정 ?>
+        <?=outlogin('theme/basic'); // 외부 로그인, 테마의 스킨을 사용하려면 스킨을 theme/basic 과 같이 지정 ?>
+        <?=poll('theme/basic'); // 설문조사, 테마의 스킨을 사용하려면 스킨을 theme/basic 과 같이 지정 ?>
+        <?=visit('theme/basic'); // 접속자집계, 테마의 스킨을 사용하려면 스킨을 theme/basic 과 같이 지정 ?>
     </div>
 </div>
 
@@ -37,12 +37,12 @@ if(G5_COMMUNITY_USE === false) {
 
     <div id="ft_wr">
         <div id="ft_link">
-            <a href="<?php echo G5_BBS_URL; ?>/content.php?co_id=company">회사소개</a>
-            <a href="<?php echo G5_BBS_URL; ?>/content.php?co_id=privacy">개인정보처리방침</a>
-            <a href="<?php echo G5_BBS_URL; ?>/content.php?co_id=provision">서비스이용약관</a>
-            <a href="<?php echo get_device_change_url(); ?>">모바일버전</a>
+            <a href="<?=G5_BBS_URL; ?>/content.php?co_id=company">회사소개</a>
+            <a href="<?=G5_BBS_URL; ?>/content.php?co_id=privacy">개인정보처리방침</a>
+            <a href="<?=G5_BBS_URL; ?>/content.php?co_id=provision">서비스이용약관</a>
+            <a href="<?=get_device_change_url(); ?>">모바일버전</a>
         </div>
-        <div id="ft_catch"><img src="<?php echo G5_IMG_URL; ?>/ft_logo.png" alt="<?php echo G5_VERSION ?>"></div>
+        <div id="ft_catch"><img src="<?=G5_IMG_URL; ?>/ft_logo.png" alt="<?=G5_VERSION ?>"></div>
         <div id="ft_copy">Copyright &copy; <b>소유하신 도메인.</b> All rights reserved.</div>
     </div>
     

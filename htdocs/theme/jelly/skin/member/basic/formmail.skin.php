@@ -7,14 +7,14 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 
 <!-- 폼메일 시작 { -->
 <div id="formmail" class="new_win">
-    <h1 id="win_title"><?php echo $name ?>님께 메일보내기</h1>
+    <h1 id="win_title"><?=$name ?>님께 메일보내기</h1>
 
     <form name="fformmail" action="./formmail_send.php" onsubmit="return fformmail_submit(this);" method="post" enctype="multipart/form-data" style="margin:0px;">
-    <input type="hidden" name="to" value="<?php echo $email ?>">
+    <input type="hidden" name="to" value="<?=$email ?>">
     <input type="hidden" name="attach" value="2">
     <?php if ($is_member) { // 회원이면  ?>
-    <input type="hidden" name="fnick" value="<?php echo get_text($member['mb_nick']) ?>">
-    <input type="hidden" name="fmail" value="<?php echo $member['mb_email'] ?>">
+    <input type="hidden" name="fnick" value="<?=get_text($member['mb_nick']) ?>">
+    <input type="hidden" name="fmail" value="<?=$member['mb_email'] ?>">
     <?php }  ?>
 
     <div class="form_01 new_win_con">
@@ -60,7 +60,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
             </li>
             <li>
                 <span class="sound_only">자동등록방지</span>
-                <?php echo captcha_html(); ?>
+                <?=captcha_html(); ?>
             </li>
         </ul>
         <div class="win_btn">
@@ -83,7 +83,7 @@ with (document.fformmail) {
 
 function fformmail_submit(f)
 {
-    <?php echo chk_captcha_js();  ?>
+    <?=chk_captcha_js();  ?>
 
     if (f.file1.value || f.file2.value) {
         // 4.00.11

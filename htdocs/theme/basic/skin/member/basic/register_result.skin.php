@@ -9,7 +9,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 <div id="reg_result" class="register">
     <p class="reg_result_p">
     	<i class="fa fa-gift" aria-hidden="true"></i><br>
-        <strong><?php echo get_text($mb['mb_name']); ?></strong>님의 회원가입을 진심으로 축하합니다.
+        <strong><?=get_text($mb['mb_name']); ?></strong>님의 회원가입을 진심으로 축하합니다.
     </p>
 
     <?php if (is_use_email_certify()) {  ?>
@@ -19,9 +19,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
     </p>
     <div id="result_email">
         <span>아이디</span>
-        <strong><?php echo $mb['mb_id'] ?></strong><br>
+        <strong><?=$mb['mb_id'] ?></strong><br>
         <span>이메일 주소</span>
-        <strong><?php echo $mb['mb_email'] ?></strong>
+        <strong><?=$mb['mb_email'] ?></strong>
     </div>
     <p>
         이메일 주소를 잘못 입력하셨다면, 사이트 관리자에게 문의해주시기 바랍니다.
@@ -40,5 +40,5 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 </div>
 <!-- } 회원가입결과 끝 -->
 <div class="btn_confirm_reg">
-	<a href="<?php echo G5_URL ?>/" class="reg_btn_submit">메인으로</a>
+	<a href="<?=G5_URL ?>/" class="reg_btn_submit">메인으로</a>
 </div>

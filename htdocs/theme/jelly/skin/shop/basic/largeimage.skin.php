@@ -24,7 +24,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
         ?>
         <span>
             <a href="javascript:window.close();">
-                <img src="<?php echo $imageurl; ?>" width="<?php echo $size[0]; ?>" height="<?php echo $size[1]; ?>" alt="<?php echo $row['it_name']; ?>" id="largeimage_<?php echo $i; ?>">
+                <img src="<?=$imageurl; ?>" width="<?=$size[0]; ?>" height="<?=$size[1]; ?>" alt="<?=$row['it_name']; ?>" id="largeimage_<?=$i; ?>">
             </a>
         </span>
         <?php
@@ -53,13 +53,13 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
 <script>
 // 창 사이즈 조절
 $(window).on("load", function() {
-    var w = <?php echo $size[0]; ?> + 50;
+    var w = <?=$size[0]; ?> + 50;
     var h = $("#sit_pvi_nw").outerHeight(true) + $("#sit_pvi_nw h1").outerHeight(true);
     window.resizeTo(w, h);
 });
 
 $(function(){
-    $("#sit_pvi_nwbig span:eq("+<?php echo ($no - 1); ?>+")").addClass("visible");
+    $("#sit_pvi_nwbig span:eq("+<?=($no - 1); ?>+")").addClass("visible");
 
     // 이미지 미리보기
     $(".img_thumb").bind("mouseover focus", function(){

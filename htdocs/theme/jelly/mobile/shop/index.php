@@ -6,10 +6,10 @@ define("_INDEX_", TRUE);
 include_once(G5_THEME_MSHOP_PATH.'/shop.head.php');
 ?>
 
-<script src="<?php echo G5_JS_URL; ?>/swipe.js"></script>
-<script src="<?php echo G5_JS_URL; ?>/shop.mobile.main.js"></script>
+<script src="<?=G5_JS_URL; ?>/swipe.js"></script>
+<script src="<?=G5_JS_URL; ?>/shop.mobile.main.js"></script>
 
-<?php echo display_banner('메인', 'mainbanner.10.skin.php'); ?>
+<?=display_banner('메인', 'mainbanner.10.skin.php'); ?>
 
 
 <!-- 중간 메뉴 -->

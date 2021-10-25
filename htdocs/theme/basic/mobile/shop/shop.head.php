@@ -12,7 +12,7 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 ?>
 
 <header id="hd">
-    <?php if ((!$bo_table || $w == 's' ) && defined('_INDEX_')) { ?><h1><?php echo $config['cf_title'] ?></h1><?php } ?>
+    <?php if ((!$bo_table || $w == 's' ) && defined('_INDEX_')) { ?><h1><?=$config['cf_title'] ?></h1><?php } ?>
 
     <div id="skip_to_container"><a href="#container">본문 바로가기</a></div>
 
@@ -21,22 +21,22 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
     } ?>
 
     <div id="hd_wr">
-        <div id="logo"><a href="<?php echo G5_SHOP_URL; ?>/"><img src="<?php echo G5_DATA_URL; ?>/common/mobile_logo_img" alt="<?php echo $config['cf_title']; ?> 메인"></a></div>
+        <div id="logo"><a href="<?=G5_SHOP_URL; ?>/"><img src="<?=G5_DATA_URL; ?>/common/mobile_logo_img" alt="<?=$config['cf_title']; ?> 메인"></a></div>
         <div id="hd_btn">
             <button type="button" id="btn_hdcate"><i class="fa fa-bars"></i><span class="sound_only">분류</span></button>
             <button type="button" id="btn_hdsch"><i class="fa fa-search"></i><span class="sound_only">검색열기</span></button>
-            <a href="<?php echo G5_SHOP_URL; ?>/mypage.php" id="btn_hduser"><i class="fa fa-user"></i><span class="sound_only">마이페이지</span></a>
-            <a href="<?php echo G5_SHOP_URL; ?>/cart.php" id="btn_hdcart"><i class="fa fa-shopping-cart"></i><span class="sound_only">장바구니</span><span class="cart-count"><?php echo get_boxcart_datas_count(); ?></span></a>
+            <a href="<?=G5_SHOP_URL; ?>/mypage.php" id="btn_hduser"><i class="fa fa-user"></i><span class="sound_only">마이페이지</span></a>
+            <a href="<?=G5_SHOP_URL; ?>/cart.php" id="btn_hdcart"><i class="fa fa-shopping-cart"></i><span class="sound_only">장바구니</span><span class="cart-count"><?=get_boxcart_datas_count(); ?></span></a>
 
         </div>
     </div>
 
-    <form name="frmsearch1" action="<?php echo G5_SHOP_URL; ?>/search.php" onsubmit="return search_submit(this);">
+    <form name="frmsearch1" action="<?=G5_SHOP_URL; ?>/search.php" onsubmit="return search_submit(this);">
     <aside id="hd_sch">
         <div class="sch_inner">
             <h2>상품 검색</h2>
             <label for="sch_str" class="sound_only">상품명<strong class="sound_only"> 필수</strong></label>
-            <input type="text" name="q" value="<?php echo stripslashes(get_text(get_search_string($q))); ?>" id="sch_str" required class="frm_input" placeholder="검색어를 입력해주세요">
+            <input type="text" name="q" value="<?=stripslashes(get_text(get_search_string($q))); ?>" id="sch_str" required class="frm_input" placeholder="검색어를 입력해주세요">
             <button type="submit" value="검색" class="sch_submit"><i class="fa fa-search" aria-hidden="true"></i></button>
         </div>
         <button type="button" class="btn_close"><i class="fa fa-times"></i><span class="sound_only">닫기</span></button>
@@ -115,5 +115,5 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
         $container_class[] = 'is_community';
     }
 ?>
-<div id="container" class="<?php echo implode(' ', $container_class); ?>">
-    <?php if ((!$bo_table || $w == 's' ) && !defined('_INDEX_')) { ?><h1 id="container_title"><a href="javascript:history.back()" class="btn_back"><i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sound_only">뒤로</span></a> <?php echo $g5['title'] ?></h1><?php }
+<div id="container" class="<?=implode(' ', $container_class); ?>">
+    <?php if ((!$bo_table || $w == 's' ) && !defined('_INDEX_')) { ?><h1 id="container_title"><a href="javascript:history.back()" class="btn_back"><i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sound_only">뒤로</span></a> <?=$g5['title'] ?></h1><?php }

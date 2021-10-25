@@ -148,7 +148,7 @@ include_once('./_common.php');
 	.COMMENT { font-family:"굴림","굴림체"; font-size:9pt; line-height:160% }
 </style>
 <!-- 거래등록 하는 kcp 서버와 통신을 위한 스크립트-->
-<script src="<?php echo G5_MSHOP_URL; ?>/kcp/approval_key.js"></script>
+<script src="<?=G5_MSHOP_URL; ?>/kcp/approval_key.js"></script>
 
 
 <script language="javascript">
@@ -177,7 +177,7 @@ include_once('./_common.php');
 		{
 			/* Ret_URL값은 현 페이지의 URL 입니다. */
 			alert("연동시 Ret_URL을 반드시 설정하셔야 됩니다.");
-            document.location.href = "<?php echo $js_return_url; ?>";
+            document.location.href = "<?=$js_return_url; ?>";
 			return false;
 		}
 
@@ -196,13 +196,13 @@ include_once('./_common.php');
         if (sm_form.res_cd.value == "3001" )
         {
             alert("사용자가 취소하였습니다.");
-            document.location.href = "<?php echo $js_return_url; ?>";
+            document.location.href = "<?=$js_return_url; ?>";
             return false;
         }
         else if (sm_form.res_cd.value == "3000" )
         {
             alert("30만원 이상 결제 할수 없습니다.");
-            document.location.href = "<?php echo $js_return_url; ?>";
+            document.location.href = "<?=$js_return_url; ?>";
             return false;
         }
 
@@ -254,12 +254,12 @@ if($enc_data != '' && $enc_info != '' && $tran_cd != '') {
 
 <form name="sm_form" method="POST" accept-charset="euc-kr">
 
-<input type="hidden" name="good_name" value="<?php echo $good_name; ?>">
-<input type="hidden" name="good_mny"  value="<?php echo $good_mny; ?>" >
-<input type="hidden" name='buyr_name' value="<?php echo $buyr_name; ?>">
-<input type="hidden" name="buyr_tel1" value="<?php echo $buyr_tel1; ?>">
-<input type="hidden" name="buyr_tel2" value="<?php echo $buyr_tel2; ?>">
-<input type="hidden" name="buyr_mail" value="<?php echo $buyr_mail; ?>">
+<input type="hidden" name="good_name" value="<?=$good_name; ?>">
+<input type="hidden" name="good_mny"  value="<?=$good_mny; ?>" >
+<input type="hidden" name='buyr_name' value="<?=$buyr_name; ?>">
+<input type="hidden" name="buyr_tel1" value="<?=$buyr_tel1; ?>">
+<input type="hidden" name="buyr_tel2" value="<?=$buyr_tel2; ?>">
+<input type="hidden" name="buyr_mail" value="<?=$buyr_mail; ?>">
 <?php
 // 가상계좌 입금 마감일을 설정하려면 아래 주석을 풀어서 사용해 주세요.
 //$ipgm_date = date("Ymd", (G5_SERVER_TIME + 86400 * 5));
@@ -267,16 +267,16 @@ if($enc_data != '' && $enc_info != '' && $tran_cd != '') {
 ?>
 
 <?php if($payco_direct){ ?>
-<input type="hidden" name="payco_direct"   value="<?php echo $payco_direct; ?>">      <!-- PAYCO 결제창 호출 -->
+<input type="hidden" name="payco_direct"   value="<?=$payco_direct; ?>">      <!-- PAYCO 결제창 호출 -->
 <?php } ?>
 <?php if($naverpay_direct){ ?>
-<input type="hidden" name="naverpay_direct"   value="<?php echo $naverpay_direct; ?>">      <!-- 네이버페이 결제창 호출 -->
+<input type="hidden" name="naverpay_direct"   value="<?=$naverpay_direct; ?>">      <!-- 네이버페이 결제창 호출 -->
     <?php if(isset($default['de_easy_pay_services']) && in_array('used_nhnkcp_naverpay_point', explode(',', $default['de_easy_pay_services'])) ){     // 네이버페이 포인트 결제 옵션 ?>
     <input type="hidden" name="naverpay_point_direct" value="Y">    <!-- 네이버페이 포인트 결제를 하려면 naverpay_point_direct 를 Y  -->
     <?php } ?>
 <?php } ?>
 <?php if($kakaopay_direct){ ?>
-<input type="hidden" name="kakaopay_direct"   value="<?php echo $kakaopay_direct; ?>">      <!-- 카카오페이 결제창 호출 -->
+<input type="hidden" name="kakaopay_direct"   value="<?=$kakaopay_direct; ?>">      <!-- 카카오페이 결제창 호출 -->
 <?php } ?>
 
 <!-- 필수 사항 -->
@@ -284,13 +284,13 @@ if($enc_data != '' && $enc_info != '' && $tran_cd != '') {
 <!-- 요청 구분 -->
 <input type="hidden" name="req_tx"       value="pay">
 <!-- 사이트 코드 -->
-<input type="hidden" name="site_cd"      value="<?php echo $g_conf_site_cd; ?>">
+<input type="hidden" name="site_cd"      value="<?=$g_conf_site_cd; ?>">
  <!-- 사이트 이름 -->
-<input type="hidden" name="shop_name"    value="<?php echo $g_conf_site_name; ?>">
+<input type="hidden" name="shop_name"    value="<?=$g_conf_site_name; ?>">
 <!-- 결제수단-->
-<input type="hidden" name="pay_method"   value="<?php echo $pay_method; ?>">
+<input type="hidden" name="pay_method"   value="<?=$pay_method; ?>">
 <!-- 주문번호 -->
-<input type="hidden"   name="ordr_idxx"    value="<?php echo $ordr_idxx; ?>">
+<input type="hidden"   name="ordr_idxx"    value="<?=$ordr_idxx; ?>">
 <!-- 최대 할부개월수 -->
 <input type="hidden" name="quotaopt"     value="12">
 <!-- 통화 코드 -->
@@ -299,41 +299,41 @@ if($enc_data != '' && $enc_info != '' && $tran_cd != '') {
 <input type="hidden" name="approval_key" id="approval">
 <!-- 리턴 URL (kcp와 통신후 결제를 요청할 수 있는 암호화 데이터를 전송 받을 가맹점의 주문페이지 URL) -->
 <!-- 반드시 가맹점 주문페이지의 URL을 입력 해주시기 바랍니다. -->
-<input type="hidden" name="Ret_URL"      value="<?php echo G5_MSHOP_URL; ?>/kcp/order_approval_form.php">
+<input type="hidden" name="Ret_URL"      value="<?=G5_MSHOP_URL; ?>/kcp/order_approval_form.php">
 <!-- 인증시 필요한 파라미터(변경불가)-->
-<input type="hidden" name="ActionResult" value="<?php echo $ActionResult; ?>">
+<input type="hidden" name="ActionResult" value="<?=$ActionResult; ?>">
 <!-- 에스크로 사용유무 에스크로 사용 업체(가상계좌만 해당)는 Y로 세팅 해주시기 바랍니다.-->
-<input type="hidden" name="escw_used"  value="<?php echo $escw_used; ?>">
+<input type="hidden" name="escw_used"  value="<?=$escw_used; ?>">
 <!-- 에스크로 결제처리모드 -->
-<input type="hidden" name="pay_mod"   value="<?php echo ($default['de_escrow_use']?'O':'N'); ?>">
+<input type="hidden" name="pay_mod"   value="<?=($default['de_escrow_use']?'O':'N'); ?>">
 <!-- 수취인이름 -->
-<input type="hidden" name="rcvr_name" value="<?php echo $rcvr_name; ?>">
+<input type="hidden" name="rcvr_name" value="<?=$rcvr_name; ?>">
 <!-- 수취인 연락처 -->
-<input type="hidden" name="rcvr_tel1" value="<?php echo $rcvr_tel1; ?>">
+<input type="hidden" name="rcvr_tel1" value="<?=$rcvr_tel1; ?>">
 <!-- 수취인 휴대폰 번호 -->
-<input type="hidden" name="rcvr_tel2" value="<?php echo $rcvr_tel2; ?>">
+<input type="hidden" name="rcvr_tel2" value="<?=$rcvr_tel2; ?>">
 <!-- 수취인 E-MAIL -->
-<input type="hidden" name="rcvr_add1" value="<?php echo $rcvr_add1; ?>">
+<input type="hidden" name="rcvr_add1" value="<?=$rcvr_add1; ?>">
 <!-- 수취인 우편번호 -->
-<input type="hidden" name="rcvr_add2" value="<?php echo $rcvr_add2; ?>">
+<input type="hidden" name="rcvr_add2" value="<?=$rcvr_add2; ?>">
 <!-- 수취인 주소 -->
-<input type="hidden" name="rcvr_mail" value="<?php echo $rcvr_mail; ?>">
+<input type="hidden" name="rcvr_mail" value="<?=$rcvr_mail; ?>">
 <!-- 수취인 상세 주소 -->
-<input type="hidden" name="rcvr_zipx" value="<?php echo $rcvr_zipx; ?>">
+<input type="hidden" name="rcvr_zipx" value="<?=$rcvr_zipx; ?>">
 <!-- 장바구니 상품 개수 -->
-<input type="hidden" name="bask_cntx" value="<?php echo $bask_cntx; ?>">
+<input type="hidden" name="bask_cntx" value="<?=$bask_cntx; ?>">
 <!-- 장바구니 정보(상단 스크립트 참조) -->
-<input type="hidden" name="good_info" value="<?php echo $good_info; ?>">
+<input type="hidden" name="good_info" value="<?=$good_info; ?>">
 <!-- 배송소요기간 -->
 <input type="hidden" name="deli_term" value="03">
 <!-- 기타 파라메터 추가 부분 - Start - -->
-<input type="hidden" name="param_opt_1"	 value="<?php echo get_text($param_opt_1); ?>"/>
-<input type="hidden" name="param_opt_2"	 value="<?php echo get_text($param_opt_2); ?>"/>
-<input type="hidden" name="param_opt_3"	 value="<?php echo get_text($param_opt_3); ?>"/>
+<input type="hidden" name="param_opt_1"	 value="<?=get_text($param_opt_1); ?>"/>
+<input type="hidden" name="param_opt_2"	 value="<?=get_text($param_opt_2); ?>"/>
+<input type="hidden" name="param_opt_3"	 value="<?=get_text($param_opt_3); ?>"/>
 <input type="hidden" name="disp_tax_yn"  value="N">
 <!-- 기타 파라메터 추가 부분 - End - -->
 <!-- 화면 크기조정 부분 - Start - -->
-<input type="hidden" name="tablet_size"	 value="<?php echo $tablet_size; ?>"/>
+<input type="hidden" name="tablet_size"	 value="<?=$tablet_size; ?>"/>
 <!-- 화면 크기조정 부분 - End - -->
 <!--
 	사용 카드 설정
@@ -351,7 +351,7 @@ if($enc_data != '' && $enc_info != '' && $tran_cd != '') {
             BC 2,3,6개월, 국민 3,6개월, 삼성 6,9개월 무이자 : CCBC-02:03:06,CCKM-03:06,CCSS-03:06:04
     <input type="hidden" name="kcp_noint_quota" value="CCBC-02:03:06,CCKM-03:06,CCSS-03:06:09"/> */
 -->
-<input type="hidden" name="kcp_noint"       value="<?php echo ($default['de_card_noint_use'] ? '' : 'N'); ?>">
+<input type="hidden" name="kcp_noint"       value="<?=($default['de_card_noint_use'] ? '' : 'N'); ?>">
 
 <?php
 if($default['de_tax_flag_use']) {
@@ -366,25 +366,25 @@ if($default['de_tax_flag_use']) {
        (good_mny = comm_tax_mny + comm_vat_mny + comm_free_mny) */
 ?>
 <input type="hidden" name="tax_flag"          value="TG03">     <!-- 변경불가    -->
-<input type="hidden" name="comm_tax_mny"	  value="<?php echo $comm_tax_mny; ?>">         <!-- 과세금액    -->
-<input type="hidden" name="comm_vat_mny"      value="<?php echo $comm_vat_mny; ?>">         <!-- 부가세	    -->
-<input type="hidden" name="comm_free_mny"     value="<?php echo $comm_free_mny; ?>">        <!-- 비과세 금액 -->
+<input type="hidden" name="comm_tax_mny"	  value="<?=$comm_tax_mny; ?>">         <!-- 과세금액    -->
+<input type="hidden" name="comm_vat_mny"      value="<?=$comm_vat_mny; ?>">         <!-- 부가세	    -->
+<input type="hidden" name="comm_free_mny"     value="<?=$comm_free_mny; ?>">        <!-- 비과세 금액 -->
 <?php
 }
 ?>
 
-<input type="hidden" name="res_cd"         value="<?php echo $res_cd; ?>">      <!-- 결과 코드          -->
-<input type="hidden" name="tran_cd"        value="<?php echo $tran_cd; ?>">     <!-- 트랜잭션 코드      -->
-<input type="hidden" name="enc_info"       value="<?php echo $enc_info; ?>">    <!-- 암호화 정보        -->
-<input type="hidden" name="enc_data"       value="<?php echo $enc_data; ?>">    <!-- 암호화 데이터      -->
+<input type="hidden" name="res_cd"         value="<?=$res_cd; ?>">      <!-- 결과 코드          -->
+<input type="hidden" name="tran_cd"        value="<?=$tran_cd; ?>">     <!-- 트랜잭션 코드      -->
+<input type="hidden" name="enc_info"       value="<?=$enc_info; ?>">    <!-- 암호화 정보        -->
+<input type="hidden" name="enc_data"       value="<?=$enc_data; ?>">    <!-- 암호화 데이터      -->
 </form>
 
     <div id="pay_fail">
         <p>결제가 실패한 경우 아래 돌아가기 버튼을 클릭해주세요.</p>
-        <a href="<?php echo $js_return_url; ?>">돌아가기</a>
+        <a href="<?=$js_return_url; ?>">돌아가기</a>
     </div>
     <div id="show_progress" style="display:none;">
-        <span style="display:block; text-align:center;margin-top:120px"><img src="<?php echo G5_MOBILE_URL; ?>/shop/img/loading.gif" alt="" ></span>
+        <span style="display:block; text-align:center;margin-top:120px"><img src="<?=G5_MOBILE_URL; ?>/shop/img/loading.gif" alt="" ></span>
         <span style="display:block; text-align:center;margin-top:10px; font-size:14px">주문완료 중입니다. 잠시만 기다려 주십시오.</span>
     </div>
 </div>

@@ -18,19 +18,19 @@ if(!$row['pp_id'])
     <h1>개인결제 복사</h1>
 
     <form name="fpersonalpaycopy" method="post" action="./personalpaycopyupdate.php" onsubmit="return form_check(this);">
-    <input type="hidden" name="pp_id" value="<?php echo $pp_id; ?>">
+    <input type="hidden" name="pp_id" value="<?=$pp_id; ?>">
 
      <div class="tbl_frm01 tbl_wrap">
         <table>
-        <caption><?php echo $g5['title']; ?></caption>
+        <caption><?=$g5['title']; ?></caption>
         <tbody>
         <tr>
             <th scope="row"><label for="pp_name">이름</label></th>
-            <td><input type="text" name="pp_name" value="<?php echo $row['pp_name']; ?>" id="pp_name" required class="required frm_input"></td>
+            <td><input type="text" name="pp_name" value="<?=$row['pp_name']; ?>" id="pp_name" required class="required frm_input"></td>
         </tr>
         <tr>
             <th scope="row"><label for="od_id">주문번호</label></th>
-            <td><input type="text" name="od_id" value="<?php echo $row['od_id']; ?>" id="od_id" class="frm_input"></td>
+            <td><input type="text" name="od_id" value="<?=$row['od_id']; ?>" id="od_id" class="frm_input"></td>
         </tr>
         <tr>
             <th scope="row"><label for="pp_price">주문금액</label></th>

@@ -561,7 +561,7 @@ function social_check_login_before($p_service=''){
                             window.close();
                             if (typeof window.opener.social_link_fn != 'undefined')
                             {
-                                window.opener.social_link_fn("<?php echo $provider_name; ?>");
+                                window.opener.social_link_fn("<?=$provider_name; ?>");
                             }
                         }
                     </script>
@@ -612,9 +612,9 @@ function social_check_login_before($p_service=''){
 
                         if (typeof window.opener.social_link_fn != 'undefined')
                         {
-                            window.opener.social_link_fn("<?php echo $provider_name; ?>");
+                            window.opener.social_link_fn("<?=$provider_name; ?>");
                         } else {
-                            window.opener.location.href = "<?php echo $register_url; ?>";
+                            window.opener.location.href = "<?=$register_url; ?>";
                         }
                     }
                 </script>

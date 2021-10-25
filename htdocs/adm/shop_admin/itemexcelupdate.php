@@ -170,7 +170,7 @@ include_once(G5_PATH.'/head.sub.php');
 ?>
 
 <div class="new_win">
-    <h1><?php echo $g5['title']; ?></h1>
+    <h1><?=$g5['title']; ?></h1>
 
     <div class="local_desc01 local_desc">
         <p>상품등록을 완료했습니다.</p>
@@ -178,20 +178,20 @@ include_once(G5_PATH.'/head.sub.php');
 
     <dl id="excelfile_result">
         <dt>총상품수</dt>
-        <dd><?php echo number_format($total_count); ?></dd>
+        <dd><?=number_format($total_count); ?></dd>
         <dt>완료건수</dt>
-        <dd><?php echo number_format($succ_count); ?></dd>
+        <dd><?=number_format($succ_count); ?></dd>
         <dt>실패건수</dt>
-        <dd><?php echo number_format($fail_count); ?></dd>
+        <dd><?=number_format($fail_count); ?></dd>
         <?php if($fail_count > 0) { ?>
         <dt>실패상품코드</dt>
-        <dd><?php echo implode(', ', $fail_it_id); ?></dd>
+        <dd><?=implode(', ', $fail_it_id); ?></dd>
         <?php } ?>
         <?php if($dup_count > 0) { ?>
         <dt>상품코드중복건수</dt>
-        <dd><?php echo number_format($dup_count); ?></dd>
+        <dd><?=number_format($dup_count); ?></dd>
         <dt>중복상품코드</dt>
-        <dd><?php echo implode(', ', $dup_it_id); ?></dd>
+        <dd><?=implode(', ', $dup_it_id); ?></dd>
         <?php } ?>
     </dl>
 

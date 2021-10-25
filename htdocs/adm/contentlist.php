@@ -50,8 +50,8 @@ $result = sql_query($sql);
 ?>
 
 <div class="local_ov01 local_ov">
-    <?php if ($page > 1) {?><a href="<?php echo $_SERVER['SCRIPT_NAME']; ?>">처음으로</a><?php } ?>
-    <span class="btn_ov01"><span class="ov_txt">전체 내용</span><span class="ov_num"> <?php echo $total_count; ?>건</span></span>
+    <?php if ($page > 1) {?><a href="<?=$_SERVER['SCRIPT_NAME']; ?>">처음으로</a><?php } ?>
+    <span class="btn_ov01"><span class="ov_txt">전체 내용</span><span class="ov_num"> <?=$total_count; ?>건</span></span>
 </div>
 
 <div class="btn_fixed_top">
@@ -60,7 +60,7 @@ $result = sql_query($sql);
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">ID</th>
@@ -72,13 +72,13 @@ $result = sql_query($sql);
     <?php for ($i=0; $row=sql_fetch_array($result); $i++) {
         $bg = 'bg'.($i%2);
     ?>
-    <tr class="<?php echo $bg; ?>">
-        <td class="td_id"><?php echo $row['co_id']; ?></td>
-        <td class="td_left"><?php echo htmlspecialchars2($row['co_subject']); ?></td>
+    <tr class="<?=$bg; ?>">
+        <td class="td_id"><?=$row['co_id']; ?></td>
+        <td class="td_left"><?=htmlspecialchars2($row['co_subject']); ?></td>
         <td class="td_mng td_mng_l">
-            <a href="./contentform.php?w=u&amp;co_id=<?php echo $row['co_id']; ?>" class="btn btn_03"><span class="sound_only"><?php echo htmlspecialchars2($row['co_subject']); ?> </span>수정</a>
-            <a href="<?php echo get_pretty_url('content', $row['co_id']); ?>" class="btn btn_02"><span class="sound_only"><?php echo htmlspecialchars2($row['co_subject']); ?> </span> 보기</a>
-            <a href="./contentformupdate.php?w=d&amp;co_id=<?php echo $row['co_id']; ?>" onclick="return delete_confirm(this);" class="btn btn_02"><span class="sound_only"><?php echo htmlspecialchars2($row['co_subject']); ?> </span>삭제</a>
+            <a href="./contentform.php?w=u&amp;co_id=<?=$row['co_id']; ?>" class="btn btn_03"><span class="sound_only"><?=htmlspecialchars2($row['co_subject']); ?> </span>수정</a>
+            <a href="<?=get_pretty_url('content', $row['co_id']); ?>" class="btn btn_02"><span class="sound_only"><?=htmlspecialchars2($row['co_subject']); ?> </span> 보기</a>
+            <a href="./contentformupdate.php?w=d&amp;co_id=<?=$row['co_id']; ?>" onclick="return delete_confirm(this);" class="btn btn_02"><span class="sound_only"><?=htmlspecialchars2($row['co_subject']); ?> </span>삭제</a>
         </td>
     </tr>
     <?php
@@ -91,7 +91,7 @@ $result = sql_query($sql);
     </table>
 </div>
 
-<?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
+<?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
 
 <?php
 include_once (G5_ADMIN_PATH.'/admin.tail.php');

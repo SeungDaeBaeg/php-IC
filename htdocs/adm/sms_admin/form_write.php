@@ -30,14 +30,14 @@ include_once(G5_ADMIN_PATH.'/admin.head.php');
 ?>
 
 <form name="book_form" method="post" action="form_update.php">
-<input type="hidden" name="w" value="<?php echo $w?>">
-<input type="hidden" name="page" value="<?php echo $page?>">
-<input type="hidden" name="fo_no" value="<?php echo $write['fo_no']; ?>">
-<input type="hidden" name="get_fg_no" value="<?php echo $fg_no?>">
+<input type="hidden" name="w" value="<?=$w?>">
+<input type="hidden" name="page" value="<?=$page?>">
+<input type="hidden" name="fo_no" value="<?=$write['fo_no']; ?>">
+<input type="hidden" name="get_fg_no" value="<?=$fg_no?>">
 
     <div class="tbl_frm01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title'];?> 목록</caption>
+    <caption><?=$g5['title'];?> 목록</caption>
     <colgroup>
         <col class="grid_4">
         <col>
@@ -52,14 +52,14 @@ include_once(G5_ADMIN_PATH.'/admin.head.php');
                 $qry = sql_query("select * from {$g5['sms5_form_group_table']} order by fg_name");
                 while($res = sql_fetch_array($qry)) {
                 ?>
-                <option value="<?php echo $res['fg_no']?>"<?php echo get_selected($res['fg_no'], $write['fg_no']); ?>><?php echo $res['fg_name']?></option>
+                <option value="<?=$res['fg_no']?>"<?=get_selected($res['fg_no'], $write['fg_no']); ?>><?=$res['fg_name']?></option>
                 <?php } ?>
             </select>
         </td>
     </tr>
     <tr>
         <th scope="row"><label for="fo_name">제목<strong class="sound_only"> 필수</strong></label></th>
-        <td><input type="text" name="fo_name" id="fo_name" required value="<?php echo get_sanitize_input($write['fo_name']); ?>" class="frm_input required" size="70"></td>
+        <td><input type="text" name="fo_name" id="fo_name" required value="<?=get_sanitize_input($write['fo_name']); ?>" class="frm_input required" size="70"></td>
     </tr>
     <tr>
         <th scope="row">메세지</th>
@@ -67,7 +67,7 @@ include_once(G5_ADMIN_PATH.'/admin.head.php');
             <div class="sms5_box write_wrap">
                 <span class="box_ico"></span>
                 <label for="sms_contents" id="wr_message_lbl">내용</label>
-                <textarea name="fo_content" id="sms_contents" class="box_txt box_square" onkeyup="byte_check('sms_contents', 'sms_bytes');" accesskey="m"><?php echo $write['fo_content']?></textarea>
+                <textarea name="fo_content" id="sms_contents" class="box_txt box_square" onkeyup="byte_check('sms_contents', 'sms_bytes');" accesskey="m"><?=$write['fo_content']?></textarea>
 
                 <div id="sms_byte"><span id="sms_bytes">0</span> / 80 byte</div>
 
@@ -148,7 +148,7 @@ include_once(G5_ADMIN_PATH.'/admin.head.php');
     <?php if ($w == 'u') {?>
     <tr>
         <th scope="row">업데이트</th>
-        <td> <?php echo $write['fo_datetime']?> </td>
+        <td> <?=$write['fo_datetime']?> </td>
     </tr>
     <?php } ?>
     </tbody>
@@ -156,7 +156,7 @@ include_once(G5_ADMIN_PATH.'/admin.head.php');
     </div>
     <div class="btn_confirm01 btn_confirm">
         <input type="submit" value="확인" class="btn_submit" accesskey="s">
-        <a href="./form_list.php?<?php echo clean_query_string($_SERVER['QUERY_STRING']); ?>">목록</a>
+        <a href="./form_list.php?<?=clean_query_string($_SERVER['QUERY_STRING']); ?>">목록</a>
     </div>
 </form>
 

@@ -9,14 +9,14 @@ add_stylesheet('<link rel="stylesheet" href="'.$new_skin_url.'/style.css">', 0);
 <fieldset id="new_sch">
     <legend>상세검색</legend>
     <form name="fnew" method="get">
-    <?php echo $group_select ?>
+    <?=$group_select ?>
     <label for="view" class="sound_only">검색대상</label>
     <select name="view" id="view" onchange="select_change()">
         <option value="">전체게시물
         <option value="w">원글만
         <option value="c">코멘트만
     </select>
-    <input type="text" name="mb_id" value="<?php echo $mb_id ?>" id="mb_id" placeholder="검색어(필수)" required class="frm_input ">
+    <input type="text" name="mb_id" value="<?=$mb_id ?>" id="mb_id" placeholder="검색어(필수)" required class="frm_input ">
     <button type="submit" value="검색" class="btn_submit"><i class="fa fa-search" aria-hidden="true"></i></button>
     </form>
     <script>
@@ -24,8 +24,8 @@ add_stylesheet('<link rel="stylesheet" href="'.$new_skin_url.'/style.css">', 0);
     {
         document.fnew.submit();
     }
-    document.getElementById("gr_id").value = "<?php echo $gr_id ?>";
-    document.getElementById("view").value = "<?php echo $view ?>";
+    document.getElementById("gr_id").value = "<?=$gr_id ?>";
+    document.getElementById("view").value = "<?=$view ?>";
     </script>
 </fieldset>
 <!-- } 전체게시물 검색 끝 -->
@@ -42,9 +42,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$new_skin_url.'/style.css">', 0);
         $wr_subject = get_text(cut_str($list[$i]['wr_subject'], 80));
     ?>
     <li>
-        <a href="<?php echo $list[$i]['href'] ?>" class="new_tit"><?php echo $list[$i]['comment'] ?><?php echo $wr_subject ?></a>
-        <a href="./board.php?bo_table=<?php echo $list[$i]['bo_table'] ?>" class="new_board"><i class="fa fa-list-alt" aria-hidden="true"></i> <?php echo $bo_subject ?></a>
-        <span class="new_date"><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $list[$i]['datetime2'] ?></span>
+        <a href="<?=$list[$i]['href'] ?>" class="new_tit"><?=$list[$i]['comment'] ?><?=$wr_subject ?></a>
+        <a href="./board.php?bo_table=<?=$list[$i]['bo_table'] ?>" class="new_board"><i class="fa fa-list-alt" aria-hidden="true"></i> <?=$bo_subject ?></a>
+        <span class="new_date"><i class="fa fa-clock-o" aria-hidden="true"></i> <?=$list[$i]['datetime2'] ?></span>
     </li>
     <?php } ?>
 
@@ -54,5 +54,5 @@ add_stylesheet('<link rel="stylesheet" href="'.$new_skin_url.'/style.css">', 0);
     </ul>
 </div>
 
-<?php echo $write_pages ?>
+<?=$write_pages ?>
 <!-- } 전체게시물 목록 끝 -->

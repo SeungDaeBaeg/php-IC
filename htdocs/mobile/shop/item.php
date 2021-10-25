@@ -201,7 +201,7 @@ echo '<div id="sit_hhtml">'.conv_content($it['it_mobile_head_html'], 1).'</div>'
 ?>
 
 <?php if($is_orderable) { ?>
-<script src="<?php echo G5_JS_URL; ?>/shop.js"></script>
+<script src="<?=G5_JS_URL; ?>/shop.js"></script>
 <?php } ?>
 
 <?php

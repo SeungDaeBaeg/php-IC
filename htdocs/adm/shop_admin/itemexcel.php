@@ -9,7 +9,7 @@ include_once(G5_PATH.'/head.sub.php');
 ?>
 
 <div class="new_win">
-    <h1><?php echo $g5['title']; ?></h1>
+    <h1><?=$g5['title']; ?></h1>
 
     <div class="local_desc01 local_desc">
         <p>
@@ -20,7 +20,7 @@ include_once(G5_PATH.'/head.sub.php');
         </p>
 
         <p>
-            <a href="<?php echo G5_URL; ?>/<?php echo G5_LIB_DIR; ?>/Excel/itemexcel.xls">상품일괄등록용 엑셀파일 다운로드</a>
+            <a href="<?=G5_URL; ?>/<?=G5_LIB_DIR; ?>/Excel/itemexcel.xls">상품일괄등록용 엑셀파일 다운로드</a>
         </p>
     </div>
 

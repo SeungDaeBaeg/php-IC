@@ -87,7 +87,7 @@ unset($row);
 ?>
 
 <div class="ins_inner">
-    <h2><?php echo G5_VERSION ?> 설치가 시작되었습니다.</h2>
+    <h2><?=G5_VERSION ?> 설치가 시작되었습니다.</h2>
 
     <ol>
 <?php
@@ -618,7 +618,7 @@ fclose($f);
 @chmod($file, G5_FILE_PERMISSION);
 ?>
 
-        <li>DB설정 파일 생성 완료 (<?php echo $file ?>)</li>
+        <li>DB설정 파일 생성 완료 (<?=$file ?>)</li>
 
 <?php
 // data 디렉토리 및 하위 디렉토리에서는 .htaccess .htpasswd .php .phtml .html .htm .inc .cgi .pl 파일을 실행할수 없게함.
@@ -642,7 +642,7 @@ if($g5_shop_install) {
 ?>
     </ol>
 
-    <p>축하합니다. <?php echo G5_VERSION ?> 설치가 완료되었습니다.</p>
+    <p>축하합니다. <?=G5_VERSION ?> 설치가 완료되었습니다.</p>
 
 </div>
 

@@ -74,12 +74,12 @@ $count = sql_num_rows($result);
 	        ?>
 	        <tr>
 	            <td>
-	                <input type="hidden" name="f_cp_id[]" value="<?php echo $row['cp_id']; ?>">
-	                <input type="hidden" name="f_cp_prc[]" value="<?php echo $dc; ?>">
-	                <input type="hidden" name="f_cp_subj[]" value="<?php echo $row['cp_subject']; ?>">
-	                <?php echo get_text($row['cp_subject']); ?>
+	                <input type="hidden" name="f_cp_id[]" value="<?=$row['cp_id']; ?>">
+	                <input type="hidden" name="f_cp_prc[]" value="<?=$dc; ?>">
+	                <input type="hidden" name="f_cp_subj[]" value="<?=$row['cp_subject']; ?>">
+	                <?=get_text($row['cp_subject']); ?>
 	            </td>
-	            <td class="td_numbig"><?php echo number_format($dc); ?></td>
+	            <td class="td_numbig"><?=number_format($dc); ?></td>
 	            <td class="td_mngsmall"><button type="button" class="cp_apply">적용</button></td>
 	        </tr>
 	        <?php

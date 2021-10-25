@@ -15,7 +15,7 @@ $g5['title'] = '배송지 목록';
 include_once(G5_PATH.'/head.sub.php');
 ?>
 
-<form name="forderaddress" method="post" action="<?php echo $order_action_url; ?>" autocomplete="off">
+<form name="forderaddress" method="post" action="<?=$order_action_url; ?>" autocomplete="off">
 <div id="sod_addr" class="new_win">
     <h1 id="win_title">배송지 목록</h1>
 
@@ -29,23 +29,23 @@ include_once(G5_PATH.'/head.sub.php');
             ?>
             <li>
                 <div class="addr_title chk_box">
-                    <input type="hidden" name="ad_id[<?php echo $i; ?>]" value="<?php echo $row['ad_id'];?>">
-                    <input type="checkbox" name="chk[]" value="<?php echo $i;?>" id="chk_<?php echo $i;?>" class="ad_chk selec_chk">
-                    <label for="chk_<?php echo $i;?>"><span></span><strong class="sound_only">배송지선택</strong></label>
-                    <label for="ad_subject<?php echo $i;?>" class="sound_only">배송지명</label>
-                    <input type="text" name="ad_subject[<?php echo $i; ?>]" value="<?php echo $row['ad_subject']; ?>" class="ad_subject" maxlength="20">
+                    <input type="hidden" name="ad_id[<?=$i; ?>]" value="<?=$row['ad_id'];?>">
+                    <input type="checkbox" name="chk[]" value="<?=$i;?>" id="chk_<?=$i;?>" class="ad_chk selec_chk">
+                    <label for="chk_<?=$i;?>"><span></span><strong class="sound_only">배송지선택</strong></label>
+                    <label for="ad_subject<?=$i;?>" class="sound_only">배송지명</label>
+                    <input type="text" name="ad_subject[<?=$i; ?>]" value="<?=$row['ad_subject']; ?>" class="ad_subject" maxlength="20">
                 </div>
                 <div class="addr_info">
-                    <div class="addr_name"><?php echo get_text($row['ad_name']); ?></div>
-                    <div class="addr_addr"><?php echo print_address($row['ad_addr1'], $row['ad_addr2'], $row['ad_addr3'], $row['ad_jibeon']); ?></div>
-                    <div class="addr_tel"><i class="fa fa-phone" aria-hidden="true"></i> <?php echo $row['ad_tel']; ?> / <i class="fa fa-mobile" aria-hidden="true"></i> <?php echo $row['ad_hp']; ?></div>
+                    <div class="addr_name"><?=get_text($row['ad_name']); ?></div>
+                    <div class="addr_addr"><?=print_address($row['ad_addr1'], $row['ad_addr2'], $row['ad_addr3'], $row['ad_jibeon']); ?></div>
+                    <div class="addr_tel"><i class="fa fa-phone" aria-hidden="true"></i> <?=$row['ad_tel']; ?> / <i class="fa fa-mobile" aria-hidden="true"></i> <?=$row['ad_hp']; ?></div>
                 </div>
                 <div class="addr_btn">
-                    <input type="hidden" value="<?php echo $addr; ?>">
+                    <input type="hidden" value="<?=$addr; ?>">
                     <button type="button" class="btn_sel sel_address">선택</button>
-                    <a href="<?php echo $_SERVER['SCRIPT_NAME']; ?>?w=d&amp;ad_id=<?php echo $row['ad_id']; ?>" id="btn_del" class="del_address">삭제</a>
-                    <input type="radio" name="ad_default" value="<?php echo $row['ad_id'];?>" id="ad_default<?php echo $i;?>" <?php if($row['ad_default']) echo 'checked="checked"';?>>
-                    <label for="ad_default<?php echo $i;?>" class="add_lb">기본배송지</label>
+                    <a href="<?=$_SERVER['SCRIPT_NAME']; ?>?w=d&amp;ad_id=<?=$row['ad_id']; ?>" id="btn_del" class="del_address">삭제</a>
+                    <input type="radio" name="ad_default" value="<?=$row['ad_id'];?>" id="ad_default<?=$i;?>" <?php if($row['ad_default']) echo 'checked="checked"';?>>
+                    <label for="ad_default<?=$i;?>" class="add_lb">기본배송지</label>
                 </div>
             </li>
             <?php
@@ -61,7 +61,7 @@ include_once(G5_PATH.'/head.sub.php');
 </div>
 </form>
 
-<?php echo get_paging($config['cf_mobile_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
+<?=get_paging($config['cf_mobile_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
 
 <script>
 $(function() {

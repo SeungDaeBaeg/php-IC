@@ -222,28 +222,28 @@ switch($LGD_PAYTYPE) {
         <tbody>
         <tr>
             <th scope="row">결과코드</th>
-            <td><?php echo $xpay->Response_Code(); ?></td>
+            <td><?=$xpay->Response_Code(); ?></td>
         </tr>
         <tr>
             <th scope="row">결과 메세지</th>
-            <td><?php echo $xpay->Response_Msg(); ?></td>
+            <td><?=$xpay->Response_Msg(); ?></td>
         </tr>
         <tr>
             <th scope="row">현금영수증 거래번호</th>
-            <td><?php echo $xpay->Response("LGD_TID",0); ?></td>
+            <td><?=$xpay->Response("LGD_TID",0); ?></td>
         </tr>
         <tr>
             <th scope="row">현금영수증 승인번호</th>
-            <td><?php echo $xpay->Response("LGD_CASHRECEIPTNUM",0); ?></td>
+            <td><?=$xpay->Response("LGD_CASHRECEIPTNUM",0); ?></td>
         </tr>
         <tr>
             <th scope="row">승인시간</th>
-            <td><?php echo preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/", "\\1-\\2-\\3 \\4:\\5:\\6",$xpay->Response("LGD_RESPDATE",0)); ?></td>
+            <td><?=preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/", "\\1-\\2-\\3 \\4:\\5:\\6",$xpay->Response("LGD_RESPDATE",0)); ?></td>
         </tr>
         <tr>
             <th scope="row">현금영수증 URL</th>
             <td>
-                <button type="button" name="receiptView" class="btn_frmline" onClick="javascript:showCashReceipts('<?php echo $LGD_MID; ?>','<?php echo $LGD_OID; ?>','<?php echo $od_casseqno; ?>','<?php echo $trade_type; ?>','<?php echo $CST_PLATFORM; ?>');">영수증 확인</button>
+                <button type="button" name="receiptView" class="btn_frmline" onClick="javascript:showCashReceipts('<?=$LGD_MID; ?>','<?=$LGD_OID; ?>','<?=$od_casseqno; ?>','<?=$trade_type; ?>','<?=$CST_PLATFORM; ?>');">영수증 확인</button>
                 <p>영수증 확인은 실 등록의 경우에만 가능합니다.</p>
             </td>
         </tr>

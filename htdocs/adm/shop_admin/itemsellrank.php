@@ -63,15 +63,15 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 ?>
 
 <div class="local_ov01 local_ov">
-    <?php echo $listall; ?>
-    <span class="btn_ov01"><span class="ov_txt">등록상품 </span><span class="ov_num"> <?php echo $total_count; ?>건 </span></span> 
+    <?=$listall; ?>
+    <span class="btn_ov01"><span class="ov_txt">등록상품 </span><span class="ov_num"> <?=$total_count; ?>건 </span></span>
 </div>
 
 <form name="flist" class="local_sch01 local_sch">
-<input type="hidden" name="doc" value="<?php echo $doc; ?>">
-<input type="hidden" name="sort1" value="<?php echo $sort1; ?>">
-<input type="hidden" name="sort2" value="<?php echo $sort2; ?>">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
+<input type="hidden" name="doc" value="<?=$doc; ?>">
+<input type="hidden" name="sort1" value="<?=$sort1; ?>">
+<input type="hidden" name="sort2" value="<?=$sort2; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
 
 <label for="sel_ca_id" class="sound_only">검색대상</label>
 <select name="sel_ca_id" id="sel_ca_id">
@@ -90,9 +90,9 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 
 기간설정
 <label for="fr_date" class="sound_only">시작일</label>
-<input type="text" name="fr_date" value="<?php echo $fr_date; ?>" id="fr_date" required class="required frm_input" size="8" maxlength="8"> 에서
+<input type="text" name="fr_date" value="<?=$fr_date; ?>" id="fr_date" required class="required frm_input" size="8" maxlength="8"> 에서
 <label for="to_date" class="sound_only">종료일</label>
-<input type="text" name="to_date" value="<?php echo $to_date; ?>" id="to_date" required class="required frm_input" size="8" maxlength="8"> 까지
+<input type="text" name="to_date" value="<?=$to_date; ?>" id="to_date" required class="required frm_input" size="8" maxlength="8"> 까지
 <input type="submit" value="검색" class="btn_submit">
 
 </form>
@@ -108,21 +108,21 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">순위</th>
         <th scope="col">상품명</th>
-        <th scope="col"><a href="<?php echo title_sort("ct_status_1",1)."&amp;$qstr1"; ?>">쇼핑</a></th>
-        <th scope="col"><a href="<?php echo title_sort("ct_status_2",1)."&amp;$qstr1"; ?>">주문</a></th>
-        <th scope="col"><a href="<?php echo title_sort("ct_status_3",1)."&amp;$qstr1"; ?>">입금</a></th>
-        <th scope="col"><a href="<?php echo title_sort("ct_status_4",1)."&amp;$qstr1"; ?>">준비</a></th>
-        <th scope="col"><a href="<?php echo title_sort("ct_status_5",1)."&amp;$qstr1"; ?>">배송</a></th>
-        <th scope="col"><a href="<?php echo title_sort("ct_status_6",1)."&amp;$qstr1"; ?>">완료</a></th>
-        <th scope="col"><a href="<?php echo title_sort("ct_status_7",1)."&amp;$qstr1"; ?>">취소</a></th>
-        <th scope="col"><a href="<?php echo title_sort("ct_status_8",1)."&amp;$qstr1"; ?>">반품</a></th>
-        <th scope="col"><a href="<?php echo title_sort("ct_status_9",1)."&amp;$qstr1"; ?>">품절</a></th>
-        <th scope="col"><a href="<?php echo title_sort("ct_status_sum",1)."&amp;$qstr1"; ?>">합계</a></th>
+        <th scope="col"><a href="<?=title_sort("ct_status_1",1)."&amp;$qstr1"; ?>">쇼핑</a></th>
+        <th scope="col"><a href="<?=title_sort("ct_status_2",1)."&amp;$qstr1"; ?>">주문</a></th>
+        <th scope="col"><a href="<?=title_sort("ct_status_3",1)."&amp;$qstr1"; ?>">입금</a></th>
+        <th scope="col"><a href="<?=title_sort("ct_status_4",1)."&amp;$qstr1"; ?>">준비</a></th>
+        <th scope="col"><a href="<?=title_sort("ct_status_5",1)."&amp;$qstr1"; ?>">배송</a></th>
+        <th scope="col"><a href="<?=title_sort("ct_status_6",1)."&amp;$qstr1"; ?>">완료</a></th>
+        <th scope="col"><a href="<?=title_sort("ct_status_7",1)."&amp;$qstr1"; ?>">취소</a></th>
+        <th scope="col"><a href="<?=title_sort("ct_status_8",1)."&amp;$qstr1"; ?>">반품</a></th>
+        <th scope="col"><a href="<?=title_sort("ct_status_9",1)."&amp;$qstr1"; ?>">품절</a></th>
+        <th scope="col"><a href="<?=title_sort("ct_status_sum",1)."&amp;$qstr1"; ?>">합계</a></th>
     </tr>
     </thead>
     <tbody>
@@ -135,19 +135,19 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 
         $bg = 'bg'.($i%2);
         ?>
-        <tr class="<?php echo $bg; ?>">
-            <td class="td_num"><?php echo $num; ?></td>
-            <td class="td_left"><a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?> <?php echo cut_str($row['it_name'],30); ?></a></td>
-            <td class="td_num"><?php echo $row['ct_status_1']; ?></td>
-            <td class="td_num"><?php echo $row['ct_status_2']; ?></td>
-            <td class="td_num"><?php echo $row['ct_status_3']; ?></td>
-            <td class="td_num"><?php echo $row['ct_status_4']; ?></td>
-            <td class="td_num"><?php echo $row['ct_status_5']; ?></td>
-            <td class="td_num"><?php echo $row['ct_status_6']; ?></td>
-            <td class="td_num"><?php echo $row['ct_status_7']; ?></td>
-            <td class="td_num"><?php echo $row['ct_status_8']; ?></td>
-            <td class="td_num"><?php echo $row['ct_status_9']; ?></td>
-            <td class="td_num"><?php echo $row['ct_status_sum']; ?></td>
+        <tr class="<?=$bg; ?>">
+            <td class="td_num"><?=$num; ?></td>
+            <td class="td_left"><a href="<?=$href; ?>"><?=get_it_image($row['it_id'], 50, 50); ?> <?=cut_str($row['it_name'],30); ?></a></td>
+            <td class="td_num"><?=$row['ct_status_1']; ?></td>
+            <td class="td_num"><?=$row['ct_status_2']; ?></td>
+            <td class="td_num"><?=$row['ct_status_3']; ?></td>
+            <td class="td_num"><?=$row['ct_status_4']; ?></td>
+            <td class="td_num"><?=$row['ct_status_5']; ?></td>
+            <td class="td_num"><?=$row['ct_status_6']; ?></td>
+            <td class="td_num"><?=$row['ct_status_7']; ?></td>
+            <td class="td_num"><?=$row['ct_status_8']; ?></td>
+            <td class="td_num"><?=$row['ct_status_9']; ?></td>
+            <td class="td_num"><?=$row['ct_status_sum']; ?></td>
         </tr>
         <?php
     }
@@ -160,7 +160,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
     </table>
 </div>
 
-<?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr1&amp;page="); ?>
+<?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr1&amp;page="); ?>
 
 <script>
 $(function() {

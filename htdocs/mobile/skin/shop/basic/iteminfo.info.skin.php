@@ -12,13 +12,13 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">',
 <div id="sit_inf" class="win_desc">
     <?php if ($it['it_basic']) { // 상품 기본설명 ?>
     <div id="sit_inf_basic">
-         <?php echo $it['it_basic']; ?>
+         <?=$it['it_basic']; ?>
     </div>
     <?php } ?>
 
     <?php if ($it['it_explan'] || $it['it_mobile_explan']) { // 상품 상세설명 ?>
     <div id="sit_inf_explan">
-        <?php echo ($it['it_mobile_explan'] ? conv_content($it['it_mobile_explan'], 1) : conv_content($it['it_explan'], 1)); ?>
+        <?=($it['it_mobile_explan'] ? conv_content($it['it_mobile_explan'], 1) : conv_content($it['it_explan'], 1)); ?>
     </div>
     <?php } ?>
 
@@ -38,8 +38,8 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">',
             $ii_value = $val;
         ?>
         <li>
-            <strong><?php echo $ii_title; ?></strong>
-            <span><?php echo $ii_value; ?></span>
+            <strong><?=$ii_title; ?></strong>
+            <span><?=$ii_value; ?></span>
         </li>
         <?php } //foreach?>
     </ul>

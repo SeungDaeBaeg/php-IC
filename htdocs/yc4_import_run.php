@@ -81,19 +81,19 @@ document.onkeydown = noRefresh ;
 
 <!-- 상단 시작 { -->
 <div id="hd">
-    <h1 id="hd_h1"><?php echo $g5['title'] ?></h1>
+    <h1 id="hd_h1"><?=$g5['title'] ?></h1>
 
     <div id="skip_to_container"><a href="#container">본문 바로가기</a></div>
 
     <div id="hd_wrapper">
 
         <div id="logo">
-            <a href="<?php echo G5_URL ?>"><img src="<?php echo G5_IMG_URL ?>/logo.jpg" alt="<?php echo $config['cf_title']; ?>"></a>
+            <a href="<?=G5_URL ?>"><img src="<?=G5_IMG_URL ?>/logo.jpg" alt="<?=$config['cf_title']; ?>"></a>
         </div>
 
         <fieldset id="hd_sch">
             <legend>사이트 내 전체검색</legend>
-            <form name="fsearchbox" method="get" action="<?php echo G5_BBS_URL ?>/search.php" onsubmit="return fsearchbox_submit(this);">
+            <form name="fsearchbox" method="get" action="<?=G5_BBS_URL ?>/search.php" onsubmit="return fsearchbox_submit(this);">
             <input type="hidden" name="sfl" value="wr_subject||wr_content">
             <input type="hidden" name="sop" value="and">
             <label for="sch_stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
@@ -133,24 +133,24 @@ document.onkeydown = noRefresh ;
         <ul id="tnb">
             <?php if ($is_member) {  ?>
             <?php if ($is_admin) {  ?>
-            <li><a href="<?php echo G5_ADMIN_URL ?>"><b>관리자</b></a></li>
+            <li><a href="<?=G5_ADMIN_URL ?>"><b>관리자</b></a></li>
             <?php }  ?>
-            <li><a href="<?php echo G5_BBS_URL ?>/member_confirm.php?url=<?php echo G5_BBS_URL ?>/register_form.php">정보수정</a></li>
-            <li><a href="<?php echo G5_BBS_URL ?>/logout.php">로그아웃</a></li>
+            <li><a href="<?=G5_BBS_URL ?>/member_confirm.php?url=<?=G5_BBS_URL ?>/register_form.php">정보수정</a></li>
+            <li><a href="<?=G5_BBS_URL ?>/logout.php">로그아웃</a></li>
             <?php } else {  ?>
-            <li><a href="<?php echo G5_BBS_URL ?>/register.php">회원가입</a></li>
-            <li><a href="<?php echo G5_BBS_URL ?>/login.php"><b>로그인</b></a></li>
+            <li><a href="<?=G5_BBS_URL ?>/register.php">회원가입</a></li>
+            <li><a href="<?=G5_BBS_URL ?>/login.php"><b>로그인</b></a></li>
             <?php }  ?>
-            <li><a href="<?php echo G5_BBS_URL ?>/qalist.php">1:1문의</a></li>
-            <li><a href="<?php echo G5_BBS_URL ?>/current_connect.php">접속자 <?php echo connect(); // 현재 접속자수  ?></a></li>
-            <li><a href="<?php echo G5_BBS_URL ?>/new.php">새글</a></li>
+            <li><a href="<?=G5_BBS_URL ?>/qalist.php">1:1문의</a></li>
+            <li><a href="<?=G5_BBS_URL ?>/current_connect.php">접속자 <?=connect(); // 현재 접속자수  ?></a></li>
+            <li><a href="<?=G5_BBS_URL ?>/new.php">새글</a></li>
         </ul>
 
         <div id="text_size">
             <!-- font_resize('엘리먼트id', '제거할 class', '추가할 class'); -->
-            <button id="size_down" onclick="font_resize('container', 'ts_up ts_up2', '');"><img src="<?php echo G5_URL; ?>/img/ts01.gif" alt="기본"></button>
-            <button id="size_def" onclick="font_resize('container', 'ts_up ts_up2', 'ts_up');"><img src="<?php echo G5_URL; ?>/img/ts02.gif" alt="크게"></button>
-            <button id="size_up" onclick="font_resize('container', 'ts_up ts_up2', 'ts_up2');"><img src="<?php echo G5_URL; ?>/img/ts03.gif" alt="더크게"></button>
+            <button id="size_down" onclick="font_resize('container', 'ts_up ts_up2', '');"><img src="<?=G5_URL; ?>/img/ts01.gif" alt="기본"></button>
+            <button id="size_def" onclick="font_resize('container', 'ts_up ts_up2', 'ts_up');"><img src="<?=G5_URL; ?>/img/ts02.gif" alt="크게"></button>
+            <button id="size_up" onclick="font_resize('container', 'ts_up ts_up2', 'ts_up2');"><img src="<?=G5_URL; ?>/img/ts03.gif" alt="더크게"></button>
         </div>
     </div>
 
@@ -173,7 +173,7 @@ document.onkeydown = noRefresh ;
         <?php // echo outlogin('basic'); // 외부 로그인  ?>
     </div>
     <div id="container">
-        <?php if ((!$bo_table || $w == 's' ) && !defined("_INDEX_")) { ?><div id="container_title"><?php echo $g5['title'] ?></div><?php } ?>
+        <?php if ((!$bo_table || $w == 's' ) && !defined("_INDEX_")) { ?><div id="container_title"><?=$g5['title'] ?></div><?php } ?>
 
         <div id="g4_import_run">
             <ol>
@@ -672,7 +672,7 @@ document.onkeydown = noRefresh ;
 
 <!-- 하단 시작 { -->
 <div id="ft">
-    <div id="ft_catch"><img src="<?php echo G5_IMG_URL; ?>/ft.png" alt="<?php echo G5_VERSION ?>"></div>
+    <div id="ft_catch"><img src="<?=G5_IMG_URL; ?>/ft.png" alt="<?=G5_VERSION ?>"></div>
     <div id="ft_copy">
         <p>
             Copyright &copy; <b>소유하신 도메인.</b> All rights reserved.<br>

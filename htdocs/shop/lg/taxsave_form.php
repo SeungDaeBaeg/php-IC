@@ -80,7 +80,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 </script>
 
 <div id="scash" class="new_win">
-    <h1 id="win_title"><?php echo $g5['title']; ?></h1>
+    <h1 id="win_title"><?=$g5['title']; ?></h1>
 
     <section>
         <h2>주문정보</h2>
@@ -94,23 +94,23 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             <tbody>
             <tr>
                 <th scope="row">주문 번호</th>
-                <td><?php echo $od_id; ?></td>
+                <td><?=$od_id; ?></td>
             </tr>
             <tr>
                 <th scope="row">상품 정보</th>
-                <td><?php echo $goods_name; ?></td>
+                <td><?=$goods_name; ?></td>
             </tr>
             <tr>
                 <th scope="row">주문자 이름</th>
-                <td><?php echo $od_name; ?></td>
+                <td><?=$od_name; ?></td>
             </tr>
             <tr>
                 <th scope="row">주문자 E-Mail</th>
-                <td><?php echo $od_email; ?></td>
+                <td><?=$od_email; ?></td>
             </tr>
             <tr>
                 <th scope="row">주문자 전화번호</th>
-                <td><?php echo $od_tel; ?></td>
+                <td><?=$od_tel; ?></td>
             </tr>
             </tbody>
             </table>
@@ -120,9 +120,9 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     <section>
         <h2>현금영수증 발급 정보</h2>
 
-        <form method="post" id="LGD_PAYINFO" action="<?php echo G5_SHOP_URL; ?>/lg/taxsave_result.php">
-        <input type="hidden" name="tx"        value="<?php echo $tx; ?>">
-        <input type="hidden" name="od_id" value="<?php echo $od_id; ?>">
+        <form method="post" id="LGD_PAYINFO" action="<?=G5_SHOP_URL; ?>/lg/taxsave_result.php">
+        <input type="hidden" name="tx"        value="<?=$tx; ?>">
+        <input type="hidden" name="od_id" value="<?=$od_id; ?>">
         <div class="tbl_head01 tbl_wrap">
             <table>
             <colgroup>
@@ -132,7 +132,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             <tbody>
             <tr>
                 <th scope="row">원 거래 시각</th>
-                <td><?php echo $trad_time; ?></td>
+                <td><?=$trad_time; ?></td>
             </tr>
             <tr>
                 <th scope="row">발행 용도</th>
@@ -156,19 +156,19 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             </tr>
             <tr>
                 <th scope="row">거래금액 총합</th>
-                <td><?php echo number_format($amt_tot); ?>원</td>
+                <td><?=number_format($amt_tot); ?>원</td>
             </tr>
             <tr>
                 <th scope="row">공급가액</th>
-                <td><?php echo number_format($amt_sup); ?>원<!-- ((거래금액 총합 * 10) / 11) --></td>
+                <td><?=number_format($amt_sup); ?>원<!-- ((거래금액 총합 * 10) / 11) --></td>
             </tr>
             <tr>
                 <th scope="row">봉사료</th>
-                <td><?php echo number_format($amt_svc); ?>원</td>
+                <td><?=number_format($amt_svc); ?>원</td>
             </tr>
             <tr>
                 <th scope="row">부가가치세</th>
-                <td><?php echo number_format($amt_tax); ?>원<!-- 거래금액 총합 - 공급가액 - 봉사료 --></td>
+                <td><?=number_format($amt_tax); ?>원<!-- 거래금액 총합 - 공급가액 - 봉사료 --></td>
             </tr>
             </tbody>
             </table>

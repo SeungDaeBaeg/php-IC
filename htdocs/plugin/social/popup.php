@@ -28,9 +28,9 @@ if( isset( $_REQUEST["redirect_to_idp"] ) ){
         <script>
         if( window.opener ){
             (function(){
-                var login_url = "<?php echo $get_login_url; ?>";
+                var login_url = "<?=$get_login_url; ?>";
 
-                window.opener.location.href = login_url+"&provider=<?php echo $provider_name; ?>";
+                window.opener.location.href = login_url+"&provider=<?=$provider_name; ?>";
                 window.close();
             })();
         }

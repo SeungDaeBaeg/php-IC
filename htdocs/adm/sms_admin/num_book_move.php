@@ -27,17 +27,17 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 ?>
 
 <div id="copymove" class="new_win">
-    <h1 id="win_title"><?php echo $g5['title'] ?></h1>
+    <h1 id="win_title"><?=$g5['title'] ?></h1>
 
     <form name="fboardmoveall" method="post" action="./number_move_update.php" onsubmit="return fboardmoveall_submit(this);">
-    <input type="hidden" name="sw" value="<?php echo $sw ?>">
-    <input type="hidden" name="bk_no_list" value="<?php echo get_sanitize_input($bk_no_list); ?>">
-    <input type="hidden" name="act" value="<?php echo get_sanitize_input($act); ?>">
-    <input type="hidden" name="url" value="<?php echo clean_xss_tags(strip_tags($_SERVER['HTTP_REFERER'])); ?>">
+    <input type="hidden" name="sw" value="<?=$sw ?>">
+    <input type="hidden" name="bk_no_list" value="<?=get_sanitize_input($bk_no_list); ?>">
+    <input type="hidden" name="act" value="<?=get_sanitize_input($act); ?>">
+    <input type="hidden" name="url" value="<?=clean_xss_tags(strip_tags($_SERVER['HTTP_REFERER'])); ?>">
     <div class=" new_win_con"> 
         <div class="tbl_head01 tbl_wrap">
             <table>
-            <caption><?php echo $act ?>할 그룹을 한개 이상 선택하여 주십시오.</caption>
+            <caption><?=$act ?>할 그룹을 한개 이상 선택하여 주십시오.</caption>
             <thead>
             <tr>
                 <th scope="col">
@@ -53,12 +53,12 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
             <?php for ($i=0; $i<count($list); $i++) { ?>
             <tr>
                 <td class="td_chk">
-                    <label for="chk<?php echo $i ?>" class="sound_only"><?php echo $list[$i]['bg_name'] ?></label>
-                    <input type="<?php echo $inputbox_type; ?>" value="<?php echo $list[$i]['bg_no'] ?>" id="chk<?php echo $i ?>" name="chk_bg_no[]">
+                    <label for="chk<?=$i ?>" class="sound_only"><?=$list[$i]['bg_name'] ?></label>
+                    <input type="<?=$inputbox_type; ?>" value="<?=$list[$i]['bg_no'] ?>" id="chk<?=$i ?>" name="chk_bg_no[]">
                 </td>
                 <td>
-                    <label for="chk<?php echo $i ?>">
-                        <?php echo $list[$i]['bg_name'] ?>
+                    <label for="chk<?=$i ?>">
+                        <?=$list[$i]['bg_name'] ?>
                     </label>
                 </td>
             </tr>
@@ -68,7 +68,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         </div>
     </div>
     <div class="win_btn">
-        <input type="submit" value="<?php echo $act ?>" id="btn_submit" class="btn_submit btn">
+        <input type="submit" value="<?=$act ?>" id="btn_submit" class="btn_submit btn">
         <button type="button" class="btn_cancel btn">창닫기</button>
     </div>
     </form>

@@ -415,28 +415,28 @@ if (sql_num_rows($result) == 0)
     ?>
     <!-- 반복시작 - 지운아빠 2013-04-18 -->
     <div class="sodr_print_pop_list">
-        <h2>주문번호 <?php echo $row1['od_id']; ?></h2>
-        <h3>보내는 사람 : <?php echo get_text($row1['od_name']); ?></h3>
+        <h2>주문번호 <?=$row1['od_id']; ?></h2>
+        <h3>보내는 사람 : <?=get_text($row1['od_name']); ?></h3>
 
         <dl>
             <dt>주소</dt>
-            <dd><?php echo get_text($row1['od_addr']); ?></dd>
+            <dd><?=get_text($row1['od_addr']); ?></dd>
             <dt>휴대폰</dt>
-            <dd><?php echo get_text($row1['od_hp']); ?></dd>
+            <dd><?=get_text($row1['od_hp']); ?></dd>
             <dt>전화번호</dt>
-            <dd><?php echo get_text($row1['od_tel']); ?></dd>
+            <dd><?=get_text($row1['od_tel']); ?></dd>
         </dl>
         <?php if ($samesamesame) { ?>
         <p class="sodr_print_pop_same">보내는 사람과 받는 사람이 동일합니다.</p>
         <?php } else { ?>
-        <h3>받는 사람 : <?php echo get_text($row1['od_b_name']); ?></h3>
+        <h3>받는 사람 : <?=get_text($row1['od_b_name']); ?></h3>
         <dl>
             <dt>주소</dt>
-            <dd><?php echo get_text($row1['od_b_addr']); ?></dd>
+            <dd><?=get_text($row1['od_b_addr']); ?></dd>
             <dt>휴대폰</dt>
-            <dd><?php echo get_text($row1['od_b_hp']); ?></dd>
+            <dd><?=get_text($row1['od_b_hp']); ?></dd>
             <dt>전화번호</dt>
-            <dd><?php echo get_text($row1['od_b_tel']); ?></dd>
+            <dd><?=get_text($row1['od_b_tel']); ?></dd>
         </dl>
         <?php } ?>
 
@@ -527,11 +527,11 @@ if (sql_num_rows($result) == 0)
 
             ?>
             <tr>
-                <td><?php echo $it_name; ?></td>
-                <td class="td_num"><?php echo number_format($it_price); ?></td>
-                <td class="td_cntsmall"><?php echo $fontqty1; ?><?php echo number_format($row2['ct_qty']); ?><?php echo $fontqty2; ?></td>
-                <td class="td_num td_numsum"><?php echo number_format($row2_tot_price); ?></td>
-                <td class="td_sendcost_by"><?php echo $ct_send_cost; ?></td>
+                <td><?=$it_name; ?></td>
+                <td class="td_num"><?=number_format($it_price); ?></td>
+                <td class="td_cntsmall"><?=$fontqty1; ?><?=number_format($row2['ct_qty']); ?><?=$fontqty2; ?></td>
+                <td class="td_num td_numsum"><?=number_format($row2_tot_price); ?></td>
+                <td class="td_sendcost_by"><?=$ct_send_cost; ?></td>
             </tr>
             <?php
                 $cnt++;
@@ -539,24 +539,24 @@ if (sql_num_rows($result) == 0)
             ?>
             <tr>
                 <td>배송비</td>
-                <td class="td_num"><?php echo number_format($row1['od_send_cost']); ?></td>
-                <td class="td_cntsmall"><?php echo $fontqty1; ?>1<?php echo $fontqty2; ?></td>
-                <td class="td_num td_numsum"><?php echo number_format($row1['od_send_cost']); ?></td>
+                <td class="td_num"><?=number_format($row1['od_send_cost']); ?></td>
+                <td class="td_cntsmall"><?=$fontqty1; ?>1<?=$fontqty2; ?></td>
+                <td class="td_num td_numsum"><?=number_format($row1['od_send_cost']); ?></td>
                 <td class="td_sendcost_by"></td>
             </tr>
             <tr>
                 <td>추가 배송비</td>
-                <td class="td_num"><?php echo number_format($row1['od_send_cost2']); ?></td>
-                <td class="td_cntsmall"><?php echo $fontqty1; ?>1<?php echo $fontqty2; ?></td>
-                <td class="td_num td_numsum"><?php echo number_format($row1['od_send_cost2']); ?></td>
+                <td class="td_num"><?=number_format($row1['od_send_cost2']); ?></td>
+                <td class="td_cntsmall"><?=$fontqty1; ?>1<?=$fontqty2; ?></td>
+                <td class="td_num td_numsum"><?=number_format($row1['od_send_cost2']); ?></td>
                 <td class="td_sendcost_by"></td>
             </tr>
             </tbody>
             <tfoot>
             <tr>
                 <th scope="row" colspan="2">합계</th>
-                <td><?php echo number_format($sub_tot_qty + 2); ?></td>
-                <td><?php echo number_format($sub_tot_price + $row1['od_send_cost'] + $row1['od_send_cost2']); ?></td>
+                <td><?=number_format($sub_tot_qty + 2); ?></td>
+                <td><?=number_format($sub_tot_price + $row1['od_send_cost'] + $row1['od_send_cost2']); ?></td>
                 <td></td>
             </tr>
             </tfoot>
@@ -581,8 +581,8 @@ if (sql_num_rows($result) == 0)
     <div id="sodr_print_pop_total">
         <span>
             전체
-            <strong><?php echo number_format($tot_tot_qty); ?></strong>개
-            <strong><?php echo number_format($tot_tot_price); ?></strong>원
+            <strong><?=number_format($tot_tot_qty); ?></strong>개
+            <strong><?=number_format($tot_tot_price); ?></strong>원
         </span>
         &lt;출력 끝&gt;
     </div>

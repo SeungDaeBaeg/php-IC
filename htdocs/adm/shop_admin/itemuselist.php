@@ -58,13 +58,13 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 ?>
 
 <div class="local_ov01 local_ov">
-    <?php echo $listall; ?>
-    <span class="btn_ov01"><span class="ov_txt"> 전체 후기내역</span><span class="ov_num">  <?php echo $total_count; ?>건</span></span>
+    <?=$listall; ?>
+    <span class="btn_ov01"><span class="ov_txt"> 전체 후기내역</span><span class="ov_num">  <?=$total_count; ?>건</span></span>
 </div>
 
 <form name="flist" class="local_sch01 local_sch">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
-<input type="hidden" name="save_stx" value="<?php echo $stx; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
+<input type="hidden" name="save_stx" value="<?=$stx; ?>">
 
 <label for="sca" class="sound_only">분류선택</label>
 <select name="sca" id="sca">
@@ -84,39 +84,39 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 
 <label for="sfl" class="sound_only">검색대상</label>
 <select name="sfl" id="sfl">
-    <option value="it_name" <?php echo get_selected($sfl, 'it_name'); ?>>상품명</option>
-    <option value="a.it_id" <?php echo get_selected($sfl, 'a.it_id'); ?>>상품코드</option>
-    <option value="is_name" <?php echo get_selected($sfl, 'is_name'); ?>>이름</option>
+    <option value="it_name" <?=get_selected($sfl, 'it_name'); ?>>상품명</option>
+    <option value="a.it_id" <?=get_selected($sfl, 'a.it_id'); ?>>상품코드</option>
+    <option value="is_name" <?=get_selected($sfl, 'is_name'); ?>>이름</option>
 </select>
 
 <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-<input type="text" name="stx" id="stx" value="<?php echo $stx; ?>" required class="frm_input required">
+<input type="text" name="stx" id="stx" value="<?=$stx; ?>" required class="frm_input required">
 <input type="submit" value="검색" class="btn_submit">
 
 </form>
 
 <form name="fitemuselist" method="post" action="./itemuselistupdate.php" onsubmit="return fitemuselist_submit(this);" autocomplete="off">
-<input type="hidden" name="sca" value="<?php echo $sca; ?>">
-<input type="hidden" name="sst" value="<?php echo $sst; ?>">
-<input type="hidden" name="sod" value="<?php echo $sod; ?>">
-<input type="hidden" name="sfl" value="<?php echo $sfl; ?>">
-<input type="hidden" name="stx" value="<?php echo $stx; ?>">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
+<input type="hidden" name="sca" value="<?=$sca; ?>">
+<input type="hidden" name="sst" value="<?=$sst; ?>">
+<input type="hidden" name="sod" value="<?=$sod; ?>">
+<input type="hidden" name="sfl" value="<?=$sfl; ?>">
+<input type="hidden" name="stx" value="<?=$stx; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
 
 <div class="tbl_head01 tbl_wrap" id="itemuselist">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">
             <label for="chkall" class="sound_only">사용후기 전체</label>
             <input type="checkbox" name="chkall" value="1" id="chkall" onclick="check_all(this.form)">
         </th>
-        <th scope="col"><?php echo subject_sort_link("it_name"); ?>상품명</a></th>
-        <th scope="col"><?php echo subject_sort_link("mb_name"); ?>이름</a></th>
-        <th scope="col"><?php echo subject_sort_link("is_subject"); ?>제목</a></th>
-        <th scope="col"><?php echo subject_sort_link("is_score"); ?>평점</a></th>
-        <th scope="col"><?php echo subject_sort_link("is_confirm"); ?>확인</a></th>
+        <th scope="col"><?=subject_sort_link("it_name"); ?>상품명</a></th>
+        <th scope="col"><?=subject_sort_link("mb_name"); ?>이름</a></th>
+        <th scope="col"><?=subject_sort_link("is_subject"); ?>제목</a></th>
+        <th scope="col"><?=subject_sort_link("is_score"); ?>평점</a></th>
+        <th scope="col"><?=subject_sort_link("is_confirm"); ?>확인</a></th>
         <th scope="col">관리</th>
     </tr>
     </thead>
@@ -130,37 +130,37 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
         $bg = 'bg'.($i%2);
     ?>
 
-    <tr class="<?php echo $bg; ?>">
+    <tr class="<?=$bg; ?>">
         <td class="td_chk">
-            <label for="chk_<?php echo $i; ?>" class="sound_only"><?php echo get_text($row['is_subject']) ?> 사용후기</label>
-            <input type="checkbox" name="chk[]" value="<?php echo $i ?>" id="chk_<?php echo $i; ?>">
-            <input type="hidden" name="is_id[<?php echo $i; ?>]" value="<?php echo $row['is_id']; ?>">
-            <input type="hidden" name="it_id[<?php echo $i; ?>]" value="<?php echo $row['it_id']; ?>">
+            <label for="chk_<?=$i; ?>" class="sound_only"><?=get_text($row['is_subject']) ?> 사용후기</label>
+            <input type="checkbox" name="chk[]" value="<?=$i ?>" id="chk_<?=$i; ?>">
+            <input type="hidden" name="is_id[<?=$i; ?>]" value="<?=$row['is_id']; ?>">
+            <input type="hidden" name="it_id[<?=$i; ?>]" value="<?=$row['it_id']; ?>">
         </td>
-        <td class="td_left"><a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?><?php echo cut_str($row['it_name'],30); ?></a></td>
-        <td class="td_name"><?php echo $name; ?></td>
+        <td class="td_left"><a href="<?=$href; ?>"><?=get_it_image($row['it_id'], 50, 50); ?><?=cut_str($row['it_name'],30); ?></a></td>
+        <td class="td_name"><?=$name; ?></td>
         <td class="sit_use_subject td_left">
-            <a href="#" class="use_href" onclick="return false;" target="<?php echo $i; ?>"><?php echo get_text($row['is_subject']); ?><span class="tit_op">열기</span></a>
-            <div id="use_div<?php echo $i; ?>" class="use_div" style="display:none;">
-                <?php echo $is_content; ?>
+            <a href="#" class="use_href" onclick="return false;" target="<?=$i; ?>"><?=get_text($row['is_subject']); ?><span class="tit_op">열기</span></a>
+            <div id="use_div<?=$i; ?>" class="use_div" style="display:none;">
+                <?=$is_content; ?>
             </div>
         </td>
         <td class="td_select">
-            <label for="score_<?php echo $i; ?>" class="sound_only">평점</label>
-            <select name="is_score[<?php echo $i; ?>]" id="score_<?php echo $i; ?>">
-            <option value="5" <?php echo get_selected($row['is_score'], "5"); ?>>매우만족</option>
-            <option value="4" <?php echo get_selected($row['is_score'], "4"); ?>>만족</option>
-            <option value="3" <?php echo get_selected($row['is_score'], "3"); ?>>보통</option>
-            <option value="2" <?php echo get_selected($row['is_score'], "2"); ?>>불만</option>
-            <option value="1" <?php echo get_selected($row['is_score'], "1"); ?>>매우불만</option>
+            <label for="score_<?=$i; ?>" class="sound_only">평점</label>
+            <select name="is_score[<?=$i; ?>]" id="score_<?=$i; ?>">
+            <option value="5" <?=get_selected($row['is_score'], "5"); ?>>매우만족</option>
+            <option value="4" <?=get_selected($row['is_score'], "4"); ?>>만족</option>
+            <option value="3" <?=get_selected($row['is_score'], "3"); ?>>보통</option>
+            <option value="2" <?=get_selected($row['is_score'], "2"); ?>>불만</option>
+            <option value="1" <?=get_selected($row['is_score'], "1"); ?>>매우불만</option>
             </select>
         </td>
         <td class="td_chk2">
-            <label for="confirm_<?php echo $i; ?>" class="sound_only">확인</label>
-            <input type="checkbox" name="is_confirm[<?php echo $i; ?>]" <?php echo ($row['is_confirm'] ? 'checked' : ''); ?> value="1" id="confirm_<?php echo $i; ?>">
+            <label for="confirm_<?=$i; ?>" class="sound_only">확인</label>
+            <input type="checkbox" name="is_confirm[<?=$i; ?>]" <?=($row['is_confirm'] ? 'checked' : ''); ?> value="1" id="confirm_<?=$i; ?>">
         </td>
         <td class="td_mng td_mng_s">
-            <a href="./itemuseform.php?w=u&amp;is_id=<?php echo $row['is_id']; ?>&amp;<?php echo $qstr; ?>" class="btn btn_03"><span class="sound_only"><?php echo get_text($row['is_subject']); ?> </span>수정</a>
+            <a href="./itemuseform.php?w=u&amp;is_id=<?=$row['is_id']; ?>&amp;<?=$qstr; ?>" class="btn btn_03"><span class="sound_only"><?=get_text($row['is_subject']); ?> </span>수정</a>
         </td>
     </tr>
 
@@ -181,7 +181,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 </div>
 </form>
 
-<?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
+<?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
 
 <script>
 function fitemuselist_submit(f)

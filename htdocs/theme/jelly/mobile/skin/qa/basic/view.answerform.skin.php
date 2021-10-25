@@ -10,11 +10,11 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     <h2>답변등록</h2>
 
     <form name="fanswer" method="post" action="./qawrite_update.php" autocomplete="off">
-    <input type="hidden" name="qa_id" value="<?php echo $view['qa_id']; ?>">
+    <input type="hidden" name="qa_id" value="<?=$view['qa_id']; ?>">
     <input type="hidden" name="w" value="a">
-    <input type="hidden" name="sca" value="<?php echo $sca ?>">
-    <input type="hidden" name="stx" value="<?php echo $stx; ?>">
-    <input type="hidden" name="page" value="<?php echo $page; ?>">
+    <input type="hidden" name="sca" value="<?=$sca ?>">
+    <input type="hidden" name="stx" value="<?=$stx; ?>">
+    <input type="hidden" name="page" value="<?=$page; ?>">
     <?php
     $option = '';
     $option_hidden = '';
@@ -34,7 +34,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             <?php if ($option) { ?>
             <li>
                 <span class="sound_only">옵션</span>
-                <?php echo $option; ?>
+                <?=$option; ?>
             </li>
             <?php } ?>
             <li>
@@ -43,7 +43,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             </li>
             <li>
                 <label for="qa_content" class="sound_only">내용<strong>필수</strong></label>
-                <?php echo $editor_html; // 에디터 사용시는 에디터로, 아니면 textarea 로 노출 ?>
+                <?=$editor_html; // 에디터 사용시는 에디터로, 아니면 textarea 로 노출 ?>
             </li>
         </ul>
     </div>
@@ -69,7 +69,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
     function fwrite_submit(f)
     {
-        <?php echo $editor_js; // 에디터 사용시 자바스크립트에서 내용을 폼필드로 넣어주며 내용이 입력되었는지 검사함   ?>
+        <?=$editor_js; // 에디터 사용시 자바스크립트에서 내용을 폼필드로 넣어주며 내용이 입력되었는지 검사함   ?>
 
         var subject = "";
         var content = "";

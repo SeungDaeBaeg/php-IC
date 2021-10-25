@@ -17,7 +17,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
         ?>
         <span>
             <a href="javascript:window.close();">
-                <?php echo $imgs['imagehtml']; ?>
+                <?=$imgs['imagehtml']; ?>
             </a>
         </span>
         <?php } ?>
@@ -63,12 +63,12 @@ function largeimage_load(image_width){
     window.resizeTo(w, h);
 }
 
-    $("#sit_pvi_nwbig span:eq("+<?php echo ($no - 1); ?>+")").addClass("visible");
+    $("#sit_pvi_nwbig span:eq("+<?=($no - 1); ?>+")").addClass("visible");
 
     // 창 사이즈 조절
     <?php if( isset($size[0]) && $size[0] ){ ?>
     $(window).on("load", function() {
-        largeimage_load(<?php echo $size[0]; ?>);
+        largeimage_load(<?=$size[0]; ?>);
     });
     <?php } else { ?>
         var is_load_end = false;

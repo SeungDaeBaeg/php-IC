@@ -14,7 +14,7 @@ if(defined('G5_THEME_SHOP_PATH')) {
 }
 ?>
 
-<?php if (!$limit) { ?>총 <?php echo $cnt; ?> 건<?php } ?>
+<?php if (!$limit) { ?>총 <?=$cnt; ?> 건<?php } ?>
 
 
 <div id="sod_inquiry">
@@ -75,20 +75,20 @@ if(defined('G5_THEME_SHOP_PATH')) {
 
         <li>
             <div class="inquiry_idtime">
-                <a href="<?php echo G5_SHOP_URL; ?>/orderinquiryview.php?od_id=<?php echo $row['od_id']; ?>&amp;uid=<?php echo $uid; ?>" class="idtime_link"><?php echo $row['od_id']; ?></a>
-                <span class="idtime_time"><?php echo substr($row['od_time'],2,25); ?></span>
+                <a href="<?=G5_SHOP_URL; ?>/orderinquiryview.php?od_id=<?=$row['od_id']; ?>&amp;uid=<?=$uid; ?>" class="idtime_link"><?=$row['od_id']; ?></a>
+                <span class="idtime_time"><?=substr($row['od_time'],2,25); ?></span>
             </div>
             <div class="inquiry_name">
-                <?php echo $ct_name; ?>
+                <?=$ct_name; ?>
             </div>
             <div class="inq_wr">
                 <div class="inquiry_price">
-                    <?php echo display_price($row['od_receipt_price']); ?>
+                    <?=display_price($row['od_receipt_price']); ?>
                 </div>
-                <div class="inv_status"><?php echo $od_status; ?></div>
+                <div class="inv_status"><?=$od_status; ?></div>
             </div>
             <div class="inquiry_inv">
-                <?php echo $od_invoice; ?>
+                <?=$od_invoice; ?>
             </div>
         </li>
 

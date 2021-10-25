@@ -8,8 +8,8 @@ $cart_action_url = G5_SHOP_URL.'/cartupdate.php';
 
 <!-- 장바구니 간략 보기 시작 { -->
 <aside id="sbsk" class="sbsk">
-    <h2 class="s_h2">장바구니 <span class="cart-count"><?php echo get_boxcart_datas_count(); ?></span></h2>
-    <form name="skin_frmcartlist" id="skin_sod_bsk_list" method="post" action="<?php echo G5_SHOP_URL.'/cartupdate.php'; ?>">
+    <h2 class="s_h2">장바구니 <span class="cart-count"><?=get_boxcart_datas_count(); ?></span></h2>
+    <form name="skin_frmcartlist" id="skin_sod_bsk_list" method="post" action="<?=G5_SHOP_URL.'/cartupdate.php'; ?>">
     <ul>
     <?php
     $cart_datas = get_boxcart_datas(true);
@@ -45,7 +45,7 @@ $cart_action_url = G5_SHOP_URL.'/cartupdate.php';
     ?>
     </ul>
     <?php if($i){ ?><div class="btn_buy"><button type="submit" class="btn_submit">구매하기</button></div><?php } ?>
-    <a href="<?php echo G5_SHOP_URL; ?>/cart.php" class="go_cart">전체보기</a>
+    <a href="<?=G5_SHOP_URL; ?>/cart.php" class="go_cart">전체보기</a>
     </form>
 </aside>
 <script>

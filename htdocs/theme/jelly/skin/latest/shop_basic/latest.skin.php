@@ -6,7 +6,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$latest_skin_url.'/style.css">', 
 ?>
 
 <div class="lat">
-    <strong class="lat_title"><i class="fa fa-list-ul" aria-hidden="true"></i> <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?php echo $bo_table ?>"><?php echo $bo_subject ?></a></strong>
+    <strong class="lat_title"><i class="fa fa-list-ul" aria-hidden="true"></i> <a href="<?=G5_BBS_URL ?>/board.php?bo_table=<?=$bo_table ?>"><?=$bo_subject ?></a></strong>
     <ul>
     <?php for ($i=0; $i<count($list); $i++) {  ?>
         <li>

@@ -53,7 +53,7 @@ function m_Completepayment( FormOrJson, closeEvent )
 }
 </script>
 
-<script src="<?php echo $g_conf_js_url; ?>"></script>
+<script src="<?=$g_conf_js_url; ?>"></script>
 <script>
 /* Payplus Plug-in 실행 */
 function jsf__pay( form )
@@ -69,7 +69,7 @@ function jsf__pay( form )
 }
 </script>
 
-<form name="nhnkcp_pay_form" id="nhnkcp_pay_form" method="POST" action="<?php echo $order_action_url; ?>" style="display:none">
+<form name="nhnkcp_pay_form" id="nhnkcp_pay_form" method="POST" action="<?=$order_action_url; ?>" style="display:none">
 <?php
     /* ============================================================================== */
     /* =   2. 가맹점 필수 정보 설정                                                 = */
@@ -79,9 +79,9 @@ function jsf__pay( form )
     // 요청종류 : 승인(pay)/취소,매입(mod) 요청시 사용
 ?>
     <input type="hidden" name="req_tx"          value="pay">
-    <input type="hidden" name="site_cd"         value="<?php echo $default['de_kcp_mid']; ?>">
-    <input type="hidden" name="site_name"       value="<?php echo $g_conf_site_name; ?>">
-    <input type="hidden" name="def_site_cd"     value="<?php echo $default['de_kcp_mid']; ?>">
+    <input type="hidden" name="site_cd"         value="<?=$default['de_kcp_mid']; ?>">
+    <input type="hidden" name="site_name"       value="<?=$g_conf_site_name; ?>">
+    <input type="hidden" name="def_site_cd"     value="<?=$default['de_kcp_mid']; ?>">
     <input type="hidden" name="od_settle_case"  value="">
     <input type="hidden" name="nhnkcp_pay_case" value="">
 <?php
@@ -92,9 +92,9 @@ function jsf__pay( form )
     */
 ?>
     <input type="hidden" name="pay_method"  value="">
-    <input type="hidden" name="ordr_idxx"   value="<?php echo $od_id; ?>">
-    <input type="hidden" name="good_name"   value="<?php echo isset($goods) ? get_text($goods) : ''; ?>">
-    <input type="hidden" name="good_mny"    value="<?php echo $tot_price; ?>">
+    <input type="hidden" name="ordr_idxx"   value="<?=$od_id; ?>">
+    <input type="hidden" name="good_name"   value="<?=isset($goods) ? get_text($goods) : ''; ?>">
+    <input type="hidden" name="good_mny"    value="<?=$tot_price; ?>">
     <input type="hidden" name="buyr_name"   value="">
     <input type="hidden" name="buyr_mail"   value="">
     <input type="hidden" name="buyr_tel1"   value="">
@@ -183,13 +183,13 @@ function jsf__pay( form )
     <input type="hidden" name="escw_used" value="Y">
 
     <!-- 에스크로 결제처리 모드 : 에스크로: Y, 일반: N, KCP 설정 조건: O -->
-    <input type="hidden" name="pay_mod" value="<?php echo ($default['de_escrow_use']?"O":"N"); ?>">
+    <input type="hidden" name="pay_mod" value="<?=($default['de_escrow_use']?"O":"N"); ?>">
 
     <!-- 배송 소요일 : 예상 배송 소요일을 입력 -->
     <input type="hidden" name="deli_term" value="03">
 
     <!-- 장바구니 상품 개수 : 장바구니에 담겨있는 상품의 개수를 입력 -->
-    <input type="hidden" name="bask_cntx" value="<?php echo isset($goods_count) ? ((int) $goods_count + 1) : 0; ?>">
+    <input type="hidden" name="bask_cntx" value="<?=isset($goods_count) ? ((int) $goods_count + 1) : 0; ?>">
 
     <!-- 장바구니 상품 상세 정보 (자바 스크립트 샘플(create_goodInfo()) 참고) -->
     <input type="hidden" name="good_info" value="">
@@ -245,7 +245,7 @@ function jsf__pay( form )
          ※ 해당 은행을 결제창에서 보이게 합니다.(은행코드는 매뉴얼을 참조) */
 ?>
 
-<input type="hidden" name="kcp_noint"       value="<?php echo ($default['de_card_noint_use'] ? '' : 'N'); ?>">
+<input type="hidden" name="kcp_noint"       value="<?=($default['de_card_noint_use'] ? '' : 'N'); ?>">
 
 <?php
 if($default['de_tax_flag_use']) {

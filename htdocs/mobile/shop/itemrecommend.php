@@ -19,11 +19,11 @@ include_once(G5_PATH.'/head.sub.php');
 ?>
 
 <div id="sit_rec_new" class="new_win">
-    <h1 id="win_title"><?php echo $g5['title']; ?></h1>
+    <h1 id="win_title"><?=$g5['title']; ?></h1>
 
     <form name="fitemrecommend" method="post" action="./itemrecommendmail.php" autocomplete="off" onsubmit="return fitemrecommend_check(this);">
-    <input type="hidden" name="token" value="<?php echo $token; ?>">
-    <input type="hidden" name="it_id" value="<?php echo $it_id; ?>">
+    <input type="hidden" name="token" value="<?=$token; ?>">
+    <input type="hidden" name="it_id" value="<?=$it_id; ?>">
 
     <div class="new_win_con form_01">
         <ul>

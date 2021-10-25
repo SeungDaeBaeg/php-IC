@@ -6,7 +6,7 @@ if( ! is_inicis_simple_pay() || ('inicis' == $default['de_pg_service']) ){    //
     return;
 }
 ?>
-<input type="hidden" name="good_mny"          value="<?php echo $tot_price ?>" >
+<input type="hidden" name="good_mny"          value="<?=$tot_price ?>" >
 <input type="hidden" name="res_cd"            value="">                                     <!-- 결과 코드          -->
 
 <input type="hidden" name="P_HASH"            value="">

@@ -75,19 +75,19 @@ if(!sql_query(" select pp_cash from {$g5['g5_shop_personalpay_table']} limit 1 "
 ?>
 
 <form name="fpersonalpayform" action="./personalpayformupdate.php" method="post" onsubmit="return form_check(this);">
-<input type="hidden" name="w" value="<?php echo $w; ?>">
-<input type="hidden" name="pp_id" value="<?php echo $pp_id; ?>">
-<input type="hidden" name="sst" value="<?php echo $sst; ?>">
-<input type="hidden" name="sod" value="<?php echo $sod; ?>">
-<input type="hidden" name="sfl" value="<?php echo $sfl; ?>">
-<input type="hidden" name="stx" value="<?php echo $stx; ?>">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
-<input type="hidden" name="popup" value="<?php echo $popup; ?>">
+<input type="hidden" name="w" value="<?=$w; ?>">
+<input type="hidden" name="pp_id" value="<?=$pp_id; ?>">
+<input type="hidden" name="sst" value="<?=$sst; ?>">
+<input type="hidden" name="sod" value="<?=$sod; ?>">
+<input type="hidden" name="sfl" value="<?=$sfl; ?>">
+<input type="hidden" name="stx" value="<?=$stx; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
+<input type="hidden" name="popup" value="<?=$popup; ?>">
 <?php if($popup == 'yes') { ?>
 <input type="hidden" name="pp_use" value="1">
 <?php } ?>
 
-<?php echo $wrp_tag_st; ?>
+<?=$wrp_tag_st; ?>
 
     <section id="anc_spp_info">
         <h2 class="h2_frm">주문 정보</h2>
@@ -106,19 +106,19 @@ if(!sql_query(" select pp_cash from {$g5['g5_shop_personalpay_table']} limit 1 "
             <tbody>
             <tr>
                 <th scope="row"><label for="pp_name">이름</label></th>
-                <td><input type="text" name="pp_name" value="<?php echo get_text($pp['pp_name']); ?>" id="pp_name" required class="required frm_input"></td>
+                <td><input type="text" name="pp_name" value="<?=get_text($pp['pp_name']); ?>" id="pp_name" required class="required frm_input"></td>
             </tr>
             <tr>
                 <th scope="row"><label for="pp_price">주문금액</label></th>
-                <td><input type="text" name="pp_price" value="<?php echo $pp['pp_price']; ?>" id="pp_price" required class="required frm_input" size="15"> 원</td>
+                <td><input type="text" name="pp_price" value="<?=$pp['pp_price']; ?>" id="pp_price" required class="required frm_input" size="15"> 원</td>
             </tr>
             <tr>
                 <th scope="row"><label for="od_id">주문번호</label></th>
-                <td><input type="text" name="od_id" value="<?php echo $pp['od_id'] ? $pp['od_id'] : ''; ?>" id="od_id" class="frm_input" size="20"></td>
+                <td><input type="text" name="od_id" value="<?=$pp['od_id'] ? $pp['od_id'] : ''; ?>" id="od_id" class="frm_input" size="20"></td>
             </tr>
             <tr>
                 <th scope="row"><label for="pp_content">내용</label></th>
-                <td><textarea name="pp_content" id="pp_content" rows="8"><?php echo html_purifier($pp['pp_content']); ?></textarea></td>
+                <td><textarea name="pp_content" id="pp_content" rows="8"><?=html_purifier($pp['pp_content']); ?></textarea></td>
             </tr>
             </tbody>
             </table>
@@ -130,7 +130,7 @@ if(!sql_query(" select pp_cash from {$g5['g5_shop_personalpay_table']} limit 1 "
     <?php if($popup != 'yes') { ?>
     <section id="anc_spp_pay" class="cbox">
         <h2 class="h2_frm">결제 정보</h2>
-        <?php echo $pg_anchor; ?>
+        <?=$pg_anchor; ?>
         <div class="local_desc02 local_desc">
             <p>결제 관련 정보입니다.</p>
         </div>
@@ -146,27 +146,27 @@ if(!sql_query(" select pp_cash from {$g5['g5_shop_personalpay_table']} limit 1 "
             <?php if($popup != 'yes') { ?>
             <tr>
                 <th scope="row"><label for="pp_receipt_price">결제금액</label></th>
-                <td><input type="text" name="pp_receipt_price" value="<?php echo $pp['pp_receipt_price'] ? $pp['pp_receipt_price'] : ''; ?>" id="pp_receipt_price" class="frm_input" size="15"> 원</td>
+                <td><input type="text" name="pp_receipt_price" value="<?=$pp['pp_receipt_price'] ? $pp['pp_receipt_price'] : ''; ?>" id="pp_receipt_price" class="frm_input" size="15"> 원</td>
             </tr>
             <tr>
                 <th scope="row"><label for="pp_settle_case">결제방법</label></th>
                 <td>
                     <select name="pp_settle_case" id="pp_settle_case">
-                        <option value="" <?php echo get_selected($pp['pp_settle_case'], ''); ?>>선택</option>
-                        <option value="무통장" <?php echo get_selected($pp['pp_settle_case'], '무통장'); ?>>무통장</option>
-                        <option value="계좌이체" <?php echo get_selected($pp['pp_settle_case'], '계좌이체'); ?>>계좌이체</option>
-                        <option value="가상계좌" <?php echo get_selected($pp['pp_settle_case'], '가상계좌'); ?>>가상계좌</option>
-                        <option value="신용카드" <?php echo get_selected($pp['pp_settle_case'], '신용카드'); ?>>신용카드</option>
-                        <option value="휴대폰" <?php echo get_selected($pp['pp_settle_case'], '휴대폰'); ?>>휴대폰</option>
+                        <option value="" <?=get_selected($pp['pp_settle_case'], ''); ?>>선택</option>
+                        <option value="무통장" <?=get_selected($pp['pp_settle_case'], '무통장'); ?>>무통장</option>
+                        <option value="계좌이체" <?=get_selected($pp['pp_settle_case'], '계좌이체'); ?>>계좌이체</option>
+                        <option value="가상계좌" <?=get_selected($pp['pp_settle_case'], '가상계좌'); ?>>가상계좌</option>
+                        <option value="신용카드" <?=get_selected($pp['pp_settle_case'], '신용카드'); ?>>신용카드</option>
+                        <option value="휴대폰" <?=get_selected($pp['pp_settle_case'], '휴대폰'); ?>>휴대폰</option>
                     </select>
                 </td>
             </tr>
             <tr>
                 <th scope="row"><label for="pp_receipt_time">결제일시</label></th>
                 <td>
-                    <input type="checkbox" name="pp_receipt_chk" id="pp_receipt_chk" value="<?php echo date("Y-m-d H:i:s", G5_SERVER_TIME); ?>" onclick="if (this.checked == true) this.form.pp_receipt_time.value=this.form.pp_receipt_chk.value; else this.form.pp_receipt_time.value = this.form.pp_receipt_time.defaultValue;">
+                    <input type="checkbox" name="pp_receipt_chk" id="pp_receipt_chk" value="<?=date("Y-m-d H:i:s", G5_SERVER_TIME); ?>" onclick="if (this.checked == true) this.form.pp_receipt_time.value=this.form.pp_receipt_chk.value; else this.form.pp_receipt_time.value = this.form.pp_receipt_time.defaultValue;">
                     <label for="pp_receipt_chk">현재 시간으로 설정</label><br>
-                    <input type="text" name="pp_receipt_time" value="<?php echo is_null_time($pp['pp_receipt_time']) ? "" : $pp['pp_receipt_time']; ?>" id="pp_receipt_time" class="frm_input" maxlength="19">
+                    <input type="text" name="pp_receipt_time" value="<?=is_null_time($pp['pp_receipt_time']) ? "" : $pp['pp_receipt_time']; ?>" id="pp_receipt_time" class="frm_input" maxlength="19">
                 </td>
             </tr>
             <?php
@@ -214,9 +214,9 @@ if(!sql_query(" select pp_cash from {$g5['g5_shop_personalpay_table']} limit 1 "
                         $cash_receipt_script = 'window.open(\''.G5_CASH_RECEIPT_URL.$default['de_kcp_mid'].'&orderid='.$pp_id.'&bill_yn=Y&authno='.$cash['receipt_no'].'\', \'taxsave_receipt\', \'width=360,height=647,scrollbars=0,menus=0\');';
                     }
                 ?>
-                    <a href="javascript:;" onclick="<?php echo $cash_receipt_script; ?>">현금영수증 확인</a>
+                    <a href="javascript:;" onclick="<?=$cash_receipt_script; ?>">현금영수증 확인</a>
                 <?php } else { ?>
-                    <a href="javascript:;" onclick="window.open('<?php echo G5_SHOP_URL; ?>/taxsave.php?tx=personalpay&od_id=<?php echo $pp_id; ?>', 'taxsave', 'width=550,height=400,scrollbars=1,menus=0');">현금영수증 발급</a>
+                    <a href="javascript:;" onclick="window.open('<?=G5_SHOP_URL; ?>/taxsave.php?tx=personalpay&od_id=<?=$pp_id; ?>', 'taxsave', 'width=550,height=400,scrollbars=1,menus=0');">현금영수증 발급</a>
                 <?php } ?>
                 </td>
             </tr>
@@ -227,14 +227,14 @@ if(!sql_query(" select pp_cash from {$g5['g5_shop_personalpay_table']} limit 1 "
             <?php } ?>
             <tr>
                 <th scope="row"><label for="pp_shop_memo">상점메모</label></th>
-                <td><textarea name="pp_shop_memo" id="pp_shop_memo" rows="8"><?php echo $pp['pp_shop_memo']; ?></textarea></td>
+                <td><textarea name="pp_shop_memo" id="pp_shop_memo" rows="8"><?=$pp['pp_shop_memo']; ?></textarea></td>
             </tr>
             <tr>
                 <th scope="row"><label for="pp_use">사용</label></th>
                 <td>
                     <select name="pp_use" id="pp_use">
-                        <option value="1" <?php echo get_selected($pp['pp_use'], 1); ?>>사용함</option>
-                        <option value="0" <?php echo get_selected($pp['pp_use'], 0); ?>>사용안함</option>
+                        <option value="1" <?=get_selected($pp['pp_use'], 1); ?>>사용함</option>
+                        <option value="0" <?=get_selected($pp['pp_use'], 0); ?>>사용안함</option>
                     </select>
                 </td>
             </tr>
@@ -247,19 +247,19 @@ if(!sql_query(" select pp_cash from {$g5['g5_shop_personalpay_table']} limit 1 "
     <?php
     $btn_class = (isset($popup) && $popup === 'yes') ? 'btn_win' : 'btn_fixed_top';
     ?>
-    <div class="<?php echo $btn_class; ?>">
+    <div class="<?=$btn_class; ?>">
         <input type="submit" value="확인" class="btn_submit btn" accesskey="s">
         <?php if($popup == 'yes') { ?>
         <button type="button" onclick="self.close();" class="btn btn_02">닫기</button>
         <?php } else { ?>
-        <a href="./personalpaylist.php?<?php echo $qstr; ?>" class="btn btn_02">목록</a>
+        <a href="./personalpaylist.php?<?=$qstr; ?>" class="btn btn_02">목록</a>
         <?php } ?>
         <?php if($w == 'u') { ?>
-        <a href="./personalpayformupdate.php?w=d&amp;pp_id=<?php echo $pp['pp_id']; ?>" onclick="return delete_confirm(this);" class="btn btn_02">삭제</a>
+        <a href="./personalpayformupdate.php?w=d&amp;pp_id=<?=$pp['pp_id']; ?>" onclick="return delete_confirm(this);" class="btn btn_02">삭제</a>
         <?php } ?>
     </div>
 
-<?php echo $wrp_tag_end; ?>
+<?=$wrp_tag_end; ?>
 </form>
 
 <script>

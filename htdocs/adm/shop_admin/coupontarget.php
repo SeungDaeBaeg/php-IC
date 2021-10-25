@@ -58,21 +58,21 @@ $qstr1 = 'sch_target='.$sch_target.'&amp;sch_word='.urlencode($sch_word);
 ?>
 
 <div id="sch_target_frm" class="new_win scp_new_win">
-    <h1>쿠폰 적용 <?php echo $html_title; ?>선택</h1>
+    <h1>쿠폰 적용 <?=$html_title; ?>선택</h1>
 
     <div class="local_desc01 local_desc">
         <p>
-            쿠폰을 적용할 <?php echo $t_desc1; ?> 선택하세요.<br>
-            <?php echo $t_desc2; ?> 많을 경우에는 검색 기능을 이용하세요.
+            쿠폰을 적용할 <?=$t_desc1; ?> 선택하세요.<br>
+            <?=$t_desc2; ?> 많을 경우에는 검색 기능을 이용하세요.
         </p>
     </div>
 
     <form name="ftarget" method="get">
-    <input type="hidden" name="sch_target" value="<?php echo preg_replace('/[^a-zA-Z0-9]/', '', strip_tags($_GET['sch_target'])); ?>">
+    <input type="hidden" name="sch_target" value="<?=preg_replace('/[^a-zA-Z0-9]/', '', strip_tags($_GET['sch_target'])); ?>">
 
     <div id="scp_list_find">
-        <label for="sch_word"><?php echo $t_name; ?></label>
-        <input type="text" name="sch_word" id="sch_word" value="<?php echo get_text($sch_word); ?>" class="frm_input required" required size="20">
+        <label for="sch_word"><?=$t_name; ?></label>
+        <input type="text" name="sch_word" id="sch_word" value="<?=get_text($sch_word); ?>" class="frm_input required" required size="20">
         <input type="submit" value="검색" class="btn_frmline">
     </div>
     
@@ -81,8 +81,8 @@ $qstr1 = 'sch_target='.$sch_target.'&amp;sch_word='.urlencode($sch_word);
         <caption>검색결과</caption>
         <thead>
         <tr>
-            <th scope="col"><?php echo $t_name; ?></th>
-            <th scope="col"><?php echo $t_id; ?></th>
+            <th scope="col"><?=$t_name; ?></th>
+            <th scope="col"><?=$t_id; ?></th>
             <th scope="col">선택</th>
         </tr>
         </thead>
@@ -91,9 +91,9 @@ $qstr1 = 'sch_target='.$sch_target.'&amp;sch_word='.urlencode($sch_word);
         for($i=0; $row=sql_fetch_array($result); $i++) {
         ?>
         <tr>
-            <td class="td_left"><?php echo $row['t_name']; ?></td>
-            <td class="scp_target_code"><?php echo $row['t_id']; ?></td>
-            <td class="td_mng td_mng_s"><button type="button" class="btn btn_03" onclick="sel_target_id('<?php echo $row['t_id']; ?>');">선택</button>
+            <td class="td_left"><?=$row['t_name']; ?></td>
+            <td class="scp_target_code"><?=$row['t_id']; ?></td>
+            <td class="td_mng td_mng_s"><button type="button" class="btn btn_03" onclick="sel_target_id('<?=$row['t_id']; ?>');">선택</button>
         </tr>
         <?php
         }
@@ -106,7 +106,7 @@ $qstr1 = 'sch_target='.$sch_target.'&amp;sch_word='.urlencode($sch_word);
     </div>
     </form>
 
-    <?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, '?'.$qstr1.'&amp;page='); ?>
+    <?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, '?'.$qstr1.'&amp;page='); ?>
 
     <div class="btn_confirm01 btn_confirm win_btn">
         <button type="button" onclick="window.close();" class="btn">닫기</button>

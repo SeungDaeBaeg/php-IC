@@ -6,7 +6,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 ?>
 
 <div id="point" class="new_win">
-    <h1 id="win_title"><i class="fa fa-database" aria-hidden="true"></i> <?php echo $g5['title'] ?></h1>
+    <h1 id="win_title"><i class="fa fa-database" aria-hidden="true"></i> <?=$g5['title'] ?></h1>
     <div class="list_01">
         <ul id="point_ul">
             <?php
@@ -35,14 +35,14 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
             ?>
             <li>
                 <div class="point_wrap01">
-                    <span class="point_log"><?php echo $po_content; ?></span>
-                    <span class="point_date"><?php echo conv_date_format('y-m-d H시', $row['po_datetime']); ?></span>
+                    <span class="point_log"><?=$po_content; ?></span>
+                    <span class="point_date"><?=conv_date_format('y-m-d H시', $row['po_datetime']); ?></span>
                 </div>
                 <div class="point_wrap02">
                     <span class="point_inout"><?php if ($point1) echo $point1; else echo $point2; ?></span>
-                    <span class=" point_date point_expdate<?php echo $expr; ?>">
+                    <span class=" point_date point_expdate<?=$expr; ?>">
                         <?php if ($row['po_expired'] == 1) { ?>
-                        만료: <?php echo substr(str_replace('-', '', $row['po_expire_date']), 2); ?>
+                        만료: <?=substr(str_replace('-', '', $row['po_expire_date']), 2); ?>
                         <?php } else echo $row['po_expire_date'] == '9999-12-31' ? '&nbsp;' : $row['po_expire_date']; ?>
                     </span>
                 </div>
@@ -63,19 +63,19 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
         <div id="point_sum">
             <div class="sum_row">
                 <span class="sum_tit">지급</span>
-                <b class="sum_val"><?php echo $sum_point1; ?></b>
+                <b class="sum_val"><?=$sum_point1; ?></b>
             </div>
             <div class="sum_row">
                 <span class="sum_tit">사용</span>
-                <b class="sum_val"><?php echo $sum_point2; ?></b>
+                <b class="sum_val"><?=$sum_point2; ?></b>
             </div>
             <div class="sum_row">
                 <span class="sum_tit">보유</span>
-                <b class="sum_val"><?php echo number_format($member['mb_point']); ?></b>
+                <b class="sum_val"><?=number_format($member['mb_point']); ?></b>
             </div>
         </div>
 
-        <?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, $_SERVER['SCRIPT_NAME'].'?'.$qstr.'&amp;page='); ?>
+        <?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, $_SERVER['SCRIPT_NAME'].'?'.$qstr.'&amp;page='); ?>
 
         <div class="win_btn"><button type="button" onclick="javascript:window.close();" class="btn_close">창닫기</button></div>
     </div>

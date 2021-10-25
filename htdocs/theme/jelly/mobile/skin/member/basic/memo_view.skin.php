@@ -15,7 +15,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 ?>
 
 <div id="memo_view" class="new_win">
-    <h1 id="win_title"><?php echo $g5['title'] ?></h1>
+    <h1 id="win_title"><?=$g5['title'] ?></h1>
 
     <ul class="win_ul">
         <li><a href="./memo.php?kind=recv" class="selected">받은쪽지</a></li>
@@ -29,28 +29,28 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
             </header>
             <ul id="memo_view_ul">
                 <li class="memo_view_li">
-                    <span class="memo_view_subj"><?php echo $kind_str ?>사람</span>
-                    <strong><?php echo $nick ?></strong>
+                    <span class="memo_view_subj"><?=$kind_str ?>사람</span>
+                    <strong><?=$nick ?></strong>
                 </li>
                 <li class="memo_view_li">
-                    <span class="memo_view_subj"><?php echo $kind_date ?>시간</span>
-                    <strong><?php echo $memo['me_send_datetime'] ?></strong>
+                    <span class="memo_view_subj"><?=$kind_date ?>시간</span>
+                    <strong><?=$memo['me_send_datetime'] ?></strong>
                 </li>
             </ul>
             <p>
-                <?php echo conv_content($memo['me_memo'], 0) ?>
+                <?=conv_content($memo['me_memo'], 0) ?>
             </p>
         </article>
 
         <div class="win_btn">
-            <?php if ($kind == 'recv') { ?><a href="./memo_form.php?me_recv_mb_id=<?php echo $mb['mb_id'] ?>&amp;me_id=<?php echo $memo['me_id'] ?>" class="btn_submit">답장</a><?php } ?>
+            <?php if ($kind == 'recv') { ?><a href="./memo_form.php?me_recv_mb_id=<?=$mb['mb_id'] ?>&amp;me_id=<?=$memo['me_id'] ?>" class="btn_submit">답장</a><?php } ?>
             <?php if($prev_link) { ?>
-            <a href="<?php echo $prev_link ?>" class="btn_b03 btn">이전쪽지</a>
+            <a href="<?=$prev_link ?>" class="btn_b03 btn">이전쪽지</a>
             <?php } ?>
             <?php if($next_link) { ?>
-            <a href="<?php echo $next_link ?>" class="btn_b03 btn">다음쪽지</a>
+            <a href="<?=$next_link ?>" class="btn_b03 btn">다음쪽지</a>
             <?php } ?>
-            <a href="<?php echo $list_link ?>" class="btn_b03 btn">목록보기</a>
+            <a href="<?=$list_link ?>" class="btn_b03 btn">목록보기</a>
             <button type="button" onclick="window.close();" class="btn_close">창닫기</button>
         </div>
     </div>

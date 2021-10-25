@@ -5,34 +5,34 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">', 0);
 ?>
 
-<script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
+<script src="<?=G5_JS_URL; ?>/viewimageresize.js"></script>
 
 <!-- 전체 상품 문의 목록 시작 { -->
-<form method="get" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
+<form method="get" action="<?=$_SERVER['SCRIPT_NAME']; ?>">
 <div id="sqa_sch">
     <div class="sch_wr">
         <label for="sfl" class="sound_only">검색항목</label>
         <select name="sfl" required id="sfl">
             <option value="">선택</option>
-            <option value="b.it_name"    <?php echo get_selected($sfl, "b.it_name", true); ?>>상품명</option>
-            <option value="a.it_id"      <?php echo get_selected($sfl, "a.it_id"); ?>>상품코드</option>
-            <option value="a.iq_subject" <?php echo get_selected($sfl, "a.iq_subject"); ?>>문의제목</option>
-            <option value="a.iq_question"<?php echo get_selected($sfl, "a.iq_question"); ?>>문의내용</option>
-            <option value="a.iq_name"    <?php echo get_selected($sfl, "a.it_id"); ?>>작성자명</option>
-            <option value="a.mb_id"      <?php echo get_selected($sfl, "a.mb_id"); ?>>작성자아이디</option>
+            <option value="b.it_name"    <?=get_selected($sfl, "b.it_name", true); ?>>상품명</option>
+            <option value="a.it_id"      <?=get_selected($sfl, "a.it_id"); ?>>상품코드</option>
+            <option value="a.iq_subject" <?=get_selected($sfl, "a.iq_subject"); ?>>문의제목</option>
+            <option value="a.iq_question"<?=get_selected($sfl, "a.iq_question"); ?>>문의내용</option>
+            <option value="a.iq_name"    <?=get_selected($sfl, "a.it_id"); ?>>작성자명</option>
+            <option value="a.mb_id"      <?=get_selected($sfl, "a.mb_id"); ?>>작성자아이디</option>
         </select>
 
         <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-        <input type="text" name="stx" value="<?php echo $stx; ?>" id="stx" required class="frm_input">
+        <input type="text" name="stx" value="<?=$stx; ?>" id="stx" required class="frm_input">
         <button type="submit" value="검색" class="sch_btn"><i class="fa fa-search" aria-hidden="true"></i><span class="sound_only">검색</span></button>
     </div>
-    <a href="<?php echo $_SERVER['SCRIPT_NAME']; ?>">전체보기</a>
+    <a href="<?=$_SERVER['SCRIPT_NAME']; ?>">전체보기</a>
 </div>
 </form>
 
 <div id="sqa">
 
-    <!-- <p><?php echo $config['cf_title']; ?> 전체 상품문의 목록입니다.</p> -->
+    <!-- <p><?=$config['cf_title']; ?> 전체 상품문의 목록입니다.</p> -->
 
     <?php
     $thumbnail_width = 500;
@@ -76,38 +76,38 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">',
     <li>
 
         <div class="sqa_img">
-            <a href="<?php echo $it_href; ?>">
-                <?php echo get_it_image($row['it_id'], 70, 70); ?>
-                <span><?php echo $row['it_name']; ?></span>
+            <a href="<?=$it_href; ?>">
+                <?=get_it_image($row['it_id'], 70, 70); ?>
+                <span><?=$row['it_name']; ?></span>
 
             </a>
         </div>
 
         <section class="sqa_section">
-            <h2><span class="<?php echo $iq_style; ?>"><?php echo $iq_stats; ?></span> <?php echo $iq_subject; ?></h2>
+            <h2><span class="<?=$iq_style; ?>"><?=$iq_stats; ?></span> <?=$iq_subject; ?></h2>
 
             <dl class="sqa_dl">
                 <dt>작성자</dt>
-                <dd><i class="fa fa-user" aria-hidden="true"></i> <?php echo get_text($row['iq_name']); ?></dd>
+                <dd><i class="fa fa-user" aria-hidden="true"></i> <?=get_text($row['iq_name']); ?></dd>
                 <dt>작성일</dt>
-                <dd><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo substr($row['iq_time'],2,8); ?></dd>
+                <dd><i class="fa fa-clock-o" aria-hidden="true"></i> <?=substr($row['iq_time'],2,8); ?></dd>
             </dl>
 
-            <div id="sqa_con_<?php echo $i; ?>" class="sqa_con" style="display:none;">
+            <div id="sqa_con_<?=$i; ?>" class="sqa_con" style="display:none;">
                 <div class="sit_qa_qaq">
                     <strong class="sound_only">문의내용</strong>
                     <span class="qa_alp">Q</span>
-                    <?php echo $iq_question; // 상품 문의 내용 ?>
+                    <?=$iq_question; // 상품 문의 내용 ?>
                 </div>
                 <?php if(!$is_secret) { ?>
                 <div class="sit_qa_qaa">
                      <strong class="sound_only">답변</strong>
                     <span class="qa_alp">A</span>
-                    <?php echo $iq_answer; ?>
+                    <?=$iq_answer; ?>
                 </div>
                 <?php } ?>
             </div>
-            <div class="sqa_con_btn"><button class="sqa_con_<?php echo $i; ?>">내용보기 <i class="fa fa-caret-down" aria-hidden="true"></i></button></div>
+            <div class="sqa_con_btn"><button class="sqa_con_<?=$i; ?>">내용보기 <i class="fa fa-caret-down" aria-hidden="true"></i></button></div>
 
         </section>
 
@@ -121,7 +121,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">',
     ?>
 </div>
 
-<?php echo get_paging($config['cf_mobile_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
+<?=get_paging($config['cf_mobile_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
 
 <script>
 $(function(){

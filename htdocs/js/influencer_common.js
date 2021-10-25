@@ -112,22 +112,47 @@ var data = {
             url:url,
             data:data
         })
-            .done(function(res){
-                console.log(res);
-                try {
-                    res = JSON.parse(res);
-                    if(res.status === 'OOPS') {
-                        alert(res.msg);
-                        return;
-                    }
-                    CB(res.data);
+        .done(function(res){
+            console.log(res);
+            try {
+                res = JSON.parse(res);
+                if(res.status === 'OOPS') {
+                    alert(res.msg);
+                    return;
                 }
-                catch {
-                    alert('ajax 에러가 등장했습니다.');
-                }
-            })
-            .fail(function(){
-                alert('데이터를 가져오는데 실패하였습니다.');
-            })
+                CB(res.data);
+            }
+            catch {
+                alert('ajax 에러가 등장했습니다.');
+            }
+        })
+        .fail(function(){
+            alert('데이터를 가져오는데 실패하였습니다.');
+        })
+    },
+    getLoginId: function() {
+        return g5_logined_id;
+    },
+    isLogin: function() {
+        return this.getLoginId() !== '';
     }
+};
+
+var url = {
+    getClickUrl: function(obj) {
+        if(_.get(obj, 'm', '') === '') {
+            return false;
+        }
+        return g5_url + '/tracking/click.php?' + this.httpBuildQuery(obj);
+    },
+    httpBuildQuery(jsonObj) {
+        var keys = Object.keys(jsonObj);
+        var values = keys.map(key => jsonObj[key]);
+
+        return keys.filter((key, index) => {
+            return !_.isEmpty(values[index]);
+        }).map((key, index) => {
+            return `${key}=${values[index]}`;
+        }).join("&");
+    },
 };

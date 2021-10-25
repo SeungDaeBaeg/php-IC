@@ -23,12 +23,12 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 ?>
 
 <div id="copymove" class="new_win">
-    <h1 id="win_title"><?php echo $g5['title'] ?></h1>
+    <h1 id="win_title"><?=$g5['title'] ?></h1>
 
     <form name="fboardmoveall" method="post" action="./emoticon_move_update.php" onsubmit="return fboardmoveall_submit(this);">
-    <input type="hidden" name="sw" value="<?php echo $sw ?>">
-    <input type="hidden" name="fo_no_list" value="<?php echo $fo_no_list ?>">
-    <input type="hidden" name="url" value="<?php echo clean_xss_tags(strip_tags($_SERVER['HTTP_REFERER'])); ?>">
+    <input type="hidden" name="sw" value="<?=$sw ?>">
+    <input type="hidden" name="fo_no_list" value="<?=$fo_no_list ?>">
+    <input type="hidden" name="url" value="<?=clean_xss_tags(strip_tags($_SERVER['HTTP_REFERER'])); ?>">
 
     <div class="tbl_head01 tbl_wrap">
         <table>
@@ -43,10 +43,10 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         <?php for ($i=0; $i<count($list); $i++) { ?>
         <tr>
             <td class="td_chk">
-                <input type="radio" value="<?php echo $list[$i]['fg_no'] ?>" id="chk<?php echo $i ?>" name="chk_fg_no[]">
+                <input type="radio" value="<?=$list[$i]['fg_no'] ?>" id="chk<?=$i ?>" name="chk_fg_no[]">
             </td>
             <td>
-                <label for="chk<?php echo $i ?>"><?php echo $list[$i]['fg_name'] ?></label>
+                <label for="chk<?=$i ?>"><?=$list[$i]['fg_name'] ?></label>
             </td>
         </tr>
         <?php } ?>

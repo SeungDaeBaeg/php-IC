@@ -29,14 +29,14 @@ $od_misu = abs($od['od_misu']);
 ?>
 
 <form name="forderpartcancel" method="post" action="./orderpartcancelupdate.php" onsubmit="return form_check(this);">
-<input type="hidden" name="od_id" value="<?php echo $od_id; ?>">
+<input type="hidden" name="od_id" value="<?=$od_id; ?>">
 
 <div class="new_win">
-    <h1><?php echo $od['od_settle_case']; ?> 부분취소</h1>
+    <h1><?=$od['od_settle_case']; ?> 부분취소</h1>
 
     <div class="tbl_frm01 tbl_wrap">
         <table>
-        <caption><?php echo $g5['title']; ?> 입력</caption>
+        <caption><?=$g5['title']; ?> 입력</caption>
         <colgroup>
             <col class="grid_4">
             <col>
@@ -44,7 +44,7 @@ $od_misu = abs($od['od_misu']);
         <tbody>
         <tr>
             <th scope="row">취소가능 금액</th>
-            <td><?php echo display_price($od_misu); ?></td>
+            <td><?=display_price($od_misu); ?></td>
         </tr>
         </tr>
         <tr>
@@ -73,7 +73,7 @@ $od_misu = abs($od['od_misu']);
 <script>
 function form_check(f)
 {
-    var max_mny = parseInt(<?php echo $od_misu; ?>);
+    var max_mny = parseInt(<?=$od_misu; ?>);
     var tax_mny = parseInt(f.mod_tax_mny.value.replace("/[^0-9]/g", ""));
     var free_mny = 0;
     if(typeof f.mod_free.mny.value != "undefined")

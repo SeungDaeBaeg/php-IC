@@ -16,7 +16,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_JS_URL.'/owlcarousel/owl.carou
 	    if( isset($list) && is_array($list) ){
 	        for ($i=0; $i<count($list); $i++) {
 	        ?>
-	        <li class="item"><a href="<?php echo G5_BBS_URL ?>/search.php?sfl=wr_subject&amp;sop=and&amp;stx=<?php echo urlencode($list[$i]['pp_word']) ?>"><?php echo get_text($list[$i]['pp_word']); ?></a></li>
+	        <li class="item"><a href="<?=G5_BBS_URL ?>/search.php?sfl=wr_subject&amp;sop=and&amp;stx=<?=urlencode($list[$i]['pp_word']) ?>"><?=get_text($list[$i]['pp_word']); ?></a></li>
 	        <?php
 	        }   //end for
 	    }   //end if

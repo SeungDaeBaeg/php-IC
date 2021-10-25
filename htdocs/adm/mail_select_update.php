@@ -82,4 +82,4 @@ for ($i=0; $i<count($member_list); $i++)
     }
 }
 ?>
-<script> document.all.cont.innerHTML += "<br><br>총 <?php echo number_format($cnt) ?>건 발송<br><br><font color=crimson><b>[끝]</b></font>"; document.body.scrollTop += 1000; </script>
+<script> document.all.cont.innerHTML += "<br><br>총 <?=number_format($cnt) ?>건 발송<br><br><font color=crimson><b>[끝]</b></font>"; document.body.scrollTop += 1000; </script>

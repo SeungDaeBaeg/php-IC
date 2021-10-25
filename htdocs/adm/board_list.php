@@ -55,20 +55,20 @@ $colspan = 15;
 ?>
 
 <div class="local_ov01 local_ov">
-    <?php echo $listall ?>
-    <span class="btn_ov01"><span class="ov_txt">생성된 게시판수</span><span class="ov_num"> <?php echo number_format($total_count) ?>개</span></span>
+    <?=$listall ?>
+    <span class="btn_ov01"><span class="ov_txt">생성된 게시판수</span><span class="ov_num"> <?=number_format($total_count) ?>개</span></span>
 </div>
 
 <form name="fsearch" id="fsearch" class="local_sch01 local_sch" method="get">
 
 <label for="sfl" class="sound_only">검색대상</label>
 <select name="sfl" id="sfl">
-    <option value="bo_table"<?php echo get_selected($sfl, "bo_table", true); ?>>TABLE</option>
-    <option value="bo_subject"<?php echo get_selected($sfl, "bo_subject"); ?>>제목</option>
-    <option value="a.gr_id"<?php echo get_selected($sfl, "a.gr_id"); ?>>그룹ID</option>
+    <option value="bo_table"<?=get_selected($sfl, "bo_table", true); ?>>TABLE</option>
+    <option value="bo_subject"<?=get_selected($sfl, "bo_subject"); ?>>제목</option>
+    <option value="a.gr_id"<?=get_selected($sfl, "a.gr_id"); ?>>그룹ID</option>
 </select>
 <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-<input type="text" name="stx" value="<?php echo $stx ?>" id="stx" required class="required frm_input">
+<input type="text" name="stx" value="<?=$stx ?>" id="stx" required class="required frm_input">
 <input type="submit" value="검색" class="btn_submit">
 
 </form>
@@ -76,34 +76,34 @@ $colspan = 15;
 
 
 <form name="fboardlist" id="fboardlist" action="./board_list_update.php" onsubmit="return fboardlist_submit(this);" method="post">
-<input type="hidden" name="sst" value="<?php echo $sst ?>">
-<input type="hidden" name="sod" value="<?php echo $sod ?>">
-<input type="hidden" name="sfl" value="<?php echo $sfl ?>">
-<input type="hidden" name="stx" value="<?php echo $stx ?>">
-<input type="hidden" name="page" value="<?php echo $page ?>">
-<input type="hidden" name="token" value="<?php echo isset($token) ? $token : ''; ?>">
+<input type="hidden" name="sst" value="<?=$sst ?>">
+<input type="hidden" name="sod" value="<?=$sod ?>">
+<input type="hidden" name="sfl" value="<?=$sfl ?>">
+<input type="hidden" name="stx" value="<?=$stx ?>">
+<input type="hidden" name="page" value="<?=$page ?>">
+<input type="hidden" name="token" value="<?=isset($token) ? $token : ''; ?>">
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">
             <label for="chkall" class="sound_only">게시판 전체</label>
             <input type="checkbox" name="chkall" value="1" id="chkall" onclick="check_all(this.form)">
         </th>
-        <th scope="col"><?php echo subject_sort_link('a.gr_id') ?>그룹</a></th>
-        <th scope="col"><?php echo subject_sort_link('bo_table') ?>TABLE</a></th>
-        <th scope="col"><?php echo subject_sort_link('bo_skin', '', 'desc') ?>스킨</a></th>
-        <th scope="col"><?php echo subject_sort_link('bo_mobile_skin', '', 'desc') ?>모바일<br>스킨</a></th>
-        <th scope="col"><?php echo subject_sort_link('bo_subject') ?>제목</a></th>
+        <th scope="col"><?=subject_sort_link('a.gr_id') ?>그룹</a></th>
+        <th scope="col"><?=subject_sort_link('bo_table') ?>TABLE</a></th>
+        <th scope="col"><?=subject_sort_link('bo_skin', '', 'desc') ?>스킨</a></th>
+        <th scope="col"><?=subject_sort_link('bo_mobile_skin', '', 'desc') ?>모바일<br>스킨</a></th>
+        <th scope="col"><?=subject_sort_link('bo_subject') ?>제목</a></th>
         <th scope="col">읽기P<span class="sound_only">포인트</span></th>
         <th scope="col">쓰기P<span class="sound_only">포인트</span></th>
         <th scope="col">댓글P<span class="sound_only">포인트</span></th>
         <th scope="col">다운P<span class="sound_only">포인트</span></th>
-        <th scope="col"><?php echo subject_sort_link('bo_use_sns') ?>SNS<br>사용</a></th>
-        <th scope="col"><?php echo subject_sort_link('bo_use_search') ?>검색<br>사용</a></th>
-        <th scope="col"><?php echo subject_sort_link('bo_order') ?>출력<br>순서</a></th>
+        <th scope="col"><?=subject_sort_link('bo_use_sns') ?>SNS<br>사용</a></th>
+        <th scope="col"><?=subject_sort_link('bo_use_search') ?>검색<br>사용</a></th>
+        <th scope="col"><?=subject_sort_link('bo_order') ?>출력<br>순서</a></th>
         <th scope="col">접속기기</th>
         <th scope="col">관리</th>
     </tr>
@@ -117,73 +117,73 @@ $colspan = 15;
         $bg = 'bg'.($i%2);
     ?>
 
-    <tr class="<?php echo $bg; ?>">
+    <tr class="<?=$bg; ?>">
         <td class="td_chk">
-            <label for="chk_<?php echo $i; ?>" class="sound_only"><?php echo get_text($row['bo_subject']) ?></label>
-            <input type="checkbox" name="chk[]" value="<?php echo $i ?>" id="chk_<?php echo $i ?>">
+            <label for="chk_<?=$i; ?>" class="sound_only"><?=get_text($row['bo_subject']) ?></label>
+            <input type="checkbox" name="chk[]" value="<?=$i ?>" id="chk_<?=$i ?>">
         </td>
         <td>
             <?php if ($is_admin == 'super'){ ?>
-                <?php echo get_group_select("gr_id[$i]", $row['gr_id']) ?>
+                <?=get_group_select("gr_id[$i]", $row['gr_id']) ?>
             <?php }else{ ?>
-                <input type="hidden" name="gr_id[<?php echo $i ?>]" value="<?php echo $row['gr_id'] ?>"><?php echo $row['gr_subject'] ?>
+                <input type="hidden" name="gr_id[<?=$i ?>]" value="<?=$row['gr_id'] ?>"><?=$row['gr_subject'] ?>
             <?php } ?>
         </td>
         <td>
-            <input type="hidden" name="board_table[<?php echo $i ?>]" value="<?php echo $row['bo_table'] ?>">
-            <a href="<?php echo get_pretty_url($row['bo_table']) ?>"><?php echo $row['bo_table'] ?></a>
+            <input type="hidden" name="board_table[<?=$i ?>]" value="<?=$row['bo_table'] ?>">
+            <a href="<?=get_pretty_url($row['bo_table']) ?>"><?=$row['bo_table'] ?></a>
         </td>
         <td>
-            <label for="bo_skin_<?php echo $i; ?>" class="sound_only">스킨</label>
-            <?php echo get_skin_select('board', 'bo_skin_'.$i, "bo_skin[$i]", $row['bo_skin']); ?>
+            <label for="bo_skin_<?=$i; ?>" class="sound_only">스킨</label>
+            <?=get_skin_select('board', 'bo_skin_'.$i, "bo_skin[$i]", $row['bo_skin']); ?>
         </td>
         <td>
-            <label for="bo_mobile_skin_<?php echo $i; ?>" class="sound_only">모바일 스킨</label>
-            <?php echo get_mobile_skin_select('board', 'bo_mobile_skin_'.$i, "bo_mobile_skin[$i]", $row['bo_mobile_skin']); ?>
+            <label for="bo_mobile_skin_<?=$i; ?>" class="sound_only">모바일 스킨</label>
+            <?=get_mobile_skin_select('board', 'bo_mobile_skin_'.$i, "bo_mobile_skin[$i]", $row['bo_mobile_skin']); ?>
         </td>
         <td>
-            <label for="bo_subject_<?php echo $i; ?>" class="sound_only">게시판 제목<strong class="sound_only"> 필수</strong></label>
-            <input type="text" name="bo_subject[<?php echo $i ?>]" value="<?php echo get_text($row['bo_subject']) ?>" id="bo_subject_<?php echo $i ?>" required class="required tbl_input bo_subject full_input" size="10">
+            <label for="bo_subject_<?=$i; ?>" class="sound_only">게시판 제목<strong class="sound_only"> 필수</strong></label>
+            <input type="text" name="bo_subject[<?=$i ?>]" value="<?=get_text($row['bo_subject']) ?>" id="bo_subject_<?=$i ?>" required class="required tbl_input bo_subject full_input" size="10">
         </td>
         <td class="td_numsmall">
-            <label for="bo_read_point_<?php echo $i; ?>" class="sound_only">읽기 포인트</label>
-            <input type="text" name="bo_read_point[<?php echo $i ?>]" value="<?php echo $row['bo_read_point'] ?>" id="bo_read_point_<?php echo $i; ?>" class="tbl_input" size="2">
+            <label for="bo_read_point_<?=$i; ?>" class="sound_only">읽기 포인트</label>
+            <input type="text" name="bo_read_point[<?=$i ?>]" value="<?=$row['bo_read_point'] ?>" id="bo_read_point_<?=$i; ?>" class="tbl_input" size="2">
         </td>
         <td class="td_numsmall">
-            <label for="bo_write_point_<?php echo $i; ?>" class="sound_only">쓰기 포인트</label>
-            <input type="text" name="bo_write_point[<?php echo $i ?>]" value="<?php echo $row['bo_write_point'] ?>" id="bo_write_point_<?php echo $i; ?>" class="tbl_input" size="2">
+            <label for="bo_write_point_<?=$i; ?>" class="sound_only">쓰기 포인트</label>
+            <input type="text" name="bo_write_point[<?=$i ?>]" value="<?=$row['bo_write_point'] ?>" id="bo_write_point_<?=$i; ?>" class="tbl_input" size="2">
         </td>
         <td class="td_numsmall">
-            <label for="bo_comment_point_<?php echo $i; ?>" class="sound_only">댓글 포인트</label>
-            <input type="text" name="bo_comment_point[<?php echo $i ?>]" value="<?php echo $row['bo_comment_point'] ?>" id="bo_comment_point_<?php echo $i; ?>" class="tbl_input" size="2">
+            <label for="bo_comment_point_<?=$i; ?>" class="sound_only">댓글 포인트</label>
+            <input type="text" name="bo_comment_point[<?=$i ?>]" value="<?=$row['bo_comment_point'] ?>" id="bo_comment_point_<?=$i; ?>" class="tbl_input" size="2">
         </td>
         <td class="td_numsmall">
-            <label for="bo_download_point_<?php echo $i; ?>" class="sound_only">다운<br>포인트</label>
-            <input type="text" name="bo_download_point[<?php echo $i ?>]" value="<?php echo $row['bo_download_point'] ?>" id="bo_download_point_<?php echo $i; ?>" class="tbl_input" size="2">
+            <label for="bo_download_point_<?=$i; ?>" class="sound_only">다운<br>포인트</label>
+            <input type="text" name="bo_download_point[<?=$i ?>]" value="<?=$row['bo_download_point'] ?>" id="bo_download_point_<?=$i; ?>" class="tbl_input" size="2">
         </td>
         <td class="td_numsmall">
-            <label for="bo_use_sns_<?php echo $i; ?>" class="sound_only">SNS<br>사용</label>
-            <input type="checkbox" name="bo_use_sns[<?php echo $i ?>]" value="1" id="bo_use_sns_<?php echo $i ?>" <?php echo $row['bo_use_sns']?"checked":"" ?>>
+            <label for="bo_use_sns_<?=$i; ?>" class="sound_only">SNS<br>사용</label>
+            <input type="checkbox" name="bo_use_sns[<?=$i ?>]" value="1" id="bo_use_sns_<?=$i ?>" <?=$row['bo_use_sns']?"checked":"" ?>>
         </td>
         <td class="td_numsmall">
-            <label for="bo_use_search_<?php echo $i; ?>" class="sound_only">검색<br>사용</label>
-            <input type="checkbox" name="bo_use_search[<?php echo $i ?>]" value="1" id="bo_use_search_<?php echo $i ?>" <?php echo $row['bo_use_search']?"checked":"" ?>>
+            <label for="bo_use_search_<?=$i; ?>" class="sound_only">검색<br>사용</label>
+            <input type="checkbox" name="bo_use_search[<?=$i ?>]" value="1" id="bo_use_search_<?=$i ?>" <?=$row['bo_use_search']?"checked":"" ?>>
         </td>
         <td class="td_numsmall">
-            <label for="bo_order_<?php echo $i; ?>" class="sound_only">출력<br>순서</label>
-            <input type="text" name="bo_order[<?php echo $i ?>]" value="<?php echo $row['bo_order'] ?>" id="bo_order_<?php echo $i ?>" class="tbl_input" size="2">
+            <label for="bo_order_<?=$i; ?>" class="sound_only">출력<br>순서</label>
+            <input type="text" name="bo_order[<?=$i ?>]" value="<?=$row['bo_order'] ?>" id="bo_order_<?=$i ?>" class="tbl_input" size="2">
         </td>
         <td class="td_mngsmall">
-            <label for="bo_device_<?php echo $i; ?>" class="sound_only">접속기기</label>
-            <select name="bo_device[<?php echo $i ?>]" id="bo_device_<?php echo $i ?>">
-                <option value="both"<?php echo get_selected($row['bo_device'], 'both', true); ?>>모두</option>
-                <option value="pc"<?php echo get_selected($row['bo_device'], 'pc'); ?>>PC</option>
-                <option value="mobile"<?php echo get_selected($row['bo_device'], 'mobile'); ?>>모바일</option>
+            <label for="bo_device_<?=$i; ?>" class="sound_only">접속기기</label>
+            <select name="bo_device[<?=$i ?>]" id="bo_device_<?=$i ?>">
+                <option value="both"<?=get_selected($row['bo_device'], 'both', true); ?>>모두</option>
+                <option value="pc"<?=get_selected($row['bo_device'], 'pc'); ?>>PC</option>
+                <option value="mobile"<?=get_selected($row['bo_device'], 'mobile'); ?>>모바일</option>
             </select>
         </td>
         <td class="td_mng td_mng_m">
-            <?php echo $one_update ?>
-            <?php echo $one_copy ?>
+            <?=$one_update ?>
+            <?=$one_copy ?>
         </td>
     </tr>
     <?php
@@ -207,7 +207,7 @@ $colspan = 15;
 
 </form>
 
-<?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, $_SERVER['SCRIPT_NAME'].'?'.$qstr.'&amp;page='); ?>
+<?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, $_SERVER['SCRIPT_NAME'].'?'.$qstr.'&amp;page='); ?>
 
 <script>
 function fboardlist_submit(f)

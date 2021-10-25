@@ -28,7 +28,7 @@ if($is_kakaopay_use) {
 }
 ?>
 
-<form name="forderform" id="forderform" method="post" action="<?php echo $order_action_url; ?>" autocomplete="off">
+<form name="forderform" id="forderform" method="post" action="<?=$order_action_url; ?>" autocomplete="off">
 <div id="sod_frm" class="sod_frm_pc">
     <!-- 주문상품 확인 시작 { -->
     <div class="tbl_head03 tbl_wrap od_prd_list">
@@ -189,26 +189,26 @@ if($is_kakaopay_use) {
         <tr>
 
             <td class="td_prd">
-                <div class="sod_img"><?php echo $image; ?></div>
+                <div class="sod_img"><?=$image; ?></div>
                 <div class="sod_name">
-                    <input type="hidden" name="it_id[<?php echo $i; ?>]"    value="<?php echo $row['it_id']; ?>">
-                    <input type="hidden" name="it_name[<?php echo $i; ?>]"  value="<?php echo get_text($row['it_name']); ?>">
-                    <input type="hidden" name="it_price[<?php echo $i; ?>]" value="<?php echo $sell_price; ?>">
-                    <input type="hidden" name="cp_id[<?php echo $i; ?>]" value="">
-                    <input type="hidden" name="cp_price[<?php echo $i; ?>]" value="0">
+                    <input type="hidden" name="it_id[<?=$i; ?>]"    value="<?=$row['it_id']; ?>">
+                    <input type="hidden" name="it_name[<?=$i; ?>]"  value="<?=get_text($row['it_name']); ?>">
+                    <input type="hidden" name="it_price[<?=$i; ?>]" value="<?=$sell_price; ?>">
+                    <input type="hidden" name="cp_id[<?=$i; ?>]" value="">
+                    <input type="hidden" name="cp_price[<?=$i; ?>]" value="0">
                     <?php if($default['de_tax_flag_use']) { ?>
-                    <input type="hidden" name="it_notax[<?php echo $i; ?>]" value="<?php echo $row['it_notax']; ?>">
+                    <input type="hidden" name="it_notax[<?=$i; ?>]" value="<?=$row['it_notax']; ?>">
                     <?php } ?>
-                    <?php echo $it_name; ?>
-                    <?php echo $cp_button; ?>
+                    <?=$it_name; ?>
+                    <?=$cp_button; ?>
 
                  </div>
             </td>
-            <td class="td_num"><?php echo number_format($sum['qty']); ?></td>
-            <td class="td_numbig  text_right"><?php echo number_format($row['ct_price']); ?></td>
-            <td class="td_numbig  text_right"><span class="total_price"><?php echo number_format($sell_price); ?></span></td>
-            <td class="td_numbig  text_right"><?php echo number_format($point); ?></td>
-            <td class="td_dvr"><?php echo $ct_send_cost; ?></td>
+            <td class="td_num"><?=number_format($sum['qty']); ?></td>
+            <td class="td_numbig  text_right"><?=number_format($row['ct_price']); ?></td>
+            <td class="td_numbig  text_right"><span class="total_price"><?=number_format($sell_price); ?></span></td>
+            <td class="td_numbig  text_right"><?=number_format($point); ?></td>
+            <td class="td_dvr"><?=$ct_send_cost; ?></td>
         </tr>
 
         <?php
@@ -238,14 +238,14 @@ if($is_kakaopay_use) {
     <!-- } 주문상품 확인 끝 -->
 
     <div class="sod_left">
-        <input type="hidden" name="od_price"    value="<?php echo $tot_sell_price; ?>">
-        <input type="hidden" name="org_od_price"    value="<?php echo $tot_sell_price; ?>">
-        <input type="hidden" name="od_send_cost" value="<?php echo $send_cost; ?>">
+        <input type="hidden" name="od_price"    value="<?=$tot_sell_price; ?>">
+        <input type="hidden" name="org_od_price"    value="<?=$tot_sell_price; ?>">
+        <input type="hidden" name="od_send_cost" value="<?=$send_cost; ?>">
         <input type="hidden" name="od_send_cost2" value="0">
         <input type="hidden" name="item_coupon" value="0">
         <input type="hidden" name="od_coupon" value="0">
         <input type="hidden" name="od_send_coupon" value="0">
-        <input type="hidden" name="od_goods_name" value="<?php echo $goods; ?>">
+        <input type="hidden" name="od_goods_name" value="<?=$goods; ?>">
 
         <?php
         // 결제대행사별 코드 include (결제대행사 정보 필드)
@@ -265,7 +265,7 @@ if($is_kakaopay_use) {
                 <tbody>
                 <tr>
                     <th scope="row"><label for="od_name">이름<strong class="sound_only"> 필수</strong></label></th>
-                    <td><input type="text" name="od_name" value="<?php echo isset($member['mb_name']) ? get_text($member['mb_name']) : ''; ?>" id="od_name" required class="frm_input required" maxlength="20"></td>
+                    <td><input type="text" name="od_name" value="<?=isset($member['mb_name']) ? get_text($member['mb_name']) : ''; ?>" id="od_name" required class="frm_input required" maxlength="20"></td>
                 </tr>
 
                 <?php if (!$is_member) { // 비회원이면 ?>
@@ -280,31 +280,31 @@ if($is_kakaopay_use) {
 
                 <tr>
                     <th scope="row"><label for="od_tel">전화번호<strong class="sound_only"> 필수</strong></label></th>
-                    <td><input type="text" name="od_tel" value="<?php echo get_text($member['mb_tel']); ?>" id="od_tel" required class="frm_input required" maxlength="20"></td>
+                    <td><input type="text" name="od_tel" value="<?=get_text($member['mb_tel']); ?>" id="od_tel" required class="frm_input required" maxlength="20"></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="od_hp">핸드폰</label></th>
-                    <td><input type="text" name="od_hp" value="<?php echo get_text($member['mb_hp']); ?>" id="od_hp" class="frm_input" maxlength="20"></td>
+                    <td><input type="text" name="od_hp" value="<?=get_text($member['mb_hp']); ?>" id="od_hp" class="frm_input" maxlength="20"></td>
                 </tr>
                 <tr>
                     <th scope="row">주소</th>
                     <td>
                         <label for="od_zip" class="sound_only">우편번호<strong class="sound_only"> 필수</strong></label>
-                        <input type="text" name="od_zip" value="<?php echo $member['mb_zip1'].$member['mb_zip2']; ?>" id="od_zip" required class="frm_input required" size="8" maxlength="6" placeholder="우편번호">
+                        <input type="text" name="od_zip" value="<?=$member['mb_zip1'].$member['mb_zip2']; ?>" id="od_zip" required class="frm_input required" size="8" maxlength="6" placeholder="우편번호">
                         <button type="button" class="btn_address" onclick="win_zip('forderform', 'od_zip', 'od_addr1', 'od_addr2', 'od_addr3', 'od_addr_jibeon');">주소 검색</button><br>
-                        <input type="text" name="od_addr1" value="<?php echo get_text($member['mb_addr1']) ?>" id="od_addr1" required class="frm_input frm_address required" size="60" placeholder="기본주소">
+                        <input type="text" name="od_addr1" value="<?=get_text($member['mb_addr1']) ?>" id="od_addr1" required class="frm_input frm_address required" size="60" placeholder="기본주소">
                         <label for="od_addr1" class="sound_only">기본주소<strong class="sound_only"> 필수</strong></label><br>
-                        <input type="text" name="od_addr2" value="<?php echo get_text($member['mb_addr2']) ?>" id="od_addr2" class="frm_input frm_address" size="60" placeholder="상세주소">
+                        <input type="text" name="od_addr2" value="<?=get_text($member['mb_addr2']) ?>" id="od_addr2" class="frm_input frm_address" size="60" placeholder="상세주소">
                         <label for="od_addr2" class="sound_only">상세주소</label>
                         <br>
-                        <input type="text" name="od_addr3" value="<?php echo get_text($member['mb_addr3']) ?>" id="od_addr3" class="frm_input frm_address" size="60" readonly="readonly" placeholder="참고항목">
+                        <input type="text" name="od_addr3" value="<?=get_text($member['mb_addr3']) ?>" id="od_addr3" class="frm_input frm_address" size="60" readonly="readonly" placeholder="참고항목">
                         <label for="od_addr3" class="sound_only">참고항목</label><br>
-                        <input type="hidden" name="od_addr_jibeon" value="<?php echo get_text($member['mb_addr_jibeon']); ?>">
+                        <input type="hidden" name="od_addr_jibeon" value="<?=get_text($member['mb_addr_jibeon']); ?>">
                     </td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="od_email">E-mail<strong class="sound_only"> 필수</strong></label></th>
-                    <td><input type="text" name="od_email" value="<?php echo $member['mb_email']; ?>" id="od_email" required class="frm_input required" size="35" maxlength="100"></td>
+                    <td><input type="text" name="od_email" value="<?=$member['mb_email']; ?>" id="od_email" required class="frm_input required" size="35" maxlength="100"></td>
                 </tr>
 
                 <?php if ($default['de_hope_date_use']) { // 배송희망일 사용 ?>
@@ -387,7 +387,7 @@ if($is_kakaopay_use) {
                     <th scope="row">배송지선택</th>
                     <td>
 						<div class="order_choice_place">
-                        <?php echo $addr_list; ?>
+                        <?=$addr_list; ?>
 						</div>
                     </td>
                 </tr>
@@ -446,7 +446,7 @@ if($is_kakaopay_use) {
             <ul>
                 <li class="sod_bsk_sell">
                     <span>주문</span>
-                    <strong><?php echo number_format($tot_sell_price); ?></strong>원
+                    <strong><?=number_format($tot_sell_price); ?></strong>원
                 </li>
                 <li class="sod_bsk_coupon">
                     <span>쿠폰할인</span>
@@ -454,16 +454,16 @@ if($is_kakaopay_use) {
                 </li>
                 <li class="sod_bsk_dvr">
                     <span>배송비</span>
-                    <strong><?php echo number_format($send_cost); ?></strong>원
+                    <strong><?=number_format($send_cost); ?></strong>원
                 </li>
                 <li class="sod_bsk_point">
                     <span>포인트</span>
-                    <strong><?php echo number_format($tot_point); ?></strong>점
+                    <strong><?=number_format($tot_point); ?></strong>점
                 </li>
                <li class="sod_bsk_cnt">
                     <span>총계</span>
                     <?php $tot_price = $tot_sell_price + $send_cost; // 총계 = 주문상품금액합계 + 배송비 ?>
-                    <strong id="ct_tot_price"><?php echo number_format($tot_price); ?></strong>원
+                    <strong id="ct_tot_price"><?=number_format($tot_price); ?></strong>원
                 </li>
 
             </ul>
@@ -549,7 +549,7 @@ if($is_kakaopay_use) {
             </div>
             <div id="od_tot_price">
                 <span>총 주문금액</span>
-                <strong class="print_price"><?php echo number_format($tot_price); ?></strong>원
+                <strong class="print_price"><?=number_format($tot_price); ?></strong>원
             </div>
 
             <div id="od_pay_sl">
@@ -691,13 +691,13 @@ if($is_kakaopay_use) {
 				</div>
                 <div class="sod_frm_point">
                     <div>
-                        <label for="od_temp_point">사용 포인트(<?php echo $point_unit; ?>점 단위)</label>
-                        <input type="hidden" name="max_temp_point" value="<?php echo $temp_point; ?>">
+                        <label for="od_temp_point">사용 포인트(<?=$point_unit; ?>점 단위)</label>
+                        <input type="hidden" name="max_temp_point" value="<?=$temp_point; ?>">
                         <input type="text" name="od_temp_point" value="0" id="od_temp_point"  size="7"> 점
                     </div>
                     <div id="sod_frm_pt">
-                        <span><strong>보유포인트</strong><?php echo display_point($member['mb_point']); ?></span>
-                        <span class="max_point_box"><strong>최대 사용 가능 포인트</strong><em id="use_max_point"><?php echo display_point($temp_point); ?></em></span>
+                        <span><strong>보유포인트</strong><?=display_point($member['mb_point']); ?></span>
+                        <span class="max_point_box"><strong>최대 사용 가능 포인트</strong><em id="use_max_point"><?=display_point($temp_point); ?></em></span>
                     </div>
                 </div>
                 <?php
@@ -773,7 +773,7 @@ if(function_exists('is_use_easypay') && is_use_easypay('global_nhnkcp')){  // �
 ?>
 <script>
 var zipcode = "";
-var form_action_url = "<?php echo $order_action_url; ?>";
+var form_action_url = "<?=$order_action_url; ?>";
 
 $(function() {
     var $cp_btn_el;
@@ -787,7 +787,7 @@ $(function() {
 
         $.post(
             "./orderitemcoupon.php",
-            { it_id: it_id,  sw_direct: "<?php echo $sw_direct; ?>" },
+            { it_id: it_id,  sw_direct: "<?=$sw_direct; ?>" },
             function(data) {
                 $cp_btn_el.after(data);
             }
@@ -1149,9 +1149,9 @@ function calculate_order_price()
 function calculate_temp_point()
 {
     var sell_price = parseInt($("input[name=od_price]").val());
-    var mb_point = parseInt(<?php echo $member['mb_point']; ?>);
-    var max_point = parseInt(<?php echo $default['de_settle_max_point']; ?>);
-    var point_unit = parseInt(<?php echo $default['de_settle_point_unit']; ?>);
+    var mb_point = parseInt(<?=$member['mb_point']; ?>);
+    var max_point = parseInt(<?=$default['de_settle_max_point']; ?>);
+    var point_unit = parseInt(<?=$default['de_settle_point_unit']; ?>);
     var temp_point = max_point;
 
     if(temp_point > sell_price)
@@ -1314,7 +1314,7 @@ function forderform_check(f)
 
     var temp_point = 0;
     if (typeof(f.od_temp_point) != "undefined") {
-        var point_unit = parseInt(<?php echo $default['de_settle_point_unit']; ?>);
+        var point_unit = parseInt(<?=$default['de_settle_point_unit']; ?>);
         temp_point = parseInt(f.od_temp_point.value) || 0;
 
         if (f.od_temp_point.value)
@@ -1325,7 +1325,7 @@ function forderform_check(f)
                 return false;
             }
 
-            if (temp_point > <?php echo (int)$member['mb_point']; ?>) {
+            if (temp_point > <?=(int)$member['mb_point']; ?>) {
                 alert("회원님의 포인트보다 많이 결제할 수 없습니다.");
                 f.od_temp_point.select();
                 return false;
@@ -1632,7 +1632,7 @@ function gumae2baesong() {
 
 <?php if ($default['de_hope_date_use']) { ?>
 $(function(){
-    $("#od_hope_date").datepicker({ changeMonth: true, changeYear: true, dateFormat: "yy-mm-dd", showButtonPanel: true, yearRange: "c-99:c+99", minDate: "+<?php echo (int)$default['de_hope_date_after']; ?>d;", maxDate: "+<?php echo (int)$default['de_hope_date_after'] + 6; ?>d;" });
+    $("#od_hope_date").datepicker({ changeMonth: true, changeYear: true, dateFormat: "yy-mm-dd", showButtonPanel: true, yearRange: "c-99:c+99", minDate: "+<?=(int)$default['de_hope_date_after']; ?>d;", maxDate: "+<?=(int)$default['de_hope_date_after'] + 6; ?>d;" });
 });
 <?php } ?>
 </script>

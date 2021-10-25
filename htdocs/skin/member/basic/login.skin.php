@@ -8,13 +8,13 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 <!-- 로그인 시작 { -->
 <div id="mb_login" class="mbskin">
     <div class="mbskin_box">
-        <h1><?php echo $g5['title'] ?></h1>
+        <h1><?=$g5['title'] ?></h1>
         <div class="mb_log_cate">
             <h2><span class="sound_only">회원</span>로그인</h2>
-            <a href="<?php echo G5_BBS_URL ?>/register.php" class="join">회원가입</a>
+            <a href="<?=G5_BBS_URL ?>/register.php" class="join">회원가입</a>
         </div>
-        <form name="flogin" action="<?php echo $login_action_url ?>" onsubmit="return flogin_submit(this);" method="post">
-        <input type="hidden" name="url" value="<?php echo $login_url ?>">
+        <form name="flogin" action="<?=$login_action_url ?>" onsubmit="return flogin_submit(this);" method="post">
+        <input type="hidden" name="url" value="<?=$login_url ?>">
         
         <fieldset id="login_fs">
             <legend>회원로그인</legend>
@@ -30,7 +30,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
                     <label for="login_auto_login"><span></span> 자동로그인</label>  
                 </div>
                 <div class="login_if_lpl">
-                    <a href="<?php echo G5_BBS_URL ?>/password_lost.php" target="_blank" id="login_password_lost">정보찾기</a>  
+                    <a href="<?=G5_BBS_URL ?>/password_lost.php" target="_blank" id="login_password_lost">정보찾기</a>
                 </div>
             </div>
         </fieldset> 
@@ -48,7 +48,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
         <p>비회원으로 주문하시는 경우 포인트는 지급하지 않습니다.</p>
 
         <div id="guest_privacy">
-            <?php echo conv_content($default['de_guest_privacy'], $config['cf_editor']); ?>
+            <?=conv_content($default['de_guest_privacy'], $config['cf_editor']); ?>
         </div>
 		
 		<div class="chk_box">
@@ -70,8 +70,8 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
                 }
             }
 
-            f.url.value = "<?php echo $url; ?>";
-            f.action = "<?php echo $url; ?>";
+            f.url.value = "<?=$url; ?>";
+            f.action = "<?=$url; ?>";
             f.submit();
         }
         </script>
@@ -84,10 +84,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
         <fieldset id="mb_login_od">
             <legend>비회원 주문조회</legend>
 
-            <form name="forderinquiry" method="post" action="<?php echo urldecode($url); ?>" autocomplete="off">
+            <form name="forderinquiry" method="post" action="<?=urldecode($url); ?>" autocomplete="off">
 
             <label for="od_id" class="od_id sound_only">주문서번호<strong class="sound_only"> 필수</strong></label>
-            <input type="text" name="od_id" value="<?php echo $od_id; ?>" id="od_id" required class="frm_input required" size="20" placeholder="주문서번호">
+            <input type="text" name="od_id" value="<?=$od_id; ?>" id="od_id" required class="frm_input required" size="20" placeholder="주문서번호">
             <label for="od_pwd" class="od_pwd sound_only">비밀번호 <strong>필수</strong></label>
             <input type="password" name="od_pwd" size="20" id="od_pwd" required class="frm_input required" placeholder="비밀번호">
             <button type="submit" class="btn_submit">확인</button>

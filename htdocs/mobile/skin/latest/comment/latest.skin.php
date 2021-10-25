@@ -7,18 +7,18 @@ $list_count = (is_array($list) && $list) ? count($list) : 0;
 ?>
 
 <div class="cm_lt">
-    <h2 class="cm_lt_title"><a href="<?php echo get_pretty_url($bo_table); ?>">최신댓글</a></h2>
+    <h2 class="cm_lt_title"><a href="<?=get_pretty_url($bo_table); ?>">최신댓글</a></h2>
     <ul>
     <?php
     for ($i=0; $i<$list_count; $i++) {
     ?>
         <li>
-            <span class="cm_lt_nick"><?php echo get_member_profile_img($member['mb_id']); ?></span>
+            <span class="cm_lt_nick"><?=get_member_profile_img($member['mb_id']); ?></span>
             <div class="cm_lt_info">
-            	<a href="<?php echo get_pretty_url($bo_table, $list[$i]['wr_id']); ?>" class="over"><?php echo $list[$i]['subject']; ?></a>
+            	<a href="<?=get_pretty_url($bo_table, $list[$i]['wr_id']); ?>" class="over"><?=$list[$i]['subject']; ?></a>
 				<br>
-				<span class="lt_nick"><?php echo $list[$i]['name'] ?></span>
-            	<span class="lt_date"><?php echo $list[$i]['datetime2'] ?></span>              
+				<span class="lt_nick"><?=$list[$i]['name'] ?></span>
+            	<span class="lt_date"><?=$list[$i]['datetime2'] ?></span>
             </div>
         </li>
     <?php
@@ -28,6 +28,6 @@ $list_count = (is_array($list) && $list) ? count($list) : 0;
         echo '<li class="empty_li">게시물이 없습니다.</li>'.PHP_EOL;
     ?>
     </ul>
-    <a href="<?php echo get_pretty_url($bo_table); ?>" class="lt_more"><span class="sound_only"><?php echo $bo_subject ?></span>더보기</a>
+    <a href="<?=get_pretty_url($bo_table); ?>" class="lt_more"><span class="sound_only"><?=$bo_subject ?></span>더보기</a>
 
 </div>

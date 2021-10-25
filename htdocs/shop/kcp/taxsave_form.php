@@ -22,11 +22,11 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             return;
         }
 
-        form.ordr_idxx.value = "<?php echo $od_id; ?>";
-        form.amt_tot.value = "<?php echo $amt_tot; ?>";
-        form.amt_sup.value = "<?php echo $amt_sup; ?>";
-        form.amt_svc.value = "<?php echo $amt_svc; ?>";
-        form.amt_tax.value = "<?php echo $amt_tax; ?>";
+        form.ordr_idxx.value = "<?=$od_id; ?>";
+        form.amt_tot.value = "<?=$amt_tot; ?>";
+        form.amt_sup.value = "<?=$amt_sup; ?>";
+        form.amt_svc.value = "<?=$amt_svc; ?>";
+        form.amt_tax.value = "<?=$amt_tax; ?>";
 
         form.submit();
     }
@@ -115,7 +115,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 <body>
 
 <div id="scash" class="new_win">
-    <h1 id="win_title"><?php echo $g5['title']; ?></h1>
+    <h1 id="win_title"><?=$g5['title']; ?></h1>
 
     <section>
         <h2>주문정보</h2>
@@ -129,23 +129,23 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             <tbody>
             <tr>
                 <th scope="row">주문 번호</th>
-                <td><?php echo $od_id; ?></td>
+                <td><?=$od_id; ?></td>
             </tr>
             <tr>
                 <th scope="row">상품 정보</th>
-                <td><?php echo $goods_name; ?></td>
+                <td><?=$goods_name; ?></td>
             </tr>
             <tr>
                 <th scope="row">주문자 이름</th>
-                <td><?php echo $od_name; ?></td>
+                <td><?=$od_name; ?></td>
             </tr>
             <tr>
                 <th scope="row">주문자 E-Mail</th>
-                <td><?php echo $od_email; ?></td>
+                <td><?=$od_email; ?></td>
             </tr>
             <tr>
                 <th scope="row">주문자 전화번호</th>
-                <td><?php echo $od_tel; ?></td>
+                <td><?=$od_tel; ?></td>
             </tr>
             </tbody>
             </table>
@@ -155,15 +155,15 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     <section>
         <h2>현금영수증 발급 정보</h2>
 
-        <form name="cash_form" action="<?php echo G5_SHOP_URL; ?>/kcp/pp_cli_hub.php" method="post">
-        <input type="hidden" name="tx"        value="<?php echo $tx; ?>">
+        <form name="cash_form" action="<?=G5_SHOP_URL; ?>/kcp/pp_cli_hub.php" method="post">
+        <input type="hidden" name="tx"        value="<?=$tx; ?>">
         <input type="hidden" name="corp_type" value="0"> <!-- 사업자 구분 - 0:직접판매 , 1:입점몰판매 -->
         <input type="hidden" name="ordr_idxx">
-        <input type="hidden" name="good_name" value="<?php echo addslashes($goods_name); ?>">
-        <input type="hidden" name="buyr_name" value="<?php echo $od_name; ?>">
-        <input type="hidden" name="buyr_mail" value="<?php echo $od_email; ?>">
-        <input type="hidden" name="buyr_tel1" value="<?php echo $od_tel; ?>">
-        <input type="hidden" name="trad_time" value="<?php echo $trad_time; ?>">
+        <input type="hidden" name="good_name" value="<?=addslashes($goods_name); ?>">
+        <input type="hidden" name="buyr_name" value="<?=$od_name; ?>">
+        <input type="hidden" name="buyr_mail" value="<?=$od_email; ?>">
+        <input type="hidden" name="buyr_tel1" value="<?=$od_tel; ?>">
+        <input type="hidden" name="trad_time" value="<?=$trad_time; ?>">
 
         <input type="hidden" name="amt_tot">
         <input type="hidden" name="amt_sup">
@@ -179,7 +179,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             <tbody>
             <tr>
                 <th scope="row">원 거래 시각</th>
-                <td><?php echo $trad_time; ?></td>
+                <td><?=$trad_time; ?></td>
             </tr>
             <tr>
                 <th scope="row">발행 용도</th>
@@ -203,19 +203,19 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             </tr>
             <tr>
                 <th scope="row">거래금액 총합</th>
-                <td><?php echo number_format($amt_tot); ?>원</td>
+                <td><?=number_format($amt_tot); ?>원</td>
             </tr>
             <tr>
                 <th scope="row">공급가액</th>
-                <td><?php echo number_format($amt_sup); ?>원<!-- ((거래금액 총합 * 10) / 11) --></td>
+                <td><?=number_format($amt_sup); ?>원<!-- ((거래금액 총합 * 10) / 11) --></td>
             </tr>
             <tr>
                 <th scope="row">봉사료</th>
-                <td><?php echo number_format($amt_svc); ?>원</td>
+                <td><?=number_format($amt_svc); ?>원</td>
             </tr>
             <tr>
                 <th scope="row">부가가치세</th>
-                <td><?php echo number_format($amt_tax); ?>원<!-- 거래금액 총합 - 공급가액 - 봉사료 --></td>
+                <td><?=number_format($amt_tax); ?>원<!-- 거래금액 총합 - 공급가액 - 봉사료 --></td>
             </tr>
             </tbody>
             </table>

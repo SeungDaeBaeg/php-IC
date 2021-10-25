@@ -71,41 +71,41 @@ var list_delete_php = 'popular_list.php';
 </script>
 
 <div class="local_ov01 local_ov">
-        <?php echo $listall ?>
-        <span class="btn_ov01"><span class="ov_txt">건수</span><span class="ov_num">  <?php echo number_format($total_count) ?>개</span></span>
+        <?=$listall ?>
+        <span class="btn_ov01"><span class="ov_txt">건수</span><span class="ov_num">  <?=number_format($total_count) ?>개</span></span>
 </div>
 
 <form name="fsearch" id="fsearch" class="local_sch01 local_sch" method="get">
 <div class="sch_last">
     <label for="sfl" class="sound_only">검색대상</label>
     <select name="sfl" id="sfl">
-        <option value="pp_word"<?php echo get_selected($sfl, "pp_word"); ?>>검색어</option>
-        <option value="pp_date"<?php echo get_selected($sfl, "pp_date"); ?>>등록일</option>
+        <option value="pp_word"<?=get_selected($sfl, "pp_word"); ?>>검색어</option>
+        <option value="pp_date"<?=get_selected($sfl, "pp_date"); ?>>등록일</option>
     </select>
     <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-    <input type="text" name="stx" value="<?php echo $stx ?>" id="stx" required class="required frm_input">
+    <input type="text" name="stx" value="<?=$stx ?>" id="stx" required class="required frm_input">
     <input type="submit" value="검색" class="btn_submit">
 </div>
 </form>
 
 <form name="fpopularlist" id="fpopularlist" method="post">
-<input type="hidden" name="sst" value="<?php echo $sst ?>">
-<input type="hidden" name="sod" value="<?php echo $sod ?>">
-<input type="hidden" name="sfl" value="<?php echo $sfl ?>">
-<input type="hidden" name="stx" value="<?php echo $stx ?>">
-<input type="hidden" name="page" value="<?php echo $page ?>">
-<input type="hidden" name="token" value="<?php echo isset($token) ? $token : ''; ?>">
+<input type="hidden" name="sst" value="<?=$sst ?>">
+<input type="hidden" name="sod" value="<?=$sod ?>">
+<input type="hidden" name="sfl" value="<?=$sfl ?>">
+<input type="hidden" name="stx" value="<?=$stx ?>">
+<input type="hidden" name="page" value="<?=$page ?>">
+<input type="hidden" name="token" value="<?=isset($token) ? $token : ''; ?>">
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">
             <label for="chkall" class="sound_only">현재 페이지 인기검색어 전체</label>
             <input type="checkbox" name="chkall" value="1" id="chkall" onclick="check_all(this.form)">
         </th>
-        <th scope="col"><?php echo subject_sort_link('pp_word') ?>검색어</a></th>
+        <th scope="col"><?=subject_sort_link('pp_word') ?>검색어</a></th>
         <th scope="col">등록일</th>
         <th scope="col">등록IP</th>
     </tr>
@@ -118,14 +118,14 @@ var list_delete_php = 'popular_list.php';
         $bg = 'bg'.($i%2);
     ?>
 
-    <tr class="<?php echo $bg; ?>">
+    <tr class="<?=$bg; ?>">
         <td class="td_chk">
-            <label for="chk_<?php echo $i; ?>" class="sound_only"><?php echo $word ?></label>
-            <input type="checkbox" name="chk[]" value="<?php echo $row['pp_id'] ?>" id="chk_<?php echo $i ?>">
+            <label for="chk_<?=$i; ?>" class="sound_only"><?=$word ?></label>
+            <input type="checkbox" name="chk[]" value="<?=$row['pp_id'] ?>" id="chk_<?=$i ?>">
         </td>
-        <td class="td_left"><a href="<?php echo $_SERVER['SCRIPT_NAME'] ?>?sfl=pp_word&amp;stx=<?php echo $word ?>"><?php echo $word ?></a></td>
-        <td><?php echo $row['pp_date'] ?></td>
-        <td><?php echo $row['pp_ip'] ?></td>
+        <td class="td_left"><a href="<?=$_SERVER['SCRIPT_NAME'] ?>?sfl=pp_word&amp;stx=<?=$word ?>"><?=$word ?></a></td>
+        <td><?=$row['pp_date'] ?></td>
+        <td><?=$row['pp_ip'] ?></td>
     </tr>
 
     <?php
@@ -147,7 +147,7 @@ var list_delete_php = 'popular_list.php';
 
 </form>
 
-<?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
+<?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
 
 <script>
 $(function() {

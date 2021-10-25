@@ -33,7 +33,7 @@ if($pp['pp_pg'] == 'lg') {
 <!-- 주문상세내역 시작 { -->
 <div id="sod_fin">
 
-    <p id="sod_fin_no">개인결제번호 <strong><?php echo $pp_id; ?></strong></p>
+    <p id="sod_fin_no">개인결제번호 <strong><?=$pp_id; ?></strong></p>
 
     <section id="sod_fin_view">
         <h2>결제 정보</h2>
@@ -89,21 +89,21 @@ if($pp['pp_pg'] == 'lg') {
                 <?php if($pp['od_id']) { ?>
                 <tr>
                     <th scope="row">주문번호</th>
-                    <td><?php echo $pp['od_id']; ?></td>
+                    <td><?=$pp['od_id']; ?></td>
                 </tr>
                 <?php } ?>
                 <tr>
                     <th scope="row">결제방식</th>
-                    <td><?php echo $pp['pp_settle_case']; ?></td>
+                    <td><?=$pp['pp_settle_case']; ?></td>
                 </tr>
                 <?php if($pp_receipt_price) { ?>
                 <tr>
                     <th scope="row">결제금액</th>
-                    <td><?php echo $pp_receipt_price; ?></td>
+                    <td><?=$pp_receipt_price; ?></td>
                 </tr>
                 <tr>
                     <th scope="row">결제일시</th>
-                    <td><?php echo is_null_time($pp['pp_receipt_time']) ? '' : $pp['pp_receipt_time']; ?></td>
+                    <td><?=is_null_time($pp['pp_receipt_time']) ? '' : $pp['pp_receipt_time']; ?></td>
                 </tr>
                 <?php
                 }
@@ -113,8 +113,8 @@ if($pp['pp_pg'] == 'lg') {
                 {
                 ?>
                 <tr>
-                    <th scope="row"><?php echo $app_no_subj; ?></th>
-                    <td><?php echo $app_no; ?></td>
+                    <th scope="row"><?=$app_no_subj; ?></th>
+                    <td><?=$app_no; ?></td>
                 </tr>
                 <?php
                 }
@@ -125,11 +125,11 @@ if($pp['pp_pg'] == 'lg') {
                 ?>
                 <tr>
                     <th scope="row">입금자명</th>
-                    <td><?php echo get_text($pp['pp_deposit_name']); ?></td>
+                    <td><?=get_text($pp['pp_deposit_name']); ?></td>
                 </tr>
                 <tr>
                     <th scope="row">입금계좌</th>
-                    <td><?php echo get_text($pp['pp_bank_account']); ?></td>
+                    <td><?=get_text($pp['pp_bank_account']); ?></td>
                 </tr>
                 <?php
                 }
@@ -155,7 +155,7 @@ if($pp['pp_pg'] == 'lg') {
                                 $hp_receipt_script = 'window.open(\''.G5_BILL_RECEIPT_URL.'mcash_bill&tno='.$pp['pp_tno'].'&order_no='.$pp['pp_id'].'&trade_mony='.$pp['pp_receipt_price'].'\', \'winreceipt\', \'width=500,height=690,scrollbars=yes,resizable=yes\');';
                             }
                         ?>
-                        <a href="javascript:;" onclick="<?php echo $hp_receipt_script; ?>">영수증 출력</a>
+                        <a href="javascript:;" onclick="<?=$hp_receipt_script; ?>">영수증 출력</a>
                         <?php
                         }
 
@@ -174,7 +174,7 @@ if($pp['pp_pg'] == 'lg') {
                                 $card_receipt_script = 'window.open(\''.G5_BILL_RECEIPT_URL.'card_bill&tno='.$pp['pp_tno'].'&order_no='.$pp['pp_id'].'&trade_mony='.$pp['pp_receipt_price'].'\', \'winreceipt\', \'width=470,height=815,scrollbars=yes,resizable=yes\');';
                             }
                         ?>
-                        <a href="javascript:;" onclick="<?php echo $card_receipt_script; ?>">영수증 출력</a>
+                        <a href="javascript:;" onclick="<?=$card_receipt_script; ?>">영수증 출력</a>
                         <?php
                         }
                         ?>
@@ -231,13 +231,13 @@ if($pp['pp_pg'] == 'lg') {
                             $cash_receipt_script = 'window.open(\''.G5_CASH_RECEIPT_URL.$default['de_kcp_mid'].'&orderid='.$pp_id.'&bill_yn=Y&authno='.$cash['receipt_no'].'\', \'taxsave_receipt\', \'width=360,height=647,scrollbars=0,menus=0\');';
                         }
                     ?>
-                        <a href="javascript:;" onclick="<?php echo $cash_receipt_script; ?>" class="btn_frmline">현금영수증 확인하기</a>
+                        <a href="javascript:;" onclick="<?=$cash_receipt_script; ?>" class="btn_frmline">현금영수증 확인하기</a>
                     <?php
                     }
                     else
                     {
                     ?>
-                        <a href="javascript:;" onclick="window.open('<?php echo G5_SHOP_URL; ?>/taxsave.php?tx=personalpay&od_id=<?php echo $pp_id; ?>', 'taxsave', 'width=550,height=400,scrollbars=1,menus=0');" class="btn_frmline">현금영수증을 발급하시려면 클릭하십시오.</a>
+                        <a href="javascript:;" onclick="window.open('<?=G5_SHOP_URL; ?>/taxsave.php?tx=personalpay&od_id=<?=$pp_id; ?>', 'taxsave', 'width=550,height=400,scrollbars=1,menus=0');" class="btn_frmline">현금영수증을 발급하시려면 클릭하십시오.</a>
                     <?php } ?>
                     </td>
                 </tr>
@@ -257,7 +257,7 @@ if($pp['pp_pg'] == 'lg') {
         <ul>
             <li>
                 총 주문액
-                <strong><?php echo display_price($pp['pp_price']); ?></strong>
+                <strong><?=display_price($pp['pp_price']); ?></strong>
             </li>
             <?php
             if ($misu_price > 0) {
@@ -269,7 +269,7 @@ if($pp['pp_pg'] == 'lg') {
             ?>
             <li id="alrdy">
                 결제액
-                <strong><?php echo $wanbul; ?></strong>
+                <strong><?=$wanbul; ?></strong>
             </li>
         </ul>
     </section>
@@ -290,19 +290,19 @@ if($pp['pp_pg'] == 'lg') {
         <tbody>
         <tr>
             <th scope="col"><label for="e_trade_no">KCP 거래번호</label></th>
-            <td><input type="text" name="e_trade_no" value="<?php echo $pp['pp_tno']; ?>" size="80"></td>
+            <td><input type="text" name="e_trade_no" value="<?=$pp['pp_tno']; ?>" size="80"></td>
         </tr>
         <tr>
             <th scope="col"><label for="deposit_no">입금계좌</label></th>
-            <td><input type="text" name="deposit_no" value="<?php echo $deposit_no; ?>" size="80"></td>
+            <td><input type="text" name="deposit_no" value="<?=$deposit_no; ?>" size="80"></td>
         </tr>
         <tr>
             <th scope="col"><label for="req_name">입금자명</label></th>
-            <td><input type="text" name="req_name" value="<?php echo $pp['pp_deposit_name']; ?>" size="80"></td>
+            <td><input type="text" name="req_name" value="<?=$pp['pp_deposit_name']; ?>" size="80"></td>
         </tr>
         <tr>
             <th scope="col"><label for="noti_url">입금통보 URL</label></th>
-            <td><input type="text" name="noti_url" value="<?php echo G5_SHOP_URL; ?>/settle_kcp_common.php" size="80"></td>
+            <td><input type="text" name="noti_url" value="<?=G5_SHOP_URL; ?>/settle_kcp_common.php" size="80"></td>
         </tr>
         </tbody>
         </table>

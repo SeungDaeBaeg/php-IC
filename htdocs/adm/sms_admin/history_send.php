@@ -228,7 +228,7 @@ if($config['cf_sms_type'] == 'LMS') {
 <script>
 //act = window.open('sms_ing.php', 'act', 'width=300, height=200');
 //act.close();
-location.href = 'history_view.php?wr_no=<?php echo $wr_no?>&wr_renum=<?php echo $new_wr_renum?>';
+location.href = 'history_view.php?wr_no=<?=$wr_no?>&wr_renum=<?=$new_wr_renum?>';
 </script>
 <?php
 include_once(G5_ADMIN_PATH.'/admin.tail.php');

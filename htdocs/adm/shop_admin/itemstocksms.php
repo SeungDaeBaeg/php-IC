@@ -68,39 +68,39 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 ?>
 
 <div class="local_ov01 local_ov">
-    <?php echo $listall; ?>
-     <span class="btn_ov01"><span class="ov_txt">전체 </span><span class="ov_num"> <?php echo number_format($total_count); ?>건</span></span>  
-     <span class="btn_ov01"><span class="ov_txt">미전송 </span><span class="ov_num"><?php echo number_format($unsend_count); ?>건</span></span>  
+    <?=$listall; ?>
+     <span class="btn_ov01"><span class="ov_txt">전체 </span><span class="ov_num"> <?=number_format($total_count); ?>건</span></span>
+     <span class="btn_ov01"><span class="ov_txt">미전송 </span><span class="ov_num"><?=number_format($unsend_count); ?>건</span></span>
 </div>
 
 <form name="flist" class="local_sch01 local_sch">
-<input type="hidden" name="doc" value="<?php echo $doc; ?>">
-<input type="hidden" name="sort1" value="<?php echo $sort1; ?>">
-<input type="hidden" name="sort2" value="<?php echo $sort2; ?>">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
+<input type="hidden" name="doc" value="<?=$doc; ?>">
+<input type="hidden" name="sort1" value="<?=$sort1; ?>">
+<input type="hidden" name="sort2" value="<?=$sort2; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
 
 <label for="sel_field" class="sound_only">검색대상</label>
 <select name="sel_field" id="sel_field">
-    <option value="it_id" <?php echo get_selected($sel_field, 'it_id'); ?>>상품코드</option>
-    <option value="ss_hp" <?php echo get_selected($sel_field, 'ss_hp'); ?>>휴대폰번호</option>
+    <option value="it_id" <?=get_selected($sel_field, 'it_id'); ?>>상품코드</option>
+    <option value="ss_hp" <?=get_selected($sel_field, 'ss_hp'); ?>>휴대폰번호</option>
 </select>
 
 <label for="search" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-<input type="text" name="search" id="search" value="<?php echo $search; ?>" required class="frm_input required">
+<input type="text" name="search" id="search" value="<?=$search; ?>" required class="frm_input required">
 <input type="submit" value="검색" class="btn_submit">
 
 </form>
 
 <form name="fitemstocksms" action="./itemstocksmsupdate.php" method="post" onsubmit="return fitemstocksms_submit(this);">
-<input type="hidden" name="sort1" value="<?php echo $sort1; ?>">
-<input type="hidden" name="sort2" value="<?php echo $sort2; ?>">
-<input type="hidden" name="sel_field" value="<?php echo $sel_field; ?>">
-<input type="hidden" name="search" value="<?php echo $search; ?>">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
+<input type="hidden" name="sort1" value="<?=$sort1; ?>">
+<input type="hidden" name="sort2" value="<?=$sort2; ?>">
+<input type="hidden" name="sel_field" value="<?=$sel_field; ?>">
+<input type="hidden" name="search" value="<?=$search; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">
@@ -130,17 +130,17 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
         $bg = 'bg'.($i%2);
 
     ?>
-    <tr class="<?php echo $bg; ?>">
+    <tr class="<?=$bg; ?>">
         <td class="td_chk">
-            <label for="chk_<?php echo $i; ?>" class="sound_only"><?php echo $it_name; ?> 알림요청</label>
-            <input type="checkbox" name="chk[]" value="<?php echo $i ?>" id="chk_<?php echo $i; ?>">
-            <input type="hidden" name="ss_id[<?php echo $i; ?>]" value="<?php echo $row['ss_id']; ?>">
+            <label for="chk_<?=$i; ?>" class="sound_only"><?=$it_name; ?> 알림요청</label>
+            <input type="checkbox" name="chk[]" value="<?=$i ?>" id="chk_<?=$i; ?>">
+            <input type="hidden" name="ss_id[<?=$i; ?>]" value="<?=$row['ss_id']; ?>">
         </td>
-        <td class="td_left"><?php echo $it_name; ?></td>
-        <td class="td_telbig"><?php echo $row['ss_hp']; ?></td>
-        <td class="td_stat"><?php echo ($row['ss_send'] ? '전송완료' : '전송전'); ?></td>
-        <td class="td_datetime"><?php echo (is_null_time($row['ss_send_time']) ? '' : $row['ss_send_time']); ?></td>
-        <td class="td_datetime"><?php echo (is_null_time($row['ss_datetime']) ? '' : $row['ss_datetime']); ?></td>
+        <td class="td_left"><?=$it_name; ?></td>
+        <td class="td_telbig"><?=$row['ss_hp']; ?></td>
+        <td class="td_stat"><?=($row['ss_send'] ? '전송완료' : '전송전'); ?></td>
+        <td class="td_datetime"><?=(is_null_time($row['ss_send_time']) ? '' : $row['ss_send_time']); ?></td>
+        <td class="td_datetime"><?=(is_null_time($row['ss_datetime']) ? '' : $row['ss_datetime']); ?></td>
     </tr>
     <?php
     }
@@ -160,7 +160,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 </div>
 </form>
 
-<?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
+<?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
 
 <script>
 function fitemstocksms_submit(f)

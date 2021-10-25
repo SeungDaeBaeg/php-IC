@@ -49,8 +49,8 @@ $goods = $pp['pp_name'].'님 개인결제';
 </div>
 
 <div id="sod_frm">
-    <form name="forderform" method="post" action="<?php echo $action_url; ?>" autocomplete="off">
-    <input type="hidden" name="pp_id" value="<?php echo $pp['pp_id']; ?>">
+    <form name="forderform" method="post" action="<?=$action_url; ?>" autocomplete="off">
+    <input type="hidden" name="pp_id" value="<?=$pp['pp_id']; ?>">
     <section id="sod_frm_orderer">
         <h2>개인결제정보</h2>
 
@@ -60,24 +60,24 @@ $goods = $pp['pp_name'].'님 개인결제';
             <?php if(trim($pp['pp_content'])) { ?>
             <tr>
                 <th>상세내용</th>
-                <td><?php echo conv_content($pp['pp_content'], 0); ?></td>
+                <td><?=conv_content($pp['pp_content'], 0); ?></td>
             </tr>
             <?php } ?>
             <tr>
                 <th>결제금액</th>
-                <td><?php echo display_price($pp['pp_price']); ?></td>
+                <td><?=display_price($pp['pp_price']); ?></td>
             </tr>
             <tr>
                 <th scope="row"><label for="pp_name">이름</label></th>
-                <td><input type="text" name="pp_name" value="<?php echo $pp['pp_name']; ?>" id="pp_name" required class="required frm_input"></td>
+                <td><input type="text" name="pp_name" value="<?=$pp['pp_name']; ?>" id="pp_name" required class="required frm_input"></td>
             </tr>
             <tr>
                 <th scope="row"><label for="pp_email">이메일</label></th>
-                <td><input type="email" name="pp_email" value="<?php echo $member['mb_email']; ?>" id="pp_email" required class="required frm_input"></td>
+                <td><input type="email" name="pp_email" value="<?=$member['mb_email']; ?>" id="pp_email" required class="required frm_input"></td>
             </tr>
             <tr>
                 <th scope="row"><label for="pp_hp">휴대폰</label></th>
-                <td><input type="text" name="pp_hp" value="<?php echo $member['mb_hp']; ?>" id="pp_hp" class="frm_input"></td>
+                <td><input type="text" name="pp_hp" value="<?=$member['mb_hp']; ?>" id="pp_hp" class="frm_input"></td>
             </tr>
             </tbody>
             </table>
@@ -145,7 +145,7 @@ $goods = $pp['pp_name'].'님 개인결제';
     ?>
 
     <div id="show_progress" style="display:none;">
-        <img src="<?php echo G5_MOBILE_URL; ?>/shop/img/loading.gif" alt="">
+        <img src="<?=G5_MOBILE_URL; ?>/shop/img/loading.gif" alt="">
         <span>결제진행 중입니다. 잠시만 기다려 주십시오.</span>
     </div>
     </form>
@@ -239,7 +239,7 @@ function pay_approval()
     f.P_TAX.value = pf.comm_vat_mny.value;
     f.P_TAXFREE = pf.comm_free_mny.value;
     <?php } ?>
-    f.P_RETURN_URL.value = "<?php echo $return_url.$pp_id; ?>";
+    f.P_RETURN_URL.value = "<?=$return_url.$pp_id; ?>";
     f.action = "https://mobile.inicis.com/smart/" + paymethod + "/";
     <?php } ?>
 
@@ -319,7 +319,7 @@ function payfield_check(f)
 // 결제체크
 function payment_check(f)
 {
-    var tot_price = <?php echo (int)$pp['pp_price']; ?>;
+    var tot_price = <?=(int)$pp['pp_price']; ?>;
 
     if (document.getElementById("pp_settle_iche")) {
         if (document.getElementById("pp_settle_iche").checked) {

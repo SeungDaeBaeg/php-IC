@@ -178,7 +178,7 @@ if (file_exists($dbconfig_file)) {
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>오류! <?php echo G5_VERSION ?> 설치하기</title>
+<title>오류! <?=G5_VERSION ?> 설치하기</title>
 <link rel="stylesheet" href="install/install.css">
 </head>
 <body>
@@ -191,11 +191,11 @@ if (file_exists($dbconfig_file)) {
 <div class="ins_inner">
     <p>다음 파일을 찾을 수 없습니다.</p>
     <ul>
-        <li><strong><?php echo G5_DATA_DIR.'/'.G5_DBCONFIG_FILE ?></strong></li>
+        <li><strong><?=G5_DATA_DIR.'/'.G5_DBCONFIG_FILE ?></strong></li>
     </ul>
     <p>그누보드 설치 후 다시 실행하시기 바랍니다.</p>
     <div class="inner_btn">
-        <a href="<?php echo G5_URL; ?>/install/"><?php echo G5_VERSION ?> 설치하기</a>
+        <a href="<?=G5_URL; ?>/install/"><?=G5_VERSION ?> 설치하기</a>
     </div>
 </div>
 <div id="ins_ft">

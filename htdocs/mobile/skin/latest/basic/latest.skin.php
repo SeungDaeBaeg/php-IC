@@ -20,8 +20,8 @@ $is_show_next_prev = ($list_count > 4) ? 1 : 0;
 ?>
 
 <div class="lt owl-carousel-wrap">
-    <a href="<?php echo get_pretty_url($bo_table); ?>" class="lt_title"><strong><?php echo $bo_subject; ?></strong></a>
-    <div class="<?php echo $list_count ? 'latest-sel' : ''; ?>">
+    <a href="<?=get_pretty_url($bo_table); ?>" class="lt_title"><strong><?=$bo_subject; ?></strong></a>
+    <div class="<?=$list_count ? 'latest-sel' : ''; ?>">
         <ul class="item">
             <?php
             for ($i=0; $i<$list_count; $i++) {
@@ -63,9 +63,9 @@ $is_show_next_prev = ($list_count > 4) ? 1 : 0;
                 ?>
                
                 <div class="lt_info">
-                    <?php echo $list[$i]['name'] ?>
+                    <?=$list[$i]['name'] ?>
                     <span class="lt_date">
-                        <?php echo $list[$i]['datetime'] ?>
+                        <?=$list[$i]['datetime'] ?>
                     </span>
                 </div>
             </li>
@@ -78,9 +78,9 @@ $is_show_next_prev = ($list_count > 4) ? 1 : 0;
     <?php if ($is_show_next_prev){  // $divisor_count 이상의 값이 있을경우에만 출력 ?>
 	<div class="lt_page">
 		<button class="lt_page_prev"><span class="sound_only">이전페이지</span><i class="fa fa-caret-left" aria-hidden="true"></i></button>
-		<span class="page_print"><b><?php echo $start_page_num; ?></b>/<?php echo $start_page_num; ?></span>
+		<span class="page_print"><b><?=$start_page_num; ?></b>/<?=$start_page_num; ?></span>
 		<button class="lt_page_next"><span class="sound_only">다음페이지</span><i class="fa fa-caret-right" aria-hidden="true"></i></button>
 	</div>
     <?php } ?>
-    <a href="<?php echo get_pretty_url($bo_table); ?>" class="lt_more"><span class="sound_only"><?php echo $bo_subject ?></span>전체보기</a>
+    <a href="<?=get_pretty_url($bo_table); ?>" class="lt_more"><span class="sound_only"><?=$bo_subject ?></span>전체보기</a>
 </div>

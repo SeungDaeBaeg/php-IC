@@ -19,7 +19,7 @@ $mshop_categories = get_shop_category_array(true);
 
 <div id="category" class="menu">
     <div class="menu_wr">
-        <?php echo outlogin('shop_basic'); // 외부 로그인 ?>
+        <?=outlogin('shop_basic'); // 외부 로그인 ?>
 
         <div class="content">
             <?php
@@ -32,7 +32,7 @@ $mshop_categories = get_shop_category_array(true);
                     echo '<ul class="cate">'.PHP_EOL;
             ?>
                 <li>
-                    <a href="<?php echo $mshop_ca_row1['url']; ?>"><?php echo get_text($mshop_ca_row1['ca_name']); ?></a>
+                    <a href="<?=$mshop_ca_row1['url']; ?>"><?=get_text($mshop_ca_row1['ca_name']); ?></a>
                     <?php
                     if( count($cate1) > 1 )
                         echo '<button class="sub_ct_toggle ct_op">'.get_text($mshop_ca_row1['ca_name']).' 하위분류 열기</button>'.PHP_EOL;
@@ -46,7 +46,7 @@ $mshop_categories = get_shop_category_array(true);
                             echo '<ul class="sub_cate sub_cate1">'.PHP_EOL;
                     ?>
                         <li>
-                            <a href="<?php echo $mshop_ca_row2['url']; ?>"><?php echo get_text($mshop_ca_row2['ca_name']); ?></a>
+                            <a href="<?=$mshop_ca_row2['url']; ?>"><?=get_text($mshop_ca_row2['ca_name']); ?></a>
                             <?php
                             $mshop_ca_res3 = sql_query(get_mshop_category($mshop_ca_row2['ca_id'], 6));
                             if( count($cate2) > 1 )
@@ -61,7 +61,7 @@ $mshop_categories = get_shop_category_array(true);
                                     echo '<ul class="sub_cate sub_cate2">'.PHP_EOL;
                             ?>
                                 <li>
-                                    <a href="<?php echo $mshop_ca_row3['url']; ?>"><?php echo get_text($mshop_ca_row3['ca_name']); ?></a>
+                                    <a href="<?=$mshop_ca_row3['url']; ?>"><?=get_text($mshop_ca_row3['ca_name']); ?></a>
                                     <?php
                                     $mshop_ca_res4 = sql_query(get_mshop_category($mshop_ca_row3['ca_id'], 8));
                                     if(sql_num_rows($mshop_ca_res4))
@@ -72,7 +72,7 @@ $mshop_categories = get_shop_category_array(true);
                                             echo '<ul class="sub_cate sub_cate3">'.PHP_EOL;
                                     ?>
                                         <li>
-                                            <a href="<?php echo $mshop_ca_href.$mshop_ca_row4['ca_id']; ?>"><?php echo get_text($mshop_ca_row4['ca_name']); ?></a>
+                                            <a href="<?=$mshop_ca_href.$mshop_ca_row4['ca_id']; ?>"><?=get_text($mshop_ca_row4['ca_name']); ?></a>
                                             <?php
                                             $mshop_ca_res5 = sql_query(get_mshop_category($mshop_ca_row4['ca_id'], 10));
                                             if(sql_num_rows($mshop_ca_res5))
@@ -83,7 +83,7 @@ $mshop_categories = get_shop_category_array(true);
                                                     echo '<ul class="sub_cate sub_cate4">'.PHP_EOL;
                                             ?>
                                                 <li>
-                                                    <a href="<?php echo $mshop_ca_href.$mshop_ca_row5['ca_id']; ?>"><?php echo get_text($mshop_ca_row5['ca_name']); ?></a>
+                                                    <a href="<?=$mshop_ca_href.$mshop_ca_row5['ca_id']; ?>"><?=get_text($mshop_ca_row5['ca_name']); ?></a>
                                                 </li>
                                             <?php
                                             }
@@ -129,12 +129,12 @@ $mshop_categories = get_shop_category_array(true);
         <?php include(G5_MSHOP_SKIN_PATH.'/boxtodayview.skin.php'); // 오늘 본 상품 ?>
 
         <ul id="cate_tnb">
-            <li><a href="<?php echo G5_SHOP_URL; ?>/couponzone.php"><i class="fa fa-ticket"></i> 쿠폰존</a></li>
-            <li><a href="<?php echo G5_SHOP_URL; ?>/itemuselist.php"><i class="fa fa-camera"></i> 사용후기</a></li>
-            <li><a href="<?php echo G5_BBS_URL; ?>/faq.php"><i class="fa fa-question"></i>FAQ</a></li>
-            <li><a href="<?php echo G5_BBS_URL; ?>/qalist.php"><i class="fa fa-comments"></i>1:1문의</a></li>
-            <li><a href="<?php echo G5_SHOP_URL; ?>/personalpay.php"><i class="fa fa-credit-card"></i>개인결제</a></li>
-            <li><a href="<?php echo G5_URL; ?>"><i class="fa fa-home"></i>커뮤니티</a></li>
+            <li><a href="<?=G5_SHOP_URL; ?>/couponzone.php"><i class="fa fa-ticket"></i> 쿠폰존</a></li>
+            <li><a href="<?=G5_SHOP_URL; ?>/itemuselist.php"><i class="fa fa-camera"></i> 사용후기</a></li>
+            <li><a href="<?=G5_BBS_URL; ?>/faq.php"><i class="fa fa-question"></i>FAQ</a></li>
+            <li><a href="<?=G5_BBS_URL; ?>/qalist.php"><i class="fa fa-comments"></i>1:1문의</a></li>
+            <li><a href="<?=G5_SHOP_URL; ?>/personalpay.php"><i class="fa fa-credit-card"></i>개인결제</a></li>
+            <li><a href="<?=G5_URL; ?>"><i class="fa fa-home"></i>커뮤니티</a></li>
         </ul> 
     </div>
 </div>

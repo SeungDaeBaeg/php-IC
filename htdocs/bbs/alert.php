@@ -48,9 +48,9 @@ if($error) {
 ?>
 
 <script>
-alert("<?php echo $msg; ?>");
+alert("<?=$msg; ?>");
 <?php if ($url) { ?>
-document.location.replace("<?php echo str_replace('&amp;', '&', $url); ?>");
+document.location.replace("<?=str_replace('&amp;', '&', $url); ?>");
 <?php } else { ?>
 history.back();
 <?php } ?>
@@ -58,12 +58,12 @@ history.back();
 
 <noscript>
 <div id="validation_check">
-    <h1><?php echo $header2 ?></h1>
+    <h1><?=$header2 ?></h1>
     <p class="cbg">
-        <?php echo $msg2 ?>
+        <?=$msg2 ?>
     </p>
     <?php if($post) { ?>
-    <form method="post" action="<?php echo $url ?>">
+    <form method="post" action="<?=$url ?>">
     <?php
     foreach($_POST as $key => $value) {
         
@@ -76,7 +76,7 @@ history.back();
         if(preg_match("/pass|pwd|capt|url/", $key))
             continue;
     ?>
-    <input type="hidden" name="<?php echo htmlspecialchars($key); ?>" value="<?php echo htmlspecialchars($value); ?>">
+    <input type="hidden" name="<?=htmlspecialchars($key); ?>" value="<?=htmlspecialchars($value); ?>">
     <?php
     }
     ?>
@@ -84,7 +84,7 @@ history.back();
     </form>
     <?php } else { ?>
     <div class="btn_confirm">
-        <a href="<?php echo $url ?>">돌아가기</a>
+        <a href="<?=$url ?>">돌아가기</a>
     </div>
     <?php } ?>
 
@@ -93,8 +93,8 @@ history.back();
 <header>
     <hgroup>
         <!-- <h1>회원가입 정보 입력 확인</h1> --> <!-- 수행 중이던 작업 내용 -->
-        <h1><?php echo $header ?></h1> <!-- 수행 중이던 작업 내용 -->
-        <h2><?php echo $header2 ?></h2>
+        <h1><?=$header ?></h1> <!-- 수행 중이던 작업 내용 -->
+        <h2><?=$header2 ?></h2>
     </hgroup>
 </header>
 <p>
@@ -103,10 +103,10 @@ history.back();
     <strong>이름</strong> 필수 입력입니다. 한글만 입력할 수 있습니다.<br>
     <strong>이메일</strong> 올바르게 입력하지 않았습니다.<br>
     -->
-    <?php echo $msg2 ?>
+    <?=$msg2 ?>
 </p>
 
-<a href="<?php echo $url ?>">돌아가기</a>
+<a href="<?=$url ?>">돌아가기</a>
 </article>
 */ ?>
 </div>

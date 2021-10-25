@@ -14,7 +14,7 @@ $pg_anchor = '<ul class="anchor">
 
 <section id="anc_pricecompare_info">
     <h2>가격비교사이트 연동 안내</h2>
-    <?php echo $pg_anchor; ?>
+    <?=$pg_anchor; ?>
 
     <div class="local_desc01 local_desc">
         <ol>
@@ -27,7 +27,7 @@ $pg_anchor = '<ul class="anchor">
 
 <section id="anc_pricecompare_engine">
     <h2>사이트별 엔진페이지 URL</h2>
-    <?php echo $pg_anchor; ?>
+    <?=$pg_anchor; ?>
 
     <div class="local_desc01 local_desc">
         <p>사이트 명을 클릭하시면 해당 사이트로 이동합니다.</p>
@@ -37,16 +37,16 @@ $pg_anchor = '<ul class="anchor">
             <dd>
                 <ul>
                     <li>입점 안내 : <a href="http://join.shopping.naver.com/join/intro.nhn" target="_blank">http://join.shopping.naver.com/join/intro.nhn</a></li>
-                    <li>전체상품 URL : <a href="<?php echo G5_SHOP_URL; ?>/price/naver.php" target="_blank"><?php echo G5_SHOP_URL; ?>/price/naver.php</a></li>
-                    <li>요약상품 URL : <a href="<?php echo G5_SHOP_URL; ?>/price/naver_summary.php" target="_blank"><?php echo G5_SHOP_URL; ?>/price/naver_summary.php</a></li>
+                    <li>전체상품 URL : <a href="<?=G5_SHOP_URL; ?>/price/naver.php" target="_blank"><?=G5_SHOP_URL; ?>/price/naver.php</a></li>
+                    <li>요약상품 URL : <a href="<?=G5_SHOP_URL; ?>/price/naver_summary.php" target="_blank"><?=G5_SHOP_URL; ?>/price/naver_summary.php</a></li>
                 </ul>
             </dd>
             <dt><a href="http://shopping.daum.net/" target="_blank">다음 쇼핑하우</a></dt>
             <dd>
                 <ul>
                     <li>입점 안내 : <a href="http://commerceone.biz.daum.net/join/intro.daum" target="_blank">http://commerceone.biz.daum.net/join/intro.daum</a></li>
-                    <li>전체상품 URL : <a href="<?php echo G5_SHOP_URL; ?>/price/daum.php" target="_blank"><?php echo G5_SHOP_URL; ?>/price/daum.php</a></li>
-                    <li>요약상품 URL : <a href="<?php echo G5_SHOP_URL; ?>/price/daum_summary.php" target="_blank"><?php echo G5_SHOP_URL; ?>/price/daum_summary.php</a></li>
+                    <li>전체상품 URL : <a href="<?=G5_SHOP_URL; ?>/price/daum.php" target="_blank"><?=G5_SHOP_URL; ?>/price/daum.php</a></li>
+                    <li>요약상품 URL : <a href="<?=G5_SHOP_URL; ?>/price/daum_summary.php" target="_blank"><?=G5_SHOP_URL; ?>/price/daum_summary.php</a></li>
                 </ul>
             </dd>
         </dl>

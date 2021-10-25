@@ -5,7 +5,7 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 0);
 ?>
 
-<script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
+<script src="<?=G5_JS_URL; ?>/viewimageresize.js"></script>
 
 <!-- 상품 사용후기 시작 { -->
 <section id="sit_use_list">
@@ -14,13 +14,13 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
     <div class="sit_use_top">
         <?php if ($star_score) { ?>
         <h4>고객 평점</h4>
-        <img src="<?php echo G5_SHOP_URL; ?>/img/s_star<?php echo $star_score?>.png" alt="" class="sit_star">
+        <img src="<?=G5_SHOP_URL; ?>/img/s_star<?=$star_score?>.png" alt="" class="sit_star">
         <span class="st_bg "></span>
-        총 <strong><?php echo $total_count; ?></strong> 건 사용후기
+        총 <strong><?=$total_count; ?></strong> 건 사용후기
         <?php } ?>
         <div id="sit_use_wbtn">
-            <a href="<?php echo $itemuse_form; ?>" class="btn02 itemuse_form">사용후기 쓰기<span class="sound_only"> 새 창</span></a>
-            <a href="<?php echo $itemuse_list; ?>" class="btn01 itemuse_list">더보기</a>
+            <a href="<?=$itemuse_form; ?>" class="btn02 itemuse_form">사용후기 쓰기<span class="sound_only"> 새 창</span></a>
+            <a href="<?=$itemuse_list; ?>" class="btn01 itemuse_list">더보기</a>
         </div>
     </div>
     <?php
@@ -45,27 +45,27 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
     ?>
 
         <li class="sit_use_li">
-                <div class="sit_use_tit"><?php echo $is_subject; ?></div>
+                <div class="sit_use_tit"><?=$is_subject; ?></div>
                 <button type="button" class="sit_use_li_title">내용보기 <i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 <dl class="sit_use_dl">
                     <dt>평점<dt>
-                    <dd class="sit_use_star"><img src="<?php echo G5_SHOP_URL; ?>/img/s_star<?php echo $is_star; ?>.png" alt="별<?php echo $is_star; ?>개" width="85"></dd>
+                    <dd class="sit_use_star"><img src="<?=G5_SHOP_URL; ?>/img/s_star<?=$is_star; ?>.png" alt="별<?=$is_star; ?>개" width="85"></dd>
                     <dt>작성자</dt>
-                    <dd><?php echo $is_name; ?></dd>
+                    <dd><?=$is_name; ?></dd>
                     <dt>작성일</dt>
-                    <dd><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $is_time; ?></dd>
+                    <dd><i class="fa fa-clock-o" aria-hidden="true"></i> <?=$is_time; ?></dd>
                 </dl>
 
-            <div id="sit_use_con_<?php echo $i; ?>" class="sit_use_con">
+            <div id="sit_use_con_<?=$i; ?>" class="sit_use_con">
                 <div class="sit_use_p">
-                    <?php echo $is_content; // 사용후기 내용 ?>
+                    <?=$is_content; // 사용후기 내용 ?>
                   
                 </div>
 
                 <?php if ($is_admin || $row['mb_id'] == $member['mb_id']) { ?>
                 <div class="sit_use_cmd">
-                    <a href="<?php echo $itemuse_form."&amp;is_id={$row['is_id']}&amp;w=u"; ?>" class="itemuse_form btn01" onclick="return false;">수정</a>
-                    <a href="<?php echo $itemuse_formupdate."&amp;is_id={$row['is_id']}&amp;w=d&amp;hash={$hash}"; ?>" class="itemuse_delete btn01">삭제</a>
+                    <a href="<?=$itemuse_form."&amp;is_id={$row['is_id']}&amp;w=u"; ?>" class="itemuse_form btn01" onclick="return false;">수정</a>
+                    <a href="<?=$itemuse_formupdate."&amp;is_id={$row['is_id']}&amp;w=d&amp;hash={$hash}"; ?>" class="itemuse_delete btn01">삭제</a>
                 </div>
                 <?php } ?>
 
@@ -73,13 +73,13 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
                 <div class="sit_use_reply">
                     <div class="use_reply_icon">답변</div>
                     <div class="use_reply_tit">
-                        <?php echo $is_reply_subject; // 답변 제목 ?>
+                        <?=$is_reply_subject; // 답변 제목 ?>
                     </div>
                     <div class="use_reply_name">
-                        <?php echo $is_reply_name; // 답변자 이름 ?>
+                        <?=$is_reply_name; // 답변자 이름 ?>
                     </div>
                     <div class="use_reply_p">
-                        <?php echo $is_reply_content; // 답변 내용 ?>
+                        <?=$is_reply_content; // 답변 내용 ?>
                     </div>
                 </div>
                 <?php } //end if ?>

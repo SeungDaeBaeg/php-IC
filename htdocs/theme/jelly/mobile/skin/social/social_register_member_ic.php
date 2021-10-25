@@ -42,7 +42,7 @@
         <div class="register_row">
             <div>이메일<span class="red_color">*</span></div>
             <div>
-                <input type="text" autocomplete="nope" value="<?php echo isset($user_email)?$user_email:'';?>" id="input_email" onkeydown="inputKeyDown(this)">
+                <input type="text" autocomplete="nope" value="<?=isset($user_email)?$user_email:'';?>" id="input_email" onkeydown="inputKeyDown(this)">
                 <div class="red_color" id="error_email"></div>
             </div>
         </div>
@@ -154,18 +154,18 @@
 </div>
 
 
-<form id="fregisterform" name="fregisterform" action="<?php echo $register_action_url; ?>" method="post" enctype="multipart/form-data" autocomplete="off">
-    <input type="hidden" name="w" value="<?php echo $w; ?>">
-    <input type="hidden" name="url" value="<?php echo $urlencode; ?>">
-    <input type="hidden" name="mb_name" value="<?php echo $user_nick; ?>" >
-    <input type="hidden" name="provider" value="<?php echo $provider_name;?>" >
+<form id="fregisterform" name="fregisterform" action="<?=$register_action_url; ?>" method="post" enctype="multipart/form-data" autocomplete="off">
+    <input type="hidden" name="w" value="<?=$w; ?>">
+    <input type="hidden" name="url" value="<?=$urlencode; ?>">
+    <input type="hidden" name="mb_name" value="<?=$user_nick; ?>" >
+    <input type="hidden" name="provider" value="<?=$provider_name;?>" >
     <input type="hidden" name="action" value="register">
 
-    <input type="hidden" name="mb_id" value="<?php echo $user_id; ?>" id="reg_mb_id">
-    <input type="hidden" name="mb_nick_default" value="<?php echo isset($user_nick)?get_text($user_nick):''; ?>">
-    <input type="hidden" name="mb_nick" value="<?php echo isset($user_nick)?get_text($user_nick):''; ?>" id="reg_mb_nick">
+    <input type="hidden" name="mb_id" value="<?=$user_id; ?>" id="reg_mb_id">
+    <input type="hidden" name="mb_nick_default" value="<?=isset($user_nick)?get_text($user_nick):''; ?>">
+    <input type="hidden" name="mb_nick" value="<?=isset($user_nick)?get_text($user_nick):''; ?>" id="reg_mb_nick">
 
-    <input type="hidden" name="mb_email" value="<?php echo isset($user_email)?$user_email:''; ?>" id="reg_mb_email">
+    <input type="hidden" name="mb_email" value="<?=isset($user_email)?$user_email:''; ?>" id="reg_mb_email">
     
     <input type="hidden" name="mb_phone" id="reg_mb_phone">
     <input type="hidden" name="mb_referer" id="reg_mb_referer">
@@ -280,7 +280,7 @@
         }
 
         $.ajax({
-            url:'<?php echo $check_mb_id ?>',
+            url:'<?=$check_mb_id ?>',
             type:'post',
             data:{reg_mb_id:input_id.value}
         }).done(function(msg){

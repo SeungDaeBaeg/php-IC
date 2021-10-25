@@ -116,7 +116,7 @@ function get_max_value($arr)
 <div class="sidx">
     <section id="anc_sidx_ord">
         <h2>주문현황</h2>
-        <?php echo $pg_anchor; ?>
+        <?=$pg_anchor; ?>
 
         <?php
         $arr_order = array();
@@ -162,7 +162,7 @@ function get_max_value($arr)
                 <?php
                 foreach($y_val as $val) {
                 ?>
-                <li><span></span><?php echo number_format($val); ?></li>
+                <li><span></span><?=number_format($val); ?></li>
                 <?php
                 }
                 ?>
@@ -175,11 +175,11 @@ function get_max_value($arr)
                     $k = 10 - $i;
                     $li_bg = 'bg'.($i%2);
                 ?>
-                <li class="<?php echo $li_bg; ?>" style="z-index:<?php echo $k; ?>">
-                    <div class="graph order" title="<?php echo $order_title; ?>">
+                <li class="<?=$li_bg; ?>" style="z-index:<?=$k; ?>">
+                    <div class="graph order" title="<?=$order_title; ?>">
 
                     </div>
-                    <div class="graph cancel" title="<?php echo $cancel_title; ?>">
+                    <div class="graph cancel" title="<?=$cancel_title; ?>">
 
                     </div>
                 </li>
@@ -191,7 +191,7 @@ function get_max_value($arr)
                 <?php
                 foreach($x_val as $val) {
                 ?>
-                <li><span></span><?php echo substr($val, 5, 5).' ('.get_yoil($val).')'; ?></li>
+                <li><span></span><?=substr($val, 5, 5).' ('.get_yoil($val).')'; ?></li>
                 <?php
                 }
                 ?>
@@ -206,7 +206,7 @@ function get_max_value($arr)
     <div id="sidx_stat">
         <section id="anc_sidx_act">
             <h2>처리할 주문</h2>
-            <?php echo $pg_anchor; ?>
+            <?=$pg_anchor; ?>
 
             <div id="sidx_take_act" class="tbl_head01 tbl_wrap">
                 <table>
@@ -223,32 +223,32 @@ function get_max_value($arr)
                     $info = get_order_status_sum('주문');
                     ?>
                     <th scope="row">주문 -&gt; 입금</th>
-                    <td class="td_num"><a href="<?php echo $info['href']; ?>"><?php echo number_format($info['count']); ?></a></td>
-                    <td class="td_price"><a href="<?php echo $info['href']; ?>"><?php echo number_format($info['price']); ?></a></td>
+                    <td class="td_num"><a href="<?=$info['href']; ?>"><?=number_format($info['count']); ?></a></td>
+                    <td class="td_price"><a href="<?=$info['href']; ?>"><?=number_format($info['price']); ?></a></td>
                 </tr>
                 <tr>
                     <?php
                     $info = get_order_status_sum('입금');
                     ?>
                     <th scope="row">입금 -&gt; 준비</th>
-                    <td class="td_num"><a href="<?php echo $info['href']; ?>"><?php echo number_format($info['count']); ?></a></td>
-                    <td class="td_price"><a href="<?php echo $info['href']; ?>"><?php echo number_format($info['price']); ?></a></td>
+                    <td class="td_num"><a href="<?=$info['href']; ?>"><?=number_format($info['count']); ?></a></td>
+                    <td class="td_price"><a href="<?=$info['href']; ?>"><?=number_format($info['price']); ?></a></td>
                 </tr>
                 <tr>
                     <?php
                     $info = get_order_status_sum('준비');
                     ?>
                     <th scope="row">준비 -&gt; 배송</th>
-                    <td class="td_num"><a href="<?php echo $info['href']; ?>"><?php echo number_format($info['count']); ?></a></td>
-                    <td class="td_price"><a href="<?php echo $info['href']; ?>"><?php echo number_format($info['price']); ?></a></td>
+                    <td class="td_num"><a href="<?=$info['href']; ?>"><?=number_format($info['count']); ?></a></td>
+                    <td class="td_price"><a href="<?=$info['href']; ?>"><?=number_format($info['price']); ?></a></td>
                 </tr>
                 <tr>
                     <?php
                     $info = get_order_status_sum('배송');
                     ?>
                     <th scope="row">배송 -&gt; 완료</th>
-                    <td class="td_num"><a href="<?php echo $info['href']; ?>"><?php echo number_format($info['count']); ?></a></td>
-                    <td class="td_price"><a href="<?php echo $info['href']; ?>"><?php echo number_format($info['price']); ?></a></td>
+                    <td class="td_num"><a href="<?=$info['href']; ?>"><?=number_format($info['count']); ?></a></td>
+                    <td class="td_price"><a href="<?=$info['href']; ?>"><?=number_format($info['price']); ?></a></td>
                 </tr>
                 </tbody>
                 </table>
@@ -257,7 +257,7 @@ function get_max_value($arr)
 
         <section id="anc_sidx_stock">
             <h2>재고현황</h2>
-            <?php echo $pg_anchor; ?>
+            <?=$pg_anchor; ?>
 
             <?php
             // 재고부족 상품
@@ -296,9 +296,9 @@ function get_max_value($arr)
                 </thead>
                 <tbody>
                 <tr>
-                    <td class="td_num2"><a href="./itemstocklist.php"><?php echo number_format($item_noti); ?></a></td>
-                    <td class="td_num2"><a href="./optionstocklist.php"><?php echo number_format($option_noti); ?></a></td>
-                    <td class="td_price"><?php echo display_price(intval($userinfo['coin'])); ?></td>
+                    <td class="td_num2"><a href="./itemstocklist.php"><?=number_format($item_noti); ?></a></td>
+                    <td class="td_num2"><a href="./optionstocklist.php"><?=number_format($option_noti); ?></a></td>
+                    <td class="td_price"><?=display_price(intval($userinfo['coin'])); ?></td>
                 </tr>
                 </tbody>
                 </table>
@@ -309,7 +309,7 @@ function get_max_value($arr)
 
 <section id="anc_sidx_settle">
     <h2>결제수단별 주문현황</h2>
-    <?php echo $pg_anchor; ?>
+    <?=$pg_anchor; ?>
 
     <div id="sidx_settle" class="tbl_head01 tbl_wrap">
         <table>
@@ -327,7 +327,7 @@ function get_max_value($arr)
                 $day = substr($date, 5, 5).' ('.get_yoil($date).')';
                 $info_key[] = $date;
             ?>
-            <th scope="col" colspan="2"><?php echo $day; ?></th>
+            <th scope="col" colspan="2"><?=$day; ?></th>
             <?php } ?>
         </tr>
         <tr>
@@ -349,13 +349,13 @@ function get_max_value($arr)
             $val_cnt++;
         ?>
         <tr>
-            <th scope="row" id="th_val_<?php echo $val_cnt; ?>" class="td_category"><?php echo $val; ?></th>
+            <th scope="row" id="th_val_<?=$val_cnt; ?>" class="td_category"><?=$val; ?></th>
             <?php
             foreach($info_key as $date)
             {
             ?>
-            <td><?php echo number_format($info[$date][$val]['count']); ?></td>
-            <td><?php echo number_format($info[$date][$val]['price']); ?></td>
+            <td><?=number_format($info[$date][$val]['count']); ?></td>
+            <td><?=number_format($info[$date][$val]['price']); ?></td>
             <?php
             }
             ?>
@@ -371,7 +371,7 @@ function get_max_value($arr)
 <div class="sidx sidx_cs">
     <section id="anc_sidx_oneq">
         <h2>1:1문의</h2>
-        <?php echo $pg_anchor; ?>
+        <?=$pg_anchor; ?>
 
         <div class="ul_01 ul_wrap">
             <ul>
@@ -390,9 +390,9 @@ function get_max_value($arr)
                     $name = get_sideview($row['mb_id'], get_text($row['qa_name']), $row1['mb_email'], $row1['mb_homepage']);
                 ?>
                 <li>
-                    <span class="oneq_cate oneq_span"><?php echo get_text($row['qa_category']); ?></span>
-                    <a href="<?php echo G5_BBS_URL; ?>/qaview.php?qa_id=<?php echo $row['qa_id']; ?>" target="_blank" class="oneq_link"><?php echo conv_subject($row['qa_subject'],40); ?></a>
-                    <?php echo $name; ?>
+                    <span class="oneq_cate oneq_span"><?=get_text($row['qa_category']); ?></span>
+                    <a href="<?=G5_BBS_URL; ?>/qaview.php?qa_id=<?=$row['qa_id']; ?>" target="_blank" class="oneq_link"><?=conv_subject($row['qa_subject'],40); ?></a>
+                    <?=$name; ?>
                 </li>
                 <?php
                 }
@@ -404,13 +404,13 @@ function get_max_value($arr)
         </div>
 
         <div class="btn_list03 btn_list">
-            <a href="<?php echo G5_BBS_URL; ?>/qalist.php" target="_blank">1:1문의 더보기</a>
+            <a href="<?=G5_BBS_URL; ?>/qalist.php" target="_blank">1:1문의 더보기</a>
         </div>
     </section>
 
     <section id="anc_sidx_qna">
         <h2>상품문의</h2>
-        <?php echo $pg_anchor; ?>
+        <?=$pg_anchor; ?>
 
         <div class="ul_01 ul_wrap">
             <ul>
@@ -428,8 +428,8 @@ function get_max_value($arr)
                     $name = get_sideview($row['mb_id'], get_text($row['iq_name']), $row1['mb_email'], $row1['mb_homepage']);
                 ?>
                 <li>
-                    <a href="./itemqaform.php?w=u&amp;iq_id=<?php echo $row['iq_id']; ?>" class="qna_link"><?php echo conv_subject($row['iq_subject'],40); ?></a>
-                    <?php echo $name; ?>
+                    <a href="./itemqaform.php?w=u&amp;iq_id=<?=$row['iq_id']; ?>" class="qna_link"><?=conv_subject($row['iq_subject'],40); ?></a>
+                    <?=$name; ?>
                 </li>
                 <?php
                 }
@@ -447,7 +447,7 @@ function get_max_value($arr)
 
     <section id="anc_sidx_ps">
         <h2>사용후기</h2>
-        <?php echo $pg_anchor; ?>
+        <?=$pg_anchor; ?>
 
         <div class="ul_01 ul_wrap">
             <ul>
@@ -465,8 +465,8 @@ function get_max_value($arr)
                 $name = get_sideview($row['mb_id'], get_text($row['is_name']), $row1['mb_email'], $row1['mb_homepage']);
             ?>
                 <li>
-                    <a href="./itemuseform.php?w=u&amp;is_id=<?php echo $row['is_id']; ?>" class="ps_link"><?php echo conv_subject($row['is_subject'],40); ?></a>
-                    <?php echo $name; ?>
+                    <a href="./itemuseform.php?w=u&amp;is_id=<?=$row['is_id']; ?>" class="ps_link"><?=conv_subject($row['is_subject'],40); ?></a>
+                    <?=$name; ?>
                 </li>
             <?php
             }
@@ -518,8 +518,8 @@ $(function() {
 
 function graph_draw()
 {
-    var g_h1 = new Array("<?php echo implode('", "', $h_val['order']); ?>");
-    var g_h2 = new Array("<?php echo implode('", "', $h_val['cancel']); ?>");
+    var g_h1 = new Array("<?=implode('", "', $h_val['order']); ?>");
+    var g_h2 = new Array("<?=implode('", "', $h_val['cancel']); ?>");
     var duration = 600;
 
     var $el = $("#sidx_graph_area li");

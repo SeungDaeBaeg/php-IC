@@ -8,9 +8,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
 <aside id="ol_before" class="ol">
     <h2>회원로그인</h2>
     <!-- 로그인 전 외부로그인 시작 -->
-    <form name="foutlogin" action="<?php echo $outlogin_action_url ?>" onsubmit="return fhead_submit(this);" method="post" autocomplete="off">
+    <form name="foutlogin" action="<?=$outlogin_action_url ?>" onsubmit="return fhead_submit(this);" method="post" autocomplete="off">
     <fieldset>
-        <input type="hidden" name="url" value="<?php echo $outlogin_url ?>">
+        <input type="hidden" name="url" value="<?=$outlogin_url ?>">
         <input type="text" name="mb_id" id="ol_id" placeholder="아이디" required maxlength="20">
         <input type="password" id="ol_pw" name="mb_password" placeholder="비밀번호" required  maxlength="20">
         <div id="ol_svc">
@@ -20,8 +20,8 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
         </div>
         <input type="submit" id="ol_submit" value="로그인" class="btn_submit">
         <div class="ol_before_btn">
-            <a href="<?php echo G5_BBS_URL ?>/register.php"><b>회원가입</b></a>
-            <a href="<?php echo G5_BBS_URL ?>/password_lost.php" id="ol_password_lost">정보찾기</a>
+            <a href="<?=G5_BBS_URL ?>/register.php"><b>회원가입</b></a>
+            <a href="<?=G5_BBS_URL ?>/password_lost.php" id="ol_password_lost">정보찾기</a>
         </div>
     </fieldset>
 

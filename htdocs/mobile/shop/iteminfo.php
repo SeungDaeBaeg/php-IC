@@ -47,16 +47,16 @@ function pg_anchor($info) {
     $href = G5_SHOP_URL.'/iteminfo.php?it_id='.$it_id;
 ?>
     <ul class="sanchor">
-        <li><a href="<?php echo $href; ?>" <?php if ($info == '') echo 'class="sanchor_on"'; ?>>DETAIL</a></li>
-        <?php if ($default['de_baesong_content']) { ?><li><a href="<?php echo $href; ?>&amp;info=dvr" <?php if ($info == 'dvr') echo 'class="sanchor_on"'; ?>>INFO</a></li><?php } ?>
-        <li><a href="<?php echo $href; ?>&amp;info=use" <?php if ($info == 'use') echo 'class="sanchor_on"'; ?>>REVIEW<span class="item_use_count"><?php echo $item_use_count; ?></span></a></li>
-        <li><a href="<?php echo $href; ?>&amp;info=qa" <?php if ($info == 'qa') echo 'class="sanchor_on"'; ?>>Q&amp;A<span class="item_qa_count"><?php echo $item_qa_count; ?></span></a></li>
+        <li><a href="<?=$href; ?>" <?php if ($info == '') echo 'class="sanchor_on"'; ?>>DETAIL</a></li>
+        <?php if ($default['de_baesong_content']) { ?><li><a href="<?=$href; ?>&amp;info=dvr" <?php if ($info == 'dvr') echo 'class="sanchor_on"'; ?>>INFO</a></li><?php } ?>
+        <li><a href="<?=$href; ?>&amp;info=use" <?php if ($info == 'use') echo 'class="sanchor_on"'; ?>>REVIEW<span class="item_use_count"><?=$item_use_count; ?></span></a></li>
+        <li><a href="<?=$href; ?>&amp;info=qa" <?php if ($info == 'qa') echo 'class="sanchor_on"'; ?>>Q&amp;A<span class="item_qa_count"><?=$item_qa_count; ?></span></a></li>
     </ul>
 <?php
 }
 ?>
 <div id="menu_list">
-    <?php echo pg_anchor($info); ?>
+    <?=pg_anchor($info); ?>
 </div>
 
 <div id="info_content" class="new_win">

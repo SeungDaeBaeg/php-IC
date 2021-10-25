@@ -7,10 +7,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 
 <!-- 로그인 시작 { -->
 <div id="mb_login" class="mbskin">
-    <h1><?php echo $g5['title'] ?></h1>
+    <h1><?=$g5['title'] ?></h1>
 
-    <form name="flogin" action="<?php echo $login_action_url ?>" onsubmit="return flogin_submit(this);" method="post">
-    <input type="hidden" name="url" value="<?php echo $login_url ?>">
+    <form name="flogin" action="<?=$login_action_url ?>" onsubmit="return flogin_submit(this);" method="post">
+    <input type="hidden" name="url" value="<?=$login_url ?>">
 
     <fieldset id="login_fs">
         <legend>회원로그인</legend>
@@ -31,7 +31,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
     <aside id="login_info">
         <h2>회원로그인 안내</h2>
         <div>
-            <a href="<?php echo G5_BBS_URL ?>/password_lost.php" target="_blank" id="login_password_lost">아이디 비밀번호 찾기</a>
+            <a href="<?=G5_BBS_URL ?>/password_lost.php" target="_blank" id="login_password_lost">아이디 비밀번호 찾기</a>
             <a href="./register.php">회원 가입</a>
         </div>
     </aside>
@@ -53,7 +53,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
         </p>
 
         <div id="guest_privacy">
-            <?php echo $default['de_guest_privacy']; ?>
+            <?=$default['de_guest_privacy']; ?>
         </div>
 
         <label for="agree">개인정보수집에 대한 내용을 읽었으며 이에 동의합니다.</label>
@@ -73,8 +73,8 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
                 }
             }
 
-            f.url.value = "<?php echo $url; ?>";
-            f.action = "<?php echo $url; ?>";
+            f.url.value = "<?=$url; ?>";
+            f.action = "<?=$url; ?>";
             f.submit();
         }
         </script>
@@ -87,10 +87,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
         <fieldset id="mb_login_od">
             <legend>비회원 주문조회</legend>
 
-            <form name="forderinquiry" method="post" action="<?php echo urldecode($url); ?>" autocomplete="off">
+            <form name="forderinquiry" method="post" action="<?=urldecode($url); ?>" autocomplete="off">
 
             <label for="od_id" class="od_id sound_only">주문서번호<strong class="sound_only"> 필수</strong></label>
-            <input type="text" name="od_id" value="<?php echo $od_id; ?>" id="od_id" required class="frm_input required" size="20" placeholder="주문서번호">
+            <input type="text" name="od_id" value="<?=$od_id; ?>" id="od_id" required class="frm_input required" size="20" placeholder="주문서번호">
             <label for="id_pwd" class="od_pwd sound_only" >비밀번호<strong class="sound_only"> 필수</strong></label>
             <input type="password" name="od_pwd" size="20" id="od_pwd" required class="frm_input required" placeholder="비밀번호">
             <input type="submit" value="확인" class="btn_submit">

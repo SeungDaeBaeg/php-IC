@@ -12,7 +12,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 
 <!-- 비밀번호 확인 시작 { -->
 <div id="pw_confirm" class="mbskin">
-    <h1><?php echo $g5['title'] ?></h1>
+    <h1><?=$g5['title'] ?></h1>
     <p>
         <?php if ($w == 'u') { ?>
         <strong>작성자만 글을 수정할 수 있습니다.</strong>
@@ -26,14 +26,14 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
         <?php }  ?>
     </p>
 
-    <form name="fboardpassword" action="<?php echo $action;  ?>" method="post">
-    <input type="hidden" name="w" value="<?php echo $w ?>">
-    <input type="hidden" name="bo_table" value="<?php echo $bo_table ?>">
-    <input type="hidden" name="wr_id" value="<?php echo $wr_id ?>">
-    <input type="hidden" name="comment_id" value="<?php echo $comment_id ?>">
-    <input type="hidden" name="sfl" value="<?php echo $sfl ?>">
-    <input type="hidden" name="stx" value="<?php echo $stx ?>">
-    <input type="hidden" name="page" value="<?php echo $page ?>">
+    <form name="fboardpassword" action="<?=$action;  ?>" method="post">
+    <input type="hidden" name="w" value="<?=$w ?>">
+    <input type="hidden" name="bo_table" value="<?=$bo_table ?>">
+    <input type="hidden" name="wr_id" value="<?=$wr_id ?>">
+    <input type="hidden" name="comment_id" value="<?=$comment_id ?>">
+    <input type="hidden" name="sfl" value="<?=$sfl ?>">
+    <input type="hidden" name="stx" value="<?=$stx ?>">
+    <input type="hidden" name="page" value="<?=$page ?>">
 
     <fieldset>
         <label for="pw_wr_password" class="sound_only">비밀번호<strong>필수</strong></label>

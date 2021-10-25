@@ -651,7 +651,7 @@ echo "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">";
 ?>
 <script>
     if (confirm("계속 입력하시겠습니까?"))
-        location.href = "<?php echo "./itemform.php?".str_replace('&amp;', '&', $qstr); ?>";
+        location.href = "<?="./itemform.php?".str_replace('&amp;', '&', $qstr); ?>";
     else
-        location.href = "<?php echo "./itemlist.php?".str_replace('&amp;', '&', $qstr); ?>";
+        location.href = "<?="./itemlist.php?".str_replace('&amp;', '&', $qstr); ?>";
 </script>

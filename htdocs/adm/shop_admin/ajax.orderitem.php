@@ -106,21 +106,21 @@ $result = sql_query($sql);
             ?>
             <tr>
                 <?php if($k == 0) { ?>
-                <td class="td_itname" rowspan="<?php echo $rowspan; ?>">
-                    <a href="./itemform.php?w=u&amp;it_id=<?php echo $row['it_id']; ?>"><?php echo $image; ?> <?php echo stripslashes($row['it_name']); ?></a>
+                <td class="td_itname" rowspan="<?=$rowspan; ?>">
+                    <a href="./itemform.php?w=u&amp;it_id=<?=$row['it_id']; ?>"><?=$image; ?> <?=stripslashes($row['it_name']); ?></a>
                     <?php if($od['od_tax_flag'] && $row['ct_notax']) echo '[비과세상품]'; ?>
                 </td>
                 <?php } ?>
                 <td class="td_itopt_tl">
-                    <?php echo $opt['ct_option']; ?>
+                    <?=$opt['ct_option']; ?>
                 </td>
-                <td class="td_mngsmall"><?php echo $opt['ct_status']; ?></td>
-                <td class="td_cntsmall"><?php echo $opt['ct_qty']; ?></td>
-                <td class="td_num"><?php echo number_format($opt_price); ?></td>
-                <td class="td_num"><?php echo number_format($ct_price['stotal']); ?></td>
-                <td class="td_num"><?php echo number_format($opt['cp_price']); ?></td>
-                <td class="td_num"><?php echo number_format($ct_point['stotal']); ?></td>
-                <td class="td_sendcost_by"><?php echo $ct_send_cost; ?></td>
+                <td class="td_mngsmall"><?=$opt['ct_status']; ?></td>
+                <td class="td_cntsmall"><?=$opt['ct_qty']; ?></td>
+                <td class="td_num"><?=number_format($opt_price); ?></td>
+                <td class="td_num"><?=number_format($ct_price['stotal']); ?></td>
+                <td class="td_num"><?=number_format($opt['cp_price']); ?></td>
+                <td class="td_num"><?=number_format($ct_point['stotal']); ?></td>
+                <td class="td_sendcost_by"><?=$ct_send_cost; ?></td>
             </tr>
             <?php
             }

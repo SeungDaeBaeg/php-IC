@@ -192,28 +192,28 @@ ob_start();
         ?>
 
         <li class="sod_li">
-            <input type="hidden" name="it_id[<?php echo $i; ?>]"    value="<?php echo $row['it_id']; ?>">
-            <input type="hidden" name="it_name[<?php echo $i; ?>]"  value="<?php echo get_text($row['it_name']); ?>">
-            <input type="hidden" name="it_price[<?php echo $i; ?>]" value="<?php echo $sell_price; ?>">
+            <input type="hidden" name="it_id[<?=$i; ?>]"    value="<?=$row['it_id']; ?>">
+            <input type="hidden" name="it_name[<?=$i; ?>]"  value="<?=get_text($row['it_name']); ?>">
+            <input type="hidden" name="it_price[<?=$i; ?>]" value="<?=$sell_price; ?>">
             <?php if($default['de_tax_flag_use']) { ?>
-            <input type="hidden" name="it_notax[<?php echo $i; ?>]" value="<?php echo $row['it_notax']; ?>">
+            <input type="hidden" name="it_notax[<?=$i; ?>]" value="<?=$row['it_notax']; ?>">
             <?php } ?>
-            <input type="hidden" name="cp_id[<?php echo $i; ?>]" value="">
-            <input type="hidden" name="cp_price[<?php echo $i; ?>]" value="0">
+            <input type="hidden" name="cp_id[<?=$i; ?>]" value="">
+            <input type="hidden" name="cp_price[<?=$i; ?>]" value="0">
             <div class="li_name">
-                <?php echo $it_name; ?>
-                <div class="li_mod"  style="padding-left:<?php echo $image_width + 20; ?>px;"><?php echo $cp_button; ?></div>
-                <span class="total_img"><?php echo $image; ?></span>
+                <?=$it_name; ?>
+                <div class="li_mod"  style="padding-left:<?=$image_width + 20; ?>px;"><?=$cp_button; ?></div>
+                <span class="total_img"><?=$image; ?></span>
 
             </div>
             <div class="li_prqty">
-                <span class="prqty_price li_prqty_sp"><span>판매가 </span><?php echo number_format($row['ct_price']); ?></span>
-                <span class="prqty_qty li_prqty_sp"><span>수량 </span><?php echo number_format($sum['qty']); ?></span>
-                <span class="prqty_sc li_prqty_sp"><span>배송비 </span><?php echo $ct_send_cost; ?></span>
+                <span class="prqty_price li_prqty_sp"><span>판매가 </span><?=number_format($row['ct_price']); ?></span>
+                <span class="prqty_qty li_prqty_sp"><span>수량 </span><?=number_format($sum['qty']); ?></span>
+                <span class="prqty_sc li_prqty_sp"><span>배송비 </span><?=$ct_send_cost; ?></span>
             </div>
             <div class="li_total">
-                <span class="total_price total_span"><span>주문금액 </span><strong><?php echo number_format($sell_price); ?></strong></span>
-                <span class="total_point total_span"><span>적립포인트 </span><strong><?php echo number_format($sum['point']); ?></strong></span>
+                <span class="total_price total_span"><span>주문금액 </span><strong><?=number_format($sell_price); ?></strong></span>
+                <span class="total_point total_span"><span>적립포인트 </span><strong><?=number_format($sum['point']); ?></strong></span>
             </div>
 
         </li>
@@ -243,20 +243,20 @@ ob_start();
 
     <dl id="sod_bsk_tot">
         <dt class="sod_bsk_sell">주문</dt>
-        <dd class="sod_bsk_sell"><strong><?php echo number_format($tot_sell_price); ?> 원</strong></dd>
+        <dd class="sod_bsk_sell"><strong><?=number_format($tot_sell_price); ?> 원</strong></dd>
         <?php if($it_cp_count > 0) { ?>
         <dt class="sod_bsk_coupon">쿠폰</dt>
         <dd class="sod_bsk_coupon"><strong id="ct_tot_coupon">0 원</strong></dd>
         <?php } ?>
         <dt class="sod_bsk_dvr">배송비</dt>
-        <dd class="sod_bsk_dvr"><strong><?php echo number_format($send_cost); ?> 원</strong></dd>
+        <dd class="sod_bsk_dvr"><strong><?=number_format($send_cost); ?> 원</strong></dd>
         <dt class="sod_bsk_cnt">총계</dt>
         <dd class="sod_bsk_cnt">
             <?php $tot_price = $tot_sell_price + $send_cost; // 총계 = 주문상품금액합계 + 배송비 ?>
-            <strong id="ct_tot_price"><?php echo number_format($tot_price); ?> 원</strong>
+            <strong id="ct_tot_price"><?=number_format($tot_price); ?> 원</strong>
         </dd>
         <dt class="sod_bsk_point">포인트</dt>
-        <dd class="sod_bsk_point"><strong><?php echo number_format($tot_point); ?> 점</strong></dd>
+        <dd class="sod_bsk_point"><strong><?=number_format($tot_point); ?> 점</strong></dd>
     </dl>
 
 <?php
@@ -269,16 +269,16 @@ require_once(G5_MSHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
 </div>
 
 <div id="sod_frm">
-    <form name="forderform" method="post" action="<?php echo $order_action_url; ?>" autocomplete="off">
-    <input type="hidden" name="od_price"    value="<?php echo $tot_sell_price; ?>">
-    <input type="hidden" name="org_od_price"    value="<?php echo $tot_sell_price; ?>">
-    <input type="hidden" name="od_send_cost" value="<?php echo $send_cost; ?>">
+    <form name="forderform" method="post" action="<?=$order_action_url; ?>" autocomplete="off">
+    <input type="hidden" name="od_price"    value="<?=$tot_sell_price; ?>">
+    <input type="hidden" name="org_od_price"    value="<?=$tot_sell_price; ?>">
+    <input type="hidden" name="od_send_cost" value="<?=$send_cost; ?>">
     <input type="hidden" name="od_send_cost2" value="0">
     <input type="hidden" name="item_coupon" value="0">
     <input type="hidden" name="od_coupon" value="0">
     <input type="hidden" name="od_send_coupon" value="0">
 
-    <?php echo $content; ?>
+    <?=$content; ?>
 
     <section id="sod_frm_orderer" >
         <h2>주문하시는 분</h2>
@@ -288,7 +288,7 @@ require_once(G5_MSHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
             <tbody>
             <tr>
                 <th scope="row"><label for="od_name">이름<strong class="sound_only"> 필수</strong></label></th>
-                <td><input type="text" name="od_name" value="<?php echo $member['mb_name']; ?>" id="od_name" required class="frm_input required" maxlength="20"></td>
+                <td><input type="text" name="od_name" value="<?=$member['mb_name']; ?>" id="od_name" required class="frm_input required" maxlength="20"></td>
             </tr>
 
             <?php if (!$is_member) { // 비회원이면 ?>
@@ -303,30 +303,30 @@ require_once(G5_MSHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
 
             <tr>
                 <th scope="row"><label for="od_tel">전화번호<strong class="sound_only"> 필수</strong></label></th>
-                <td><input type="text" name="od_tel" value="<?php echo $member['mb_tel']; ?>" id="od_tel" required class="frm_input required" maxlength="20"></td>
+                <td><input type="text" name="od_tel" value="<?=$member['mb_tel']; ?>" id="od_tel" required class="frm_input required" maxlength="20"></td>
             </tr>
             <tr>
                 <th scope="row"><label for="od_hp">핸드폰</label></th>
-                <td><input type="text" name="od_hp" value="<?php echo $member['mb_hp']; ?>" id="od_hp" class="frm_input" maxlength="20"></td>
+                <td><input type="text" name="od_hp" value="<?=$member['mb_hp']; ?>" id="od_hp" class="frm_input" maxlength="20"></td>
             </tr>
             <tr>
                 <th scope="row">주소</th>
                 <td>
                     <label for="od_zip" class="sound_only">우편번호<strong class="sound_only"> 필수</strong></label>
-                    <input type="text" name="od_zip" value="<?php echo $member['mb_zip1'].$member['mb_zip2']; ?>" id="od_zip" required class="frm_input required" size="5" maxlength="6">
+                    <input type="text" name="od_zip" value="<?=$member['mb_zip1'].$member['mb_zip2']; ?>" id="od_zip" required class="frm_input required" size="5" maxlength="6">
                     <button type="button" class="btn_frmline" onclick="win_zip('forderform', 'od_zip', 'od_addr1', 'od_addr2', 'od_addr3', 'od_addr_jibeon');">주소 검색</button><br>
                     <label for="od_addr1" class="sound_only">기본주소<strong class="sound_only"> 필수</strong></label>
-                    <input type="text" name="od_addr1" value="<?php echo $member['mb_addr1'] ?>" id="od_addr1" required class="frm_input frm_address required">
+                    <input type="text" name="od_addr1" value="<?=$member['mb_addr1'] ?>" id="od_addr1" required class="frm_input frm_address required">
                     <label for="od_addr2" class="sound_only">상세주소</label>
-                    <input type="text" name="od_addr2" value="<?php echo $member['mb_addr2'] ?>" id="od_addr2" class="frm_input frm_address">
+                    <input type="text" name="od_addr2" value="<?=$member['mb_addr2'] ?>" id="od_addr2" class="frm_input frm_address">
                     <label for="od_addr3" class="sound_only">참고항목</label>
-                    <input type="text" name="od_addr3" value="<?php echo $member['mb_addr3'] ?>" id="od_addr3" class="frm_input frm_address" readonly="readonly">
-                    <input type="hidden" name="od_addr_jibeon" value="<?php echo $member['mb_addr_jibeon']; ?>"><br>
+                    <input type="text" name="od_addr3" value="<?=$member['mb_addr3'] ?>" id="od_addr3" class="frm_input frm_address" readonly="readonly">
+                    <input type="hidden" name="od_addr_jibeon" value="<?=$member['mb_addr_jibeon']; ?>"><br>
                 </td>
             </tr>
             <tr>
                 <th scope="row"><label for="od_email">E-mail<strong class="sound_only"> 필수</strong></label></th>
-                <td><input type="email" name="od_email" value="<?php echo $member['mb_email']; ?>" id="od_email" required class="frm_input required" maxlength="100"></td>
+                <td><input type="email" name="od_email" value="<?=$member['mb_email']; ?>" id="od_email" required class="frm_input required" maxlength="100"></td>
             </tr>
 
             <?php if ($default['de_hope_date_use']) { // 배송희망일 사용 ?>
@@ -406,7 +406,7 @@ require_once(G5_MSHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
             <tr>
                 <th scope="row">배송지선택</th>
                 <td id="sod_frm_deli">
-                    <?php echo $addr_list; ?>
+                    <?=$addr_list; ?>
                 </td>
             </tr>
             <?php if($is_member) { ?>
@@ -532,7 +532,7 @@ require_once(G5_MSHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
             <?php } ?>
             <tr>
                 <th>총 주문금액</th>
-                <td><span id="od_tot_price"><?php echo number_format($tot_price); ?></span>원</td>
+                <td><span id="od_tot_price"><?=number_format($tot_price); ?></span>원</td>
             </tr>
              <tr>
                 <th>추가배송비</th>
@@ -661,7 +661,7 @@ require_once(G5_MSHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
     ?>
 
     <div id="show_progress" style="display:none;">
-        <img src="<?php echo G5_MOBILE_URL; ?>/shop/img/loading.gif" alt="">
+        <img src="<?=G5_MOBILE_URL; ?>/shop/img/loading.gif" alt="">
         <span>주문완료 중입니다. 잠시만 기다려 주십시오.</span>
     </div>
     </form>
@@ -689,7 +689,7 @@ $(function() {
 
         $.post(
             "./orderitemcoupon.php",
-            { it_id: it_id,  sw_direct: "<?php echo $sw_direct; ?>" },
+            { it_id: it_id,  sw_direct: "<?=$sw_direct; ?>" },
             function(data) {
                 $cp_btn_el.after(data);
             }
@@ -1049,9 +1049,9 @@ function calculate_order_price()
 function calculate_temp_point()
 {
     var sell_price = parseInt($("input[name=od_price]").val());
-    var mb_point = parseInt(<?php echo $member['mb_point']; ?>);
-    var max_point = parseInt(<?php echo $default['de_settle_max_point']; ?>);
-    var point_unit = parseInt(<?php echo $default['de_settle_point_unit']; ?>);
+    var mb_point = parseInt(<?=$member['mb_point']; ?>);
+    var max_point = parseInt(<?=$default['de_settle_max_point']; ?>);
+    var point_unit = parseInt(<?=$default['de_settle_point_unit']; ?>);
     var temp_point = max_point;
 
     if(temp_point > sell_price)
@@ -1222,7 +1222,7 @@ function pay_approval()
     f.P_TAX.value = pf.comm_vat_mny.value;
     f.P_TAXFREE = pf.comm_free_mny.value;
     <?php } ?>
-    f.P_RETURN_URL.value = "<?php echo $return_url.$od_id; ?>";
+    f.P_RETURN_URL.value = "<?=$return_url.$od_id; ?>";
     f.action = "https://mobile.inicis.com/smart/" + paymethod + "/";
     <?php } ?>
 
@@ -1365,7 +1365,7 @@ function payment_check(f)
     if (typeof(f.od_temp_point) != "undefined") {
         if (f.od_temp_point.value)
         {
-            var point_unit = parseInt(<?php echo $default['de_settle_point_unit']; ?>);
+            var point_unit = parseInt(<?=$default['de_settle_point_unit']; ?>);
             temp_point = parseInt(f.od_temp_point.value);
 
             if (temp_point < 0) {
@@ -1380,7 +1380,7 @@ function payment_check(f)
                 return false;
             }
 
-            if (temp_point > <?php echo (int)$member['mb_point']; ?>) {
+            if (temp_point > <?=(int)$member['mb_point']; ?>) {
                 alert("회원님의 포인트보다 많이 결제할 수 없습니다.");
                 f.od_temp_point.select();
                 return false;
@@ -1465,7 +1465,7 @@ function gumae2baesong(checked) {
 
 <?php if ($default['de_hope_date_use']) { ?>
 $(function(){
-    $("#od_hope_date").datepicker({ changeMonth: true, changeYear: true, dateFormat: "yy-mm-dd", showButtonPanel: true, yearRange: "c-99:c+99", minDate: "+<?php echo (int)$default['de_hope_date_after']; ?>d;", maxDate: "+<?php echo (int)$default['de_hope_date_after'] + 6; ?>d;" });
+    $("#od_hope_date").datepicker({ changeMonth: true, changeYear: true, dateFormat: "yy-mm-dd", showButtonPanel: true, yearRange: "c-99:c+99", minDate: "+<?=(int)$default['de_hope_date_after']; ?>d;", maxDate: "+<?=(int)$default['de_hope_date_after'] + 6; ?>d;" });
 });
 <?php } ?>
 </script>

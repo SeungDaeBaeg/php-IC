@@ -32,7 +32,7 @@ include_once(G5_ADMIN_PATH.'/admin.head.php');
     </p>
 
     <p>
-        이 작업을 실행하기 전에 <a href="<?php echo G5_SMS5_ADMIN_URL; ?>/member_update.php" target="_blank">회원정보업데이트</a>를 먼저 실행해주세요.
+        이 작업을 실행하기 전에 <a href="<?=G5_SMS5_ADMIN_URL; ?>/member_update.php" target="_blank">회원정보업데이트</a>를 먼저 실행해주세요.
     </p>
 </div>
 
@@ -41,9 +41,9 @@ include_once(G5_ADMIN_PATH.'/admin.head.php');
     <label for="upload_bg_no">그룹선택</label>
     <select name="upload_bg_no" id="upload_bg_no">
         <option value=""></option>
-        <option value="1"> <?php echo $no_group['bg_name']?> (<?php echo number_format($no_group['bg_count'])?>) </option>
+        <option value="1"> <?=$no_group['bg_name']?> (<?=number_format($no_group['bg_count'])?>) </option>
         <?php for ($i=0; $i<count($group); $i++) { ?>
-        <option value="<?php echo $group[$i]['bg_no']?>"> <?php echo $group[$i]['bg_name']?> (<?php echo number_format($group[$i]['bg_count'])?>) </option>
+        <option value="<?=$group[$i]['bg_no']?>"> <?=$group[$i]['bg_name']?> (<?=number_format($group[$i]['bg_count'])?>) </option>
         <?php } ?>
     </select>
 </div>
@@ -85,9 +85,9 @@ include_once(G5_ADMIN_PATH.'/admin.head.php');
     <select name="download_bg_no" id="download_bg_no">
         <option value=""> </option>
         <option value="all"> 전체 </option>
-        <option value="1"> <?php echo $no_group['bg_name']?> (<?php echo number_format($no_group['bg_count'])?>) </option>
+        <option value="1"> <?=$no_group['bg_name']?> (<?=number_format($no_group['bg_count'])?>) </option>
         <?php for ($i=0; $i<count($group); $i++) { ?>
-        <option value="<?php echo $group[$i]['bg_no']?>"> <?php echo $group[$i]['bg_name']?> (<?php echo number_format($group[$i]['bg_count'])?>) </option>
+        <option value="<?=$group[$i]['bg_no']?>"> <?=$group[$i]['bg_name']?> (<?=number_format($group[$i]['bg_count'])?>) </option>
         <?php } ?>
     </select>
     <button type="button" onclick="download()" class="btn_01 btn">다운로드</button>

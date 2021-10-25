@@ -12,7 +12,7 @@ $adm_menu = array(
 
 <div id="head">
     <h1><a href="./index.php">jelly 테마관리</a></h1>
-    <div class="go_home"><a href="<?php echo G5_URL ?>">홈으로가기</a></div>
+    <div class="go_home"><a href="<?=G5_URL ?>">홈으로가기</a></div>
     <button type="button" class="al_mn"><i class="fa fa-bars" aria-hidden="true"></i></button>
     <div id="left_menu">
         <h2>테마설정메뉴</h2>
@@ -24,7 +24,7 @@ $adm_menu = array(
             else
                 $menu_on = '';
         ?>
-            <li><a href="./<?php echo $menu['url']; ?>"<?php echo $menu_on; ?>><?php echo $menu['text']; ?></a></li>
+            <li><a href="./<?=$menu['url']; ?>"<?=$menu_on; ?>><?=$menu['text']; ?></a></li>
         <?php
         }
         ?>
@@ -38,5 +38,5 @@ $(".al_mn").click(function(){
 });
 </script>
 <div id="container">
-    <h2 id="container_title"><?php echo $g5['title'] ?></h2>
+    <h2 id="container_title"><?=$g5['title'] ?></h2>
     <div class="container_wr">

@@ -27,7 +27,7 @@ $now_year = (int)substr(G5_TIME_YMD, 0, 4);
             <?php
             for($year=$min_year; $year<=$now_year; $year++) {
             ?>
-            <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
+            <option value="<?=$year; ?>"><?=$year; ?></option>
             <?php
             }
             ?>
@@ -38,7 +38,7 @@ $now_year = (int)substr(G5_TIME_YMD, 0, 4);
             <?php
             for($i=1; $i<=12; $i++) {
             ?>
-            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+            <option value="<?=$i; ?>"><?=$i; ?></option>
             <?php
             }
             ?>

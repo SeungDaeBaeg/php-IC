@@ -62,7 +62,7 @@ echo '</form>'.PHP_EOL;
 
 <div>
     <div id="show_progress">
-        <span style="display:block; text-align:center;margin-top:120px"><img src="<?php echo G5_MOBILE_URL; ?>/shop/img/loading.gif" alt=""></span>
+        <span style="display:block; text-align:center;margin-top:120px"><img src="<?=G5_MOBILE_URL; ?>/shop/img/loading.gif" alt=""></span>
         <span style="display:block; text-align:center;margin-top:10px; font-size:14px">주문완료 중입니다. 잠시만 기다려 주십시오.</span>
     </div>
 </div>

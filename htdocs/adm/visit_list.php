@@ -38,7 +38,7 @@ $result = sql_query($sql);
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">IP</th>
@@ -91,13 +91,13 @@ $result = sql_query($sql);
 
         $bg = 'bg'.($i%2);
     ?>
-    <tr class="<?php echo $bg; ?>">
-        <td class="td_category"><?php echo $ip ?></td>
-        <td><?php echo $link ?><?php echo $title ?><?php echo $link2 ?></td>
-        <td class="td_category td_category1"><?php echo $brow ?></td>
-        <td class="td_category td_category3"><?php echo $os ?></td>
-        <td class="td_category td_category2"><?php echo $device; ?></td>
-        <td class="td_datetime"><?php echo $row['vi_date'] ?> <?php echo $row['vi_time'] ?></td>
+    <tr class="<?=$bg; ?>">
+        <td class="td_category"><?=$ip ?></td>
+        <td><?=$link ?><?=$title ?><?=$link2 ?></td>
+        <td class="td_category td_category1"><?=$brow ?></td>
+        <td class="td_category td_category3"><?=$os ?></td>
+        <td class="td_category td_category2"><?=$device; ?></td>
+        <td class="td_datetime"><?=$row['vi_date'] ?> <?=$row['vi_time'] ?></td>
     </tr>
 
     <?php

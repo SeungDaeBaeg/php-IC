@@ -8,22 +8,22 @@ $g5['title'] = '게시판 복사';
 include_once(G5_PATH.'/head.sub.php');
 ?>
 
-<script src="<?php echo G5_ADMIN_URL ?>/admin.js?ver=<?php echo G5_JS_VER; ?>"></script>
+<script src="<?=G5_ADMIN_URL ?>/admin.js?ver=<?=G5_JS_VER; ?>"></script>
 
 <div class="new_win">
-    <h1><?php echo $g5['title']; ?></h1>
+    <h1><?=$g5['title']; ?></h1>
 
     <form name="fboardcopy" id="fboardcopy" action="./board_copy_update.php" onsubmit="return fboardcopy_check(this);" method="post">
-    <input type="hidden" name="bo_table" value="<?php echo $bo_table ?>" id="bo_table">
+    <input type="hidden" name="bo_table" value="<?=$bo_table ?>" id="bo_table">
     <input type="hidden" name="token" value="">
     <div class=" new_win_con">
         <div class="tbl_frm01 tbl_wrap">
             <table>
-            <caption><?php echo $g5['title']; ?></caption>
+            <caption><?=$g5['title']; ?></caption>
             <tbody>
             <tr>
                 <th scope="col">원본 테이블명</th>
-                <td><?php echo $bo_table ?></td>
+                <td><?=$bo_table ?></td>
             </tr>
             <tr>
                 <th scope="col"><label for="target_table">복사 테이블명<strong class="sound_only">필수</strong></label></th>
@@ -31,7 +31,7 @@ include_once(G5_PATH.'/head.sub.php');
             </tr>
             <tr>
                 <th scope="col"><label for="target_subject">게시판 제목<strong class="sound_only">필수</strong></label></th>
-                <td><input type="text" name="target_subject" value="[복사본] <?php echo get_sanitize_input($board['bo_subject']); ?>" id="target_subject" required class="required frm_input" maxlength="120"></td>
+                <td><input type="text" name="target_subject" value="[복사본] <?=get_sanitize_input($board['bo_subject']); ?>" id="target_subject" required class="required frm_input" maxlength="120"></td>
             </tr>
             <tr>
                 <th scope="col">복사 유형</th>

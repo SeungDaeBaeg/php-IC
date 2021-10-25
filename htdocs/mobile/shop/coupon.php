@@ -28,7 +28,7 @@ $result = sql_query($sql);
 
 <!-- 쿠폰 내역 시작 { -->
 <div id="scp_list" class="new_win">
-    <h1 id="win_title"><?php echo $g5['title'] ?></h1>
+    <h1 id="win_title"><?=$g5['title'] ?></h1>
     <ul>
     <?php
     $cp_count = 0;
@@ -58,12 +58,12 @@ $result = sql_query($sql);
     ?>
     <li>
         <div class="cou_top">
-            <div class="cou_tit"><?php echo $row['cp_subject']; ?></div>
-            <span class="cou_pri"><?php echo $cp_price; ?></span>
+            <div class="cou_tit"><?=$row['cp_subject']; ?></div>
+            <span class="cou_pri"><?=$cp_price; ?></span>
         </div>
         <div>
-            <span class="cou_target"><?php echo $cp_target; ?> <i class="fa fa-angle-right" aria-hidden="true"></i></span>
-            <span class="cou_date"><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo substr($row['cp_start'], 2, 8); ?> ~ <i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo substr($row['cp_end'], 2, 8); ?></span>
+            <span class="cou_target"><?=$cp_target; ?> <i class="fa fa-angle-right" aria-hidden="true"></i></span>
+            <span class="cou_date"><i class="fa fa-clock-o" aria-hidden="true"></i> <?=substr($row['cp_start'], 2, 8); ?> ~ <i class="fa fa-clock-o" aria-hidden="true"></i> <?=substr($row['cp_end'], 2, 8); ?></span>
         </div>
     </li>
     <?php

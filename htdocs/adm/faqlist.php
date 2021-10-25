@@ -29,7 +29,7 @@ $result = sql_query($sql);
 ?>
 
 <div class="local_ov01 local_ov">
-   <span class="btn_ov01"><span class="ov_txt"> 등록된 FAQ 상세내용</span><span class="ov_num"> <?php echo $total_count; ?>건</span></span>
+   <span class="btn_ov01"><span class="ov_txt"> 등록된 FAQ 상세내용</span><span class="ov_num"> <?=$total_count; ?>건</span></span>
 </div>
 
 <div class="local_desc01 local_desc">
@@ -41,12 +41,12 @@ $result = sql_query($sql);
 
 <div class="btn_fixed_top">
     <a href="./faqmasterlist.php" class="btn btn_02">FAQ 관리</a>
-    <a href="./faqform.php?fm_id=<?php echo $fm['fm_id']; ?>" class="btn btn_01">FAQ 상세내용 추가</a>
+    <a href="./faqform.php?fm_id=<?=$fm['fm_id']; ?>" class="btn btn_01">FAQ 상세내용 추가</a>
 </div>
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">번호</th>
@@ -72,13 +72,13 @@ $result = sql_query($sql);
         $fa_subject = conv_content($row['fa_subject'], 1);
     ?>
 
-    <tr class="<?php echo $bg; ?>">
-        <td class="td_num"><?php echo $num; ?></td>
-        <td class="td_left"><?php echo $fa_subject; ?></td>
-        <td class="td_num"><?php echo $row['fa_order']; ?></td>
+    <tr class="<?=$bg; ?>">
+        <td class="td_num"><?=$num; ?></td>
+        <td class="td_left"><?=$fa_subject; ?></td>
+        <td class="td_num"><?=$row['fa_order']; ?></td>
         <td class="td_mng td_mng_m">
-            <a href="./faqform.php?w=u&amp;fm_id=<?php echo $row['fm_id']; ?>&amp;fa_id=<?php echo $row['fa_id']; ?>" class="btn btn_03"><span class="sound_only"><?php echo $fa_subject; ?> </span>수정</a>
-            <a href="./faqformupdate.php?w=d&amp;fm_id=<?php echo $row['fm_id']; ?>&amp;fa_id=<?php echo $row['fa_id']; ?>" onclick="return delete_confirm(this);" class="btn btn_02"><span class="sound_only"><?php echo $fa_subject; ?> </span>삭제</a>
+            <a href="./faqform.php?w=u&amp;fm_id=<?=$row['fm_id']; ?>&amp;fa_id=<?=$row['fa_id']; ?>" class="btn btn_03"><span class="sound_only"><?=$fa_subject; ?> </span>수정</a>
+            <a href="./faqformupdate.php?w=d&amp;fm_id=<?=$row['fm_id']; ?>&amp;fa_id=<?=$row['fa_id']; ?>" onclick="return delete_confirm(this);" class="btn btn_02"><span class="sound_only"><?=$fa_subject; ?> </span>삭제</a>
         </td>
     </tr>
 

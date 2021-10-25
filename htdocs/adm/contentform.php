@@ -70,13 +70,13 @@ include_once (G5_ADMIN_PATH.'/admin.head.php');
 ?>
 
 <form name="frmcontentform" action="./contentformupdate.php" onsubmit="return frmcontentform_check(this);" method="post" enctype="MULTIPART/FORM-DATA" >
-<input type="hidden" name="w" value="<?php echo $w; ?>">
+<input type="hidden" name="w" value="<?=$w; ?>">
 <input type="hidden" name="co_html" value="1">
 <input type="hidden" name="token" value="">
 
 <div class="tbl_frm01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <colgroup>
         <col class="grid_4">
         <col>
@@ -85,43 +85,43 @@ include_once (G5_ADMIN_PATH.'/admin.head.php');
     <tr>
         <th scope="row"><label for="co_id">ID</label></th>
         <td>
-            <?php echo help('20자 이내의 영문자, 숫자, _ 만 가능합니다.'); ?>
-            <input type="text" value="<?php echo $co['co_id']; ?>" name="co_id" id ="co_id" required <?php echo $readonly; ?> class="required <?php echo $readonly; ?> frm_input" size="20" maxlength="20">
-            <?php if ($w == 'u') { ?><a href="<?php echo get_pretty_url('content', $co_id); ?>" class="btn_frmline">내용확인</a><?php } ?>
+            <?=help('20자 이내의 영문자, 숫자, _ 만 가능합니다.'); ?>
+            <input type="text" value="<?=$co['co_id']; ?>" name="co_id" id ="co_id" required <?=$readonly; ?> class="required <?=$readonly; ?> frm_input" size="20" maxlength="20">
+            <?php if ($w == 'u') { ?><a href="<?=get_pretty_url('content', $co_id); ?>" class="btn_frmline">내용확인</a><?php } ?>
         </td>
     </tr>
     <tr>
         <th scope="row"><label for="co_subject">제목</label></th>
-        <td><input type="text" name="co_subject" value="<?php echo htmlspecialchars2($co['co_subject']); ?>" id="co_subject" required class="frm_input required" size="90"></td>
+        <td><input type="text" name="co_subject" value="<?=htmlspecialchars2($co['co_subject']); ?>" id="co_subject" required class="frm_input required" size="90"></td>
     </tr>
     <tr>
         <th scope="row">내용</th>
-        <td><?php echo editor_html('co_content', get_text(html_purifier($co['co_content']), 0)); ?></td>
+        <td><?=editor_html('co_content', get_text(html_purifier($co['co_content']), 0)); ?></td>
     </tr>
     <tr>
         <th scope="row">모바일 내용</th>
-        <td><?php echo editor_html('co_mobile_content', get_text(html_purifier($co['co_mobile_content']), 0)); ?></td>
+        <td><?=editor_html('co_mobile_content', get_text(html_purifier($co['co_mobile_content']), 0)); ?></td>
     </tr>
     <tr>
         <th scope="row"><label for="co_skin">스킨 디렉토리<strong class="sound_only">필수</strong></label></th>
         <td>
-            <?php echo get_skin_select('content', 'co_skin', 'co_skin', $co['co_skin'], 'required'); ?>
+            <?=get_skin_select('content', 'co_skin', 'co_skin', $co['co_skin'], 'required'); ?>
         </td>
     </tr>
     <tr>
         <th scope="row"><label for="co_mobile_skin">모바일스킨 디렉토리<strong class="sound_only">필수</strong></label></th>
         <td>
-            <?php echo get_mobile_skin_select('content', 'co_mobile_skin', 'co_mobile_skin', $co['co_mobile_skin'], 'required'); ?>
+            <?=get_mobile_skin_select('content', 'co_mobile_skin', 'co_mobile_skin', $co['co_mobile_skin'], 'required'); ?>
         </td>
     </tr>
     <!--
     <tr>
         <th scope="row"><label for="co_tag_filter_use">태그 필터링 사용</label></th>
         <td>
-            <?php echo help("내용에서 iframe 등의 태그를 사용하려면 사용안함으로 선택해 주십시오."); ?>
+            <?=help("내용에서 iframe 등의 태그를 사용하려면 사용안함으로 선택해 주십시오."); ?>
             <select name="co_tag_filter_use" id="co_tag_filter_use">
-                <option value="1"<?php echo get_selected($co['co_tag_filter_use'], 1); ?>>사용함</option>
-                <option value="0"<?php echo get_selected($co['co_tag_filter_use'], 0); ?>>사용안함</option>
+                <option value="1"<?=get_selected($co['co_tag_filter_use'], 1); ?>>사용함</option>
+                <option value="0"<?=get_selected($co['co_tag_filter_use'], 0); ?>>사용안함</option>
             </select>
         </td>
     </tr>
@@ -129,15 +129,15 @@ include_once (G5_ADMIN_PATH.'/admin.head.php');
     <tr>
         <th scope="row"><label for="co_include_head">상단 파일 경로</label></th>
         <td>
-            <?php echo help("설정값이 없으면 기본 상단 파일을 사용합니다."); ?>
-            <input type="text" name="co_include_head" value="<?php echo $co['co_include_head']; ?>" id="co_include_head" class="frm_input" size="60">
+            <?=help("설정값이 없으면 기본 상단 파일을 사용합니다."); ?>
+            <input type="text" name="co_include_head" value="<?=$co['co_include_head']; ?>" id="co_include_head" class="frm_input" size="60">
         </td>
     </tr>
     <tr>
         <th scope="row"><label for="co_include_tail">하단 파일 경로</label></th>
         <td>
-            <?php echo help("설정값이 없으면 기본 하단 파일을 사용합니다."); ?>
-            <input type="text" name="co_include_tail" value="<?php echo $co['co_include_tail']; ?>" id="co_include_tail" class="frm_input" size="60">
+            <?=help("설정값이 없으면 기본 하단 파일을 사용합니다."); ?>
+            <input type="text" name="co_include_tail" value="<?=$co['co_include_tail']; ?>" id="co_include_tail" class="frm_input" size="60">
         </td>
     </tr>
     <tr id="admin_captcha_box" style="display:none;">
@@ -237,8 +237,8 @@ function use_captcha_check(){
 }
 
 function frm_check_file(){
-    var co_include_head = "<?php echo $co['co_include_head']; ?>";
-    var co_include_tail = "<?php echo $co['co_include_tail']; ?>";
+    var co_include_head = "<?=$co['co_include_head']; ?>";
+    var co_include_tail = "<?=$co['co_include_tail']; ?>";
     var head = jQuery.trim(jQuery("#co_include_head").val());
     var tail = jQuery.trim(jQuery("#co_include_tail").val());
 
@@ -272,9 +272,9 @@ function frmcontentform_check(f)
     errmsg = "";
     errfld = "";
 
-    <?php echo get_editor_js('co_content'); ?>
-    <?php echo chk_editor_js('co_content'); ?>
-    <?php echo get_editor_js('co_mobile_content'); ?>
+    <?=get_editor_js('co_content'); ?>
+    <?=chk_editor_js('co_content'); ?>
+    <?=get_editor_js('co_mobile_content'); ?>
 
     check_field(f.co_id, "ID를 입력하세요.");
     check_field(f.co_subject, "제목을 입력하세요.");
@@ -287,7 +287,7 @@ function frmcontentform_check(f)
     }
     
     if( captcha_chk ) {
-        <?php echo $captcha_js; // 캡챠 사용시 자바스크립트에서 입력된 캡챠를 검사함  ?>
+        <?=$captcha_js; // 캡챠 사용시 자바스크립트에서 입력된 캡챠를 검사함  ?>
     }
 
     return true;

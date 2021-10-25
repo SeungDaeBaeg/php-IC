@@ -6,7 +6,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
 ?>
 <div class="ol tnb_con ol_before_wr">
     <aside id="ol_before" class="ol">
-        <img src="<?php echo G5_DATA_URL; ?>/common/logo.jpg">
+        <img src="<?=G5_DATA_URL; ?>/common/logo.jpg">
         <div>
             전상품 최저가 보장<br>
             365일 할인구매<br>
@@ -18,10 +18,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
         <!-- 로그인 전 외부로그인 시작 -->
 
         <? if(SERVER_LOCAL == $_SERVER['REMOTE_ADDR']) { ?>
-            <form name="foutlogin" action="<?php echo $outlogin_action_url ?>" onsubmit="return fhead_submit(this);" method="post" autocomplete="off">
+            <form name="foutlogin" action="<?=$outlogin_action_url ?>" onsubmit="return fhead_submit(this);" method="post" autocomplete="off">
                 <button type="button" class="btn_close"><i class="fa fa-times"></i><span class="sound_only">닫기</span></button>
                 <fieldset>
-                    <input type="hidden" name="url" value="<?php echo $outlogin_url ?>">
+                    <input type="hidden" name="url" value="<?=$outlogin_url ?>">
                     <label for="ol_id" id="ol_idlabel" class="sound_only">회원아이디<strong>필수</strong></label>
                     <input type="text" id="ol_id" name="mb_id" required class="required frm_input" maxlength="20" placeholder="아이디">
                     <label for="ol_pw" id="ol_pwlabel" class="sound_only">비밀번호<strong>필수</strong></label>
@@ -31,10 +31,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
                         <label for="auto_login" id="auto_login_label">자동로그인</label>
                     </div>
                     <input type="submit" id="ol_submit" value="로그인" class="btn_b02">
-                    <a href="<?php echo G5_BBS_URL ?>/register.php"" class="btn_b01 btn_join"><b>회원가입</b></a>
+                    <a href="<?=G5_BBS_URL ?>/register.php"" class="btn_b01 btn_join"><b>회원가입</b></a>
 
                     <div id="ol_svc">
-                        <a href="<?php echo G5_BBS_URL ?>/password_lost.php" id="ol_password_lost">회원정보찾기</a>
+                        <a href="<?=G5_BBS_URL ?>/password_lost.php" id="ol_password_lost">회원정보찾기</a>
                     </div>
                 </fieldset>
             </form>

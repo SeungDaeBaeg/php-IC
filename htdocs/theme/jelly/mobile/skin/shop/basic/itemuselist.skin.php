@@ -5,35 +5,35 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">', 0);
 ?>
 
-<script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
+<script src="<?=G5_JS_URL; ?>/viewimageresize.js"></script>
 
 <!-- 전체 상품 사용후기 목록 시작 { -->
-<form method="get" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>">
+<form method="get" action="<?=$_SERVER['SCRIPT_NAME']; ?>">
 <div id="sps_sch">
     <div class="sch_wr">
         <label for="sfl" class="sound_only">검색항목</label>
         <select name="sfl" id="sfl" required>
             <option value="">선택</option>
-            <option value="b.it_name"   <?php echo get_selected($sfl, "b.it_name"); ?>>상품명</option>
-            <option value="a.it_id"     <?php echo get_selected($sfl, "a.it_id"); ?>>상품코드</option>
-            <option value="a.is_subject"<?php echo get_selected($sfl, "a.is_subject"); ?>>후기제목</option>
-            <option value="a.is_content"<?php echo get_selected($sfl, "a.is_content"); ?>>후기내용</option>
-            <option value="a.is_name"   <?php echo get_selected($sfl, "a.is_name"); ?>>작성자명</option>
-            <option value="a.mb_id"     <?php echo get_selected($sfl, "a.mb_id"); ?>>작성자아이디</option>
+            <option value="b.it_name"   <?=get_selected($sfl, "b.it_name"); ?>>상품명</option>
+            <option value="a.it_id"     <?=get_selected($sfl, "a.it_id"); ?>>상품코드</option>
+            <option value="a.is_subject"<?=get_selected($sfl, "a.is_subject"); ?>>후기제목</option>
+            <option value="a.is_content"<?=get_selected($sfl, "a.is_content"); ?>>후기내용</option>
+            <option value="a.is_name"   <?=get_selected($sfl, "a.is_name"); ?>>작성자명</option>
+            <option value="a.mb_id"     <?=get_selected($sfl, "a.mb_id"); ?>>작성자아이디</option>
         </select>
         <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-        <input type="text" name="stx" value="<?php echo $stx; ?>" id="stx" required class="frm_input" size="15">
+        <input type="text" name="stx" value="<?=$stx; ?>" id="stx" required class="frm_input" size="15">
         <button type="submit" value="검색" class="sch_btn"><i class="fa fa-search" aria-hidden="true"></i><span class="sound_only">검색</span></button>
 
     </div>
-    <a href="<?php echo $_SERVER['SCRIPT_NAME']; ?>">전체보기</a>
+    <a href="<?=$_SERVER['SCRIPT_NAME']; ?>">전체보기</a>
 
 </div>
 </form>
 
 <div id="sps">
 
-    <!-- <p><?php echo $config['cf_title']; ?> 전체 사용후기 목록입니다.</p> -->
+    <!-- <p><?=$config['cf_title']; ?> 전체 사용후기 목록입니다.</p> -->
 
     <?php
     $thumbnail_width = 500;
@@ -53,27 +53,27 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">',
     <li>
 
         <div class="sps_img">
-            <a href="<?php echo $it_href; ?>">
-                <?php echo get_itemuselist_thumbnail($row['it_id'], $row['is_content'], 70, 70); ?>
-                <span><?php echo $row2['it_name']; ?></span>
+            <a href="<?=$it_href; ?>">
+                <?=get_itemuselist_thumbnail($row['it_id'], $row['is_content'], 70, 70); ?>
+                <span><?=$row2['it_name']; ?></span>
             </a>
         </div>
 
         <section class="sps_section">
-            <h2><?php echo get_text($row['is_subject']); ?></h2>
+            <h2><?=get_text($row['is_subject']); ?></h2>
 
             <dl class="sps_dl">
                 <dt>평가점수</dt>
-                <dd class="sps_star"><img src="<?php echo G5_SHOP_URL; ?>/img/s_star<?php echo $star; ?>.png" alt="별<?php echo $star; ?>개" width="80"></dd> 
+                <dd class="sps_star"><img src="<?=G5_SHOP_URL; ?>/img/s_star<?=$star; ?>.png" alt="별<?=$star; ?>개" width="80"></dd>
                 <dt>작성자</dt>
-                <dd><i class="fa fa-user" aria-hidden="true"></i> <?php echo get_text($row['is_name']); ?></dd>
+                <dd><i class="fa fa-user" aria-hidden="true"></i> <?=get_text($row['is_name']); ?></dd>
                 <dt>작성일</dt>
-                <dd><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo substr($row['is_time'],2,8); ?></dd>
+                <dd><i class="fa fa-clock-o" aria-hidden="true"></i> <?=substr($row['is_time'],2,8); ?></dd>
 
             </dl>
 
-            <div id="sps_con_<?php echo $i; ?>" style="display:none;">
-                <?php echo $is_content; // 사용후기 내용 ?>
+            <div id="sps_con_<?=$i; ?>" style="display:none;">
+                <?=$is_content; // 사용후기 내용 ?>
 
                 <?php
                 if( !empty($row['is_reply_subject']) ){     //사용후기 답변이 있다면
@@ -81,22 +81,22 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">',
                 ?>
                 <div class="sps_reply">
                     <div class="sps_img">
-                        <a href="<?php echo $it_href; ?>">
-                            <?php echo get_itemuselist_thumbnail($row['it_id'], $row['is_reply_content'], 50, 50); ?>
-                            <span><?php echo $row2['it_name']; ?></span>
+                        <a href="<?=$it_href; ?>">
+                            <?=get_itemuselist_thumbnail($row['it_id'], $row['is_reply_content'], 50, 50); ?>
+                            <span><?=$row2['it_name']; ?></span>
                         </a>
                     </div>
 
                     <section class="sps_section">
-                        <h2 class="is_use_reply"><?php echo get_text($row['is_reply_subject']); ?></h2>
+                        <h2 class="is_use_reply"><?=get_text($row['is_reply_subject']); ?></h2>
 
                         <dl class="sps_dl">
                             <dt>작성자</dt>
-                            <dd><?php echo $row['is_reply_name']; ?></dd>
+                            <dd><?=$row['is_reply_name']; ?></dd>
                         </dl>
 
-                        <div id="sps_con_<?php echo $i; ?>_reply" style="display:none;">
-                            <?php echo $is_reply_content; // 사용후기 답변 내용 ?>
+                        <div id="sps_con_<?=$i; ?>_reply" style="display:none;">
+                            <?=$is_reply_content; // 사용후기 답변 내용 ?>
                         </div>
 
                     </section>
@@ -105,7 +105,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">',
 
             </div>
 
-            <div class="sps_con_btn"><button class="sps_con_<?php echo $i; ?>">내용보기 <i class="fa fa-caret-down" aria-hidden="true"></i></button></div>
+            <div class="sps_con_btn"><button class="sps_con_<?=$i; ?>">내용보기 <i class="fa fa-caret-down" aria-hidden="true"></i></button></div>
         </section>
 
     </li>
@@ -117,7 +117,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">',
     ?>
 </div>
 
-<?php echo get_paging($config['cf_mobile_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
+<?=get_paging($config['cf_mobile_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
 
 <script>
 $(function(){

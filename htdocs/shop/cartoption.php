@@ -26,11 +26,11 @@ if(!sql_num_rows($result))
 
 <h2>상품옵션수정</h2>
 <!-- 장바구니 옵션 시작 { -->
-<form name="foption" method="post" action="<?php echo G5_SHOP_URL; ?>/cartupdate.php" onsubmit="return formcheck(this);">
+<form name="foption" method="post" action="<?=G5_SHOP_URL; ?>/cartupdate.php" onsubmit="return formcheck(this);">
 <input type="hidden" name="act" value="optionmod">
-<input type="hidden" name="it_id[]" value="<?php echo $it['it_id']; ?>">
-<input type="hidden" id="it_price" value="<?php echo $row2['ct_price']; ?>">
-<input type="hidden" name="ct_send_cost" value="<?php echo $row2['ct_send_cost']; ?>">
+<input type="hidden" name="it_id[]" value="<?=$it['it_id']; ?>">
+<input type="hidden" id="it_price" value="<?=$row2['ct_price']; ?>">
+<input type="hidden" name="ct_send_cost" value="<?=$row2['ct_send_cost']; ?>">
 <input type="hidden" name="sw_direct">
 <?php
 if(defined('G5_THEME_USE_OPTIONS_TRTD') && G5_THEME_USE_OPTIONS_TRTD){
@@ -93,21 +93,21 @@ if($option_2) {
             if($row['io_type'])
                 $cls = 'spl';
         ?>
-        <li class="sit_<?php echo $cls; ?>_list">
-            <input type="hidden" name="io_type[<?php echo $it['it_id']; ?>][]" value="<?php echo $row['io_type']; ?>">
-            <input type="hidden" name="io_id[<?php echo $it['it_id']; ?>][]" value="<?php echo $row['io_id']; ?>">
-            <input type="hidden" name="io_value[<?php echo $it['it_id']; ?>][]" value="<?php echo $row['ct_option']; ?>">
-            <input type="hidden" class="io_price" value="<?php echo $row['io_price']; ?>">
-            <input type="hidden" class="io_stock" value="<?php echo $it_stock_qty; ?>">
+        <li class="sit_<?=$cls; ?>_list">
+            <input type="hidden" name="io_type[<?=$it['it_id']; ?>][]" value="<?=$row['io_type']; ?>">
+            <input type="hidden" name="io_id[<?=$it['it_id']; ?>][]" value="<?=$row['io_id']; ?>">
+            <input type="hidden" name="io_value[<?=$it['it_id']; ?>][]" value="<?=$row['ct_option']; ?>">
+            <input type="hidden" class="io_price" value="<?=$row['io_price']; ?>">
+            <input type="hidden" class="io_stock" value="<?=$it_stock_qty; ?>">
             <div class="opt_name">
-                <span class="sit_opt_subj"><?php echo $row['ct_option']; ?></span>
+                <span class="sit_opt_subj"><?=$row['ct_option']; ?></span>
             </div>
             <div class="opt_count">
                 <button type="button" class="sit_qty_minus btn_frmline"><i class="fa fa-minus" aria-hidden="true"></i><span class="sound_only">감소</span></button>
-                <label for="ct_qty_<?php echo $i; ?>" class="sound_only">수량</label>
-                <input type="text" name="ct_qty[<?php echo $it['it_id']; ?>][]" value="<?php echo $row['ct_qty']; ?>" id="ct_qty_<?php echo $i; ?>" class="num_input" size="5">
+                <label for="ct_qty_<?=$i; ?>" class="sound_only">수량</label>
+                <input type="text" name="ct_qty[<?=$it['it_id']; ?>][]" value="<?=$row['ct_qty']; ?>" id="ct_qty_<?=$i; ?>" class="num_input" size="5">
                 <button type="button" class="sit_qty_plus btn_frmline"><i class="fa fa-plus" aria-hidden="true"></i><span class="sound_only">증가</span></button>
-                <span class="sit_opt_prc"><?php echo $io_price; ?></span>
+                <span class="sit_opt_prc"><?=$io_price; ?></span>
                 <button type="button" class="sit_opt_del"><i class="fa fa-times" aria-hidden="true"></i><span class="sound_only">삭제</span></button>
             </div>
 
@@ -131,8 +131,8 @@ function formcheck(f)
 {
     var val, io_type, result = true;
     var sum_qty = 0;
-    var min_qty = parseInt(<?php echo $it['it_buy_min_qty']; ?>);
-    var max_qty = parseInt(<?php echo $it['it_buy_max_qty']; ?>);
+    var min_qty = parseInt(<?=$it['it_buy_min_qty']; ?>);
+    var max_qty = parseInt(<?=$it['it_buy_max_qty']; ?>);
     var $el_type = $("input[name^=io_type]");
 
     $("input[name^=ct_qty]").each(function(index) {

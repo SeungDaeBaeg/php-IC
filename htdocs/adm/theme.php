@@ -25,9 +25,9 @@ $g5['title'] = "테마설정";
 include_once('./admin.head.php');
 ?>
 
-<script src="<?php echo G5_ADMIN_URL; ?>/theme.js"></script>
+<script src="<?=G5_ADMIN_URL; ?>/theme.js"></script>
 <div class="local_wr">
-    <span class="btn_ov01"><span class="ov_txt">설치된 테마</span><span class="ov_num">  <?php echo number_format($total_count); ?></span></span>
+    <span class="btn_ov01"><span class="ov_txt">설치된 테마</span><span class="ov_num">  <?=number_format($total_count); ?></span></span>
 
 </div>
 
@@ -57,14 +57,14 @@ include_once('./admin.head.php');
     ?>
     <li>
         <div class="tmli_if">
-            <?php echo $screenshot; ?>
+            <?=$screenshot; ?>
             <div class="tmli_tit">
-                <p><?php echo get_text($info['theme_name']); ?></p>
+                <p><?=get_text($info['theme_name']); ?></p>
             </div>
         </div>
-        <?php echo $btn_active; ?>
-        <a href="./theme_preview.php?theme=<?php echo $theme[$i]; ?>" class="theme_pr" target="theme_preview">미리보기</a>
-        <button type="button" class="tmli_dt theme_preview" data-theme="<?php echo $theme[$i]; ?>">상세보기</button>
+        <?=$btn_active; ?>
+        <a href="./theme_preview.php?theme=<?=$theme[$i]; ?>" class="theme_pr" target="theme_preview">미리보기</a>
+        <button type="button" class="tmli_dt theme_preview" data-theme="<?=$theme[$i]; ?>">상세보기</button>
     </li>
     <?php
     }

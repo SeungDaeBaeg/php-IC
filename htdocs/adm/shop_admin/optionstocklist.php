@@ -64,15 +64,15 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 ?>
 
 <div class="local_ov01 local_ov">
-    <?php echo $listall; ?>
-    <span class="btn_ov01"><span class="ov_txt">전체 옵션</span><span class="ov_num">  <?php echo $total_count; ?>개</span></span>
+    <?=$listall; ?>
+    <span class="btn_ov01"><span class="ov_txt">전체 옵션</span><span class="ov_num">  <?=$total_count; ?>개</span></span>
 </div>
 
 <form name="flist" class="local_sch01 local_sch">
-<input type="hidden" name="doc" value="<?php echo $doc; ?>">
-<input type="hidden" name="sort1" value="<?php echo $sort1; ?>">
-<input type="hidden" name="sort2" value="<?php echo $sort2; ?>">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
+<input type="hidden" name="doc" value="<?=$doc; ?>">
+<input type="hidden" name="sort1" value="<?=$sort1; ?>">
+<input type="hidden" name="sort2" value="<?=$sort2; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
 
 <label for="sel_ca_id" class="sound_only">분류선택</label>
 <select name="sel_ca_id" id="sel_ca_id">
@@ -91,38 +91,38 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 
 <label for="sel_field" class="sound_only">검색대상</label>
 <select name="sel_field" id="sel_field">
-    <option value="b.it_name" <?php echo get_selected($sel_field, 'b.it_name'); ?>>상품명</option>
-    <option value="a.it_id" <?php echo get_selected($sel_field, 'a.it_id'); ?>>상품코드</option>
+    <option value="b.it_name" <?=get_selected($sel_field, 'b.it_name'); ?>>상품명</option>
+    <option value="a.it_id" <?=get_selected($sel_field, 'a.it_id'); ?>>상품코드</option>
 </select>
 
 <label for="search" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-<input type="text" name="search" id="search" value="<?php echo $search; ?>" required class="frm_input required">
+<input type="text" name="search" id="search" value="<?=$search; ?>" required class="frm_input required">
 <input type="submit" value="검색" class="btn_submit">
 
 </form>
 
 <form name="fitemstocklist" action="./optionstocklistupdate.php" method="post">
-<input type="hidden" name="sort1" value="<?php echo $sort1; ?>">
-<input type="hidden" name="sort2" value="<?php echo $sort2; ?>">
-<input type="hidden" name="sel_ca_id" value="<?php echo $sel_ca_id; ?>">
-<input type="hidden" name="sel_field" value="<?php echo $sel_field; ?>">
-<input type="hidden" name="search" value="<?php echo $search; ?>">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
+<input type="hidden" name="sort1" value="<?=$sort1; ?>">
+<input type="hidden" name="sort2" value="<?=$sort2; ?>">
+<input type="hidden" name="sel_ca_id" value="<?=$sel_ca_id; ?>">
+<input type="hidden" name="sel_field" value="<?=$sel_field; ?>">
+<input type="hidden" name="search" value="<?=$search; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
-        <th scope="col"><a href="<?php echo title_sort("b.it_name") . "&amp;$qstr1"; ?>">상품명</a></th>
+        <th scope="col"><a href="<?=title_sort("b.it_name") . "&amp;$qstr1"; ?>">상품명</a></th>
         <th scope="col">옵션항목</th>
         <th scope="col">옵션타입</th>
-        <th scope="col"><a href="<?php echo title_sort("a.io_stock_qty") . "&amp;$qstr1"; ?>">창고재고</a></th>
+        <th scope="col"><a href="<?=title_sort("a.io_stock_qty") . "&amp;$qstr1"; ?>">창고재고</a></th>
         <th scope="col">주문대기</th>
         <th scope="col">가재고</th>
         <th scope="col">재고수정</th>
         <th scope="col">통보수량</th>
-        <th scope="col"><a href="<?php echo title_sort("a.io_use") . "&amp;$qstr1"; ?>">판매</a></th>
+        <th scope="col"><a href="<?=title_sort("a.io_use") . "&amp;$qstr1"; ?>">판매</a></th>
         <th scope="col">관리</th>
     </tr>
     </thead>
@@ -175,31 +175,31 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 
         $bg = 'bg'.($i%2);
     ?>
-    <tr class="<?php echo $bg; ?>">
+    <tr class="<?=$bg; ?>">
         <td class="td_left">
-            <input type="hidden" name="it_id[<?php echo $i; ?>]" value="<?php echo $row['it_id']; ?>">
-            <input type="hidden" name="io_id[<?php echo $i; ?>]" value="<?php echo $row['io_id']; ?>">
-            <input type="hidden" name="io_type[<?php echo $i; ?>]" value="<?php echo $row['io_type']; ?>">
-            <a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?> <?php echo cut_str(stripslashes($row['it_name']), 60, "&#133"); ?></a>
+            <input type="hidden" name="it_id[<?=$i; ?>]" value="<?=$row['it_id']; ?>">
+            <input type="hidden" name="io_id[<?=$i; ?>]" value="<?=$row['io_id']; ?>">
+            <input type="hidden" name="io_type[<?=$i; ?>]" value="<?=$row['io_type']; ?>">
+            <a href="<?=$href; ?>"><?=get_it_image($row['it_id'], 50, 50); ?> <?=cut_str(stripslashes($row['it_name']), 60, "&#133"); ?></a>
         </td>
-        <td class="td_left"><?php echo $option; ?></td>
-        <td class="td_mng"><?php echo $type; ?></td>
-        <td class="td_num<?php echo $io_stock_qty_st; ?>"><?php echo $io_stock_qty; ?></td>
-        <td class="td_num"><?php echo number_format($wait_qty); ?></td>
-        <td class="td_num"><?php echo number_format($temporary_qty); ?></td>
+        <td class="td_left"><?=$option; ?></td>
+        <td class="td_mng"><?=$type; ?></td>
+        <td class="td_num<?=$io_stock_qty_st; ?>"><?=$io_stock_qty; ?></td>
+        <td class="td_num"><?=number_format($wait_qty); ?></td>
+        <td class="td_num"><?=number_format($temporary_qty); ?></td>
         <td class="td_num">
-            <label for="stock_qty_<?php echo $i; ?>" class="sound_only">재고수정</label>
-            <input type="text" name="io_stock_qty[<?php echo $i; ?>]" value="<?php echo $row['io_stock_qty']; ?>" id="stock_qty_<?php echo $i; ?>" class="frm_input" size="8" autocomplete="off">
+            <label for="stock_qty_<?=$i; ?>" class="sound_only">재고수정</label>
+            <input type="text" name="io_stock_qty[<?=$i; ?>]" value="<?=$row['io_stock_qty']; ?>" id="stock_qty_<?=$i; ?>" class="frm_input" size="8" autocomplete="off">
         </td>
         <td class="td_num">
-            <label for="noti_qty_<?php echo $i; ?>" class="sound_only">통보수량</label>
-            <input type="text" name="io_noti_qty[<?php echo $i; ?>]" value="<?php echo $row['io_noti_qty']; ?>" id="noti_qty_<?php echo $i; ?>" class="frm_input" size="8" autocomplete="off">
+            <label for="noti_qty_<?=$i; ?>" class="sound_only">통보수량</label>
+            <input type="text" name="io_noti_qty[<?=$i; ?>]" value="<?=$row['io_noti_qty']; ?>" id="noti_qty_<?=$i; ?>" class="frm_input" size="8" autocomplete="off">
         </td>
         <td class="td_chk2">
-            <label for="use_<?php echo $i; ?>" class="sound_only">판매</label>
-            <input type="checkbox" name="io_use[<?php echo $i; ?>]" value="1" id="use_<?php echo $i; ?>" <?php echo ($row['io_use'] ? "checked" : ""); ?>>
+            <label for="use_<?=$i; ?>" class="sound_only">판매</label>
+            <input type="checkbox" name="io_use[<?=$i; ?>]" value="1" id="use_<?=$i; ?>" <?=($row['io_use'] ? "checked" : ""); ?>>
         </td>
-        <td class="td_mng td_mng_s"><a href="./itemform.php?w=u&amp;it_id=<?php echo $row['it_id']; ?>&amp;ca_id=<?php echo $row['ca_id']; ?>&amp;<?php echo $qstr; ?>" class="btn btn_03">수정</a></td>
+        <td class="td_mng td_mng_s"><a href="./itemform.php?w=u&amp;it_id=<?=$row['it_id']; ?>&amp;ca_id=<?=$row['ca_id']; ?>&amp;<?=$qstr; ?>" class="btn btn_03">수정</a></td>
     </tr>
     <?php
     }
@@ -225,7 +225,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
     </p>
 </div>
 
-<?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
+<?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
 
 <?php
 include_once (G5_ADMIN_PATH.'/admin.tail.php');

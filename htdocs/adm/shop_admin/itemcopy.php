@@ -17,18 +17,18 @@ include_once(G5_PATH.'/head.sub.php');
 
     <div id="sit_copy">
         <label for="new_it_id">상품코드</label>
-        <input type="text" name="new_it_id" value="<?php echo time(); ?>" id="new_it_id" class="frm_input" maxlength="20">
+        <input type="text" name="new_it_id" value="<?=time(); ?>" id="new_it_id" class="frm_input" maxlength="20">
     </div>
 
     <div class="win_btn btn_confirm">
-        <input type="button" value="복사하기" class="btn_submit" onclick="_copy('itemcopyupdate.php?it_id=<?php echo $it_id; ?>&amp;ca_id=<?php echo $ca_id; ?>');">
+        <input type="button" value="복사하기" class="btn_submit" onclick="_copy('itemcopyupdate.php?it_id=<?=$it_id; ?>&amp;ca_id=<?=$ca_id; ?>');">
         <button type="button" onclick="self.close();">창닫기</button>
     </div>
 
     </form>
 </div>
 
-<script src="<?php echo G5_ADMIN_URL ?>/admin.js"></script>
+<script src="<?=G5_ADMIN_URL ?>/admin.js"></script>
 
 <script>
 // <![CDATA[

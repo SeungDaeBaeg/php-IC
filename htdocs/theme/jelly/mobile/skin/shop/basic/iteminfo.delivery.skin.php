@@ -8,11 +8,11 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">',
 <h2 class="if_tit">배송정보</h2>
 
 <div class="win_desc_if">
-    <?php echo conv_content($default['de_baesong_content'], 1); ?>
+    <?=conv_content($default['de_baesong_content'], 1); ?>
 </div>
 
 <h2 class="if_tit">교환/반품</h2>
 
 <div class="win_desc_if">
-    <?php echo conv_content($default['de_change_content'], 1); ?>
+    <?=conv_content($default['de_change_content'], 1); ?>
 </div>

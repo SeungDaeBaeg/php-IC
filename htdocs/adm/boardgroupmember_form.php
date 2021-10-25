@@ -17,12 +17,12 @@ $colspan = 4;
 ?>
 
 <form name="fboardgroupmember_form" id="fboardgroupmember_form" action="./boardgroupmember_update.php" onsubmit="return boardgroupmember_form_check(this)" method="post">
-<input type="hidden" name="mb_id" value="<?php echo $mb['mb_id'] ?>" id="mb_id">
+<input type="hidden" name="mb_id" value="<?=$mb['mb_id'] ?>" id="mb_id">
 <input type="hidden" name="token" value="" id="token">
 <div class="local_ov01 local_ov">
-    <span class="btn_ov01"><span class="ov_txt"> 아이디</span><span class="ov_num"><?php echo $mb['mb_id'] ?></span></span>
-    <span class="btn_ov01"><span class="ov_txt"> 이름</span><span class="ov_num"><?php echo get_text($mb['mb_name']); ?></span></span>
-    <span class="btn_ov01"><span class="ov_txt"> 닉네임</span><span class="ov_num"><?php echo $mb['mb_nick'] ?></span></span>
+    <span class="btn_ov01"><span class="ov_txt"> 아이디</span><span class="ov_num"><?=$mb['mb_id'] ?></span></span>
+    <span class="btn_ov01"><span class="ov_txt"> 이름</span><span class="ov_num"><?=get_text($mb['mb_name']); ?></span></span>
+    <span class="btn_ov01"><span class="ov_txt"> 닉네임</span><span class="ov_num"><?=$mb['mb_nick'] ?></span></span>
 </div>    
 <div class="local_cmd01 local_cmd">
 
@@ -48,18 +48,18 @@ $colspan = 4;
 </form>
 
 <form name="fboardgroupmember" id="fboardgroupmember" action="./boardgroupmember_update.php" onsubmit="return fboardgroupmember_submit(this);" method="post">
-<input type="hidden" name="sst" value="<?php echo $sst ?>" id="sst">
-<input type="hidden" name="sod" value="<?php echo $sod ?>" id="sod">
-<input type="hidden" name="sfl" value="<?php echo $sfl ?>" id="sfl">
-<input type="hidden" name="stx" value="<?php echo $stx ?>" id="stx">
-<input type="hidden" name="page" value="<?php echo $page ?>" id="page">
-<input type="hidden" name="token" value="<?php echo get_sanitize_input($token); ?>" id="token">
-<input type="hidden" name="mb_id" value="<?php echo $mb['mb_id'] ?>" id="mb_id">
+<input type="hidden" name="sst" value="<?=$sst ?>" id="sst">
+<input type="hidden" name="sod" value="<?=$sod ?>" id="sod">
+<input type="hidden" name="sfl" value="<?=$sfl ?>" id="sfl">
+<input type="hidden" name="stx" value="<?=$stx ?>" id="stx">
+<input type="hidden" name="page" value="<?=$page ?>" id="page">
+<input type="hidden" name="token" value="<?=get_sanitize_input($token); ?>" id="token">
+<input type="hidden" name="mb_id" value="<?=$mb['mb_id'] ?>" id="mb_id">
 <input type="hidden" name="w" value="d" id="w">
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">
@@ -84,12 +84,12 @@ $colspan = 4;
     ?>
     <tr>
         <td class="td_chk">
-            <label for="chk_<?php echo $i; ?>" class="sound_only"><?php echo $row['gr_subject'] ?> 그룹</label>
-            <input type="checkbox" name="chk[]" value="<?php echo $row['gm_id'] ?>" id="chk_<?php echo $i ?>">
+            <label for="chk_<?=$i; ?>" class="sound_only"><?=$row['gr_subject'] ?> 그룹</label>
+            <input type="checkbox" name="chk[]" value="<?=$row['gm_id'] ?>" id="chk_<?=$i ?>">
         </td>
-        <td class="td_grid"><a href="<?php echo G5_BBS_URL; ?>/group.php?gr_id=<?php echo $row['gr_id'] ?>"><?php echo $row['gr_id'] ?></a></td>
-        <td class="td_category"><?php echo $row['gr_subject'] ?></td>
-        <td class="td_datetime"><?php echo $row['gm_datetime'] ?></td>
+        <td class="td_grid"><a href="<?=G5_BBS_URL; ?>/group.php?gr_id=<?=$row['gr_id'] ?>"><?=$row['gr_id'] ?></a></td>
+        <td class="td_category"><?=$row['gr_subject'] ?></td>
+        <td class="td_datetime"><?=$row['gm_datetime'] ?></td>
     </tr>
     <?php
     }

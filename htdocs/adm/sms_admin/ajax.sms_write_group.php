@@ -23,19 +23,19 @@ while ($res = sql_fetch_array($qry)) array_push($group, $res);
     </thead>
     <tbody>
     <tr>
-        <td><a href="javascript:sms_obj.person(1)"><?php echo $no_group['bg_name']?></a></td>
-        <td class="td_num"><?php echo number_format($no_group['bg_receipt'])?></td>
-        <td class="td_mngsmall"><button type="button" class="btn_frmline" onclick="sms_obj.group_add(1, '<?php echo $no_group['bg_name']?>', '<?php echo number_format($no_group['bg_receipt'])?>')">추가</button></td>
+        <td><a href="javascript:sms_obj.person(1)"><?=$no_group['bg_name']?></a></td>
+        <td class="td_num"><?=number_format($no_group['bg_receipt'])?></td>
+        <td class="td_mngsmall"><button type="button" class="btn_frmline" onclick="sms_obj.group_add(1, '<?=$no_group['bg_name']?>', '<?=number_format($no_group['bg_receipt'])?>')">추가</button></td>
     </tr>
     <?php
     $line = 1;
     for ($i=0; $i<count($group); $i++) {
         $bg = 'bg'.($line++%2);
     ?>
-    <tr class="<?php echo $bg; ?>">
-        <td><a href="javascript:sms_obj.person(<?php echo $group[$i]['bg_no']?>)"><?php echo $group[$i]['bg_name']?></a></td>
-        <td class="td_num"><?php echo number_format($group[$i]['bg_receipt'])?></td>
-        <td class="td_mngsmall"><button type="button" class="btn_frmline" onclick="sms_obj.group_add(<?php echo $group[$i]['bg_no']?>, '<?php echo $group[$i]['bg_name']?>', '<?php echo number_format($group[$i]['bg_receipt'])?>')">추가</button></td>
+    <tr class="<?=$bg; ?>">
+        <td><a href="javascript:sms_obj.person(<?=$group[$i]['bg_no']?>)"><?=$group[$i]['bg_name']?></a></td>
+        <td class="td_num"><?=number_format($group[$i]['bg_receipt'])?></td>
+        <td class="td_mngsmall"><button type="button" class="btn_frmline" onclick="sms_obj.group_add(<?=$group[$i]['bg_no']?>, '<?=$group[$i]['bg_name']?>', '<?=number_format($group[$i]['bg_receipt'])?>')">추가</button></td>
     </tr>
     <?php } ?>
     </tbody>

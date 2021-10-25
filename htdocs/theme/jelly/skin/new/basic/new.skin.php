@@ -14,7 +14,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$new_skin_url.'/style.css">', 0);
 <fieldset id="new_sch">
     <legend>상세검색</legend>
     <form name="fnew" method="get">
-    <?php echo $group_select ?>
+    <?=$group_select ?>
     <label for="view" class="sound_only">검색대상</label>
     <select name="view" id="view">
         <option value="">전체게시물
@@ -22,7 +22,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$new_skin_url.'/style.css">', 0);
         <option value="c">코멘트만
     </select>
     <label for="mb_id" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-    <input type="text" name="mb_id" value="<?php echo $mb_id ?>" id="mb_id" required class="frm_input" size="40">
+    <input type="text" name="mb_id" value="<?=$mb_id ?>" id="mb_id" required class="frm_input" size="40">
     <button type="submit" class="btn_submit"><i class="fa fa-search" aria-hidden="true"></i> 검색</button>
     <p>회원 아이디만 검색 가능</p>
     </form>
@@ -33,8 +33,8 @@ add_stylesheet('<link rel="stylesheet" href="'.$new_skin_url.'/style.css">', 0);
         document.fnew.submit();
     }
     */
-    document.getElementById("gr_id").value = "<?php echo $gr_id ?>";
-    document.getElementById("view").value = "<?php echo $view ?>";
+    document.getElementById("gr_id").value = "<?=$gr_id ?>";
+    document.getElementById("view").value = "<?=$view ?>";
     </script>
 </fieldset>
 <!-- } 전체게시물 검색 끝 -->
@@ -42,11 +42,11 @@ add_stylesheet('<link rel="stylesheet" href="'.$new_skin_url.'/style.css">', 0);
 <!-- 전체게시물 목록 시작 { -->
 <form name="fnewlist" id="fnewlist" method="post" action="#" onsubmit="return fnew_submit(this);">
 <input type="hidden" name="sw"       value="move">
-<input type="hidden" name="view"     value="<?php echo $view; ?>">
-<input type="hidden" name="sfl"      value="<?php echo $sfl; ?>">
-<input type="hidden" name="stx"      value="<?php echo $stx; ?>">
-<input type="hidden" name="bo_table" value="<?php echo $bo_table; ?>">
-<input type="hidden" name="page"     value="<?php echo $page; ?>">
+<input type="hidden" name="view"     value="<?=$view; ?>">
+<input type="hidden" name="sfl"      value="<?=$sfl; ?>">
+<input type="hidden" name="stx"      value="<?=$stx; ?>">
+<input type="hidden" name="bo_table" value="<?=$bo_table; ?>">
+<input type="hidden" name="page"     value="<?=$page; ?>">
 <input type="hidden" name="pressed"  value="">
 
 <div class="tbl_head01 tbl_wrap">
@@ -78,17 +78,17 @@ add_stylesheet('<link rel="stylesheet" href="'.$new_skin_url.'/style.css">', 0);
     <tr>
         <?php if ($is_admin) { ?>
         <td class="td_chk">
-            <label for="chk_bn_id_<?php echo $i; ?>" class="sound_only"><?php echo $num?>번</label>
-            <input type="checkbox" name="chk_bn_id[]" value="<?php echo $i; ?>" id="chk_bn_id_<?php echo $i; ?>">
-            <input type="hidden" name="bo_table[<?php echo $i; ?>]" value="<?php echo $list[$i]['bo_table']; ?>">
-            <input type="hidden" name="wr_id[<?php echo $i; ?>]" value="<?php echo $list[$i]['wr_id']; ?>">
+            <label for="chk_bn_id_<?=$i; ?>" class="sound_only"><?=$num?>번</label>
+            <input type="checkbox" name="chk_bn_id[]" value="<?=$i; ?>" id="chk_bn_id_<?=$i; ?>">
+            <input type="hidden" name="bo_table[<?=$i; ?>]" value="<?=$list[$i]['bo_table']; ?>">
+            <input type="hidden" name="wr_id[<?=$i; ?>]" value="<?=$list[$i]['wr_id']; ?>">
         </td>
         <?php } ?>
-        <td class="td_group"><a href="./new.php?gr_id=<?php echo $list[$i]['gr_id'] ?>"><?php echo $gr_subject ?></a></td>
-        <td class="td_board"><a href="./board.php?bo_table=<?php echo $list[$i]['bo_table'] ?>"><?php echo $bo_subject ?></a></td>
-        <td><a href="<?php echo $list[$i]['href'] ?>" class="new_tit"><?php echo $list[$i]['comment'] ?><?php echo $wr_subject ?></a></td>
-        <td class="td_name"><?php echo $list[$i]['name'] ?></td>
-        <td class="td_date"><?php echo $list[$i]['datetime2'] ?></td>
+        <td class="td_group"><a href="./new.php?gr_id=<?=$list[$i]['gr_id'] ?>"><?=$gr_subject ?></a></td>
+        <td class="td_board"><a href="./board.php?bo_table=<?=$list[$i]['bo_table'] ?>"><?=$bo_subject ?></a></td>
+        <td><a href="<?=$list[$i]['href'] ?>" class="new_tit"><?=$list[$i]['comment'] ?><?=$wr_subject ?></a></td>
+        <td class="td_name"><?=$list[$i]['name'] ?></td>
+        <td class="td_date"><?=$list[$i]['datetime2'] ?></td>
     </tr>
     <?php }  ?>
 
@@ -140,5 +140,5 @@ function fnew_submit(f)
 </script>
 <?php } ?>
 
-<?php echo $write_pages ?>
+<?=$write_pages ?>
 <!-- } 전체게시물 목록 끝 -->

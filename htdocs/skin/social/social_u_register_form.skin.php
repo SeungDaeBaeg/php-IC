@@ -41,7 +41,7 @@ add_stylesheet('<link rel="stylesheet" href="'.get_social_skin_url().'/style.css
             }
         ?>
 
-        <a href="<?php echo $link_href; ?>" id="sns-<?php echo $social; ?>" class="sns-icon social_link sns-<?php echo $social; ?><?php echo $add_class; ?>" title="<?php echo $title; ?>" data-provider="<?php echo $social; ?>" ><span class="ico"></span><span class="txt"><?php echo $provider_name; ?> 로그인</span></a>
+        <a href="<?=$link_href; ?>" id="sns-<?=$social; ?>" class="sns-icon social_link sns-<?=$social; ?><?=$add_class; ?>" title="<?=$title; ?>" data-provider="<?=$social; ?>" ><span class="ico"></span><span class="txt"><?=$provider_name; ?> 로그인</span></a>
 
         <?php }     //end foreach ?>
 
@@ -55,7 +55,7 @@ function social_get_nonce(provider){
     var socials = [];
 
     <?php foreach( $socials as $social=>$v ){ ?>
-        socials["<?php echo $social; ?>"] = "<?php echo social_nonce_create($social, $session_id); ?>";
+        socials["<?=$social; ?>"] = "<?=social_nonce_create($social, $session_id); ?>";
     <?php } ?>
 
     return (typeof socials[provider] != 'undefined') ? socials[provider] : '';
@@ -69,7 +69,7 @@ function social_link_fn(provider){
 
     if( $icon.length ){
 
-        var social_url = "<?php echo G5_SOCIAL_LOGIN_URL; ?>",
+        var social_url = "<?=G5_SOCIAL_LOGIN_URL; ?>",
             link_href = social_url+"/unlink.php?provider="+provider+"&social_nonce="+social_get_nonce(provider),
             atitle = provider+" 연결을 해제합니다.";
 
@@ -85,9 +85,9 @@ function social_link_fn(provider){
 
 jQuery(function($){
 
-    var social_img_path = "<?php echo G5_SOCIAL_LOGIN_URL; ?>",
-        self_url = "<?php echo $self_url; ?>",
-        urlencode = "<?php echo $urlencode; ?>";
+    var social_img_path = "<?=G5_SOCIAL_LOGIN_URL; ?>",
+        self_url = "<?=$self_url; ?>",
+        urlencode = "<?=$urlencode; ?>";
         
     $(".sns-wrap").on("click", ".social_link", function(e){
         e.preventDefault();
@@ -100,7 +100,7 @@ jQuery(function($){
                 return false;
             }
 
-            var ajax_url = "<?php echo G5_SOCIAL_LOGIN_URL.'/unlink.php' ?>",
+            var ajax_url = "<?=G5_SOCIAL_LOGIN_URL.'/unlink.php' ?>",
                 mb_id = '',
                 provider = $(this).attr("data-provider");
 
@@ -140,7 +140,7 @@ jQuery(function($){
         } else {        //소셜계정 연결하기
 
             var pop_url = $(this).attr("href");
-            var is_popup = "<?php echo G5_SOCIAL_USE_POPUP; ?>";
+            var is_popup = "<?=G5_SOCIAL_USE_POPUP; ?>";
             
             if( is_popup ){
                 var newWin = window.open(

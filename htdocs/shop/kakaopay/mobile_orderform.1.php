@@ -38,24 +38,24 @@ if(!function_exists('get_inicis_app_scheme')){
 ?>
 
 <form name="inicis_kakaopay_form" id="inicis_kakaopay_form" method="POST" action="" accept-charset="euc-kr">
-<input type="hidden" name="P_OID"        value="<?php echo $od_id; ?>">
-<input type="hidden" name="P_GOODS"      value="<?php echo $goods; ?>">
-<input type="hidden" name="P_AMT"        value="<?php echo $tot_price; ?>">
+<input type="hidden" name="P_OID"        value="<?=$od_id; ?>">
+<input type="hidden" name="P_GOODS"      value="<?=$goods; ?>">
+<input type="hidden" name="P_AMT"        value="<?=$tot_price; ?>">
 <input type="hidden" name="P_UNAME"      value="">
 <input type="hidden" name="P_MOBILE"     value="">
 <input type="hidden" name="P_EMAIL"      value="">
-<input type="hidden" name="P_MID"        value="<?php echo $default['de_kakaopay_mid']; ?>">
-<input type="hidden" name="P_NEXT_URL"   value="<?php echo $next_url; ?>">
-<input type="hidden" name="P_NOTI_URL"   value="<?php echo $noti_url; ?>">
+<input type="hidden" name="P_MID"        value="<?=$default['de_kakaopay_mid']; ?>">
+<input type="hidden" name="P_NEXT_URL"   value="<?=$next_url; ?>">
+<input type="hidden" name="P_NOTI_URL"   value="<?=$noti_url; ?>">
 <input type="hidden" name="P_RETURN_URL" value="">
 <input type="hidden" name="P_HPP_METHOD" value="2">
-<input type="hidden" name="P_RESERVED"   value="<?php echo get_inicis_app_scheme(); ?>bank_receipt=N&twotrs_isp=Y&block_isp=Y<?php echo $useescrow; ?>">
-<input type="hidden" name="DEF_RESERVED" value="<?php echo get_inicis_app_scheme(); ?>bank_receipt=N&twotrs_isp=Y&block_isp=Y<?php echo $useescrow; ?>">
-<input type="hidden" name="P_NOTI"       value="<?php echo $od_id; ?>">
+<input type="hidden" name="P_RESERVED"   value="<?=get_inicis_app_scheme(); ?>bank_receipt=N&twotrs_isp=Y&block_isp=Y<?=$useescrow; ?>">
+<input type="hidden" name="DEF_RESERVED" value="<?=get_inicis_app_scheme(); ?>bank_receipt=N&twotrs_isp=Y&block_isp=Y<?=$useescrow; ?>">
+<input type="hidden" name="P_NOTI"       value="<?=$od_id; ?>">
 <input type="hidden" name="P_QUOTABASE"  value="01:02:03:04:05:06:07:08:09:10:11:12"> <!-- 할부기간 설정 01은 일시불 -->
 <input type="hidden" name="P_SKIP_TERMS"      value="Y">
 
-<input type="hidden" name="good_mny"     value="<?php echo $tot_price; ?>" >
+<input type="hidden" name="good_mny"     value="<?=$tot_price; ?>" >
 
 <?php if($default['de_tax_flag_use']) { ?>
 <input type="hidden" name="P_TAX"        value="">
@@ -101,7 +101,7 @@ function getTxnId(pf) {
     inicis_kakaopay_form.P_TAXFREE = pf.comm_free_mny.value;
     <?php } ?>
 
-    inicis_kakaopay_form.P_RETURN_URL.value = "<?php echo $return_url.$od_id; ?>";
+    inicis_kakaopay_form.P_RETURN_URL.value = "<?=$return_url.$od_id; ?>";
     inicis_kakaopay_form.action = "https://mobile.inicis.com/smart/" + paymethod + "/";
 
     // 주문 정보 임시저장

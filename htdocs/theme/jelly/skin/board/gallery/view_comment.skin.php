@@ -4,8 +4,8 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
 <script>
 // 글자수 제한
-var char_min = parseInt(<?php echo $comment_min ?>); // 최소
-var char_max = parseInt(<?php echo $comment_max ?>); // 최대
+var char_min = parseInt(<?=$comment_min ?>); // 최소
+var char_max = parseInt(<?=$comment_max ?>); // 최대
 </script>
 <button type="button" class="cmt_btn"><i class="fa fa-commenting-o" aria-hidden="true"></i> 댓글목록</button>
 <!-- 댓글 시작 { -->
@@ -26,16 +26,16 @@ var char_max = parseInt(<?php echo $comment_max ?>); // 최대
         $cmt_sv = $cmt_amt - $i + 1; // 댓글 헤더 z-index 재설정 ie8 이하 사이드뷰 겹침 문제 해결
      ?>
 
-    <article id="c_<?php echo $comment_id ?>" <?php if ($cmt_depth) { ?>style="margin-left:<?php echo $cmt_depth ?>px;border-top-color:#e0e0e0"<?php } ?>>
-        <header style="z-index:<?php echo $cmt_sv; ?>">
-            <h2><?php echo get_text($list[$i]['wr_name']); ?>님의 <?php if ($cmt_depth) { ?><span class="sound_only">댓글의</span><?php } ?> 댓글</h2>
-            <?php echo $list[$i]['name'] ?>
+    <article id="c_<?=$comment_id ?>" <?php if ($cmt_depth) { ?>style="margin-left:<?=$cmt_depth ?>px;border-top-color:#e0e0e0"<?php } ?>>
+        <header style="z-index:<?=$cmt_sv; ?>">
+            <h2><?=get_text($list[$i]['wr_name']); ?>님의 <?php if ($cmt_depth) { ?><span class="sound_only">댓글의</span><?php } ?> 댓글</h2>
+            <?=$list[$i]['name'] ?>
             <?php if ($is_ip_view) { ?>
             <span class="sound_only">아이피</span>
-            <span>(<?php echo $list[$i]['ip']; ?>)</span>
+            <span>(<?=$list[$i]['ip']; ?>)</span>
             <?php } ?>
             <span class="sound_only">작성일</span>
-            <span class="bo_vc_hdinfo"><i class="fa fa-clock-o" aria-hidden="true"></i> <time datetime="<?php echo date('Y-m-d\TH:i:s+09:00', strtotime($list[$i]['datetime'])) ?>"><?php echo $list[$i]['datetime'] ?></time></span>
+            <span class="bo_vc_hdinfo"><i class="fa fa-clock-o" aria-hidden="true"></i> <time datetime="<?=date('Y-m-d\TH:i:s+09:00', strtotime($list[$i]['datetime'])) ?>"><?=$list[$i]['datetime'] ?></time></span>
             <?php
             include(G5_SNS_PATH.'/view_comment_list.sns.skin.php');
             ?>
@@ -44,8 +44,8 @@ var char_max = parseInt(<?php echo $comment_max ?>); // 최대
         <!-- 댓글 출력 -->
         <div class="cmt_contents">
             <p>
-                <?php if (strstr($list[$i]['wr_option'], "secret")) { ?><img src="<?php echo $board_skin_url; ?>/img/icon_secret.gif" alt="비밀글"><?php } ?>
-                <?php echo $comment ?>
+                <?php if (strstr($list[$i]['wr_option'], "secret")) { ?><img src="<?=$board_skin_url; ?>/img/icon_secret.gif" alt="비밀글"><?php } ?>
+                <?=$comment ?>
             </p>
             <?php if($list[$i]['is_reply'] || $list[$i]['is_edit'] || $list[$i]['is_del']) {
                 $query_string = clean_query_string($_SERVER['QUERY_STRING']);
@@ -62,17 +62,17 @@ var char_max = parseInt(<?php echo $comment_max ?>); // 최대
                 $c_edit_href = './board.php?'.$query_string.'&amp;c_id='.$comment_id.'&amp;w=cu#bo_vc_w';
              ?>
             <ul class="bo_vc_act">
-                <?php if ($list[$i]['is_reply']) { ?><li><a href="<?php echo $c_reply_href;  ?>" onclick="comment_box('<?php echo $comment_id ?>', 'c'); return false;" class="btn_b03">답변</a></li><?php } ?>
-                <?php if ($list[$i]['is_edit']) { ?><li><a href="<?php echo $c_edit_href;  ?>" onclick="comment_box('<?php echo $comment_id ?>', 'cu'); return false;" class="btn_b03">수정</a></li><?php } ?>
-                <?php if ($list[$i]['is_del'])  { ?><li><a href="<?php echo $list[$i]['del_link'];  ?>" onclick="return comment_delete();" class="btn_b03">삭제</a></li><?php } ?>
+                <?php if ($list[$i]['is_reply']) { ?><li><a href="<?=$c_reply_href;  ?>" onclick="comment_box('<?=$comment_id ?>', 'c'); return false;" class="btn_b03">답변</a></li><?php } ?>
+                <?php if ($list[$i]['is_edit']) { ?><li><a href="<?=$c_edit_href;  ?>" onclick="comment_box('<?=$comment_id ?>', 'cu'); return false;" class="btn_b03">수정</a></li><?php } ?>
+                <?php if ($list[$i]['is_del'])  { ?><li><a href="<?=$list[$i]['del_link'];  ?>" onclick="return comment_delete();" class="btn_b03">삭제</a></li><?php } ?>
             </ul>
             <?php } ?>
         </div>
-        <span id="edit_<?php echo $comment_id ?>" class="bo_vc_w"></span><!-- 수정 -->
-        <span id="reply_<?php echo $comment_id ?>" class="bo_vc_w"></span><!-- 답변 -->
+        <span id="edit_<?=$comment_id ?>" class="bo_vc_w"></span><!-- 수정 -->
+        <span id="reply_<?=$comment_id ?>" class="bo_vc_w"></span><!-- 답변 -->
 
-        <input type="hidden" value="<?php echo strstr($list[$i]['wr_option'],"secret") ?>" id="secret_comment_<?php echo $comment_id ?>">
-        <textarea id="save_comment_<?php echo $comment_id ?>" style="display:none"><?php echo get_text($list[$i]['content1'], 0) ?></textarea>
+        <input type="hidden" value="<?=strstr($list[$i]['wr_option'],"secret") ?>" id="secret_comment_<?=$comment_id ?>">
+        <textarea id="save_comment_<?=$comment_id ?>" style="display:none"><?=get_text($list[$i]['content1'], 0) ?></textarea>
 
     </article>
     <?php } ?>
@@ -88,22 +88,22 @@ var char_max = parseInt(<?php echo $comment_max ?>); // 최대
 <!-- 댓글 쓰기 시작 { -->
 <aside id="bo_vc_w" class="bo_vc_w">
     <h2>댓글쓰기</h2>
-    <form name="fviewcomment" id="fviewcomment" action="<?php echo $comment_action_url; ?>" onsubmit="return fviewcomment_submit(this);" method="post" autocomplete="off">
-    <input type="hidden" name="w" value="<?php echo $w ?>" id="w">
-    <input type="hidden" name="bo_table" value="<?php echo $bo_table ?>">
-    <input type="hidden" name="wr_id" value="<?php echo $wr_id ?>">
-    <input type="hidden" name="comment_id" value="<?php echo $c_id ?>" id="comment_id">
-    <input type="hidden" name="sca" value="<?php echo $sca ?>">
-    <input type="hidden" name="sfl" value="<?php echo $sfl ?>">
-    <input type="hidden" name="stx" value="<?php echo $stx ?>">
-    <input type="hidden" name="spt" value="<?php echo $spt ?>">
-    <input type="hidden" name="page" value="<?php echo $page ?>">
+    <form name="fviewcomment" id="fviewcomment" action="<?=$comment_action_url; ?>" onsubmit="return fviewcomment_submit(this);" method="post" autocomplete="off">
+    <input type="hidden" name="w" value="<?=$w ?>" id="w">
+    <input type="hidden" name="bo_table" value="<?=$bo_table ?>">
+    <input type="hidden" name="wr_id" value="<?=$wr_id ?>">
+    <input type="hidden" name="comment_id" value="<?=$c_id ?>" id="comment_id">
+    <input type="hidden" name="sca" value="<?=$sca ?>">
+    <input type="hidden" name="sfl" value="<?=$sfl ?>">
+    <input type="hidden" name="stx" value="<?=$stx ?>">
+    <input type="hidden" name="spt" value="<?=$spt ?>">
+    <input type="hidden" name="page" value="<?=$page ?>">
     <input type="hidden" name="is_good" value="">
 
     <span class="sound_only">내용</span>
     <?php if ($comment_min || $comment_max) { ?><strong id="char_cnt"><span id="char_count"></span>글자</strong><?php } ?>
     <textarea id="wr_content" name="wr_content" maxlength="10000" required class="required" title="내용" placeholder="댓글내용을 입력해주세요" 
-    <?php if ($comment_min || $comment_max) { ?>onkeyup="check_byte('wr_content', 'char_count');"<?php } ?>><?php echo $c_wr_content; ?></textarea>
+    <?php if ($comment_min || $comment_max) { ?>onkeyup="check_byte('wr_content', 'char_count');"<?php } ?>><?=$c_wr_content; ?></textarea>
     <?php if ($comment_min || $comment_max) { ?><script> check_byte('wr_content', 'char_count'); </script><?php } ?>
     <script>
     $(document).on("keyup change", "textarea#wr_content[maxlength]", function() {
@@ -119,7 +119,7 @@ var char_max = parseInt(<?php echo $comment_max ?>); // 최대
         <div class="bo_vc_w_info">
             <?php if ($is_guest) { ?>
             <label for="wr_name" class="sound_only">이름<strong> 필수</strong></label>
-            <input type="text" name="wr_name" value="<?php echo get_cookie("ck_sns_name"); ?>" id="wr_name" required class="frm_input required" size="25" placeholder="이름">
+            <input type="text" name="wr_name" value="<?=get_cookie("ck_sns_name"); ?>" id="wr_name" required class="frm_input required" size="25" placeholder="이름">
             <label for="wr_password" class="sound_only">비밀번호<strong> 필수</strong></label>
             <input type="password" name="wr_password" id="wr_password" required class="frm_input required" size="25"  placeholder="비밀번호">
             <?php
@@ -132,7 +132,7 @@ var char_max = parseInt(<?php echo $comment_max ?>); // 최대
             <span id="bo_vc_send_sns"></span>
             <?php } ?>
             <?php if ($is_guest) { ?>
-                <?php echo $captcha_html; ?>
+                <?=$captcha_html; ?>
             <?php } ?>
         </div>
         <div class="btn_confirm">
@@ -306,7 +306,7 @@ comment_box('', 'c'); // 댓글 입력폼이 보이도록 처리하기위해서 
 $(function() {
     // sns 등록
     $("#bo_vc_send_sns").load(
-        "<?php echo G5_SNS_URL; ?>/view_comment_write.sns.skin.php?bo_table=<?php echo $bo_table; ?>",
+        "<?=G5_SNS_URL; ?>/view_comment_write.sns.skin.php?bo_table=<?=$bo_table; ?>",
         function() {
             save_html = document.getElementById('bo_vc_w').innerHTML;
         }

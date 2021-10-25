@@ -23,8 +23,8 @@ $mshop_categories = get_shop_category_array(true);
             // 2단계 분류 판매 가능한 것만
             $count = ((int) count($cate1)) - 1;
         ?>
-        <li class="gnb_1dli" style="z-index:<?php echo $gnb_zindex; ?>">
-            <a href="<?php echo $row['url']; ?>" class="gnb_1da"><?php echo $row['ca_name']; ?><?php if ($count) echo '<i class="fa fa-angle-right" aria-hidden="true"></i>'; ?></a>
+        <li class="gnb_1dli" style="z-index:<?=$gnb_zindex; ?>">
+            <a href="<?=$row['url']; ?>" class="gnb_1da"><?=$row['ca_name']; ?><?php if ($count) echo '<i class="fa fa-angle-right" aria-hidden="true"></i>'; ?></a>
             <?php
             $j=0;
             foreach($cate1 as $key=>$cate2) {
@@ -33,7 +33,7 @@ $mshop_categories = get_shop_category_array(true);
             $row2 = $cate2['text'];
             if ($j==0) echo '<ul class="gnb_2dul" style="z-index:'.$gnb_zindex.'">';
             ?>
-                <li class="gnb_2dli"><a href="<?php echo $row2['url']; ?>" class="gnb_2da"><?php echo $row2['ca_name']; ?></a></li>
+                <li class="gnb_2dli"><a href="<?=$row2['url']; ?>" class="gnb_2da"><?=$row2['ca_name']; ?></a></li>
             <?php $j++; }   //end for
             if ($j>0) echo '</ul>';
             ?>

@@ -363,7 +363,7 @@ function win_close_alert($msg) {
 <script>
 //act = window.open('sms_ing.php', 'act', 'width=300, height=200');
 //act.close();
-location.href = 'history_view.php?wr_no=<?php echo $wr_no?>';
+location.href = 'history_view.php?wr_no=<?=$wr_no?>';
 </script>
 <?php
 include_once(G5_ADMIN_PATH.'/admin.tail.php');

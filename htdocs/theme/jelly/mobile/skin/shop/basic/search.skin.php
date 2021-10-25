@@ -6,31 +6,31 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
     <!-- 상세검색 항목 시작 { -->
     <div id="ssch_frm">
-        <h2><span><strong><?php echo $q; ?></strong> 검색결과</span> (총 <strong><?php echo $total_count; ?></strong> 건 )</h2>
+        <h2><span><strong><?=$q; ?></strong> 검색결과</span> (총 <strong><?=$total_count; ?></strong> 건 )</h2>
 
         <form name="frmdetailsearch">
-        <input type="hidden" name="qsort" id="qsort" value="<?php echo $qsort ?>">
-        <input type="hidden" name="qorder" id="qorder" value="<?php echo $qorder ?>">
-        <input type="hidden" name="qcaid" id="qcaid" value="<?php echo $qcaid ?>">
+        <input type="hidden" name="qsort" id="qsort" value="<?=$qsort ?>">
+        <input type="hidden" name="qorder" id="qorder" value="<?=$qorder ?>">
+        <input type="hidden" name="qcaid" id="qcaid" value="<?=$qcaid ?>">
         <div class="ssch_scharea">
 
             <div class="ssch_right">
                 <strong class="sound_only">검색범위</strong>
-                <input type="checkbox" name="qname" id="ssch_qname" value="1" <?php echo $qname_check?'checked="checked"':'';?>> <label for="ssch_qname">상품명</label>
-                <input type="checkbox" name="qexplan" id="ssch_qexplan" value="1" <?php echo $qexplan_check?'checked="checked"':'';?>> <label for="ssch_qexplan">상품설명</label>
-                <input type="checkbox" name="qbasic" id="ssch_qbasic" value="1" <?php echo $qbasic_check?'checked="checked"':'';?>> <label for="ssch_qbasic">기본설명</label>
-                <input type="checkbox" name="qid" id="ssch_qid" value="1" <?php echo $qid_check?'checked="checked"':'';?>> <label for="ssch_qid">상품코드</label>
+                <input type="checkbox" name="qname" id="ssch_qname" value="1" <?=$qname_check?'checked="checked"':'';?>> <label for="ssch_qname">상품명</label>
+                <input type="checkbox" name="qexplan" id="ssch_qexplan" value="1" <?=$qexplan_check?'checked="checked"':'';?>> <label for="ssch_qexplan">상품설명</label>
+                <input type="checkbox" name="qbasic" id="ssch_qbasic" value="1" <?=$qbasic_check?'checked="checked"':'';?>> <label for="ssch_qbasic">기본설명</label>
+                <input type="checkbox" name="qid" id="ssch_qid" value="1" <?=$qid_check?'checked="checked"':'';?>> <label for="ssch_qid">상품코드</label>
                 <span>
                 <strong class="sound_only">상품가격 (원)</strong>
                 <label for="ssch_qfrom" class="sound_only">최소 가격</label>
-                <input type="text" name="qfrom" value="<?php echo $qfrom; ?>" id="ssch_qfrom" class="ssch_input" size="8"> 원 ~
+                <input type="text" name="qfrom" value="<?=$qfrom; ?>" id="ssch_qfrom" class="ssch_input" size="8"> 원 ~
                 <label for="ssch_qto" class="sound_only">최대 가격</label>
-                <input type="text" name="qto" value="<?php echo $qto; ?>" id="ssch_qto" class="ssch_input" size="8"> 원
+                <input type="text" name="qto" value="<?=$qto; ?>" id="ssch_qto" class="ssch_input" size="8"> 원
                 </span>
             </div>
             <div class="ssch_left">
                 <label for="ssch_q" class="sound_only" >검색어</label>
-                <input type="text" name="q" value="<?php echo $q; ?>" id="ssch_q" class="ssch_input" size="40" maxlength="30" placeholder="검색어">
+                <input type="text" name="q" value="<?=$q; ?>" id="ssch_q" class="ssch_input" size="40" maxlength="30" placeholder="검색어">
                 <button type="submit" value="검색" class="btn_submit"><i class="fa fa-search" aria-hidden="true"></i> </button>
             </div>
 

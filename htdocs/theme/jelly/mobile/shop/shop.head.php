@@ -10,7 +10,7 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 ?>
 
 <header id="hd">
-    <?php if ((!$bo_table || $w == 's' ) && defined('_INDEX_')) { ?><h1><?php echo $config['cf_title'] ?></h1><?php } ?>
+    <?php if ((!$bo_table || $w == 's' ) && defined('_INDEX_')) { ?><h1><?=$config['cf_title'] ?></h1><?php } ?>
 
     <div id="skip_to_container"><a href="#container">본문 바로가기</a></div>
 
@@ -35,8 +35,8 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
                     <? } ?>
                 </div>
 
-                <a href="<?php echo G5_SHOP_URL; ?>/">
-                    <img src="<?php echo G5_DATA_URL; ?>/common/logo.jpg" alt="<?php echo $config['cf_title']; ?> 메인">
+                <a href="<?=G5_SHOP_URL; ?>/">
+                    <img src="<?=G5_DATA_URL; ?>/common/logo.jpg" alt="<?=$config['cf_title']; ?> 메인">
                 </a>
 
                 <? if(!empty(data::getLoginInfo())) { ?>
@@ -85,12 +85,12 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
              <div id="hd_sch">
                 <button type="button" class="btn_close"><i class="fa fa-times"></i></button>
                 <div class="hd_sch_wr">
-                    <form name="frmsearch1" action="<?php echo G5_SHOP_URL; ?>/search.php" onsubmit="return search_submit(this);">
+                    <form name="frmsearch1" action="<?=G5_SHOP_URL; ?>/search.php" onsubmit="return search_submit(this);">
 
                     <div class="sch_inner">
                         <h2>상품 검색</h2>
                         <label for="sch_str" class="sound_only">상품명<strong class="sound_only"> 필수</strong></label>
-                        <input type="text" name="q" value="<?php echo stripslashes(get_text(get_search_string($q))); ?>" id="sch_str" required placeholder="검색어를 입력해주세요">
+                        <input type="text" name="q" value="<?=stripslashes(get_text(get_search_string($q))); ?>" id="sch_str" required placeholder="검색어를 입력해주세요">
                         <button type="submit"  class="sch_submit"><i class="fa fa-search" aria-hidden="true"></i><span class="sound_only"> 검색</span></button>
                     </div>
                     </form>
@@ -106,7 +106,7 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
                         $seq = 1;
                         foreach($keyword as $word) {
                         ?>
-                            <li><a href="<?php echo G5_SHOP_URL; ?>/search.php?q=<?php echo urlencode($word); ?>"><?php echo get_text($word); ?></a></li>
+                            <li><a href="<?=G5_SHOP_URL; ?>/search.php?q=<?=urlencode($word); ?>"><?=get_text($word); ?></a></li>
                         <?php
                             $seq++;
                         }
@@ -138,7 +138,7 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
    </div>
 
     <?php if (false) { ?>
-        <div class="hd_admin"><a href="<?php echo G5_ADMIN_URL; ?>" target="_blank">관리자</a> <a href="<?php echo G5_THEME_ADM_URL ?>" target="_blank">테마관리</a></div>
+        <div class="hd_admin"><a href="<?=G5_ADMIN_URL; ?>" target="_blank">관리자</a> <a href="<?=G5_THEME_ADM_URL ?>" target="_blank">테마관리</a></div>
     <?php } ?>
 
     <script>
@@ -184,4 +184,4 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 </header>
 
 <div id="container" class="container">
-    <?php if (!defined('_INDEX_')) { ?><h1 id="container_title"><?php echo $g5['title'] ?></h1><?php } ?>
+    <?php if (!defined('_INDEX_')) { ?><h1 id="container_title"><?=$g5['title'] ?></h1><?php } ?>

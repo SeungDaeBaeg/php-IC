@@ -22,7 +22,7 @@ include_once(G5_ADMIN_PATH.'/admin.head.php');
 <script>
 
 function del(bg_no) {
-    if (confirm("한번 삭제한 자료는 복구할 방법이 없습니다.\n\n삭제되는 그룹에 속한 자료는 '<?php echo $no_group['bg_name']?>'로 이동됩니다.\n\n그래도 삭제하시겠습니까?"))
+    if (confirm("한번 삭제한 자료는 복구할 방법이 없습니다.\n\n삭제되는 그룹에 속한 자료는 '<?=$no_group['bg_name']?>'로 이동됩니다.\n\n그래도 삭제하시겠습니까?"))
         location.href = 'num_group_update.php?mw=d&bg_no=' + bg_no;
 }
 
@@ -53,7 +53,7 @@ function num_group_submit(f)
     }
 
     if(document.pressed == "선택삭제") {
-        if(confirm("한번 삭제한 자료는 복구할 방법이 없습니다.\n\n삭제되는 그룹에 속한 자료는 '<?php echo $no_group['bg_name']?>'로 이동됩니다.\n\n그래도 삭제하시겠습니까?")) {
+        if(confirm("한번 삭제한 자료는 복구할 방법이 없습니다.\n\n삭제되는 그룹에 속한 자료는 '<?=$no_group['bg_name']?>'로 이동됩니다.\n\n그래도 삭제하시겠습니까?")) {
             f.w.value = "de";
         } else {
             return false;
@@ -74,11 +74,11 @@ function num_group_submit(f)
 </script>
 
 <div class="sch_last">
-    <span class="btn_ov01"><span class="ov_txt">건수</span><span class="ov_num"> <?php echo $total_count; ?>건 </span></span>
+    <span class="btn_ov01"><span class="ov_txt">건수</span><span class="ov_num"> <?=$total_count; ?>건 </span></span>
 </div>
 
-<form name="group<?php echo isset($res['bg_no']) ? $res['bg_no'] : ''; ?>" method="get" action="./num_group_update.php" class="local_sch02 local_sch">
-<input type="hidden" name="bg_no" value="<?php echo isset($res['bg_no']) ? $res['bg_no'] : ''; ?>">
+<form name="group<?=isset($res['bg_no']) ? $res['bg_no'] : ''; ?>" method="get" action="./num_group_update.php" class="local_sch02 local_sch">
+<input type="hidden" name="bg_no" value="<?=isset($res['bg_no']) ? $res['bg_no'] : ''; ?>">
 
 <div>
     <label for="bg_name" class="sound_only">그룹추가<strong class="sound_only"> 필수</strong></label>
@@ -97,7 +97,7 @@ function num_group_submit(f)
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">
@@ -118,18 +118,18 @@ function num_group_submit(f)
     <!-- 미분류 시작 -->
     <tr>
         <td></td>
-        <td><?php echo $no_group['bg_name']?></td>
-        <td class="td_num"><?php echo number_format($no_group['bg_count'])?></td>
-        <td class="td_num"><?php echo number_format($no_group['bg_member'])?></td>
-        <td class="td_num"><?php echo number_format($no_group['bg_nomember'])?></td>
-        <td class="td_num"><?php echo number_format($no_group['bg_receipt'])?></td>
-        <td class="td_num"><?php echo number_format($no_group['bg_reject'])?></td>
+        <td><?=$no_group['bg_name']?></td>
+        <td class="td_num"><?=number_format($no_group['bg_count'])?></td>
+        <td class="td_num"><?=number_format($no_group['bg_member'])?></td>
+        <td class="td_num"><?=number_format($no_group['bg_nomember'])?></td>
+        <td class="td_num"><?=number_format($no_group['bg_receipt'])?></td>
+        <td class="td_num"><?=number_format($no_group['bg_reject'])?></td>
         <td class="td_mng">
             <label for="select_bg_no_999" class="sound_only">이동할 그룹</label>
-            <select name="select_bg_no_999" id="select_bg_no_999" onchange="move(<?php echo $no_group['bg_no']?>, '<?php echo $no_group['bg_name']?>', this);" >
+            <select name="select_bg_no_999" id="select_bg_no_999" onchange="move(<?=$no_group['bg_no']?>, '<?=$no_group['bg_name']?>', this);" >
                 <option value=""></option>
                 <?php for ($i=0; $i<count($group); $i++) { ?>
-                <option value="<?php echo $group[$i]['bg_no']?>"> <?php echo get_sanitize_input($group[$i]['bg_name']); ?> </option>
+                <option value="<?=$group[$i]['bg_no']?>"> <?=get_sanitize_input($group[$i]['bg_name']); ?> </option>
                 <?php } ?>
             </select>
         </td>
@@ -142,34 +142,34 @@ function num_group_submit(f)
     for ($i=0; $i<count($group); $i++) {
     $bg = 'bg'.(($i + 1)%2);
     ?>
-    <tr class="<?php echo $bg; ?>">
+    <tr class="<?=$bg; ?>">
         <td class="td_mng">
-            <input type="hidden" name="bg_no[<?php echo $i ?>]" value="<?php echo $group[$i]['bg_no']?>" id="bg_no_<?php echo $i ?>">
-            <label for="chk_<?php echo $i ?>" class="sound_only">그룹명</label>
-            <input type="checkbox" name="chk[]" value="<?php echo $i ?>" id="chk_<?php echo $i ?>">
+            <input type="hidden" name="bg_no[<?=$i ?>]" value="<?=$group[$i]['bg_no']?>" id="bg_no_<?=$i ?>">
+            <label for="chk_<?=$i ?>" class="sound_only">그룹명</label>
+            <input type="checkbox" name="chk[]" value="<?=$i ?>" id="chk_<?=$i ?>">
         </td>
         <td>
-            <label for="bg_name_<?php echo $i; ?>" class="sound_only">그룹명</label>
-            <input type="text" name="bg_name[<?php echo $i; ?>]" value="<?php echo get_sanitize_input($group[$i]['bg_name']); ?>" id="bg_name_<?php echo $i; ?>" class="frm_input">
+            <label for="bg_name_<?=$i; ?>" class="sound_only">그룹명</label>
+            <input type="text" name="bg_name[<?=$i; ?>]" value="<?=get_sanitize_input($group[$i]['bg_name']); ?>" id="bg_name_<?=$i; ?>" class="frm_input">
         </td>
-        <td class="td_num"><?php echo number_format($group[$i]['bg_count'])?></td>
-        <td class="td_num"><?php echo number_format($group[$i]['bg_member'])?></td>
-        <td class="td_num"><?php echo number_format($group[$i]['bg_nomember'])?></td>
-        <td class="td_num"><?php echo number_format($group[$i]['bg_receipt'])?></td>
-        <td class="td_num"><?php echo number_format($group[$i]['bg_reject'])?></td>
+        <td class="td_num"><?=number_format($group[$i]['bg_count'])?></td>
+        <td class="td_num"><?=number_format($group[$i]['bg_member'])?></td>
+        <td class="td_num"><?=number_format($group[$i]['bg_nomember'])?></td>
+        <td class="td_num"><?=number_format($group[$i]['bg_receipt'])?></td>
+        <td class="td_num"><?=number_format($group[$i]['bg_reject'])?></td>
         <td class="td_mbstat">
-            <label for="select_bg_no_<?php echo $i; ?>" class="sound_only">이동할 그룹</label>
-            <select name="select_bg_no[<?php echo $i ?>]" id="select_bg_no_<?php echo $i; ?>" onchange="move(<?php echo $group[$i]['bg_no']?>, '<?php echo $group[$i]['bg_name']?>', this);" >
+            <label for="select_bg_no_<?=$i; ?>" class="sound_only">이동할 그룹</label>
+            <select name="select_bg_no[<?=$i ?>]" id="select_bg_no_<?=$i; ?>" onchange="move(<?=$group[$i]['bg_no']?>, '<?=$group[$i]['bg_name']?>', this);" >
                 <option value=""></option>
-                <option value="<?php echo $no_group['bg_no']?>"><?php echo $no_group['bg_name']?></option>
+                <option value="<?=$no_group['bg_no']?>"><?=$no_group['bg_name']?></option>
                 <?php for ($j=0; $j<count($group); $j++) { ?>
                 <?php if ($group[$i]['bg_no']==$group[$j]['bg_no']) continue; ?>
-                <option value="<?php echo $group[$j]['bg_no']?>"> <?php echo $group[$j]['bg_name']?> </option>
+                <option value="<?=$group[$j]['bg_no']?>"> <?=$group[$j]['bg_name']?> </option>
                 <?php } ?>
             </select>
         </td>
         <td class="td_mng">
-            <a href="./num_book.php?bg_no=<?php echo $group[$i]['bg_no']?>" class="btn btn_03">보기</a>
+            <a href="./num_book.php?bg_no=<?=$group[$i]['bg_no']?>" class="btn btn_03">보기</a>
         </td>
     </tr>
     <?php } ?>

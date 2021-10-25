@@ -7,9 +7,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$qa_skin_url.'/style.css">', 0);
 <?php if ($category_option) { ?>
 <!-- 카테고리 시작 { -->
 <nav id="bo_cate">
-    <h2><?php echo $qaconfig['qa_title'] ?> 카테고리</h2>
+    <h2><?=$qaconfig['qa_title'] ?> 카테고리</h2>
     <ul id="bo_cate_ul">
-        <?php echo $category_option ?>
+        <?=$category_option ?>
     </ul>
 </nav>
 <!-- } 카테고리 끝 -->
@@ -21,17 +21,17 @@ add_stylesheet('<link rel="stylesheet" href="'.$qa_skin_url.'/style.css">', 0);
     <!-- } 게시판 페이지 정보 및 버튼 끝 -->
 
     <form name="fqalist" id="fqalist" action="./qadelete.php" onsubmit="return fqalist_submit(this);" method="post">
-    <input type="hidden" name="stx" value="<?php echo $stx; ?>">
-    <input type="hidden" name="sca" value="<?php echo $sca; ?>">
-    <input type="hidden" name="page" value="<?php echo $page; ?>">
+    <input type="hidden" name="stx" value="<?=$stx; ?>">
+    <input type="hidden" name="sca" value="<?=$sca; ?>">
+    <input type="hidden" name="page" value="<?=$page; ?>">
  
     <div class="bo_fx">
 
         <?php if ($admin_href || $write_href) { ?>
         <ul>
-            <?php if ($admin_href) { ?><li><a href="<?php echo $admin_href ?>" class="btn_admin btn_m"><i class="fa fa-cog" aria-hidden="true"></i><span class="sound_only">관리자</span></a></li><?php } ?>
+            <?php if ($admin_href) { ?><li><a href="<?=$admin_href ?>" class="btn_admin btn_m"><i class="fa fa-cog" aria-hidden="true"></i><span class="sound_only">관리자</span></a></li><?php } ?>
             <?php if ($is_checkbox) { ?><li><input type="submit" name="btn_submit" value="선택삭제" onclick="document.pressed=this.value" class="btn_m btn_b01"></li> <?php } ?>
-            <?php if ($write_href) { ?><li><a href="<?php echo $write_href ?>" class="btn_b02 btn_m">문의등록</a></li><?php } ?>
+            <?php if ($write_href) { ?><li><a href="<?=$write_href ?>" class="btn_b02 btn_m">문의등록</a></li><?php } ?>
         </ul>
         <?php } ?>
 
@@ -54,20 +54,20 @@ add_stylesheet('<link rel="stylesheet" href="'.$qa_skin_url.'/style.css">', 0);
                 <div class="li_title">
                     <?php if ($is_checkbox) { ?>
                     <span class="bo_chk li_chk">
-                        <label for="chk_qa_id_<?php echo $i ?>"><span class="chk_img"></span><span  class="sound_only"><?php echo $list[$i]['subject']; ?></span></label>
-                        <input type="checkbox" name="chk_qa_id[]" value="<?php echo $list[$i]['qa_id'] ?>" id="chk_qa_id_<?php echo $i ?>">
+                        <label for="chk_qa_id_<?=$i ?>"><span class="chk_img"></span><span  class="sound_only"><?=$list[$i]['subject']; ?></span></label>
+                        <input type="checkbox" name="chk_qa_id[]" value="<?=$list[$i]['qa_id'] ?>" id="chk_qa_id_<?=$i ?>">
                     </span>
                     <?php } ?>
-                    <strong><?php echo $list[$i]['category']; ?></strong>
-                    <a href="<?php echo $list[$i]['view_href']; ?>" class="li_sbj">
-                        <?php echo $list[$i]['subject']; ?><span> <?php echo $list[$i]['icon_file']; ?></span>
+                    <strong><?=$list[$i]['category']; ?></strong>
+                    <a href="<?=$list[$i]['view_href']; ?>" class="li_sbj">
+                        <?=$list[$i]['subject']; ?><span> <?=$list[$i]['icon_file']; ?></span>
                     </a>
                 </div>
                 <div class="li_info">
-                    <span><?php echo $list[$i]['name']; ?></span>
-                    <span><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $list[$i]['date']; ?></span>
+                    <span><?=$list[$i]['name']; ?></span>
+                    <span><i class="fa fa-clock-o" aria-hidden="true"></i> <?=$list[$i]['date']; ?></span>
                     
-                    <div class="li_stat <?php echo ($list[$i]['qa_status'] ? 'txt_done' : 'txt_rdy'); ?>"><?php echo ($list[$i]['qa_status'] ? '<i class="fa fa-check-circle" aria-hidden="true"></i> 답변완료' : '<i class="fa fa-times-circle" aria-hidden="true"></i> 답변대기'); ?></div>
+                    <div class="li_stat <?=($list[$i]['qa_status'] ? 'txt_done' : 'txt_rdy'); ?>"><?=($list[$i]['qa_status'] ? '<i class="fa fa-check-circle" aria-hidden="true"></i> 답변완료' : '<i class="fa fa-times-circle" aria-hidden="true"></i> 답변대기'); ?></div>
 
                 </div>
             </li>
@@ -86,9 +86,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$qa_skin_url.'/style.css">', 0);
         <legend>게시물 검색</legend>
 
         <form name="fsearch" method="get">
-        <input type="hidden" name="sca" value="<?php echo $sca ?>">
+        <input type="hidden" name="sca" value="<?=$sca ?>">
         <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-        <input type="text" name="stx" value="<?php echo stripslashes($stx) ?>" required id="stx" class="sch_input required" size="15" maxlength="15">
+        <input type="text" name="stx" value="<?=stripslashes($stx) ?>" required id="stx" class="sch_input required" size="15" maxlength="15">
         <button type="submit" value="검색" class="sch_btn"><i class="fa fa-search" aria-hidden="true"></i> <span class="sound_only">검색</span></button>
         </form>
     </fieldset>
@@ -103,7 +103,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$qa_skin_url.'/style.css">', 0);
 <?php } ?>
 
 <!-- 페이지 -->
-<?php echo $list_pages;  ?>
+<?=$list_pages;  ?>
 
 <?php if ($is_checkbox) { ?>
 <script>

@@ -40,7 +40,7 @@ if($sql) {
     <table>
     <thead>
     <tr>
-        <th scope="col"><?php echo $bbs_subject_title; ?></th>
+        <th scope="col"><?=$bbs_subject_title; ?></th>
         <?php if($type == 'board'){ ?>
             <th scope="col">게시판 그룹</th>
         <?php } ?>
@@ -67,17 +67,17 @@ if($sql) {
 ?>
 
     <tr>
-        <td><?php echo $row['subject']; ?></td>
+        <td><?=$row['subject']; ?></td>
         <?php
         if($type == 'board'){
         $group = get_call_func_cache('get_group', array($row['gr_id']));
         ?>
-        <td><?php echo $group['gr_subject']; ?></td>
+        <td><?=$group['gr_subject']; ?></td>
         <?php } ?>
         <td class="td_mngsmall">
-            <input type="hidden" name="subject[]" value="<?php echo preg_replace('/[\'\"]/', '', $row['subject']); ?>">
-            <input type="hidden" name="link[]" value="<?php echo $link; ?>">
-            <button type="button" class="add_select btn btn_03"><span class="sound_only"><?php echo $row['subject']; ?> </span>선택</button>
+            <input type="hidden" name="subject[]" value="<?=preg_replace('/[\'\"]/', '', $row['subject']); ?>">
+            <input type="hidden" name="link[]" value="<?=$link; ?>">
+            <button type="button" class="add_select btn btn_03"><span class="sound_only"><?=$row['subject']; ?> </span>선택</button>
         </td>
     </tr>
 
@@ -111,7 +111,7 @@ if($sql) {
     <tr>
         <th scope="row"><label for="me_link">링크<strong class="sound_only"> 필수</strong></label></th>
         <td>
-            <?php echo help('링크는 http://를 포함해서 입력해 주세요.'); ?>
+            <?=help('링크는 http://를 포함해서 입력해 주세요.'); ?>
             <input type="text" name="me_link" id="me_link" required class="frm_input full_input required">
         </td>
     </tr>

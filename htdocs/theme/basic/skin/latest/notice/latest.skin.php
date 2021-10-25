@@ -8,7 +8,7 @@ $list_count = (is_array($list) && $list) ? count($list) : 0;
 ?>
 
 <div class="notice ft_cnt">
-    <h2><a href="<?php echo get_pretty_url($bo_table); ?>"><?php echo $bo_subject ?></a></h2>
+    <h2><a href="<?=get_pretty_url($bo_table); ?>"><?=$bo_subject ?></a></h2>
     <ul>
     <?php for ($i=0; $i<$list_count; $i++) {  ?>
         <li>

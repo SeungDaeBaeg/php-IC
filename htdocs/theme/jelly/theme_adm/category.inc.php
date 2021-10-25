@@ -15,9 +15,9 @@ for($i=0; $row=sql_fetch_array($result); $i++) {
 
     $ca_name = get_text($row['ca_name']);
 ?>
-    <li<?php echo $li_first; ?>>
-        <?php echo $ca_name; ?>
-        <button type="button" class="btn_1 category_add" data-ca="<?php echo $row['ca_id']; ?>" data-name="<?php echo $ca_name; ?>">추가</button>
+    <li<?=$li_first; ?>>
+        <?=$ca_name; ?>
+        <button type="button" class="btn_1 category_add" data-ca="<?=$row['ca_id']; ?>" data-name="<?=$ca_name; ?>">추가</button>
     </li>
 <?php
 }

@@ -28,7 +28,7 @@ $mshop_categories = get_shop_category_array(true);
             echo '<ul class="cate">'.PHP_EOL;
     ?>
         <li class="cate_li_1">
-            <a href="<?php echo $mshop_ca_row1['url']; ?>" class="cate_li_1_a"><?php echo get_text($mshop_ca_row1['ca_name']); ?></a>
+            <a href="<?=$mshop_ca_row1['url']; ?>" class="cate_li_1_a"><?=get_text($mshop_ca_row1['ca_name']); ?></a>
             <?php
             $j=0;
             foreach($cate1 as $key=>$cate2){
@@ -39,7 +39,7 @@ $mshop_categories = get_shop_category_array(true);
                     echo '<ul class="sub_cate sub_cate1">'.PHP_EOL;
             ?>
                 <li class="cate_li_2">
-                    <a href="<?php echo $mshop_ca_row2['url']; ?>"><?php echo get_text($mshop_ca_row2['ca_name']); ?></a>
+                    <a href="<?=$mshop_ca_row2['url']; ?>"><?=get_text($mshop_ca_row2['ca_name']); ?></a>
                 </li>
             <?php
             $j++;

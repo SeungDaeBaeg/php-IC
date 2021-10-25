@@ -15,9 +15,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
     <?php if ($is_category) { ?>
     <nav id="bo_cate">
-        <h2><?php echo ($board['bo_mobile_subject'] ? $board['bo_mobile_subject'] : $board['bo_subject']) ?> 카테고리</h2>
+        <h2><?=($board['bo_mobile_subject'] ? $board['bo_mobile_subject'] : $board['bo_subject']) ?> 카테고리</h2>
         <ul id="bo_cate_ul">
-            <?php echo $category_option ?>
+            <?=$category_option ?>
         </ul>
     </nav>
     <?php } ?>
@@ -29,39 +29,39 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             <legend>게시물 검색</legend>
 
             <form name="fsearch" method="get">
-            <input type="hidden" name="bo_table" value="<?php echo $bo_table ?>">
-            <input type="hidden" name="sca" value="<?php echo $sca ?>">
+            <input type="hidden" name="bo_table" value="<?=$bo_table ?>">
+            <input type="hidden" name="sca" value="<?=$sca ?>">
             <input type="hidden" name="sop" value="and">
             <label for="sfl" class="sound_only">검색대상</label>
             <select name="sfl" id="sfl">
-                <option value="wr_subject"<?php echo get_selected($sfl, 'wr_subject', true); ?>>제목</option>
-                <option value="wr_content"<?php echo get_selected($sfl, 'wr_content'); ?>>내용</option>
-                <option value="wr_subject||wr_content"<?php echo get_selected($sfl, 'wr_subject||wr_content'); ?>>제목+내용</option>
-                <option value="mb_id,1"<?php echo get_selected($sfl, 'mb_id,1'); ?>>회원아이디</option>
-                <option value="mb_id,0"<?php echo get_selected($sfl, 'mb_id,0'); ?>>회원아이디(코)</option>
-                <option value="wr_name,1"<?php echo get_selected($sfl, 'wr_name,1'); ?>>글쓴이</option>
-                <option value="wr_name,0"<?php echo get_selected($sfl, 'wr_name,0'); ?>>글쓴이(코)</option>
+                <option value="wr_subject"<?=get_selected($sfl, 'wr_subject', true); ?>>제목</option>
+                <option value="wr_content"<?=get_selected($sfl, 'wr_content'); ?>>내용</option>
+                <option value="wr_subject||wr_content"<?=get_selected($sfl, 'wr_subject||wr_content'); ?>>제목+내용</option>
+                <option value="mb_id,1"<?=get_selected($sfl, 'mb_id,1'); ?>>회원아이디</option>
+                <option value="mb_id,0"<?=get_selected($sfl, 'mb_id,0'); ?>>회원아이디(코)</option>
+                <option value="wr_name,1"<?=get_selected($sfl, 'wr_name,1'); ?>>글쓴이</option>
+                <option value="wr_name,0"<?=get_selected($sfl, 'wr_name,0'); ?>>글쓴이(코)</option>
             </select>
-            <input name="stx" value="<?php echo stripslashes($stx) ?>" placeholder="검색어(필수)" required id="stx" class="sch_input" size="15" maxlength="20">
+            <input name="stx" value="<?=stripslashes($stx) ?>" placeholder="검색어(필수)" required id="stx" class="sch_input" size="15" maxlength="20">
             <button type="submit" value="검색" class="sch_btn"><i class="fa fa-search" aria-hidden="true"></i> <span class="sound_only">검색</span></button>
             </form>
             <button type="button" class="btn_close"><span class="sound_only">다기</span><i class="fa fa-times-circle"></i> </button>
         </fieldset>
 
         <form name="fboardlist" id="fboardlist" action="./board_list_update.php" onsubmit="return fboardlist_submit(this);" method="post">
-        <input type="hidden" name="bo_table" value="<?php echo $bo_table ?>">
-        <input type="hidden" name="sfl" value="<?php echo $sfl ?>">
-        <input type="hidden" name="stx" value="<?php echo $stx ?>">
-        <input type="hidden" name="spt" value="<?php echo $spt ?>">
-        <input type="hidden" name="sst" value="<?php echo $sst ?>">
-        <input type="hidden" name="sod" value="<?php echo $sod ?>">
-        <input type="hidden" name="page" value="<?php echo $page ?>">
+        <input type="hidden" name="bo_table" value="<?=$bo_table ?>">
+        <input type="hidden" name="sfl" value="<?=$sfl ?>">
+        <input type="hidden" name="stx" value="<?=$stx ?>">
+        <input type="hidden" name="spt" value="<?=$spt ?>">
+        <input type="hidden" name="sst" value="<?=$sst ?>">
+        <input type="hidden" name="sod" value="<?=$sod ?>">
+        <input type="hidden" name="page" value="<?=$page ?>">
         <input type="hidden" name="sw" value="">
         
         <ul class="bo_btn">
-            <?php if ($admin_href) { ?><li><a href="<?php echo $admin_href ?>" class="btn_admin"><i class="fa fa-cog" aria-hidden="true"></i><span class="sound_only">관리자</span></a></li><?php } ?>
-            <?php if ($rss_href) { ?><li><a href="<?php echo $rss_href ?>" class=""><i class="fa fa-rss" aria-hidden="true"></i><span class="sound_only">RSS</span></a></li><?php } ?>
-            <?php if ($write_href) { ?><li><a href="<?php echo $write_href ?>" class=""><i class="fa fa-pencil" aria-hidden="true"></i><span class="sound_only">글쓰기</span></a></li><?php } ?>
+            <?php if ($admin_href) { ?><li><a href="<?=$admin_href ?>" class="btn_admin"><i class="fa fa-cog" aria-hidden="true"></i><span class="sound_only">관리자</span></a></li><?php } ?>
+            <?php if ($rss_href) { ?><li><a href="<?=$rss_href ?>" class=""><i class="fa fa-rss" aria-hidden="true"></i><span class="sound_only">RSS</span></a></li><?php } ?>
+            <?php if ($write_href) { ?><li><a href="<?=$write_href ?>" class=""><i class="fa fa-pencil" aria-hidden="true"></i><span class="sound_only">글쓰기</span></a></li><?php } ?>
             <?php if ($is_checkbox) { ?>
             <li><button type="button" class="edit_op_btn view_op_btn_list"><i class="fa fa-ellipsis-v" aria-hidden="true"></i><span class="sound_only">게시판 리스트수정</span></button>
                 <ul class="btn_edit btn_list_op">
@@ -113,20 +113,20 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                     <div class="bo_subject">
                         <?php if ($is_checkbox) { ?>
                         <span class="bo_chk">
-                            <label for="chk_wr_id_<?php echo $i ?>" class="sound_only"><?php echo $list[$i]['subject'] ?></label>
-                            <input type="checkbox" name="chk_wr_id[]" value="<?php echo $list[$i]['wr_id'] ?>" id="chk_wr_id_<?php echo $i ?>">
+                            <label for="chk_wr_id_<?=$i ?>" class="sound_only"><?=$list[$i]['subject'] ?></label>
+                            <input type="checkbox" name="chk_wr_id[]" value="<?=$list[$i]['wr_id'] ?>" id="chk_wr_id_<?=$i ?>">
                         </span><?php } ?>
                         <?php if ($list[$i]['is_notice']) { ?><strong class="notice_icon"><i class="fa fa-microphone" aria-hidden="true"></i><span class="sound_only">공지</span></strong><?php } ?> 
 
                         <?php
                         if ($is_category && $list[$i]['ca_name']) {
                         ?>
-                        <a href="<?php echo $list[$i]['ca_name_href'] ?>" class="bo_cate_link">[<?php echo $list[$i]['ca_name'] ?>]</a>
+                        <a href="<?=$list[$i]['ca_name_href'] ?>" class="bo_cate_link">[<?=$list[$i]['ca_name'] ?>]</a>
                         <?php } ?>
 
-                        <a href="<?php echo $list[$i]['href'] ?>" class="bo_tit">
-                            <?php echo $list[$i]['icon_reply']; ?>
-                            <?php echo $list[$i]['subject'] ?>
+                        <a href="<?=$list[$i]['href'] ?>" class="bo_tit">
+                            <?=$list[$i]['icon_reply']; ?>
+                            <?=$list[$i]['subject'] ?>
                             <?php
                             // if ($list[$i]['file']['count']) { echo '<'.$list[$i]['file']['count'].'>'; }
 
@@ -142,10 +142,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
                     </div>
                     <div class="bo_info">
-                        <span class="sound_only">작성자</span><?php echo $list[$i]['name'] ?>
-                        <?php if ($list[$i]['comment_cnt']) { ?><span class="sound_only">댓글</span><i class="fa fa-commenting-o" aria-hidden="true"></i> <?php echo $list[$i]['comment_cnt']; ?><span class="sound_only">개</span><?php } ?> 
-                        <span class="bo_view"><i class="fa fa-eye" aria-hidden="true"></i> <?php echo $list[$i]['wr_hit'] ?></span>
-                        <span class="bo_date"><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $list[$i]['datetime2'] ?></span>
+                        <span class="sound_only">작성자</span><?=$list[$i]['name'] ?>
+                        <?php if ($list[$i]['comment_cnt']) { ?><span class="sound_only">댓글</span><i class="fa fa-commenting-o" aria-hidden="true"></i> <?=$list[$i]['comment_cnt']; ?><span class="sound_only">개</span><?php } ?>
+                        <span class="bo_view"><i class="fa fa-eye" aria-hidden="true"></i> <?=$list[$i]['wr_hit'] ?></span>
+                        <span class="bo_date"><i class="fa fa-clock-o" aria-hidden="true"></i> <?=$list[$i]['datetime2'] ?></span>
                     
                     </div>
                     
@@ -166,7 +166,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 <?php } ?>
 
 <!-- 페이지 -->
-<?php echo $write_pages; ?>
+<?=$write_pages; ?>
 
 <?php if ($is_checkbox) { ?>
 <script>

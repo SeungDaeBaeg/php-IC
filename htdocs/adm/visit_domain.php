@@ -39,7 +39,7 @@ while ($row=sql_fetch_array($result)) {
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">순위</th>
@@ -52,7 +52,7 @@ while ($row=sql_fetch_array($result)) {
     <tfoot>
     <tr>
         <td colspan="3">합계</td>
-        <td><strong><?php echo $sum_count ?></strong></td>
+        <td><strong><?=$sum_count ?></strong></td>
         <td>100%</td>
     </tr>
     </tfoot>
@@ -88,16 +88,16 @@ while ($row=sql_fetch_array($result)) {
 
             $bg = 'bg'.($i%2);
     ?>
-    <tr class="<?php echo $bg; ?>">
-        <td class="td_num"><?php echo $no ?></td>
-        <td class="td_category"><?php echo $link ?><?php echo $key ?><?php echo $link2 ?></td>
+    <tr class="<?=$bg; ?>">
+        <td class="td_num"><?=$no ?></td>
+        <td class="td_category"><?=$link ?><?=$key ?><?=$link2 ?></td>
         <td>
             <div class="visit_bar">
-                <span style="width:<?php echo $s_rate ?>%"></span>
+                <span style="width:<?=$s_rate ?>%"></span>
             </div>
         </td>
-        <td class="td_num_c3"><?php echo $count ?></td>
-        <td class="td_num"><?php echo $s_rate ?></td>
+        <td class="td_num_c3"><?=$count ?></td>
+        <td class="td_num"><?=$s_rate ?></td>
     </tr>
     <?php
         }

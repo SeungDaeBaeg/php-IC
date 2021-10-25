@@ -25,23 +25,23 @@ if (G5_IS_MOBILE) {
 ?>
 
 <div id="sit_sms_new" class="new_win">
-    <h1 id="win_title"><?php echo $g5['title']; ?></h1>
+    <h1 id="win_title"><?=$g5['title']; ?></h1>
 
-    <form name="fstocksms" method="post" action="<?php echo G5_HTTPS_SHOP_URL; ?>/itemstocksmsupdate.php" onsubmit="return fstocksms_submit(this);"  autocomplete="off">
-    <input type="hidden" name="it_id" value="<?php echo $it_id; ?>">
+    <form name="fstocksms" method="post" action="<?=G5_HTTPS_SHOP_URL; ?>/itemstocksmsupdate.php" onsubmit="return fstocksms_submit(this);"  autocomplete="off">
+    <input type="hidden" name="it_id" value="<?=$it_id; ?>">
 
     <div class="form_01">
         <ul>
             <li class="prd_name">
-                <?php echo $it['it_name']; ?>
+                <?=$it['it_name']; ?>
             </li>
             <li>
                 <label for="ss_hp" class="sound_only">휴대폰번호<strong> 필수</strong></label>
-                <input type="text" name="ss_hp" value="<?php echo $member['mb_hp']; ?>" id="ss_hp" required class="required frm_input full_input" placeholder="휴대폰번호">
+                <input type="text" name="ss_hp" value="<?=$member['mb_hp']; ?>" id="ss_hp" required class="required frm_input full_input" placeholder="휴대폰번호">
             </li>
             <li>
                 <strong>개인정보처리방침안내</strong>
-                <textarea readonly><?php echo get_text($config['cf_privacy']) ?></textarea>
+                <textarea readonly><?=get_text($config['cf_privacy']) ?></textarea>
             </li>
         </ul>
         

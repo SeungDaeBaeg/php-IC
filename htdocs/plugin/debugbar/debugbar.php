@@ -12,7 +12,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_PLUGIN_URL.'/debugbar/style.cs
     <div class="debug_bar_text_group">
         <div class="debug_bar_btn_group"><button class="view_debug_bar debug_button">디버그</button></div>
         <div class="debug_bar_text">
-            <?php echo 'PHP 실행시간 : '.$php_run_time.' | 메모리 사용량 : '.number_format($memory_usage).' bytes'; ?>
+            <?='PHP 실행시간 : '.$php_run_time.' | 메모리 사용량 : '.number_format($memory_usage).' bytes'; ?>
         </div>
     </div>
     <div class="debug_bar_content">
@@ -28,7 +28,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_PLUGIN_URL.'/debugbar/style.cs
 
             <div id="debug_executed_query" class="inner_debug">
                 <h3 class="query_top">
-                    총 쿼리수 : <span><?php echo isset($g5_debug['sql']) ? count($g5_debug['sql']) : 0; ?></span>
+                    총 쿼리수 : <span><?=isset($g5_debug['sql']) ? count($g5_debug['sql']) : 0; ?></span>
                 </h3>
 
                 <div class="sql_query_list">
@@ -53,9 +53,9 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_PLUGIN_URL.'/debugbar/style.cs
                 $show_excuted_time = number_format((float)$executed_time * 1000, 2, '.', '');
                 ?>
                 <tr>
-                    <td scope="row" data-label="실행순서"><?php echo $key; ?></td>
-                    <td class="left" data-label="쿼리문"><?php echo $query['sql']; ?></td>
-                    <td data-label="실행시간"><?php echo $show_excuted_time.' ms'; ?></td>
+                    <td scope="row" data-label="실행순서"><?=$key; ?></td>
+                    <td class="left" data-label="쿼리문"><?=$query['sql']; ?></td>
+                    <td data-label="실행시간"><?=$show_excuted_time.' ms'; ?></td>
                 </tr>
                 <?php } ?>
 
@@ -138,13 +138,13 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_PLUGIN_URL.'/debugbar/style.cs
                         ?>
                         <tr>
                             <?php if ($is_print){ ?>
-                            <td scope="row" data-label="event_tag" <?php echo $rowspan; ?>><?php echo $tag.' <span class="hook_count">('.$count.')</span>'; ?></td>
+                            <td scope="row" data-label="event_tag" <?=$rowspan; ?>><?=$tag.' <span class="hook_count">('.$count.')</span>'; ?></td>
                             <?php } ?>
                             <td data-label="event_function">
-                                <?php echo $print_function; ?>
+                                <?=$print_function; ?>
                             </td>
-                            <td data-label="인수의 수"><?php echo $data['arguments']; ?></td>
-                            <td data-label="우선 순위"><?php echo $data['priority']; ?></td>
+                            <td data-label="인수의 수"><?=$data['arguments']; ?></td>
+                            <td data-label="우선 순위"><?=$data['priority']; ?></td>
                         </tr>
                         <?php
                                 $is_print = '';
@@ -152,7 +152,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_PLUGIN_URL.'/debugbar/style.cs
                             } else {    // else if
                         ?>
                         <tr>
-                            <td scope="row" data-label="event_tag"><?php echo $tag.' <span class="hook_count">('.$count.')</span>'; ?></td>
+                            <td scope="row" data-label="event_tag"><?=$tag.' <span class="hook_count">('.$count.')</span>'; ?></td>
                             <td data-label="event_function">&nbsp;</td>
                             <td data-label="인수의 수">&nbsp;</td>
                             <td data-label="우선 순위">&nbsp;</td>
@@ -231,13 +231,13 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_PLUGIN_URL.'/debugbar/style.cs
                         ?>
                         <tr>
                             <?php if ($is_print){ ?>
-                            <td scope="row" data-label="replace_tag" <?php echo $rowspan; ?>><?php echo $tag.' <span class="hook_count">('.$count.')</span>'; ?></td>
+                            <td scope="row" data-label="replace_tag" <?=$rowspan; ?>><?=$tag.' <span class="hook_count">('.$count.')</span>'; ?></td>
                             <?php } ?>
                             <td data-label="replace_function">
-                                <?php echo $print_function; ?>
+                                <?=$print_function; ?>
                             </td>
-                            <td data-label="인수의 수"><?php echo $data['arguments']; ?></td>
-                            <td data-label="우선 순위"><?php echo $data['priority']; ?></td>
+                            <td data-label="인수의 수"><?=$data['arguments']; ?></td>
+                            <td data-label="우선 순위"><?=$data['priority']; ?></td>
                         </tr>
                         <?php
                                 $is_print = '';
@@ -245,7 +245,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_PLUGIN_URL.'/debugbar/style.cs
                             } else {    // else if
                         ?>
                         <tr>
-                            <td scope="row" data-label="replace_tag"><?php echo $tag.' <span class="hook_count">('.$count.')</span>'; ?></td>
+                            <td scope="row" data-label="replace_tag"><?=$tag.' <span class="hook_count">('.$count.')</span>'; ?></td>
                             <td data-label="replace_function">&nbsp;</td>
                             <td data-label="인수의 수">&nbsp;</td>
                             <td data-label="우선 순위">&nbsp;</td>

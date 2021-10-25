@@ -21,10 +21,10 @@ for ($i=1; $row=sql_fetch_array($result); $i++) {
 
     $href = G5_SHOP_URL.'/personalpayform.php?pp_id='.$row['pp_id'].'&amp;page='.$page;
 ?>
-    <li class="sct_li<?php echo $sct_last; ?>" style="width:<?php echo $img_width; ?>px">
-        <div class="sct_img"><a href="<?php echo $href; ?>" class="sct_a"><img src="<?php echo G5_SHOP_SKIN_URL; ?>/img/personal.jpg" alt=""></a></div>
-        <div class="sct_txt"><a href="<?php echo $href; ?>" class="sct_a"><?php echo get_text($row['pp_name']).'님 개인결제'; ?></a></div>
-        <div class="sct_cost"><?php echo display_price($row['pp_price']); ?></div>
+    <li class="sct_li<?=$sct_last; ?>" style="width:<?=$img_width; ?>px">
+        <div class="sct_img"><a href="<?=$href; ?>" class="sct_a"><img src="<?=G5_SHOP_SKIN_URL; ?>/img/personal.jpg" alt=""></a></div>
+        <div class="sct_txt"><a href="<?=$href; ?>" class="sct_a"><?=get_text($row['pp_name']).'님 개인결제'; ?></a></div>
+        <div class="sct_cost"><?=display_price($row['pp_price']); ?></div>
     </li>
 <?php
 }

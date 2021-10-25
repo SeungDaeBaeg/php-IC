@@ -56,29 +56,29 @@ $colspan = 7;
 ?>
 
 <form name="fsearch" id="fsearch" class="local_sch01 local_sch" method="get">
-<input type="hidden" name="gr_id" value="<?php echo $gr_id ?>">
+<input type="hidden" name="gr_id" value="<?=$gr_id ?>">
 <label for="sfl" class="sound_only">검색대상</label>
 <select name="sfl" id="sfl">
-    <option value="a.mb_id"<?php echo get_selected($sfl, "a.mb_id") ?>>회원아이디</option>
+    <option value="a.mb_id"<?=get_selected($sfl, "a.mb_id") ?>>회원아이디</option>
 </select>
 <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-<input type="text" name="stx" value="<?php echo $stx ?>" id="stx" required class="required frm_input">
+<input type="text" name="stx" value="<?=$stx ?>" id="stx" required class="required frm_input">
 <input type="submit" value="검색" class="btn_submit">
 </form>
 
 <form name="fboardgroupmember" id="fboardgroupmember" action="./boardgroupmember_update.php" onsubmit="return fboardgroupmember_submit(this);" method="post">
-<input type="hidden" name="sst" value="<?php echo $sst ?>">
-<input type="hidden" name="sod" value="<?php echo $sod ?>">
-<input type="hidden" name="sfl" value="<?php echo $sfl ?>">
-<input type="hidden" name="stx" value="<?php echo $stx ?>">
-<input type="hidden" name="page" value="<?php echo $page ?>">
-<input type="hidden" name="token" value="<?php echo $token ?>">
-<input type="hidden" name="gr_id" value="<?php echo $gr_id ?>">
+<input type="hidden" name="sst" value="<?=$sst ?>">
+<input type="hidden" name="sod" value="<?=$sod ?>">
+<input type="hidden" name="sfl" value="<?=$sfl ?>">
+<input type="hidden" name="stx" value="<?=$stx ?>">
+<input type="hidden" name="page" value="<?=$page ?>">
+<input type="hidden" name="token" value="<?=$token ?>">
+<input type="hidden" name="gr_id" value="<?=$gr_id ?>">
 <input type="hidden" name="w" value="ld">
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">
@@ -86,11 +86,11 @@ $colspan = 7;
             <input type="checkbox" name="chkall" value="1" id="chkall" onclick="check_all(this.form)">
         </th>
         <th scope="col">그룹</th>
-        <th scope="col"><?php echo subject_sort_link('b.mb_id', 'gr_id='.$gr_id) ?>회원아이디</a></th>
-        <th scope="col"><?php echo subject_sort_link('b.mb_name', 'gr_id='.$gr_id) ?>이름</a></th>
-        <th scope="col"><?php echo subject_sort_link('b.mb_nick', 'gr_id='.$gr_id) ?>별명</a></th>
-        <th scope="col"><?php echo subject_sort_link('b.mb_today_login', 'gr_id='.$gr_id) ?>최종접속</a></th>
-        <th scope="col"><?php echo subject_sort_link('a.gm_datetime', 'gr_id='.$gr_id) ?>처리일시</a></th>
+        <th scope="col"><?=subject_sort_link('b.mb_id', 'gr_id='.$gr_id) ?>회원아이디</a></th>
+        <th scope="col"><?=subject_sort_link('b.mb_name', 'gr_id='.$gr_id) ?>이름</a></th>
+        <th scope="col"><?=subject_sort_link('b.mb_nick', 'gr_id='.$gr_id) ?>별명</a></th>
+        <th scope="col"><?=subject_sort_link('b.mb_today_login', 'gr_id='.$gr_id) ?>최종접속</a></th>
+        <th scope="col"><?=subject_sort_link('a.gm_datetime', 'gr_id='.$gr_id) ?>처리일시</a></th>
     </tr>
     </thead>
     <tbody>
@@ -108,17 +108,17 @@ $colspan = 7;
 
         $bg = 'bg'.($i%2);
     ?>
-    <tr class="<?php echo $bg; ?>">
+    <tr class="<?=$bg; ?>">
         <td class="td_chk">
-            <label for="chk_<?php echo $i; ?>" class="sound_only"><?php echo $row['mb_nick'] ?> 회원</label>
-            <input type="checkbox" name="chk[]" value="<?php echo $row['gm_id'] ?>" id="chk_<?php echo $i ?>">
+            <label for="chk_<?=$i; ?>" class="sound_only"><?=$row['mb_nick'] ?> 회원</label>
+            <input type="checkbox" name="chk[]" value="<?=$row['gm_id'] ?>" id="chk_<?=$i ?>">
         </td>
-        <td class="td_grid"><?php echo $group ?></td>
-        <td class="td_mbid"><?php echo $row['mb_id'] ?></td>
-        <td class="td_mbname"><?php echo get_text($row['mb_name']); ?></td>
-        <td class="td_name sv_use"><?php echo $mb_nick ?></td>
-        <td class="td_datetime"><?php echo substr($row['mb_today_login'],2,8) ?></td>
-        <td class="td_datetime"><?php echo $row['gm_datetime'] ?></td>
+        <td class="td_grid"><?=$group ?></td>
+        <td class="td_mbid"><?=$row['mb_id'] ?></td>
+        <td class="td_mbname"><?=get_text($row['mb_name']); ?></td>
+        <td class="td_name sv_use"><?=$mb_nick ?></td>
+        <td class="td_datetime"><?=substr($row['mb_today_login'],2,8) ?></td>
+        <td class="td_datetime"><?=$row['gm_datetime'] ?></td>
     </tr>
     <?php
     }
@@ -137,7 +137,7 @@ $colspan = 7;
 </div>
 </form>
 
-<?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;gr_id=$gr_id&page="); ?>
+<?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;gr_id=$gr_id&page="); ?>
 
 <script>
 function fboardgroupmember_submit(f)

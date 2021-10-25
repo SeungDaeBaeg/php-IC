@@ -39,20 +39,20 @@ $qstr .= ($qstr ? '&amp;' : '').'sca='.$sca;
 ?>
 
 <form name="fitemuseform" method="post" action="./itemuseformupdate.php" onsubmit="return fitemuseform_submit(this);">
-<input type="hidden" name="w" value="<?php echo $w; ?>">
-<input type="hidden" name="is_id" value="<?php echo $is_id; ?>">
-<input type="hidden" name="it_id" value="<?php echo $is['it_id']; ?>">
-<input type="hidden" name="sca" value="<?php echo $sca; ?>">
-<input type="hidden" name="sst" value="<?php echo $sst; ?>">
-<input type="hidden" name="sod" value="<?php echo $sod; ?>">
-<input type="hidden" name="sfl" value="<?php echo $sfl; ?>">
-<input type="hidden" name="stx" value="<?php echo $stx; ?>">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
+<input type="hidden" name="w" value="<?=$w; ?>">
+<input type="hidden" name="is_id" value="<?=$is_id; ?>">
+<input type="hidden" name="it_id" value="<?=$is['it_id']; ?>">
+<input type="hidden" name="sca" value="<?=$sca; ?>">
+<input type="hidden" name="sst" value="<?=$sst; ?>">
+<input type="hidden" name="sod" value="<?=$sod; ?>">
+<input type="hidden" name="sfl" value="<?=$sfl; ?>">
+<input type="hidden" name="stx" value="<?=$stx; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
 
 
 <div class="tbl_frm01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 수정</caption>
+    <caption><?=$g5['title']; ?> 수정</caption>
     <colgroup>
         <col class="grid_4">
         <col>
@@ -60,40 +60,40 @@ $qstr .= ($qstr ? '&amp;' : '').'sca='.$sca;
     <tbody>
     <tr>
         <th scope="row">상품명</th>
-        <td><a href="<?php echo shop_item_url($is['it_id']); ?>"><?php echo $is['it_name']; ?></a></td>
+        <td><a href="<?=shop_item_url($is['it_id']); ?>"><?=$is['it_name']; ?></a></td>
     </tr>
     <tr>
         <th scope="row">이름</th>
-        <td><?php echo $name; ?></td>
+        <td><?=$name; ?></td>
     </tr>
     <tr>
         <th scope="row">평점</th>
-        <td><img src="<?php echo G5_URL; ?>/shop/img/s_star<?php echo $is['is_score']; ?>.png" width="100"> (<?php echo $is['is_score']; ?>점)</td>
+        <td><img src="<?=G5_URL; ?>/shop/img/s_star<?=$is['is_score']; ?>.png" width="100"> (<?=$is['is_score']; ?>점)</td>
     </tr>
     <tr>
         <th scope="row"><label for="is_subject">제목</label></th>
         <td><input type="text" name="is_subject" required class="required frm_input" id="is_subject" size="100"
-        value="<?php echo get_text($is['is_subject']); ?>"></td>
+        value="<?=get_text($is['is_subject']); ?>"></td>
     </tr>
     <tr>
         <th scope="row">내용</th>
-        <td><?php echo editor_html('is_content', get_text(html_purifier($is['is_content']), 0)); ?></td>
+        <td><?=editor_html('is_content', get_text(html_purifier($is['is_content']), 0)); ?></td>
     </tr>
     <tr>
         <th scope="row"><label for="is_reply_subject">답변 제목</label></th>
         <td><input type="text" name="is_reply_subject" class="frm_input" id="is_reply_subject" size="100"
-        value="<?php echo get_text($is['is_reply_subject']); ?>"></td>
+        value="<?=get_text($is['is_reply_subject']); ?>"></td>
     </tr>
     <tr>
         <th scope="row">답변 내용</th>
-        <td><?php echo editor_html('is_reply_content', get_text(html_purifier($is['is_reply_content']), 0)); ?></td>
+        <td><?=editor_html('is_reply_content', get_text(html_purifier($is['is_reply_content']), 0)); ?></td>
     </tr>
     <tr>
         <th scope="row">확인</th>
         <td>
-            <input type="radio" name="is_confirm" value="1" id="is_confirm_yes" <?php echo $is_confirm_yes; ?>>
+            <input type="radio" name="is_confirm" value="1" id="is_confirm_yes" <?=$is_confirm_yes; ?>>
             <label for="is_confirm_yes">예</label>
-            <input type="radio" name="is_confirm" value="0" id="is_confirm_no" <?php echo $is_confirm_no; ?>>
+            <input type="radio" name="is_confirm" value="0" id="is_confirm_no" <?=$is_confirm_no; ?>>
             <label for="is_confirm_no">아니오</label>
         </td>
     </tr>
@@ -102,7 +102,7 @@ $qstr .= ($qstr ? '&amp;' : '').'sca='.$sca;
 </div>
 
 <div class="btn_fixed_top">
-    <a href="./itemuselist.php?<?php echo $qstr; ?>" class="btn_02 btn">목록</a>
+    <a href="./itemuselist.php?<?=$qstr; ?>" class="btn_02 btn">목록</a>
     <input type="submit" value="확인" class="btn_submit btn" accesskey="s">
 </div>
 </form>
@@ -110,8 +110,8 @@ $qstr .= ($qstr ? '&amp;' : '').'sca='.$sca;
 <script>
 function fitemuseform_submit(f)
 {
-    <?php echo get_editor_js('is_content'); ?>
-    <?php echo get_editor_js('is_reply_content'); ?>
+    <?=get_editor_js('is_content'); ?>
+    <?=get_editor_js('is_reply_content'); ?>
     return true;
 }
 </script>

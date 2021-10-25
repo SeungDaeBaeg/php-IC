@@ -46,15 +46,15 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">',
 
     <script>
     $(function() {
-        var itemQty = <?php echo $tv_tot_count; ?>; // 총 아이템 수량
-        var itemShow = <?php echo $tv_div['img_length']; ?>; // 한번에 보여줄 아이템 수량
+        var itemQty = <?=$tv_tot_count; ?>; // 총 아이템 수량
+        var itemShow = <?=$tv_div['img_length']; ?>; // 한번에 보여줄 아이템 수량
         if (itemQty > itemShow)
         {
             $('#stv_btn').append('<button type="button" id="up"><i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sound_only">이전</span></button><button type="button" id="down"><span class="sound_only">다음</span><i class="fa fa-chevron-right" aria-hidden="true"></i></button>');
         }
         var Flag = 1; // 페이지
-        var EOFlag = parseInt(<?php echo $i-1; ?>/itemShow); // 전체 리스트를 3(한 번에 보여줄 값)으로 나눠 페이지 최댓값을 구하고
-        var itemRest = parseInt(<?php echo $i-1; ?>%itemShow); // 나머지 값을 구한 후
+        var EOFlag = parseInt(<?=$i-1; ?>/itemShow); // 전체 리스트를 3(한 번에 보여줄 값)으로 나눠 페이지 최댓값을 구하고
+        var itemRest = parseInt(<?=$i-1; ?>%itemShow); // 나머지 값을 구한 후
         if (itemRest > 0) // 나머지 값이 있다면
         {
             EOFlag++; // 페이지 최댓값을 1 증가시킨다.
@@ -92,5 +92,5 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">',
     <?php } ?>
 </div>
 
-<script src="<?php echo G5_JS_URL ?>/scroll_oldie.js"></script>
+<script src="<?=G5_JS_URL ?>/scroll_oldie.js"></script>
 <!-- } 오늘 본 상품 끝 -->

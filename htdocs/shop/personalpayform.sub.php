@@ -7,8 +7,8 @@ require_once(G5_SHOP_PATH.'/settle_'.$default['de_pg_service'].'.inc.php');
 require_once(G5_SHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
 ?>
 
-<form name="forderform" id="forderform" method="post" action="<?php echo $order_action_url; ?>" autocomplete="off">
-<input type="hidden" name="pp_id" value="<?php echo $pp['pp_id']; ?>">
+<form name="forderform" id="forderform" method="post" action="<?=$order_action_url; ?>" autocomplete="off">
+<input type="hidden" name="pp_id" value="<?=$pp['pp_id']; ?>">
 
     <?php
     // 결제대행사별 코드 include (결제대행사 정보 필드)
@@ -26,7 +26,7 @@ require_once(G5_SHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
                 <th scope="col" colspan="2">상세내용</th>
             </tr>
             <tr>
-                <td colspan="2"><?php echo conv_content($pp['pp_content'], 0); ?></td>
+                <td colspan="2"><?=conv_content($pp['pp_content'], 0); ?></td>
             </tr>
             <?php } ?>
             <tr>
@@ -34,21 +34,21 @@ require_once(G5_SHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
             </tr>
 
             <tr>
-                <td colspan="2"><?php echo display_price($pp['pp_price']); ?></td>
+                <td colspan="2"><?=display_price($pp['pp_price']); ?></td>
             </tr>
             <tr>
                 <th scope="col"><label for="pp_name">이름<strong class="sound_only"> 필수</strong></label></th>
                 <th scope="col"><label for="pp_hp">휴대폰</label></th>
             </tr>
             <tr>
-                <td><input type="text" name="pp_name" value="<?php echo get_text($pp['pp_name']); ?>" id="pp_name" required class="required frm_input"></td>
-                <td><input type="text" name="pp_hp" value="<?php echo get_text($member['mb_hp']); ?>" id="pp_hp" required class="required frm_input"></td>
+                <td><input type="text" name="pp_name" value="<?=get_text($pp['pp_name']); ?>" id="pp_name" required class="required frm_input"></td>
+                <td><input type="text" name="pp_hp" value="<?=get_text($member['mb_hp']); ?>" id="pp_hp" required class="required frm_input"></td>
             </tr>
             <tr>
                 <th scope="col" colspan="2"><label for="pp_email">이메일<strong class="sound_only"> 필수</strong></label></th>
             </tr>
             <tr>
-                <td colspan="2"><input type="text" name="pp_email" value="<?php echo $member['mb_email']; ?>" id="pp_email" required class="required frm_input" size="30"></td>
+                <td colspan="2"><input type="text" name="pp_email" value="<?=$member['mb_email']; ?>" id="pp_email" required class="required frm_input" size="30"></td>
             </tr>
             </tbody>
             </table>
@@ -161,7 +161,7 @@ function forderform_check(f)
         return false;
     }
 
-    var tot_price = <?php echo (int)$pp['pp_price']; ?>;
+    var tot_price = <?=(int)$pp['pp_price']; ?>;
 
     if (document.getElementById("pp_settle_iche")) {
         if (document.getElementById("pp_settle_iche").checked) {

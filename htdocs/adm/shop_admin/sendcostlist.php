@@ -37,7 +37,7 @@ include_once (G5_ADMIN_PATH.'/admin.head.php');
 
     <form name="fsendcost" id="fsendcost" method="post" action="./sendcostupdate.php" onsubmit="return fsendcost_submit(this);">
     <input type="hidden" name="w" value="d">
-    <input type="hidden" name="page" value="<?php echo $page; ?>">
+    <input type="hidden" name="page" value="<?=$page; ?>">
     <input type="hidden" name="token" value="">
     <div class="tbl_head01 tbl_wrap">
         <table>
@@ -58,14 +58,14 @@ include_once (G5_ADMIN_PATH.'/admin.head.php');
         for($i=0; $row=sql_fetch_array($result); $i++) {
         $bg = 'bg'.($i%2);
         ?>
-        <tr class="<?php echo $bg; ?>">
+        <tr class="<?=$bg; ?>">
             <td class="td_chk">
-                <input type="hidden" id="sc_id_<?php echo $i; ?>" name="sc_id[<?php echo $i; ?>]" value="<?php echo $row['sc_id']; ?>">
-                <input type="checkbox" id="chk_<?php echo $i; ?>" name="chk[]" value="<?php echo $i; ?>" title="내역선택">
+                <input type="hidden" id="sc_id_<?=$i; ?>" name="sc_id[<?=$i; ?>]" value="<?=$row['sc_id']; ?>">
+                <input type="checkbox" id="chk_<?=$i; ?>" name="chk[]" value="<?=$i; ?>" title="내역선택">
             </td>
-            <td class="td_left"><?php echo $row['sc_name']; ?></td>
-            <td class="td_postalbig"><?php echo $row['sc_zip1'].' ~ '.$row['sc_zip2']; ?></td>
-            <td class="td_sendcost_add"><?php echo number_format($row['sc_price']); ?></td>
+            <td class="td_left"><?=$row['sc_name']; ?></td>
+            <td class="td_postalbig"><?=$row['sc_zip1'].' ~ '.$row['sc_zip2']; ?></td>
+            <td class="td_sendcost_add"><?=number_format($row['sc_price']); ?></td>
         </tr>
         <?php
         }
@@ -84,7 +84,7 @@ include_once (G5_ADMIN_PATH.'/admin.head.php');
     </form>
 </section>
 
-<?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
+<?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
 
 <section id="sendcost_postal">
     <h2 class="h2_frm">추가배송비 등록</h2>

@@ -19,7 +19,7 @@ include_once(G5_ADMIN_PATH.'/admin.head.php');
     </div>
     <div class="local_desc01 local_desc">
         <p>
-            마지막 업데이트 일시 : <span id="datetime"><?php echo isset($sms5['cf_datetime']) ? get_sanitize_input($sms5['cf_datetime']) : ''; ?></span> <br>
+            마지막 업데이트 일시 : <span id="datetime"><?=isset($sms5['cf_datetime']) ? get_sanitize_input($sms5['cf_datetime']) : ''; ?></span> <br>
         </p>
     </div>
 

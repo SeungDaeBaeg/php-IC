@@ -5,7 +5,7 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0);
 ?>
 
-<script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
+<script src="<?=G5_JS_URL; ?>/viewimageresize.js"></script>
                   
             <!-- 다른 상품 보기 시작 { -->
             <div id="sit_siblings">
@@ -40,19 +40,19 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 <!-- 상품 정보 시작 { -->
 <section id="sit_inf">
     <h2>상품 정보</h2>
-    <?php echo pg_anchor('inf'); ?>
+    <?=pg_anchor('inf'); ?>
 
     <?php if ($it['it_basic']) { // 상품 기본설명 ?>
     <h3>상품 기본설명</h3>
     <div id="sit_inf_basic">
-         <?php echo $it['it_basic']; ?>
+         <?=$it['it_basic']; ?>
     </div>
     <?php } ?>
 
     <?php if ($it['it_explan']) { // 상품 상세설명 ?>
     <h3>상품 상세설명</h3>
     <div id="sit_inf_explan">
-        <?php echo conv_content($it['it_explan'], 1); ?>
+        <?=conv_content($it['it_explan'], 1); ?>
     </div>
     <?php } ?>
 
@@ -77,8 +77,8 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
         $ii_value = $val;
     ?>
     <tr>
-        <th scope="row"><?php echo $ii_title; ?></th>
-        <td><?php echo $ii_value; ?></td>
+        <th scope="row"><?=$ii_title; ?></th>
+        <td><?=$ii_value; ?></td>
     </tr>
     <?php } //foreach?>
     </tbody>
@@ -99,7 +99,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 <!-- 사용후기 시작 { -->
 <section id="sit_use">
     <h2>사용후기</h2>
-    <?php echo pg_anchor('use'); ?>
+    <?=pg_anchor('use'); ?>
 
     <div id="itemuse"><?php include_once(G5_SHOP_PATH.'/itemuse.php'); ?></div>
 </section>
@@ -108,7 +108,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 <!-- 상품문의 시작 { -->
 <section id="sit_qa">
     <h2>상품문의</h2>
-    <?php echo pg_anchor('qa'); ?>
+    <?=pg_anchor('qa'); ?>
 
     <div id="itemqa"><?php include_once(G5_SHOP_PATH.'/itemqa.php'); ?></div>
 </section>
@@ -118,9 +118,9 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 <!-- 배송정보 시작 { -->
 <section id="sit_dvr">
     <h2>배송정보</h2>
-    <?php echo pg_anchor('dvr'); ?>
+    <?=pg_anchor('dvr'); ?>
 
-    <?php echo conv_content($default['de_baesong_content'], 1); ?>
+    <?=conv_content($default['de_baesong_content'], 1); ?>
 </section>
 <!-- } 배송정보 끝 -->
 <?php } ?>
@@ -130,9 +130,9 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 <!-- 교환/반품 시작 { -->
 <section id="sit_ex">
     <h2>교환/반품</h2>
-    <?php echo pg_anchor('ex'); ?>
+    <?=pg_anchor('ex'); ?>
 
-    <?php echo conv_content($default['de_change_content'], 1); ?>
+    <?=conv_content($default['de_change_content'], 1); ?>
 </section>
 <!-- } 교환/반품 끝 -->
 <?php } ?>

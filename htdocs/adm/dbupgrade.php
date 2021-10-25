@@ -212,7 +212,7 @@ $db_upgrade_msg = $is_check ? 'DB 업그레이드가 완료되었습니다.' : '
 
 <div class="local_desc01 local_desc">
     <p>
-        <?php echo $db_upgrade_msg; ?>
+        <?=$db_upgrade_msg; ?>
     </p>
 </div>
 

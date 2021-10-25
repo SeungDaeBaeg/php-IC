@@ -52,36 +52,36 @@ $colspan = 10;
 ?>
 
 <div class="local_ov01 local_ov">
-   <span class="btn_ov01"><span class="ov_txt">전체 </span><span class="ov_num">  <?php echo number_format($total_count) ?> 건 </span></span> 
+   <span class="btn_ov01"><span class="ov_txt">전체 </span><span class="ov_num">  <?=number_format($total_count) ?> 건 </span></span>
 </div>
 
 <form name="fsearch" id="fsearch" class="local_sch01 local_sch" method="get">
     <select name="sfl" title="검색대상">
-        <option value="od_id"<?php echo get_selected($sfl, "od_id"); ?>>주문번호</option>
+        <option value="od_id"<?=get_selected($sfl, "od_id"); ?>>주문번호</option>
     </select>
     <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-    <input type="text" name="stx" value="<?php echo $stx ?>" id="stx" required class="required frm_input">
+    <input type="text" name="stx" value="<?=$stx ?>" id="stx" required class="required frm_input">
     <input type="submit" class="btn_submit" value="검색">
 </form>
 
 <form name="finorderlist" id="finorderlist" method="post" action="./inorderlistdelete.php" onsubmit="return finorderlist_submit(this);">
-<input type="hidden" name="sst" value="<?php echo $sst; ?>">
-<input type="hidden" name="sod" value="<?php echo $sod; ?>">
-<input type="hidden" name="sfl" value="<?php echo $sfl; ?>">
-<input type="hidden" name="stx" value="<?php echo $stx; ?>">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
+<input type="hidden" name="sst" value="<?=$sst; ?>">
+<input type="hidden" name="sod" value="<?=$sod; ?>">
+<input type="hidden" name="sfl" value="<?=$sfl; ?>">
+<input type="hidden" name="stx" value="<?=$stx; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
 <input type="hidden" name="token" value="">
 
 <div class="tbl_head01 tbl_wrap" id="inorderlist">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">
             <label for="chkall" class="sound_only">미완료주문 전체</label>
             <input type="checkbox" name="chkall" value="1" id="chkall" onclick="check_all(this.form)">
         </th>
-        <th scope="col"><?php echo subject_sort_link('od_id') ?>주문번호</a></th>
+        <th scope="col"><?=subject_sort_link('od_id') ?>주문번호</a></th>
         <th scope="col">PG</th>
         <th scope="col">주문자</th>
         <th scope="col">주문자전화</th>
@@ -116,22 +116,22 @@ $colspan = 10;
         $bg = 'bg'.($i%2);
     ?>
 
-    <tr class="<?php echo $bg; ?>">
+    <tr class="<?=$bg; ?>">
         <td class="td_chk">
-            <input type="hidden" id="od_id_<?php echo $i; ?>" name="od_id[<?php echo $i; ?>]" value="<?php echo $row['od_id']; ?>">
-            <input type="checkbox" id="chk_<?php echo $i; ?>" name="chk[]" value="<?php echo $i; ?>" title="내역선택">
+            <input type="hidden" id="od_id_<?=$i; ?>" name="od_id[<?=$i; ?>]" value="<?=$row['od_id']; ?>">
+            <input type="checkbox" id="chk_<?=$i; ?>" name="chk[]" value="<?=$i; ?>" title="내역선택">
         </td>
-        <td class="td_odrnum2"><?php echo $row['od_id']; ?></td>
-        <td class="td_center"><?php echo $pg; ?></td>
-        <td class="td_name"><?php echo get_text($data['od_name']); ?></td>
-        <td class="td_center"><?php echo get_text($data['od_tel']); ?></td>
-        <td class="td_name"><?php echo get_text($data['od_b_name']); ?></td>
-        <td class="td_price"><?php echo number_format($ct['price']); ?></td>
-        <td class="td_center"><?php echo $data['od_settle_case']; ?></td>
-        <td class="td_time"><?php echo $row['dt_time']; ?></td>
+        <td class="td_odrnum2"><?=$row['od_id']; ?></td>
+        <td class="td_center"><?=$pg; ?></td>
+        <td class="td_name"><?=get_text($data['od_name']); ?></td>
+        <td class="td_center"><?=get_text($data['od_tel']); ?></td>
+        <td class="td_name"><?=get_text($data['od_b_name']); ?></td>
+        <td class="td_price"><?=number_format($ct['price']); ?></td>
+        <td class="td_center"><?=$data['od_settle_case']; ?></td>
+        <td class="td_time"><?=$row['dt_time']; ?></td>
         <td class="td_mng td_mng_m">
-            <a href="./inorderform.php?od_id=<?php echo $row['od_id']; ?>&amp;<?php echo $qstr; ?>" class="btn btn_03"><span class="sound_only"><?php echo $row['od_id']; ?> </span>보기</a>
-            <a href="./inorderformupdate.php?w=d&amp;od_id=<?php echo $row['od_id']; ?>&amp;<?php echo $qstr; ?>" onclick="return delete_confirm(this);" class="btn btn_02"><span class="sound_only"><?php echo $row['od_id']; ?> </span>삭제</a>
+            <a href="./inorderform.php?od_id=<?=$row['od_id']; ?>&amp;<?=$qstr; ?>" class="btn btn_03"><span class="sound_only"><?=$row['od_id']; ?> </span>보기</a>
+            <a href="./inorderformupdate.php?w=d&amp;od_id=<?=$row['od_id']; ?>&amp;<?=$qstr; ?>" onclick="return delete_confirm(this);" class="btn btn_02"><span class="sound_only"><?=$row['od_id']; ?> </span>삭제</a>
         </td>
     </tr>
 
@@ -151,7 +151,7 @@ $colspan = 10;
 
 </form>
 
-<?php echo get_paging($config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
+<?=get_paging($config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
 
 <script>
 function finorderlist_submit(f)

@@ -33,7 +33,7 @@ jQuery(function($){
             nhnkcp_pay_form.pay_method.value = "100000000000";
             nhnkcp_pay_form.good_mny.value = pf.good_mny.value;
             nhnkcp_pay_form.good_name.value = pf.od_goods_name.value;
-            nhnkcp_pay_form.good_info.value = "<?php echo $good_info; ?>";
+            nhnkcp_pay_form.good_info.value = "<?=$good_info; ?>";
             nhnkcp_pay_form.od_settle_case.value = od_settle_case;
             nhnkcp_pay_form.nhnkcp_pay_case.value = nhnkcp_settle_case;
 

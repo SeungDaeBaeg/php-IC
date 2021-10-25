@@ -104,26 +104,26 @@ function imageview(id, w, h)
 <div id="to_content"><a href="#container">본문 바로가기</a></div>
 
 <header id="hd">
-    <h1><?php echo $config['cf_title'] ?></h1>
+    <h1><?=$config['cf_title'] ?></h1>
     <div id="hd_top">
-        <button type="button" id="btn_gnb" class="btn_gnb_close <?php echo $adm_menu_cookie['btn_gnb'];?>">메뉴</button>
-       <div id="logo"><a href="<?php echo correct_goto_url(G5_ADMIN_URL); ?>"><img src="<?php echo G5_ADMIN_URL ?>/img/logo.png" alt="<?php echo get_text($config['cf_title']); ?> 관리자"></a></div>
+        <button type="button" id="btn_gnb" class="btn_gnb_close <?=$adm_menu_cookie['btn_gnb'];?>">메뉴</button>
+       <div id="logo"><a href="<?=correct_goto_url(G5_ADMIN_URL); ?>"><img src="<?=G5_ADMIN_URL ?>/img/logo.png" alt="<?=get_text($config['cf_title']); ?> 관리자"></a></div>
 
         <div id="tnb">
             <ul>
-                <li class="tnb_li"><a href="<?php echo G5_SHOP_URL ?>/" class="tnb_shop" target="_blank" title="쇼핑몰 바로가기">쇼핑몰 바로가기</a></li>
-                <li class="tnb_li"><a href="<?php echo G5_URL ?>/" class="tnb_community" target="_blank" title="커뮤니티 바로가기">커뮤니티 바로가기</a></li>
-                <li class="tnb_li"><a href="<?php echo G5_ADMIN_URL ?>/service.php" class="tnb_service">부가서비스</a></li>
+                <li class="tnb_li"><a href="<?=G5_SHOP_URL ?>/" class="tnb_shop" target="_blank" title="쇼핑몰 바로가기">쇼핑몰 바로가기</a></li>
+                <li class="tnb_li"><a href="<?=G5_URL ?>/" class="tnb_community" target="_blank" title="커뮤니티 바로가기">커뮤니티 바로가기</a></li>
+                <li class="tnb_li"><a href="<?=G5_ADMIN_URL ?>/service.php" class="tnb_service">부가서비스</a></li>
                 <li class="tnb_li"><button type="button" class="tnb_mb_btn">관리자<span class="./img/btn_gnb.png">메뉴열기</span></button>
                     <ul class="tnb_mb_area">
-                        <li><a href="<?php echo G5_ADMIN_URL ?>/member_form.php?w=u&amp;mb_id=<?php echo $member['mb_id'] ?>">관리자정보</a></li>
-                        <li id="tnb_logout"><a href="<?php echo G5_BBS_URL ?>/logout.php">로그아웃</a></li>
+                        <li><a href="<?=G5_ADMIN_URL ?>/member_form.php?w=u&amp;mb_id=<?=$member['mb_id'] ?>">관리자정보</a></li>
+                        <li id="tnb_logout"><a href="<?=G5_BBS_URL ?>/logout.php">로그아웃</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
-    <nav id="gnb" class="gnb_large <?php echo $adm_menu_cookie['gnb']; ?>">
+    <nav id="gnb" class="gnb_large <?=$adm_menu_cookie['gnb']; ?>">
         <h2>관리자 주메뉴</h2>
         <ul class="gnb_ul">
             <?php
@@ -144,12 +144,12 @@ function imageview(id, w, h)
 
                 $button_title = $menu['menu'.$key][0][1];
             ?>
-            <li class="gnb_li<?php echo $current_class;?>">
-                <button type="button" class="btn_op menu-<?php echo $key; ?> menu-order-<?php echo $jj; ?>" title="<?php echo $button_title; ?>"><?php echo $button_title;?></button>
+            <li class="gnb_li<?=$current_class;?>">
+                <button type="button" class="btn_op menu-<?=$key; ?> menu-order-<?=$jj; ?>" title="<?=$button_title; ?>"><?=$button_title;?></button>
                 <div class="gnb_oparea_wr">
                     <div class="gnb_oparea">
-                        <h3><?php echo $menu['menu'.$key][0][1];?></h3>
-                        <?php echo print_menu1('menu'.$key, 1); ?>
+                        <h3><?=$menu['menu'.$key][0][1];?></h3>
+                        <?=print_menu1('menu'.$key, 1); ?>
                     </div>
                 </div>
             </li>
@@ -200,7 +200,7 @@ jQuery(function($){
 
 <div id="wrapper">
 
-    <div id="container" class="<?php echo $adm_menu_cookie['container']; ?>">
+    <div id="container" class="<?=$adm_menu_cookie['container']; ?>">
 
-        <h1 id="container_title"><?php echo $g5['title'] ?></h1>
+        <h1 id="container_title"><?=$g5['title'] ?></h1>
         <div class="container_wr">

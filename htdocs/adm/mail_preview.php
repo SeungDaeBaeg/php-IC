@@ -17,15 +17,15 @@ $content = conv_content($se['ma_content'], 1) . "<hr size=0><p><span style='font
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title><?php echo G5_VERSION ?> 메일발송 테스트</title>
+<title><?=G5_VERSION ?> 메일발송 테스트</title>
 </head>
 
 <body>
 
-<h1><?php echo $subject; ?></h1>
+<h1><?=$subject; ?></h1>
 
 <p>
-    <?php echo $content; ?>
+    <?=$content; ?>
 </p>
 
 <p>

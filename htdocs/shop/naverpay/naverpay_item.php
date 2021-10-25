@@ -54,24 +54,24 @@ foreach($itemIds as $it_id) {
         $ca_name3 = $cat['ca_name'];
     }
 ?>
-<item id="<?php echo $id; ?>">
+<item id="<?=$id; ?>">
 <?php if($it['ec_mall_pid']) { ?>
-<mall_pid><![CDATA[<?php echo $it['ec_mall_pid']; ?>]]></mall_pid>
+<mall_pid><![CDATA[<?=$it['ec_mall_pid']; ?>]]></mall_pid>
 <?php } ?>
-<name><![CDATA[<?php echo $name; ?>]]></name>
-<url><?php echo shop_item_url($it_id); ?></url>
-<description><![CDATA[<?php echo $description; ?>]]></description>
-<image><?php echo $image; ?></image>
-<thumb><?php echo $image; ?></thumb>
-<price><?php echo $price; ?></price>
-<quantity><?php echo $quantity; ?></quantity>
+<name><![CDATA[<?=$name; ?>]]></name>
+<url><?=shop_item_url($it_id); ?></url>
+<description><![CDATA[<?=$description; ?>]]></description>
+<image><?=$image; ?></image>
+<thumb><?=$image; ?></thumb>
+<price><?=$price; ?></price>
+<quantity><?=$quantity; ?></quantity>
 <category>
-<first id="MJ01"><![CDATA[<?php echo $ca_name; ?>]]></first>
-<second id="ML01"><![CDATA[<?php echo $ca_name2; ?>]]></second>
-<third id="MN01"><![CDATA[<?php echo $ca_name3; ?>]]></third>
+<first id="MJ01"><![CDATA[<?=$ca_name; ?>]]></first>
+<second id="ML01"><![CDATA[<?=$ca_name2; ?>]]></second>
+<third id="MN01"><![CDATA[<?=$ca_name3; ?>]]></third>
 </category>
-<?php echo $option; ?>
-<?php echo $returnInfo; ?>
+<?=$option; ?>
+<?=$returnInfo; ?>
 </item>
 <?php
 }

@@ -28,7 +28,7 @@ if ($exists) {
 <aside id="sct_ct_1" class="sct_ct">
     <h2>현재 상품 분류와 관련된 분류</h2>
     <ul>
-        <?php echo $str; ?>
+        <?=$str; ?>
     </ul>
 </aside>
 <!-- } 상품분류 1 끝 -->

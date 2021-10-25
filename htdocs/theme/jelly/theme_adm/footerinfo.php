@@ -17,11 +17,11 @@ if(is_file($save_file))
     <ul>
         <li>
             <label for="tel">전화번호</label>
-            <input type="text" name="tel" id="tel" required class="frm_input required" value="<?php echo get_text($footerinfo['tel']); ?>">
+            <input type="text" name="tel" id="tel" required class="frm_input required" value="<?=get_text($footerinfo['tel']); ?>">
         </li>
         <li>
             <label for="etc">기타정보</label>
-            <textarea name="etc" id="etc" required class="required"><?php echo $footerinfo['etc']; ?></textarea>
+            <textarea name="etc" id="etc" required class="required"><?=$footerinfo['etc']; ?></textarea>
         </li>
     </ul>
 </div>

@@ -6,7 +6,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$latest_skin_url.'/style.css">', 
 ?>
 
 <div class="lt list_01">
-    <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?php echo $bo_table ?>" class="lt_title"><i class="fa fa-list-ul" aria-hidden="true"></i> <strong><?php echo $bo_subject ?></strong></a>
+    <a href="<?=G5_BBS_URL ?>/board.php?bo_table=<?=$bo_table ?>" class="lt_title"><i class="fa fa-list-ul" aria-hidden="true"></i> <strong><?=$bo_subject ?></strong></a>
     <ul>
     <?php for ($i=0; $i<count($list); $i++) { ?>
         <li>
@@ -31,9 +31,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$latest_skin_url.'/style.css">', 
 
             ?>
             <div class="lt_info">
-                <?php echo $list[$i]['name'] ?>
-                <span class="lt_date"><?php if ($list[$i]['comment_cnt']) { ?><span class="sound_only">댓글</span><i class="fa fa-commenting-o" aria-hidden="true"></i><?php echo $list[$i]['comment_cnt']; ?><span class="sound_only">개</span><?php } ?> 
-                <i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $list[$i]['datetime2'] ?></span>
+                <?=$list[$i]['name'] ?>
+                <span class="lt_date"><?php if ($list[$i]['comment_cnt']) { ?><span class="sound_only">댓글</span><i class="fa fa-commenting-o" aria-hidden="true"></i><?=$list[$i]['comment_cnt']; ?><span class="sound_only">개</span><?php } ?> 
+                <i class="fa fa-clock-o" aria-hidden="true"></i> <?=$list[$i]['datetime2'] ?></span>
             </div>
         </li>
     <?php } ?>

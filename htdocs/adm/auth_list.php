@@ -52,38 +52,38 @@ $colspan = 5;
 ?>
 
 <div class="local_ov01 local_ov">
-    <?php echo $listall ?>
-    <span class="btn_ov01"><span class="ov_txt">설정된 관리권한</span><span class="ov_num"><?php echo number_format($total_count) ?>건</span></span>
+    <?=$listall ?>
+    <span class="btn_ov01"><span class="ov_txt">설정된 관리권한</span><span class="ov_num"><?=number_format($total_count) ?>건</span></span>
 </div>
 
 <form name="fsearch" id="fsearch" class="local_sch01 local_sch" method="get">
 <input type="hidden" name="sfl" value="a.mb_id" id="sfl">
 
 <label for="stx" class="sound_only">회원아이디<strong class="sound_only"> 필수</strong></label>
-<input type="text" name="stx" value="<?php echo $stx ?>" id="stx" required class="required frm_input">
+<input type="text" name="stx" value="<?=$stx ?>" id="stx" required class="required frm_input">
 <input type="submit" value="검색" id="fsearch_submit" class="btn_submit">
 
 </form>
 
 <form name="fauthlist" id="fauthlist" method="post" action="./auth_list_delete.php" onsubmit="return fauthlist_submit(this);">
-<input type="hidden" name="sst" value="<?php echo $sst ?>">
-<input type="hidden" name="sod" value="<?php echo $sod ?>">
-<input type="hidden" name="sfl" value="<?php echo $sfl ?>">
-<input type="hidden" name="stx" value="<?php echo $stx ?>">
-<input type="hidden" name="page" value="<?php echo $page ?>">
+<input type="hidden" name="sst" value="<?=$sst ?>">
+<input type="hidden" name="sod" value="<?=$sod ?>">
+<input type="hidden" name="sfl" value="<?=$sfl ?>">
+<input type="hidden" name="stx" value="<?=$stx ?>">
+<input type="hidden" name="page" value="<?=$page ?>">
 <input type="hidden" name="token" value="">
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">
             <label for="chkall" class="sound_only">현재 페이지 회원 전체</label>
             <input type="checkbox" name="chkall" value="1" id="chkall" onclick="check_all(this.form)">
         </th>
-        <th scope="col"><?php echo subject_sort_link('a.mb_id') ?>회원아이디</a></th>
-        <th scope="col"><?php echo subject_sort_link('mb_nick') ?>닉네임</a></th>
+        <th scope="col"><?=subject_sort_link('a.mb_id') ?>회원아이디</a></th>
+        <th scope="col"><?=subject_sort_link('mb_nick') ?>닉네임</a></th>
         <th scope="col">메뉴</th>
         <th scope="col">권한</th>
     </tr>
@@ -114,20 +114,20 @@ $colspan = 5;
 
         $bg = 'bg'.($i%2);
     ?>
-    <tr class="<?php echo $bg; ?>">
+    <tr class="<?=$bg; ?>">
         <td class="td_chk">
-            <input type="hidden" name="au_menu[<?php echo $i ?>]" value="<?php echo $row['au_menu'] ?>">
-            <input type="hidden" name="mb_id[<?php echo $i ?>]" value="<?php echo $row['mb_id'] ?>">
-            <label for="chk_<?php echo $i; ?>" class="sound_only"><?php echo $row['mb_nick'] ?>님 권한</label>
-            <input type="checkbox" name="chk[]" value="<?php echo $i ?>" id="chk_<?php echo $i ?>">
+            <input type="hidden" name="au_menu[<?=$i ?>]" value="<?=$row['au_menu'] ?>">
+            <input type="hidden" name="mb_id[<?=$i ?>]" value="<?=$row['mb_id'] ?>">
+            <label for="chk_<?=$i; ?>" class="sound_only"><?=$row['mb_nick'] ?>님 권한</label>
+            <input type="checkbox" name="chk[]" value="<?=$i ?>" id="chk_<?=$i ?>">
         </td>
-        <td class="td_mbid"><a href="?sfl=a.mb_id&amp;stx=<?php echo $row['mb_id'] ?>"><?php echo $row['mb_id'] ?></a></td>
-        <td class="td_auth_mbnick"><?php echo $mb_nick ?></td>
+        <td class="td_mbid"><a href="?sfl=a.mb_id&amp;stx=<?=$row['mb_id'] ?>"><?=$row['mb_id'] ?></a></td>
+        <td class="td_auth_mbnick"><?=$mb_nick ?></td>
         <td class="td_menu">
-            <?php echo $row['au_menu'] ?>
-            <?php echo $auth_menu[$row['au_menu']] ?>
+            <?=$row['au_menu'] ?>
+            <?=$auth_menu[$row['au_menu']] ?>
         </td>
-        <td class="td_auth"><?php echo $row['au_auth'] ?></td>
+        <td class="td_auth"><?=$row['au_auth'] ?></td>
     </tr>
     <?php
         $count++;
@@ -161,11 +161,11 @@ echo $pagelist;
 ?>
 
 <form name="fauthlist2" id="fauthlist2" action="./auth_update.php" method="post" autocomplete="off" onsubmit="return fauth_add_submit(this);">
-<input type="hidden" name="sfl" value="<?php echo $sfl ?>">
-<input type="hidden" name="stx" value="<?php echo $stx ?>">
-<input type="hidden" name="sst" value="<?php echo $sst ?>">
-<input type="hidden" name="sod" value="<?php echo $sod ?>">
-<input type="hidden" name="page" value="<?php echo $page ?>">
+<input type="hidden" name="sfl" value="<?=$sfl ?>">
+<input type="hidden" name="stx" value="<?=$stx ?>">
+<input type="hidden" name="sst" value="<?=$sst ?>">
+<input type="hidden" name="sod" value="<?=$sod ?>">
+<input type="hidden" name="page" value="<?=$page ?>">
 <input type="hidden" name="token" value="">
 
 <section id="add_admin">
@@ -189,7 +189,7 @@ echo $pagelist;
             <th scope="row"><label for="mb_id">회원아이디<strong class="sound_only">필수</strong></label></th>
             <td>
                 <strong id="msg_mb_id" class="msg_sound_only"></strong>
-                <input type="text" name="mb_id" value="<?php echo $mb_id ?>" id="mb_id" required class="required frm_input">
+                <input type="text" name="mb_id" value="<?=$mb_id ?>" id="mb_id" required class="required frm_input">
             </td>
         </tr>
         <tr>
@@ -243,7 +243,7 @@ echo $pagelist;
 <script>
 function fauth_add_submit(f){
     
-    <?php echo $captcha_js; // 캡챠 사용시 자바스크립트에서 입력된 캡챠를 검사함  ?>
+    <?=$captcha_js; // 캡챠 사용시 자바스크립트에서 입력된 캡챠를 검사함  ?>
 
     return true;
 }

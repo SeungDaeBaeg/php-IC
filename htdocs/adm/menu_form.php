@@ -20,7 +20,7 @@ if($new == 'new' || !$code) {
 ?>
 
 <div id="menu_frm" class="new_win">
-    <h1><?php echo $g5['title']; ?></h1>
+    <h1><?=$g5['title']; ?></h1>
 
     <form name="fmenuform" id="fmenuform" class="new_win_con">
 
@@ -103,14 +103,14 @@ $(function() {
         var me_name = $.trim($("#me_name").val());
         var me_link = $.trim($("#me_link").val());
 
-        add_menu_list(me_name, me_link, "<?php echo $code; ?>");
+        add_menu_list(me_name, me_link, "<?=$code; ?>");
     });
 
     $(document).on("click", ".add_select", function() {
         var me_name = $.trim($(this).siblings("input[name='subject[]']").val());
         var me_link = $.trim($(this).siblings("input[name='link[]']").val());
 
-        add_menu_list(me_name, me_link, "<?php echo $code; ?>");
+        add_menu_list(me_name, me_link, "<?=$code; ?>");
     });
 });
 
@@ -125,10 +125,10 @@ function add_menu_list(name, link, code)
     sub_menu_class = " class=\"td_category sub_menu_class\"";
     <?php } ?>
 
-    var list = "<tr class=\"menu_list menu_group_<?php echo $code; ?>\">";
+    var list = "<tr class=\"menu_list menu_group_<?=$code; ?>\">";
     list += "<td"+sub_menu_class+">";
     list += "<label for=\"me_name_"+ms+"\"  class=\"sound_only\">메뉴<strong class=\"sound_only\"> 필수</strong></label>";
-    list += "<input type=\"hidden\" name=\"code[]\" value=\"<?php echo $code; ?>\">";
+    list += "<input type=\"hidden\" name=\"code[]\" value=\"<?=$code; ?>\">";
     list += "<input type=\"text\" name=\"me_name[]\" value=\""+name+"\" id=\"me_name_"+ms+"\" required class=\"required frm_input full_input\">";
     list += "</td>";
     list += "<td>";

@@ -6,7 +6,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$latest_skin_url.'/style.css">', 
 ?>
 
 <div class="lat">
-    <h2 class="lat_title"><a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?php echo $bo_table ?>"><?php echo $bo_subject ?></a></h2>
+    <h2 class="lat_title"><a href="<?=G5_BBS_URL ?>/board.php?bo_table=<?=$bo_table ?>"><?=$bo_subject ?></a></h2>
     <ul>
     <?php for ($i=0; $i<count($list); $i++) {  ?>
         <li>
@@ -40,13 +40,13 @@ add_stylesheet('<link rel="stylesheet" href="'.$latest_skin_url.'/style.css">', 
 
             ?>
 
-            <span class="lt_date"><?php echo $list[$i]['datetime2'] ?></span>
+            <span class="lt_date"><?=$list[$i]['datetime2'] ?></span>
         </li>
     <?php }  ?>
     <?php if (count($list) == 0) { //게시물이 없을 때  ?>
     <li class="empty_li">게시물이 없습니다.</li>
     <?php }  ?>
     </ul>
-    <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?php echo $bo_table ?>" class="lt_more"><span class="sound_only"><?php echo $bo_subject ?></span><i class="fa fa-plus" aria-hidden="true"></i><span class="sound_only"> 더보기</span></a>
+    <a href="<?=G5_BBS_URL ?>/board.php?bo_table=<?=$bo_table ?>" class="lt_more"><span class="sound_only"><?=$bo_subject ?></span><i class="fa fa-plus" aria-hidden="true"></i><span class="sound_only"> 더보기</span></a>
 
 </div>

@@ -6,15 +6,15 @@ include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
 ?>
 
-<script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
+<script src="<?=G5_JS_URL; ?>/viewimageresize.js"></script>
 
-<!-- <div id="bo_v_table"><?php echo ($board['bo_mobile_subject'] ? $board['bo_mobile_subject'] : $board['bo_subject']); ?></div> -->
+<!-- <div id="bo_v_table"><?=($board['bo_mobile_subject'] ? $board['bo_mobile_subject'] : $board['bo_subject']); ?></div> -->
 
-<article id="bo_v" style="width:<?php echo $width; ?>">
+<article id="bo_v" style="width:<?=$width; ?>">
     <header>
         <h2 id="bo_v_title">
             <?php if ($category_name) { ?>
-            <span class="bo_v_cate"><?php echo $view['ca_name']; // 분류 출력 끝 ?></span> 
+            <span class="bo_v_cate"><?=$view['ca_name']; // 분류 출력 끝 ?></span>
             <?php } ?>
             <span class="bo_v_tit">
             <?php
@@ -25,10 +25,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
     <section id="bo_v_info">
         <h2>페이지 정보</h2>
-        <span class="sound_only">작성자 </span><?php echo $view['name'] ?><span class="ip"><?php if ($is_ip_view) { echo "&nbsp;($ip)"; } ?></span>
-        <span class="sound_only">작성일</span><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo date("y-m-d H:i", strtotime($view['wr_datetime'])) ?>
-        <span class="sound_only">조회</span><strong><i class="fa fa-eye" aria-hidden="true"></i> <?php echo number_format($view['wr_hit']) ?>회</strong>
-        <span class="sound_only">댓글</span><strong><i class="fa fa-commenting-o" aria-hidden="true"></i> <?php echo number_format($view['wr_comment']) ?>건</strong>
+        <span class="sound_only">작성자 </span><?=$view['name'] ?><span class="ip"><?php if ($is_ip_view) { echo "&nbsp;($ip)"; } ?></span>
+        <span class="sound_only">작성일</span><i class="fa fa-clock-o" aria-hidden="true"></i> <?=date("y-m-d H:i", strtotime($view['wr_datetime'])) ?>
+        <span class="sound_only">조회</span><strong><i class="fa fa-eye" aria-hidden="true"></i> <?=number_format($view['wr_hit']) ?>회</strong>
+        <span class="sound_only">댓글</span><strong><i class="fa fa-commenting-o" aria-hidden="true"></i> <?=number_format($view['wr_comment']) ?>건</strong>
         <?php
         ob_start();
          ?>
@@ -36,11 +36,11 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
         <div id="bo_v_edit">
             <button type="button" class="edit_op_btn view_btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i><span class="sound_only">게시판 내용수정</span> </button>
             <ul class="bo_v_left">
-                <?php if ($update_href) { ?><li><a href="<?php echo $update_href ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 수정</a></li><?php } ?>
-                <?php if ($delete_href) { ?><li><a href="<?php echo $delete_href ?>"  onclick="del(this.href); return false;"><i class="fa fa-trash-o" aria-hidden="true"></i> 삭제</a></li><?php } ?>
-                <?php if ($copy_href) { ?><li><a href="<?php echo $copy_href ?>" onclick="board_move(this.href); return false;"><i class="fa fa-files-o" aria-hidden="true"></i> 복사</a></li><?php } ?>
-                <?php if ($move_href) { ?><li><a href="<?php echo $move_href ?>" onclick="board_move(this.href); return false;"><i class="fa fa-arrows" aria-hidden="true"></i> 이동</a></li><?php } ?>
-                <?php if ($search_href) { ?><li><a href="<?php echo $search_href ?>"><i class="fa fa-search" aria-hidden="true"></i> 검색</a></li><?php } ?>
+                <?php if ($update_href) { ?><li><a href="<?=$update_href ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 수정</a></li><?php } ?>
+                <?php if ($delete_href) { ?><li><a href="<?=$delete_href ?>"  onclick="del(this.href); return false;"><i class="fa fa-trash-o" aria-hidden="true"></i> 삭제</a></li><?php } ?>
+                <?php if ($copy_href) { ?><li><a href="<?=$copy_href ?>" onclick="board_move(this.href); return false;"><i class="fa fa-files-o" aria-hidden="true"></i> 복사</a></li><?php } ?>
+                <?php if ($move_href) { ?><li><a href="<?=$move_href ?>" onclick="board_move(this.href); return false;"><i class="fa fa-arrows" aria-hidden="true"></i> 이동</a></li><?php } ?>
+                <?php if ($search_href) { ?><li><a href="<?=$search_href ?>"><i class="fa fa-search" aria-hidden="true"></i> 검색</a></li><?php } ?>
 
             </ul>
         </div>
@@ -70,7 +70,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
         <h2 id="bo_v_atc_title">본문</h2>
  
         <div id="bo_v_share">
-            <?php if ($scrap_href) { ?><a href="<?php echo $scrap_href;  ?>" target="_blank" class=" btn_scrap" onclick="win_scrap(this.href); return false;"><i class="fa fa-thumb-tack" aria-hidden="true"></i> 스크랩</a><?php } ?>
+            <?php if ($scrap_href) { ?><a href="<?=$scrap_href;  ?>" target="_blank" class=" btn_scrap" onclick="win_scrap(this.href); return false;"><i class="fa fa-thumb-tack" aria-hidden="true"></i> 스크랩</a><?php } ?>
 
             <?php
             include_once(G5_SNS_PATH."/view.sns.skin.php");
@@ -94,22 +94,22 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
         }
          ?>
 
-        <div id="bo_v_con"><?php echo get_view_thumbnail($view['content']); ?></div>
+        <div id="bo_v_con"><?=get_view_thumbnail($view['content']); ?></div>
         <?php //echo $view['rich_content']; // {이미지:0} 과 같은 코드를 사용할 경우 ?>
 
-        <?php if ($is_signature) { ?><p><?php echo $signature ?></p><?php } ?>
+        <?php if ($is_signature) { ?><p><?=$signature ?></p><?php } ?>
 
         <?php if ( $good_href || $nogood_href) { ?>
         <div id="bo_v_act">
             <?php if ($good_href) { ?>
             <span class="bo_v_act_gng">
-                <a href="<?php echo $good_href.'&amp;'.$qstr ?>" id="good_button"  class="bo_v_good btn"><i class="fa fa fa-heart-o" aria-hidden="true"></i> <span class="sound_only">추천</span><strong><?php echo number_format($view['wr_good']) ?></strong></a>
+                <a href="<?=$good_href.'&amp;'.$qstr ?>" id="good_button"  class="bo_v_good btn"><i class="fa fa fa-heart-o" aria-hidden="true"></i> <span class="sound_only">추천</span><strong><?=number_format($view['wr_good']) ?></strong></a>
                 <b id="bo_v_act_good">이 글을 추천하셨습니다</b>
             </span>
             <?php } ?>
             <?php if ($nogood_href) { ?>
             <span class="bo_v_act_gng">
-                <a href="<?php echo $nogood_href.'&amp;'.$qstr ?>" id="nogood_button" class="bo_v_nogood btn"><i class="fa fa-frown-o" aria-hidden="true"></i> <span class="sound_only">비추천</span><strong><?php echo number_format($view['wr_nogood']) ?></strong></a>
+                <a href="<?=$nogood_href.'&amp;'.$qstr ?>" id="nogood_button" class="bo_v_nogood btn"><i class="fa fa-frown-o" aria-hidden="true"></i> <span class="sound_only">비추천</span><strong><?=number_format($view['wr_nogood']) ?></strong></a>
                 <b id="bo_v_act_nogood"></b>
             </span>
             <?php } ?>
@@ -118,8 +118,8 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             if($board['bo_use_good'] || $board['bo_use_nogood']) {
         ?>
         <div id="bo_v_act">
-            <?php if($board['bo_use_good']) { ?><span class="bo_v_good btn"><i class="fa fa fa-heart-o" aria-hidden="true"></i> <span class="sound_only">추천</span><strong><?php echo number_format($view['wr_good']) ?></strong></span><?php } ?>
-            <?php if($board['bo_use_nogood']) { ?><span class="bo_v_nogood btn"><i class="fa fa-frown-o" aria-hidden="true"></i> <span class="sound_only">비추천</span> <strong><?php echo number_format($view['wr_nogood']) ?></strong></span><?php } ?>
+            <?php if($board['bo_use_good']) { ?><span class="bo_v_good btn"><i class="fa fa fa-heart-o" aria-hidden="true"></i> <span class="sound_only">추천</span><strong><?=number_format($view['wr_good']) ?></strong></span><?php } ?>
+            <?php if($board['bo_use_nogood']) { ?><span class="bo_v_nogood btn"><i class="fa fa-frown-o" aria-hidden="true"></i> <span class="sound_only">비추천</span> <strong><?=number_format($view['wr_nogood']) ?></strong></span><?php } ?>
         </div>
         <?php
             }
@@ -150,13 +150,13 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             if (isset($view['file'][$i]['source']) && $view['file'][$i]['source'] && !$view['file'][$i]['view']) {
          ?>
             <li>
-                <a href="<?php echo $view['file'][$i]['href'];  ?>" class="view_file_download">
+                <a href="<?=$view['file'][$i]['href'];  ?>" class="view_file_download">
                     <i class="fa fa-download" aria-hidden="true"></i>
-                    <strong><?php echo $view['file'][$i]['source'] ?></strong>
-                    <?php echo $view['file'][$i]['content'] ?> (<?php echo $view['file'][$i]['size'] ?>)
+                    <strong><?=$view['file'][$i]['source'] ?></strong>
+                    <?=$view['file'][$i]['content'] ?> (<?=$view['file'][$i]['size'] ?>)
                 </a>
-                <span class="bo_v_file_cnt"><?php echo $view['file'][$i]['download'] ?>회 다운로드</span> |
-                <span>DATE : <?php echo $view['file'][$i]['datetime'] ?></span>
+                <span class="bo_v_file_cnt"><?=$view['file'][$i]['download'] ?>회 다운로드</span> |
+                <span>DATE : <?=$view['file'][$i]['datetime'] ?></span>
             </li>
         <?php
             }
@@ -180,11 +180,11 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                 $link = cut_str($view['link'][$i], 70);
          ?>
             <li>
-                <a href="<?php echo $view['link_href'][$i] ?>" target="_blank">
+                <a href="<?=$view['link_href'][$i] ?>" target="_blank">
                     <i class="fa fa-link" aria-hidden="true"></i>
-                    <strong><?php echo $link ?></strong>
+                    <strong><?=$link ?></strong>
                 </a>
-                <span class="bo_v_link_cnt"><?php echo $view['link_hit'][$i] ?>회 연결</span>
+                <span class="bo_v_link_cnt"><?=$view['link_hit'][$i] ?>회 연결</span>
             </li>
         <?php
             }
@@ -200,16 +200,16 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
 <?php if ($prev_href || $next_href) { ?>
 <ul class="bo_v_nb">
-    <?php if ($prev_href) { ?><li class="bo_v_prev"><a href="<?php echo $prev_href ?>"><i class="fa fa-chevron-up" aria-hidden="true"></i> <span class="sound_only">이전글</span><?php echo $prev_wr_subject;?></a></li><?php } ?>
-    <?php if ($next_href) { ?><li class="bo_v_next"><a href="<?php echo $next_href ?>"><i class="fa fa-chevron-down" aria-hidden="true"></i> <span class="sound_only">다음글</span><?php echo $next_wr_subject;?></a></li><?php } ?>
+    <?php if ($prev_href) { ?><li class="bo_v_prev"><a href="<?=$prev_href ?>"><i class="fa fa-chevron-up" aria-hidden="true"></i> <span class="sound_only">이전글</span><?=$prev_wr_subject;?></a></li><?php } ?>
+    <?php if ($next_href) { ?><li class="bo_v_next"><a href="<?=$next_href ?>"><i class="fa fa-chevron-down" aria-hidden="true"></i> <span class="sound_only">다음글</span><?=$next_wr_subject;?></a></li><?php } ?>
 
 </ul>
 <?php } ?>
 
 <div id="bo_v_bot"> 
-   <a href="<?php echo $list_href ?>" class="btn_b01 btn">목록</a>
-    <?php if ($reply_href) { ?><a href="<?php echo $reply_href ?>" class="btn_b01 btn ">답변</a><?php } ?>
-    <?php if ($write_href) { ?><a href="<?php echo $write_href ?>" class="btn_b02 btn">글쓰기</a><?php } ?>
+   <a href="<?=$list_href ?>" class="btn_b01 btn">목록</a>
+    <?php if ($reply_href) { ?><a href="<?=$reply_href ?>" class="btn_b01 btn ">답변</a><?php } ?>
+    <?php if ($write_href) { ?><a href="<?=$write_href ?>" class="btn_b02 btn">글쓰기</a><?php } ?>
 
 </div>
 
@@ -227,7 +227,7 @@ $(function() {
             return false;
         }
 
-        var msg = "파일을 다운로드 하시면 포인트가 차감(<?php echo number_format($board['bo_download_point']) ?>점)됩니다.\n\n포인트는 게시물당 한번만 차감되며 다음에 다시 다운로드 하셔도 중복하여 차감하지 않습니다.\n\n그래도 다운로드 하시겠습니까?";
+        var msg = "파일을 다운로드 하시면 포인트가 차감(<?=number_format($board['bo_download_point']) ?>점)됩니다.\n\n포인트는 게시물당 한번만 차감되며 다음에 다시 다운로드 하셔도 중복하여 차감하지 않습니다.\n\n그래도 다운로드 하시겠습니까?";
 
         if(confirm(msg)) {
             var href = $(this).attr("href")+"&js=on";

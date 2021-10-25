@@ -24,7 +24,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">',
         ?>
         <span>
             <a href="javascript:window.close();">
-                <img src="<?php echo $imageurl; ?>" width="<?php echo $size[0]; ?>" alt="<?php echo $row['it_name']; ?>" id="largeimage_<?php echo $i; ?>">
+                <img src="<?=$imageurl; ?>" width="<?=$size[0]; ?>" alt="<?=$row['it_name']; ?>" id="largeimage_<?=$i; ?>">
             </a>
         </span>
         <?php
@@ -54,7 +54,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">',
 $(function(){
     fit_width();
 
-    $("#sit_pvi_nwbig span:eq("+<?php echo ($no - 1); ?>+")").addClass("visible");
+    $("#sit_pvi_nwbig span:eq("+<?=($no - 1); ?>+")").addClass("visible");
 
     // 이미지 미리보기
     $(".img_thumb").bind("mouseover focus", function(){

@@ -53,13 +53,13 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 ?>
 
 <div class="local_ov01 local_ov">
-    <?php echo $listall; ?>
-    <span class="btn_ov01"><span class="ov_txt">전체 </span><span class="ov_num"> <?php echo $total_count; ?>건</span></span>
+    <?=$listall; ?>
+    <span class="btn_ov01"><span class="ov_txt">전체 </span><span class="ov_num"> <?=$total_count; ?>건</span></span>
 </div>
 
 <form name="flist" class="local_sch01 local_sch">
-<input type="hidden" name="doc" value="<?php echo $doc; ?>">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
+<input type="hidden" name="doc" value="<?=$doc; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
 
 <label for="sel_ca_id" class="sound_only">검색대상</label>
 <select name="sel_ca_id" id="sel_ca_id">
@@ -77,17 +77,17 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 </select>
 
 <label for="fr_date" class="sound_only">시작일</label>
-<input type="text" name="fr_date" value="<?php echo $fr_date; ?>" id="fr_date" required class="required frm_input" size="8" maxlength="8">
+<input type="text" name="fr_date" value="<?=$fr_date; ?>" id="fr_date" required class="required frm_input" size="8" maxlength="8">
 ~
 <label for="to_date" class="sound_only">종료일</label>
-<input type="text" name="to_date" value="<?php echo $to_date; ?>" id="to_date" required class="required frm_input" size="8" maxlength="8">
+<input type="text" name="to_date" value="<?=$to_date; ?>" id="to_date" required class="required frm_input" size="8" maxlength="8">
 <input type="submit" value="검색" class="btn_submit">
 
 </form>
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?></caption>
+    <caption><?=$g5['title']; ?></caption>
     <thead>
     <tr>
         <th scope="col">순위</th>
@@ -107,12 +107,12 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 
         $bg = 'bg'.($i%2);
     ?>
-    <tr class="<?php echo $bg; ?>">
-        <td class="td_num"><?php echo $num; ?></td>
+    <tr class="<?=$bg; ?>">
+        <td class="td_num"><?=$num; ?></td>
         <td class="td_left">
-            <a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?> <?php echo cut_str($row['it_name'],30); ?></a>
+            <a href="<?=$href; ?>"><?=get_it_image($row['it_id'], 50, 50); ?> <?=cut_str($row['it_name'],30); ?></a>
         </td>
-        <td class="td_num"><?php echo $row['it_id_cnt']; ?></td>
+        <td class="td_num"><?=$row['it_id_cnt']; ?></td>
     </tr>
     <?php
     }
@@ -125,7 +125,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
     </table>
 </div>
 
-<?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr1&amp;page="); ?>
+<?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr1&amp;page="); ?>
 
 <div class="local_desc01 local_desc">
     <p>고객님들이 보관함에 가장 많이 넣은 순으로 순위를 출력합니다.</p>

@@ -37,7 +37,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
 ?>
 <section id="anc_cf_url">
     <h2 class="h2_frm">짧은 주소 설정</h2>
-    <?php echo $pg_anchor ?>
+    <?=$pg_anchor ?>
     <div class="local_desc02 local_desc">
         <p>
             게시판과 컨텐츠 페이지에 짧은 URL 을 사용합니다. <a href="https://sir.kr/manual/g5/286" class="btn btn_03" target="_blank" style="margin-left:10px">설정 관련 메뉴얼 보기</a>
@@ -78,8 +78,8 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                 $checked = ((int) $config['cf_bbs_rewrite'] === (int) $k) ? 'checked' : '';
         ?>
             <tr>
-                <td><input name="cf_bbs_rewrite" id="cf_bbs_rewrite_<?php echo $k; ?>" type="radio" value="<?php echo $k; ?>" <?php echo $checked;?> ><label for="cf_bbs_rewrite_<?php echo $k; ?>" class="rules_label"><?php echo $v['label']; ?></label></td>
-                <td><?php echo $v['url']; ?></td>
+                <td><input name="cf_bbs_rewrite" id="cf_bbs_rewrite_<?=$k; ?>" type="radio" value="<?=$k; ?>" <?=$checked;?> ><label for="cf_bbs_rewrite_<?=$k; ?>" class="rules_label"><?=$v['label']; ?></label></td>
+                <td><?=$v['url']; ?></td>
             </tr>
         <?php }     //end foreach ?>
         </tbody>
@@ -103,7 +103,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
             <br><span class="info-success">정상적으로 적용된 상태입니다.</span>
             <?php } ?>
             </h4>
-            <textarea readonly="readonly" rows="10"><?php echo get_mod_rewrite_rules(true); ?></textarea>
+            <textarea readonly="readonly" rows="10"><?=get_mod_rewrite_rules(true); ?></textarea>
         </div>
 
         <div class="is_rewrite remodal" data-remodal-id="modal_nginx" role="dialog" aria-labelledby="modalNginx" aria-describedby="modal2Desc">
@@ -113,7 +113,7 @@ add_javascript('<script src="'.G5_JS_URL.'/remodal/remodal.js"></script>', 10);
                 <span class="txt">닫기</span>
             </button>
             <h4 class="copy_title">아래 코드를 복사하여 nginx 설정 파일에 적용해 주세요.</h4>
-            <textarea readonly="readonly" rows="10"><?php echo get_nginx_conf_rules(true); ?></textarea>
+            <textarea readonly="readonly" rows="10"><?=get_nginx_conf_rules(true); ?></textarea>
         </div>
 
     </div>

@@ -179,17 +179,17 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
 ?>
 
 <form name="fmember" id="fmember" action="./member_form_update.php" onsubmit="return fmember_submit(this);" method="post" enctype="multipart/form-data">
-<input type="hidden" name="w" value="<?php echo $w ?>">
-<input type="hidden" name="sfl" value="<?php echo $sfl ?>">
-<input type="hidden" name="stx" value="<?php echo $stx ?>">
-<input type="hidden" name="sst" value="<?php echo $sst ?>">
-<input type="hidden" name="sod" value="<?php echo $sod ?>">
-<input type="hidden" name="page" value="<?php echo $page ?>">
+<input type="hidden" name="w" value="<?=$w ?>">
+<input type="hidden" name="sfl" value="<?=$sfl ?>">
+<input type="hidden" name="stx" value="<?=$stx ?>">
+<input type="hidden" name="sst" value="<?=$sst ?>">
+<input type="hidden" name="sod" value="<?=$sod ?>">
+<input type="hidden" name="page" value="<?=$page ?>">
 <input type="hidden" name="token" value="">
 
 <div class="tbl_frm01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?></caption>
+    <caption><?=$g5['title']; ?></caption>
     <colgroup>
         <col class="grid_4">
         <col>
@@ -198,37 +198,37 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
     </colgroup>
     <tbody>
     <tr>
-        <th scope="row"><label for="mb_id">아이디<?php echo $sound_only ?></label></th>
+        <th scope="row"><label for="mb_id">아이디<?=$sound_only ?></label></th>
         <td>
-            <input type="text" name="mb_id" value="<?php echo $mb['mb_id'] ?>" id="mb_id" <?php echo $required_mb_id ?> class="frm_input <?php echo $required_mb_id_class ?>" size="15"  maxlength="20">
-            <?php if ($w=='u'){ ?><a href="./boardgroupmember_form.php?mb_id=<?php echo $mb['mb_id'] ?>" class="btn_frmline">접근가능그룹보기</a><?php } ?>
+            <input type="text" name="mb_id" value="<?=$mb['mb_id'] ?>" id="mb_id" <?=$required_mb_id ?> class="frm_input <?=$required_mb_id_class ?>" size="15"  maxlength="20">
+            <?php if ($w=='u'){ ?><a href="./boardgroupmember_form.php?mb_id=<?=$mb['mb_id'] ?>" class="btn_frmline">접근가능그룹보기</a><?php } ?>
         </td>
-        <th scope="row"><label for="mb_password">비밀번호<?php echo $sound_only ?></label></th>
-        <td><input type="password" name="mb_password" id="mb_password" <?php echo $required_mb_password ?> class="frm_input <?php echo $required_mb_password ?>" size="15" maxlength="20"></td>
+        <th scope="row"><label for="mb_password">비밀번호<?=$sound_only ?></label></th>
+        <td><input type="password" name="mb_password" id="mb_password" <?=$required_mb_password ?> class="frm_input <?=$required_mb_password ?>" size="15" maxlength="20"></td>
     </tr>
     <tr>
         <th scope="row"><label for="mb_name">이름(실명)<strong class="sound_only">필수</strong></label></th>
-        <td><input type="text" name="mb_name" value="<?php echo $mb['mb_name'] ?>" id="mb_name" required class="required frm_input" size="15"  maxlength="20"></td>
+        <td><input type="text" name="mb_name" value="<?=$mb['mb_name'] ?>" id="mb_name" required class="required frm_input" size="15"  maxlength="20"></td>
         <th scope="row"><label for="mb_nick">닉네임<strong class="sound_only">필수</strong></label></th>
-        <td><input type="text" name="mb_nick" value="<?php echo $mb['mb_nick'] ?>" id="mb_nick" required class="required frm_input" size="15"  maxlength="20"></td>
+        <td><input type="text" name="mb_nick" value="<?=$mb['mb_nick'] ?>" id="mb_nick" required class="required frm_input" size="15"  maxlength="20"></td>
     </tr>
     <tr>
         <th scope="row"><label for="mb_level">회원 권한</label></th>
-        <td><?php echo get_member_level_select('mb_level', 1, $member['mb_level'], $mb['mb_level']) ?></td>
+        <td><?=get_member_level_select('mb_level', 1, $member['mb_level'], $mb['mb_level']) ?></td>
         <th scope="row">포인트</th>
-        <td><a href="./point_list.php?sfl=mb_id&amp;stx=<?php echo $mb['mb_id'] ?>" target="_blank"><?php echo number_format($mb['mb_point']) ?></a> 점</td>
+        <td><a href="./point_list.php?sfl=mb_id&amp;stx=<?=$mb['mb_id'] ?>" target="_blank"><?=number_format($mb['mb_point']) ?></a> 점</td>
     </tr>
     <tr>
         <th scope="row"><label for="mb_email">E-mail<strong class="sound_only">필수</strong></label></th>
-        <td><input type="text" name="mb_email" value="<?php echo $mb['mb_email'] ?>" id="mb_email" maxlength="100" required class="required frm_input email" size="30"></td>
+        <td><input type="text" name="mb_email" value="<?=$mb['mb_email'] ?>" id="mb_email" maxlength="100" required class="required frm_input email" size="30"></td>
         <th scope="row"><label for="mb_homepage">홈페이지</label></th>
-        <td><input type="text" name="mb_homepage" value="<?php echo $mb['mb_homepage'] ?>" id="mb_homepage" class="frm_input" maxlength="255" size="15"></td>
+        <td><input type="text" name="mb_homepage" value="<?=$mb['mb_homepage'] ?>" id="mb_homepage" class="frm_input" maxlength="255" size="15"></td>
     </tr>
     <tr>
         <th scope="row"><label for="mb_hp">휴대폰번호</label></th>
-        <td><input type="text" name="mb_hp" value="<?php echo $mb['mb_hp'] ?>" id="mb_hp" class="frm_input" size="15" maxlength="20"></td>
+        <td><input type="text" name="mb_hp" value="<?=$mb['mb_hp'] ?>" id="mb_hp" class="frm_input" size="15" maxlength="20"></td>
         <th scope="row"><label for="mb_tel">전화번호</label></th>
-        <td><input type="text" name="mb_tel" value="<?php echo $mb['mb_tel'] ?>" id="mb_tel" class="frm_input" size="15" maxlength="20"></td>
+        <td><input type="text" name="mb_tel" value="<?=$mb['mb_tel'] ?>" id="mb_tel" class="frm_input" size="15" maxlength="20"></td>
     </tr>
     <tr>
         <th scope="row">본인확인방법</th>
@@ -242,16 +242,16 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
     <tr>
         <th scope="row">본인확인</th>
         <td>
-            <input type="radio" name="mb_certify" value="1" id="mb_certify_yes" <?php echo $mb_certify_yes; ?>>
+            <input type="radio" name="mb_certify" value="1" id="mb_certify_yes" <?=$mb_certify_yes; ?>>
             <label for="mb_certify_yes">예</label>
-            <input type="radio" name="mb_certify" value="" id="mb_certify_no" <?php echo $mb_certify_no; ?>>
+            <input type="radio" name="mb_certify" value="" id="mb_certify_no" <?=$mb_certify_no; ?>>
             <label for="mb_certify_no">아니오</label>
         </td>
         <th scope="row">성인인증</th>
         <td>
-            <input type="radio" name="mb_adult" value="1" id="mb_adult_yes" <?php echo $mb_adult_yes; ?>>
+            <input type="radio" name="mb_adult" value="1" id="mb_adult_yes" <?=$mb_adult_yes; ?>>
             <label for="mb_adult_yes">예</label>
-            <input type="radio" name="mb_adult" value="0" id="mb_adult_no" <?php echo $mb_adult_no; ?>>
+            <input type="radio" name="mb_adult" value="0" id="mb_adult_no" <?=$mb_adult_no; ?>>
             <label for="mb_adult_no">아니오</label>
         </td>
     </tr>
@@ -259,22 +259,22 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
         <th scope="row">주소</th>
         <td colspan="3" class="td_addr_line">
             <label for="mb_zip" class="sound_only">우편번호</label>
-            <input type="text" name="mb_zip" value="<?php echo $mb['mb_zip1'].$mb['mb_zip2']; ?>" id="mb_zip" class="frm_input readonly" size="5" maxlength="6">
+            <input type="text" name="mb_zip" value="<?=$mb['mb_zip1'].$mb['mb_zip2']; ?>" id="mb_zip" class="frm_input readonly" size="5" maxlength="6">
             <button type="button" class="btn_frmline" onclick="win_zip('fmember', 'mb_zip', 'mb_addr1', 'mb_addr2', 'mb_addr3', 'mb_addr_jibeon');">주소 검색</button><br>
-            <input type="text" name="mb_addr1" value="<?php echo $mb['mb_addr1'] ?>" id="mb_addr1" class="frm_input readonly" size="60">
+            <input type="text" name="mb_addr1" value="<?=$mb['mb_addr1'] ?>" id="mb_addr1" class="frm_input readonly" size="60">
             <label for="mb_addr1">기본주소</label><br>
-            <input type="text" name="mb_addr2" value="<?php echo $mb['mb_addr2'] ?>" id="mb_addr2" class="frm_input" size="60">
+            <input type="text" name="mb_addr2" value="<?=$mb['mb_addr2'] ?>" id="mb_addr2" class="frm_input" size="60">
             <label for="mb_addr2">상세주소</label>
             <br>
-            <input type="text" name="mb_addr3" value="<?php echo $mb['mb_addr3'] ?>" id="mb_addr3" class="frm_input" size="60">
+            <input type="text" name="mb_addr3" value="<?=$mb['mb_addr3'] ?>" id="mb_addr3" class="frm_input" size="60">
             <label for="mb_addr3">참고항목</label>
-            <input type="hidden" name="mb_addr_jibeon" value="<?php echo $mb['mb_addr_jibeon']; ?>"><br>
+            <input type="hidden" name="mb_addr_jibeon" value="<?=$mb['mb_addr_jibeon']; ?>"><br>
         </td>
     </tr>
     <tr>
         <th scope="row"><label for="mb_icon">회원아이콘</label></th>
         <td colspan="3">
-            <?php echo help('이미지 크기는 <strong>넓이 '.$config['cf_member_icon_width'].'픽셀 높이 '.$config['cf_member_icon_height'].'픽셀</strong>로 해주세요.') ?>
+            <?=help('이미지 크기는 <strong>넓이 '.$config['cf_member_icon_width'].'픽셀 높이 '.$config['cf_member_icon_height'].'픽셀</strong>로 해주세요.') ?>
             <input type="file" name="mb_icon" id="mb_icon">
             <?php
             $mb_dir = substr($mb['mb_id'],0,2);
@@ -291,7 +291,7 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
     <tr>
         <th scope="row"><label for="mb_img">회원이미지</label></th>
         <td colspan="3">
-            <?php echo help('이미지 크기는 <strong>넓이 '.$config['cf_member_img_width'].'픽셀 높이 '.$config['cf_member_img_height'].'픽셀</strong>로 해주세요.') ?>
+            <?=help('이미지 크기는 <strong>넓이 '.$config['cf_member_img_width'].'픽셀 높이 '.$config['cf_member_img_height'].'픽셀</strong>로 해주세요.') ?>
             <input type="file" name="mb_img" id="mb_img">
             <?php
             $mb_dir = substr($mb['mb_id'],0,2);
@@ -306,62 +306,62 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
     <tr>
         <th scope="row">메일 수신</th>
         <td>
-            <input type="radio" name="mb_mailling" value="1" id="mb_mailling_yes" <?php echo $mb_mailling_yes; ?>>
+            <input type="radio" name="mb_mailling" value="1" id="mb_mailling_yes" <?=$mb_mailling_yes; ?>>
             <label for="mb_mailling_yes">예</label>
-            <input type="radio" name="mb_mailling" value="0" id="mb_mailling_no" <?php echo $mb_mailling_no; ?>>
+            <input type="radio" name="mb_mailling" value="0" id="mb_mailling_no" <?=$mb_mailling_no; ?>>
             <label for="mb_mailling_no">아니오</label>
         </td>
         <th scope="row"><label for="mb_sms_yes">SMS 수신</label></th>
         <td>
-            <input type="radio" name="mb_sms" value="1" id="mb_sms_yes" <?php echo $mb_sms_yes; ?>>
+            <input type="radio" name="mb_sms" value="1" id="mb_sms_yes" <?=$mb_sms_yes; ?>>
             <label for="mb_sms_yes">예</label>
-            <input type="radio" name="mb_sms" value="0" id="mb_sms_no" <?php echo $mb_sms_no; ?>>
+            <input type="radio" name="mb_sms" value="0" id="mb_sms_no" <?=$mb_sms_no; ?>>
             <label for="mb_sms_no">아니오</label>
         </td>
     </tr>
     <tr>
         <th scope="row">정보 공개</th>
         <td colspan="3">
-            <input type="radio" name="mb_open" value="1" id="mb_open_yes" <?php echo $mb_open_yes; ?>>
+            <input type="radio" name="mb_open" value="1" id="mb_open_yes" <?=$mb_open_yes; ?>>
             <label for="mb_open_yes">예</label>
-            <input type="radio" name="mb_open" value="0" id="mb_open_no" <?php echo $mb_open_no; ?>>
+            <input type="radio" name="mb_open" value="0" id="mb_open_no" <?=$mb_open_no; ?>>
             <label for="mb_open_no">아니오</label>
         </td>
     </tr>
     <tr>
         <th scope="row"><label for="mb_signature">서명</label></th>
-        <td colspan="3"><textarea  name="mb_signature" id="mb_signature"><?php echo $mb['mb_signature'] ?></textarea></td>
+        <td colspan="3"><textarea  name="mb_signature" id="mb_signature"><?=$mb['mb_signature'] ?></textarea></td>
     </tr>
     <tr>
         <th scope="row"><label for="mb_profile">자기 소개</label></th>
-        <td colspan="3"><textarea name="mb_profile" id="mb_profile"><?php echo $mb['mb_profile'] ?></textarea></td>
+        <td colspan="3"><textarea name="mb_profile" id="mb_profile"><?=$mb['mb_profile'] ?></textarea></td>
     </tr>
     <tr>
         <th scope="row"><label for="mb_memo">메모</label></th>
-        <td colspan="3"><textarea name="mb_memo" id="mb_memo"><?php echo $mb['mb_memo'] ?></textarea></td>
+        <td colspan="3"><textarea name="mb_memo" id="mb_memo"><?=$mb['mb_memo'] ?></textarea></td>
     </tr>
 
     <?php if ($w == 'u') { ?>
     <tr>
         <th scope="row">회원가입일</th>
-        <td><?php echo $mb['mb_datetime'] ?></td>
+        <td><?=$mb['mb_datetime'] ?></td>
         <th scope="row">최근접속일</th>
-        <td><?php echo $mb['mb_today_login'] ?></td>
+        <td><?=$mb['mb_today_login'] ?></td>
     </tr>
     <tr>
         <th scope="row">IP</th>
-        <td colspan="3"><?php echo $mb['mb_ip'] ?></td>
+        <td colspan="3"><?=$mb['mb_ip'] ?></td>
     </tr>
     <?php if ($config['cf_use_email_certify']) { ?>
     <tr>
         <th scope="row">인증일시</th>
         <td colspan="3">
             <?php if ($mb['mb_email_certify'] == '0000-00-00 00:00:00') { ?>
-            <?php echo help('회원님이 메일을 수신할 수 없는 경우 등에 직접 인증처리를 하실 수 있습니다.') ?>
+            <?=help('회원님이 메일을 수신할 수 없는 경우 등에 직접 인증처리를 하실 수 있습니다.') ?>
             <input type="checkbox" name="passive_certify" id="passive_certify">
             <label for="passive_certify">수동인증</label>
             <?php } else { ?>
-            <?php echo $mb['mb_email_certify'] ?>
+            <?=$mb['mb_email_certify'] ?>
             <?php } ?>
         </td>
     </tr>
@@ -371,22 +371,22 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
     <?php if ($config['cf_use_recommend']) { // 추천인 사용 ?>
     <tr>
         <th scope="row">추천인</th>
-        <td colspan="3"><?php echo ($mb['mb_recommend'] ? get_text($mb['mb_recommend']) : '없음'); // 081022 : CSRF 보안 결함으로 인한 코드 수정 ?></td>
+        <td colspan="3"><?=($mb['mb_recommend'] ? get_text($mb['mb_recommend']) : '없음'); // 081022 : CSRF 보안 결함으로 인한 코드 수정 ?></td>
     </tr>
     <?php } ?>
 
     <tr>
         <th scope="row"><label for="mb_leave_date">탈퇴일자</label></th>
         <td>
-            <input type="text" name="mb_leave_date" value="<?php echo $mb['mb_leave_date'] ?>" id="mb_leave_date" class="frm_input" maxlength="8">
-            <input type="checkbox" value="<?php echo date("Ymd"); ?>" id="mb_leave_date_set_today" onclick="if (this.form.mb_leave_date.value==this.form.mb_leave_date.defaultValue) {
+            <input type="text" name="mb_leave_date" value="<?=$mb['mb_leave_date'] ?>" id="mb_leave_date" class="frm_input" maxlength="8">
+            <input type="checkbox" value="<?=date("Ymd"); ?>" id="mb_leave_date_set_today" onclick="if (this.form.mb_leave_date.value==this.form.mb_leave_date.defaultValue) {
 this.form.mb_leave_date.value=this.value; } else { this.form.mb_leave_date.value=this.form.mb_leave_date.defaultValue; }">
             <label for="mb_leave_date_set_today">탈퇴일을 오늘로 지정</label>
         </td>
         <th scope="row">접근차단일자</th>
         <td>
-            <input type="text" name="mb_intercept_date" value="<?php echo $mb['mb_intercept_date'] ?>" id="mb_intercept_date" class="frm_input" maxlength="8">
-            <input type="checkbox" value="<?php echo date("Ymd"); ?>" id="mb_intercept_date_set_today" onclick="if
+            <input type="text" name="mb_intercept_date" value="<?=$mb['mb_intercept_date'] ?>" id="mb_intercept_date" class="frm_input" maxlength="8">
+            <input type="checkbox" value="<?=date("Ymd"); ?>" id="mb_intercept_date_set_today" onclick="if
 (this.form.mb_intercept_date.value==this.form.mb_intercept_date.defaultValue) { this.form.mb_intercept_date.value=this.value; } else {
 this.form.mb_intercept_date.value=this.form.mb_intercept_date.defaultValue; }">
             <label for="mb_intercept_date_set_today">접근차단일을 오늘로 지정</label>
@@ -410,17 +410,17 @@ this.form.mb_intercept_date.value=this.form.mb_intercept_date.defaultValue; }">
                     $provider = strtolower($account['provider']);
                     $provider_name = social_get_provider_service_name($provider);
                 ?>
-                <div class="account_provider" data-mpno="social_<?php echo $account['mp_no'];?>" >
+                <div class="account_provider" data-mpno="social_<?=$account['mp_no'];?>" >
                     <div class="sns-wrap-32 sns-wrap-over">
-                        <span class="sns-icon sns-<?php echo $provider; ?>" title="<?php echo $provider_name; ?>">
+                        <span class="sns-icon sns-<?=$provider; ?>" title="<?=$provider_name; ?>">
                             <span class="ico"></span>
-                            <span class="txt"><?php echo $provider_name; ?></span>
+                            <span class="txt"><?=$provider_name; ?></span>
                         </span>
 
-                        <span class="provider_name"><?php echo $provider_name;   //서비스이름?> ( <?php echo $account['displayname']; ?> )</span>
-                        <span class="account_hidden" style="display:none"><?php echo $account['mb_id']; ?></span>
+                        <span class="provider_name"><?=$provider_name;   //서비스이름?> ( <?=$account['displayname']; ?> )</span>
+                        <span class="account_hidden" style="display:none"><?=$account['mb_id']; ?></span>
                     </div>
-                    <div class="btn_info"><a href="<?php echo G5_SOCIAL_LOGIN_URL.'/unlink.php?mp_no='.$account['mp_no'] ?>" class="social_unlink" data-provider="<?php echo $account['mp_no'];?>" >연동해제</a> <span class="sound_only"><?php echo substr($account['mp_register_day'], 2, 14); ?></span></div>
+                    <div class="btn_info"><a href="<?=G5_SOCIAL_LOGIN_URL.'/unlink.php?mp_no='.$account['mp_no'] ?>" class="social_unlink" data-provider="<?=$account['mp_no'];?>" >연동해제</a> <span class="sound_only"><?=substr($account['mp_register_day'], 2, 14); ?></span></div>
                 </div>
                 <?php } //end foreach ?>
             </li>
@@ -434,7 +434,7 @@ this.form.mb_intercept_date.value=this.form.mb_intercept_date.defaultValue; }">
                     return false;
                 }
 
-                var ajax_url = "<?php echo G5_SOCIAL_LOGIN_URL.'/unlink.php' ?>";
+                var ajax_url = "<?=G5_SOCIAL_LOGIN_URL.'/unlink.php' ?>";
                 var mb_id = '',
                     mp_no = $(this).attr("data-provider"),
                     $mp_el = $(this).parents(".account_provider");
@@ -485,8 +485,8 @@ this.form.mb_intercept_date.value=this.form.mb_intercept_date.defaultValue; }">
 
     <?php for ($i=1; $i<=10; $i++) { ?>
     <tr>
-        <th scope="row"><label for="mb_<?php echo $i ?>">여분 필드 <?php echo $i ?></label></th>
-        <td colspan="3"><input type="text" name="mb_<?php echo $i ?>" value="<?php echo $mb['mb_'.$i] ?>" id="mb_<?php echo $i ?>" class="frm_input" size="30" maxlength="255"></td>
+        <th scope="row"><label for="mb_<?=$i ?>">여분 필드 <?=$i ?></label></th>
+        <td colspan="3"><input type="text" name="mb_<?=$i ?>" value="<?=$mb['mb_'.$i] ?>" id="mb_<?=$i ?>" class="frm_input" size="30" maxlength="255"></td>
     </tr>
     <?php } ?>
 
@@ -495,7 +495,7 @@ this.form.mb_intercept_date.value=this.form.mb_intercept_date.defaultValue; }">
 </div>
 
 <div class="btn_fixed_top">
-    <a href="./member_list.php?<?php echo $qstr ?>" class="btn btn_02">목록</a>
+    <a href="./member_list.php?<?=$qstr ?>" class="btn btn_02">목록</a>
     <input type="submit" value="확인" class="btn_submit btn" accesskey='s'>
 </div>
 </form>

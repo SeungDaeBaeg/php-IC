@@ -55,33 +55,33 @@ $colspan = 10;
 ?>
 
 <div class="local_ov01 local_ov">
-   <span class="btn_ov01"><span class="ov_txt">전체 </span><span class="ov_num"> <?php echo number_format($total_count) ?>건 </span></span>
+   <span class="btn_ov01"><span class="ov_txt">전체 </span><span class="ov_num"> <?=number_format($total_count) ?>건 </span></span>
 </div>
 
 <form name="fsearch" id="fsearch" class="local_sch01 local_sch" method="get">
     <select name="sfl" title="검색대상">
-        <option value="pp_id"<?php echo get_selected($sfl, "pp_id"); ?>>개인결제번호</option>
-        <option value="pp_name"<?php echo get_selected($sfl, "pp_name"); ?>>이름</option>
-        <option value="od_id"<?php echo get_selected($sfl, "od_id"); ?>>주문번호</option>
+        <option value="pp_id"<?=get_selected($sfl, "pp_id"); ?>>개인결제번호</option>
+        <option value="pp_name"<?=get_selected($sfl, "pp_name"); ?>>이름</option>
+        <option value="od_id"<?=get_selected($sfl, "od_id"); ?>>주문번호</option>
     </select>
     <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-    <input type="text" name="stx" value="<?php echo $stx ?>" id="stx" required class="required frm_input">
+    <input type="text" name="stx" value="<?=$stx ?>" id="stx" required class="required frm_input">
     <input type="submit" class="btn_submit" value="검색">
 </form>
 
 
 
 <form name="fpersonalpaylist" id="fpersonalpaylist" method="post" action="./personalpaylistdelete.php" onsubmit="return fpersonalpaylist_submit(this);">
-<input type="hidden" name="sst" value="<?php echo $sst; ?>">
-<input type="hidden" name="sod" value="<?php echo $sod; ?>">
-<input type="hidden" name="sfl" value="<?php echo $sfl; ?>">
-<input type="hidden" name="stx" value="<?php echo $stx; ?>">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
+<input type="hidden" name="sst" value="<?=$sst; ?>">
+<input type="hidden" name="sod" value="<?=$sod; ?>">
+<input type="hidden" name="sfl" value="<?=$sfl; ?>">
+<input type="hidden" name="stx" value="<?=$stx; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
 <input type="hidden" name="token" value="">
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
+    <caption><?=$g5['title']; ?> 목록</caption>
     <thead>
     <tr>
         <th scope="col">
@@ -89,12 +89,12 @@ $colspan = 10;
             <input type="checkbox" name="chkall" value="1" id="chkall" onclick="check_all(this.form)">
         </th>
         <th scope="col">제목</th>
-        <th scope="col"><?php echo subject_sort_link('od_id') ?>주문번호</a></th>
+        <th scope="col"><?=subject_sort_link('od_id') ?>주문번호</a></th>
         <th scope="col">주문금액</th>
         <th scope="col">입금금액</th>
         <th scope="col">미수금액</th>
         <th scope="col">입금방법</th>
-        <th scope="col"><?php echo subject_sort_link('pp_receipt_time') ?>입금일</a></th>
+        <th scope="col"><?=subject_sort_link('pp_receipt_time') ?>입금일</a></th>
         <th scope="col">사용</th>
         <th scope="col">관리</th>
     </tr>
@@ -110,22 +110,22 @@ $colspan = 10;
         $bg = 'bg'.($i%2);
     ?>
 
-    <tr class="<?php echo $bg; ?>">
+    <tr class="<?=$bg; ?>">
         <td class="td_chk">
-            <input type="hidden" id="pp_id_<?php echo $i; ?>" name="pp_id[<?php echo $i; ?>]" value="<?php echo $row['pp_id']; ?>">
-            <input type="checkbox" id="chk_<?php echo $i; ?>" name="chk[]" value="<?php echo $i; ?>" title="내역선택">
+            <input type="hidden" id="pp_id_<?=$i; ?>" name="pp_id[<?=$i; ?>]" value="<?=$row['pp_id']; ?>">
+            <input type="checkbox" id="chk_<?=$i; ?>" name="chk[]" value="<?=$i; ?>" title="내역선택">
         </td>
-        <td class="td_left"><?php echo get_text($row['pp_name']); ?></td>
-        <td class="td_odrnum3"><?php echo $od_id; ?></td>
-        <td class="td_numsum"><?php echo number_format($row['pp_price']); ?></td>
-        <td class="td_numincome"><?php echo number_format($row['pp_receipt_price']); ?></td>
-        <td class="td_numrdy"><?php echo number_format($row['pp_price'] - $row['pp_receipt_price']); ?></td>
-        <td class="td_payby"><?php echo $row['pp_settle_case']; ?></td>
-        <td class="td_date"><?php echo is_null_time($row['pp_receipt_time']) ? '' : substr($row['pp_receipt_time'], 2, 8); ?></td>
-        <td class="td_boolean"><?php echo $row['pp_use'] ? '예' : '아니오'; ?></td>
+        <td class="td_left"><?=get_text($row['pp_name']); ?></td>
+        <td class="td_odrnum3"><?=$od_id; ?></td>
+        <td class="td_numsum"><?=number_format($row['pp_price']); ?></td>
+        <td class="td_numincome"><?=number_format($row['pp_receipt_price']); ?></td>
+        <td class="td_numrdy"><?=number_format($row['pp_price'] - $row['pp_receipt_price']); ?></td>
+        <td class="td_payby"><?=$row['pp_settle_case']; ?></td>
+        <td class="td_date"><?=is_null_time($row['pp_receipt_time']) ? '' : substr($row['pp_receipt_time'], 2, 8); ?></td>
+        <td class="td_boolean"><?=$row['pp_use'] ? '예' : '아니오'; ?></td>
         <td class="td_mng td_mng_m">
-            <a href="./personalpayform.php?w=u&amp;pp_id=<?php echo $row['pp_id']; ?>&amp;<?php echo $qstr; ?>" class="btn btn_03"><span class="sound_only"><?php echo $row['pp_id']; ?> </span>수정</a>
-            <a href="./personalpaycopy.php?pp_id=<?php echo $row['pp_id']; ?>" class="personalpaycopy btn btn_02"><span class="sound_only"><?php echo $row['pp_id']; ?> </span>복사</a>
+            <a href="./personalpayform.php?w=u&amp;pp_id=<?=$row['pp_id']; ?>&amp;<?=$qstr; ?>" class="btn btn_03"><span class="sound_only"><?=$row['pp_id']; ?> </span>수정</a>
+            <a href="./personalpaycopy.php?pp_id=<?=$row['pp_id']; ?>" class="personalpaycopy btn btn_02"><span class="sound_only"><?=$row['pp_id']; ?> </span>복사</a>
         </td>
     </tr>
 
@@ -146,7 +146,7 @@ $colspan = 10;
 
 </form>
 
-<?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
+<?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
 
 <script>
 $(function() {

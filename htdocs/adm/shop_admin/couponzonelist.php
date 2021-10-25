@@ -43,24 +43,24 @@ $colspan = 9;
 ?>
 
 <div class="local_ov">
-    <span class="btn_ov01"><span class="ov_txt">전체 </span><span class="ov_num"> <?php echo number_format($total_count) ?> 개</span></span>
+    <span class="btn_ov01"><span class="ov_txt">전체 </span><span class="ov_num"> <?=number_format($total_count) ?> 개</span></span>
 </div>
 <form name="fsearch" id="fsearch" class="local_sch01 local_sch" method="get">
 
 <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-<input type="text" name="stx" value="<?php echo $stx ?>" id="stx" required class="required frm_input">
+<input type="text" name="stx" value="<?=$stx ?>" id="stx" required class="required frm_input">
 <input type="submit" class="btn_submit" value="검색">
 </form>
 
 
 <form name="fcouponlist" id="fcouponzonelist" method="post" action="./couponzonelist_delete.php" onsubmit="return fcouponzonelist_submit(this);">
-<input type="hidden" name="stx" value="<?php echo $stx; ?>">
-<input type="hidden" name="page" value="<?php echo $page; ?>">
+<input type="hidden" name="stx" value="<?=$stx; ?>">
+<input type="hidden" name="page" value="<?=$page; ?>">
 <input type="hidden" name="token" value="">
 
 <div class="tbl_head01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?></caption>
+    <caption><?=$g5['title']; ?></caption>
     <thead>
     <tr>
         <th scope="col">
@@ -119,20 +119,20 @@ $colspan = 9;
         $bg = 'bg'.($i%2);
     ?>
 
-    <tr class="<?php echo $bg; ?>">
+    <tr class="<?=$bg; ?>">
         <td class="td_chk">
-            <input type="hidden" id="cz_id_<?php echo $i; ?>" name="cz_id[<?php echo $i; ?>]" value="<?php echo $row['cz_id']; ?>">
-            <input type="checkbox" id="chk_<?php echo $i; ?>" name="chk[]" value="<?php echo $i; ?>" title="내역선택">
+            <input type="hidden" id="cz_id_<?=$i; ?>" name="cz_id[<?=$i; ?>]" value="<?=$row['cz_id']; ?>">
+            <input type="checkbox" id="chk_<?=$i; ?>" name="chk[]" value="<?=$i; ?>" title="내역선택">
         </td>
-        <td class="td_left"><?php echo get_text($row['cz_subject']); ?></td>
-        <td class="td_type"><?php echo $cz_type; ?></td>
-        <td class="td_type"><?php echo $cp_method; ?></td>
-        <td class="td_odrnum2"><?php echo $cp_price; ?></td>
-        <td  class="td_type">다운로드 후 <?php echo $row['cz_period']; ?>일</td>
-        <td class="td_num"><?php echo number_format($row['cz_download']); ?></td>
-        <td class="td_datetime"><?php echo substr($row['cz_start'], 2, 8); ?> ~ <?php echo substr($row['cz_end'], 2, 8); ?></td>
+        <td class="td_left"><?=get_text($row['cz_subject']); ?></td>
+        <td class="td_type"><?=$cz_type; ?></td>
+        <td class="td_type"><?=$cp_method; ?></td>
+        <td class="td_odrnum2"><?=$cp_price; ?></td>
+        <td  class="td_type">다운로드 후 <?=$row['cz_period']; ?>일</td>
+        <td class="td_num"><?=number_format($row['cz_download']); ?></td>
+        <td class="td_datetime"><?=substr($row['cz_start'], 2, 8); ?> ~ <?=substr($row['cz_end'], 2, 8); ?></td>
         <td class="td_mng td_mng_s">
-            <a href="./couponzoneform.php?w=u&amp;cz_id=<?php echo $row['cz_id']; ?>&amp;<?php echo $qstr; ?>" class="btn btn_03"><span class="sound_only"><?php echo get_text($row['cz_subject']); ?> </span>수정</a>
+            <a href="./couponzoneform.php?w=u&amp;cz_id=<?=$row['cz_id']; ?>&amp;<?=$qstr; ?>" class="btn btn_03"><span class="sound_only"><?=get_text($row['cz_subject']); ?> </span>수정</a>
         </td>
     </tr>
 
@@ -153,7 +153,7 @@ $colspan = 9;
 
 </form>
 
-<?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
+<?=get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
 
 <script>
 function fcouponzonelist_submit(f)

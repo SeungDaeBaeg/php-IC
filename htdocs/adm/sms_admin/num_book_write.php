@@ -46,16 +46,16 @@ include_once(G5_ADMIN_PATH."/admin.head.php");
 ?>
 
 <form name="book_form" id="book_form" method="post" action="./num_book_update.php">
-<input type="hidden" name="w" value="<?php echo get_sanitize_input($w); ?>">
-<input type="hidden" name="page" value="<?php echo get_sanitize_input($page); ?>">
-<input type="hidden" name="ap" value="<?php echo get_sanitize_input($ap); ?>">
-<input type="hidden" name="bk_no" value="<?php echo $write['bk_no']?>">
-<input type="hidden" name="mb_id" id="mb_id" value="<?php echo $write['mb_id']?>">
-<input type="hidden" name="get_bg_no" value="<?php echo get_sanitize_input($bg_no); ?>">
+<input type="hidden" name="w" value="<?=get_sanitize_input($w); ?>">
+<input type="hidden" name="page" value="<?=get_sanitize_input($page); ?>">
+<input type="hidden" name="ap" value="<?=get_sanitize_input($ap); ?>">
+<input type="hidden" name="bk_no" value="<?=$write['bk_no']?>">
+<input type="hidden" name="mb_id" id="mb_id" value="<?=$write['mb_id']?>">
+<input type="hidden" name="get_bg_no" value="<?=get_sanitize_input($bg_no); ?>">
 
 <div class="tbl_frm01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?></caption>
+    <caption><?=$g5['title']; ?></caption>
     <colgroup>
         <col class="grid_4">
         <col>
@@ -65,24 +65,24 @@ include_once(G5_ADMIN_PATH."/admin.head.php");
         <th scope="row"><label for="bg_no">그룹 <strong class="sound_only"> 필수</strong></label></th>
         <td>
             <select name="bg_no" id="bg_no" required class="required">
-                <option value="1"><?php echo $no_group['bg_name']?> (<?php echo number_format($no_group['bg_count'])?> 명)</option>
+                <option value="1"><?=$no_group['bg_name']?> (<?=number_format($no_group['bg_count'])?> 명)</option>
                 <?php
                 $qry = sql_query("select * from {$g5['sms5_book_group_table']} where bg_no> 1 order by bg_name");
                 while($res = sql_fetch_array($qry)) {
                 ?>
-                <option value="<?php echo $res['bg_no']?>" <?php echo $res['bg_no']==$write['bg_no']?'selected':''?>> <?php echo $res['bg_name']?>  (<?php echo number_format($res['bg_count'])?> 명) </option>
+                <option value="<?=$res['bg_no']?>" <?=$res['bg_no']==$write['bg_no']?'selected':''?>> <?=$res['bg_name']?>  (<?=number_format($res['bg_count'])?> 명) </option>
                 <?php } ?>
             </select>
         </td>
     </tr>
     <tr>
         <th scope="row"><label for="bk_name">이름<strong class="sound_only"> 필수</strong></label></th>
-        <td><input type="text" name="bk_name" id="bk_name" maxlength="50" value="<?php echo get_sanitize_input($write['bk_name']); ?>" required class="frm_input required"></td>
+        <td><input type="text" name="bk_name" id="bk_name" maxlength="50" value="<?=get_sanitize_input($write['bk_name']); ?>" required class="frm_input required"></td>
     </tr>
     <tr>
         <th scope="row"><label for="bk_hp">휴대폰번호<strong class="sound_only"> 필수</strong></label></th>
         <td>
-            <input type="text" name="bk_hp" id="bk_hp" value="<?php echo $write['bk_hp']?>" required class="frm_input required">
+            <input type="text" name="bk_hp" id="bk_hp" value="<?=$write['bk_hp']?>" required class="frm_input required">
             <?php if( count($exist_hplist) ) { // 중복되는 목록이 있다면 ?>
             <div id="hp_check_el">
                 <ul>
@@ -93,7 +93,7 @@ include_once(G5_ADMIN_PATH."/admin.head.php");
                     if( empty($v) ) continue;
                     $href = G5_ADMIN_URL."/member_form.php?w=u&amp;mb_id={$v['mb_id']}";
                 ?>
-                    <li><strong>중복됨 </strong><a href="<?php echo $href; ?>" target="_blank"><?php echo $v['mb_id']; ?></a></li>
+                    <li><strong>중복됨 </strong><a href="<?=$href; ?>" target="_blank"><?=$v['mb_id']; ?></a></li>
                 <?php
                 }
                 ?>
@@ -105,26 +105,26 @@ include_once(G5_ADMIN_PATH."/admin.head.php");
     <tr>
         <th scope="row">수신여부</th>
         <td>
-            <input type="radio" name="bk_receipt" id="bk_receipt_1" value="1" <?php echo $write['bk_receipt']?'checked':''?>>
+            <input type="radio" name="bk_receipt" id="bk_receipt_1" value="1" <?=$write['bk_receipt']?'checked':''?>>
             <label for="bk_receipt_1">수신허용</label>
-            <input type="radio" name="bk_receipt" id="bk_receipt_2" value="0" <?php echo !$write['bk_receipt']?'checked':''?>>
+            <input type="radio" name="bk_receipt" id="bk_receipt_2" value="0" <?=!$write['bk_receipt']?'checked':''?>>
             <label for="bk_receipt_2">수신거부</label>
         </td>
     </tr>
     <?php if ($w == 'u') { ?>
     <tr>
         <th scope="row">회원아이디</th>
-        <td> <?php echo $write['mb_id'] ? '<a href="'.G5_ADMIN_URL.'/member_form.php?w=u&amp;mb_id='.$write['mb_id'].'">'.$write['mb_id'].'</a>' : '비회원'?> </td>
+        <td> <?=$write['mb_id'] ? '<a href="'.G5_ADMIN_URL.'/member_form.php?w=u&amp;mb_id='.$write['mb_id'].'">'.$write['mb_id'].'</a>' : '비회원'?> </td>
     </tr>
     <tr>
         <th scope="row">업데이트</th>
-        <td> <?php echo $write['bk_datetime']?> </td>
+        <td> <?=$write['bk_datetime']?> </td>
     </tr>
     <?php } ?>
     <tr>
         <th scope="row"><label for="bk_memo">메모</label></th>
         <td>
-            <textarea name="bk_memo" id="bk_memo"><?php echo html_purifier($write['bk_memo']); ?></textarea>
+            <textarea name="bk_memo" id="bk_memo"><?=html_purifier($write['bk_memo']); ?></textarea>
         </td>
     </tr>
     </tbody>
@@ -133,7 +133,7 @@ include_once(G5_ADMIN_PATH."/admin.head.php");
 
 <div class="btn_fixed_top">
     <input type="submit" value="확인" class="btn_submit btn" accesskey="s" onclick="return book_submit();">
-    <a href="./num_book.php?<?php echo clean_query_string($_SERVER['QUERY_STRING']); ?>" class="btn btn_02">목록</a>
+    <a href="./num_book.php?<?=clean_query_string($_SERVER['QUERY_STRING']); ?>" class="btn btn_02">목록</a>
 </div>
 
 </form>
@@ -153,8 +153,8 @@ function book_submit(){
         return false;
     }
 
-    var w = "<?php echo $w; ?>";
-    var bk_no = "<?php echo $bk_no; ?>";
+    var w = "<?=$w; ?>";
+    var bk_no = "<?=$bk_no; ?>";
     var mb_id = f.mb_id.value;
     var bk_hp = f.bk_hp.value;
     var params = { w: w, bk_no: bk_no, mb_id : mb_id, bk_hp : bk_hp };
@@ -179,7 +179,7 @@ function book_submit(){
                     list_data = data.exist[num];
 
                     if(list_data) {
-                        var href = "<?php echo G5_ADMIN_URL ?>/member_form.php?w=u&mb_id="+list_data;
+                        var href = "<?=G5_ADMIN_URL ?>/member_form.php?w=u&mb_id="+list_data;
                         list_text += "<li><a href=\""+href+"\" target=\"_blank\">"+list_data+"</a></li>";
                     }
                 });

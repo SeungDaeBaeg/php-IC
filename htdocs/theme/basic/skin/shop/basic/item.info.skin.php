@@ -5,7 +5,7 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0);
 ?>
 
-<script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
+<script src="<?=G5_JS_URL; ?>/viewimageresize.js"></script>
 
 <?php if ($default['de_rel_list_use']) { ?>
 <!-- 관련상품 시작 { -->
@@ -29,8 +29,8 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 	<div id="sit_tab">
 	    <ul class="tab_tit">
 	        <li><button type="button" rel="#sit_inf" class="selected">상품정보</button></li>
-	        <li><button type="button" rel="#sit_use">사용후기 <span class="item_use_count"><?php echo $item_use_count; ?></span></button></li>
-	        <li><button type="button" rel="#sit_qa">상품문의  <span class="item_qa_count"><?php echo $item_qa_count; ?></span></button></li>
+	        <li><button type="button" rel="#sit_use">사용후기 <span class="item_use_count"><?=$item_use_count; ?></span></button></li>
+	        <li><button type="button" rel="#sit_qa">상품문의  <span class="item_qa_count"><?=$item_qa_count; ?></span></button></li>
 	        <li><button type="button" rel="#sit_dex">배송/교환</button></li>
 	    </ul>
 	    <ul class="tab_con">
@@ -42,7 +42,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 	            <?php if ($it['it_explan']) { // 상품 상세설명 ?>
 	            <h3>상품 상세설명</h3>
 	            <div id="sit_inf_explan">
-	                <?php echo conv_content($it['it_explan'], 1); ?>
+	                <?=conv_content($it['it_explan'], 1); ?>
 	            </div>
 	            <?php } ?>
 	
@@ -62,8 +62,8 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 	                $ii_value = $val;
 	            ?>
 	            <tr>
-	                <th scope="row"><?php echo $ii_title; ?></th>
-	                <td><?php echo $ii_value; ?></td>
+	                <th scope="row"><?=$ii_title; ?></th>
+	                <td><?=$ii_value; ?></td>
 	            </tr>
 	            <?php } //foreach?>
 	            </tbody>
@@ -101,7 +101,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 	            <!-- 배송 시작 { -->
 	            <div id="sit_dvr">
 	                <h3>배송</h3>
-	                <?php echo conv_content($default['de_baesong_content'], 1); ?>
+	                <?=conv_content($default['de_baesong_content'], 1); ?>
 	            </div>
 	            <!-- } 배송 끝 -->
 	            <?php } ?>
@@ -110,7 +110,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 	            <!-- 교환 시작 { -->
 	            <div id="sit_ex" >
 	                <h3>교환</h3>
-	                <?php echo conv_content($default['de_change_content'], 1); ?>
+	                <?=conv_content($default['de_change_content'], 1); ?>
 	            </div>
 	            <!-- } 교환 끝 -->
 	            <?php } ?>
@@ -163,12 +163,12 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
                     <?php if( !$option_item ){ ?>
                     <li>
                         <div class="opt_name">
-                            <span class="sit_opt_subj"><?php echo $it['it_name']; ?></span>
+                            <span class="sit_opt_subj"><?=$it['it_name']; ?></span>
                         </div>
                         <div class="opt_count">
-                            <label for="ct_qty_<?php echo $i; ?>" class="sound_only">수량</label>
+                            <label for="ct_qty_<?=$i; ?>" class="sound_only">수량</label>
                             <button type="button" class="sit_qty_minus"><i class="fa fa-minus" aria-hidden="true"></i><span class="sound_only">감소</span></button>
-                            <input type="text" name="ct_copy_qty[<?php echo $it_id; ?>][]" value="<?php echo $it['it_buy_min_qty']; ?>" id="ct_qty_<?php echo $i; ?>" class="num_input" size="5">
+                            <input type="text" name="ct_copy_qty[<?=$it_id; ?>][]" value="<?=$it['it_buy_min_qty']; ?>" id="ct_qty_<?=$i; ?>" class="num_input" size="5">
                             <button type="button" class="sit_qty_plus"><i class="fa fa-plus" aria-hidden="true"></i><span class="sound_only">증가</span></button>
                             <span class="sit_opt_prc">+0원</span>
                         </div>

@@ -22,11 +22,11 @@ add_stylesheet('<link rel="stylesheet" href="'.$connect_skin_url.'/style.css">',
             $classes[] = 'box_clear';
         }
     ?>
-        <li class="<?php echo implode(' ', $classes); ?>">
+        <li class="<?=implode(' ', $classes); ?>">
             <div class="inner">
-                <span class="crt_num"><?php echo $list[$i]['num'] ?></span>
-                <span class="crt_name"><?php echo get_member_profile_img($list[$i]['mb_id']); ?><br><?php echo $list[$i]['name'] ?></span>
-                <span class="crt_lct"><?php echo $display_location ?></span>
+                <span class="crt_num"><?=$list[$i]['num'] ?></span>
+                <span class="crt_name"><?=get_member_profile_img($list[$i]['mb_id']); ?><br><?=$list[$i]['name'] ?></span>
+                <span class="crt_lct"><?=$display_location ?></span>
             </div>
         </li>
     <?php

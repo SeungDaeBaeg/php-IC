@@ -199,7 +199,7 @@ $ct_cert->mf_clear();
 ?>
 
 <form name="form_auth" method="post">
-    <?php echo $sbParam; ?>
+    <?=$sbParam; ?>
 </form>
 
 <script>
@@ -220,10 +220,10 @@ $(function() {
     }
 
     // 인증정보
-    $opener.$("input[name=cert_type]").val("<?php echo $cert_type; ?>");
-    $opener.$("input[name=mb_name]").val("<?php echo $user_name; ?>").attr("readonly", true);
-    $opener.$("input[name=mb_hp]").val("<?php echo $phone_no; ?>").attr("readonly", true);
-    $opener.$("input[name=cert_no]").val("<?php echo $md5_cert_no; ?>");
+    $opener.$("input[name=cert_type]").val("<?=$cert_type; ?>");
+    $opener.$("input[name=mb_name]").val("<?=$user_name; ?>").attr("readonly", true);
+    $opener.$("input[name=mb_hp]").val("<?=$phone_no; ?>").attr("readonly", true);
+    $opener.$("input[name=cert_no]").val("<?=$md5_cert_no; ?>");
 
     if(is_mobile) {
         $opener.$("#cert_info").css("display", "");

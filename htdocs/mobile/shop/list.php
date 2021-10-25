@@ -57,9 +57,9 @@ define('G5_SHOP_CSS_URL', str_replace(G5_PATH, G5_URL, $skin_dir));
 ?>
 
 <script>
-var g5_shop_url = "<?php echo G5_SHOP_URL; ?>";
+var g5_shop_url = "<?=G5_SHOP_URL; ?>";
 </script>
-<script src="<?php echo G5_JS_URL; ?>/shop.mobile.list.js"></script>
+<script src="<?=G5_JS_URL; ?>/shop.mobile.list.js"></script>
 
 <div id="sct">
 
@@ -174,9 +174,9 @@ var g5_shop_url = "<?php echo G5_SHOP_URL; ?>";
         $ajax_url = G5_SHOP_URL.'/ajax.list.php?'.$qstr1.'&use_sns=1';
     ?>
     <div class="li_more">
-        <p id="item_load_msg"><img src="<?php echo G5_SHOP_CSS_URL; ?>/img/loading.gif" alt="로딩이미지" ><br>잠시만 기다려주세요.</p>
+        <p id="item_load_msg"><img src="<?=G5_SHOP_CSS_URL; ?>/img/loading.gif" alt="로딩이미지" ><br>잠시만 기다려주세요.</p>
         <div class="li_more_btn">
-            <button type="button" id="btn_more_item" data-url="<?php echo $ajax_url; ?>" data-page="<?php echo $page; ?>">더보기 +</button>
+            <button type="button" id="btn_more_item" data-url="<?=$ajax_url; ?>" data-page="<?=$page; ?>">더보기 +</button>
         </div>
     </div>
     <?php } ?>

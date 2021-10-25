@@ -10,16 +10,16 @@ if(defined('G5_THEME_PATH')) {
 </div>
 
 
-<?php echo poll('basic'); // 설문조사 ?>
-<?php echo visit('basic'); // 방문자수 ?>
+<?=poll('basic'); // 설문조사 ?>
+<?=visit('basic'); // 방문자수 ?>
 
 
 <div id="ft">
     <div id="ft_copy">
         <div id="ft_company">
-            <a href="<?php echo get_pretty_url('content', 'company'); ?>">회사소개</a>
-            <a href="<?php echo get_pretty_url('content', 'privacy'); ?>">개인정보처리방침</a>
-            <a href="<?php echo get_pretty_url('content', 'provision'); ?>">서비스이용약관</a>
+            <a href="<?=get_pretty_url('content', 'company'); ?>">회사소개</a>
+            <a href="<?=get_pretty_url('content', 'privacy'); ?>">개인정보처리방침</a>
+            <a href="<?=get_pretty_url('content', 'provision'); ?>">서비스이용약관</a>
         </div>
         Copyright &copy; <b>소유하신 도메인.</b> All rights reserved.<br>
     </div>
@@ -37,7 +37,7 @@ if(defined('G5_THEME_PATH')) {
     <button type="button" id="top_btn"><i class="fa fa-arrow-up" aria-hidden="true"></i><span class="sound_only">상단으로</span></button>
     <?php
     if(G5_DEVICE_BUTTON_DISPLAY && G5_IS_MOBILE) { ?>
-    <a href="<?php echo get_device_change_url(); ?>" id="device_change">PC 버전으로 보기</a>
+    <a href="<?=get_device_change_url(); ?>" id="device_change">PC 버전으로 보기</a>
     <?php
     }
 

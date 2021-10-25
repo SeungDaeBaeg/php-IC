@@ -12,11 +12,11 @@ include_once(G5_PATH.'/head.sub.php');
 ?>
 
 <div class="new_win">
-    <h1><?php echo $g5['title']; ?></h1>
+    <h1><?=$g5['title']; ?></h1>
 
     <div class="tbl_head01 tbl_wrap">
         <table>
-        <caption><?php echo $g5['title']; ?> 입력</caption>
+        <caption><?=$g5['title']; ?> 입력</caption>
         <thead>
         <tr>
             <th scope="col">상품명</th>
@@ -37,13 +37,13 @@ include_once(G5_PATH.'/head.sub.php');
         ?>
         <tr>
             <td>
-                <a href="<?php echo $href; ?>" target="_blank">
-                    <?php echo get_it_image($row['it_id'], 40, 40); ?>
-                    <?php echo cut_str(stripslashes($row['it_name']), 60, "&#133"); ?>
+                <a href="<?=$href; ?>" target="_blank">
+                    <?=get_it_image($row['it_id'], 40, 40); ?>
+                    <?=cut_str(stripslashes($row['it_name']), 60, "&#133"); ?>
                 </a>
             </td>
-            <td class="td_boolean"><?php echo ($row['it_use']?"사용":"미사용"); ?></td>
-            <td class="td_mngsmall"><a href="javascript:del('./itemeventwindel.php?ev_id=<?php echo $ev_id; ?>&amp;it_id=<?php echo $row['it_id']; ?>');">삭제</a></td>
+            <td class="td_boolean"><?=($row['it_use']?"사용":"미사용"); ?></td>
+            <td class="td_mngsmall"><a href="javascript:del('./itemeventwindel.php?ev_id=<?=$ev_id; ?>&amp;it_id=<?=$row['it_id']; ?>');">삭제</a></td>
         <tr>
         <?php
         }

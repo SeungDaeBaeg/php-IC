@@ -54,7 +54,7 @@ jQuery(function($){
             samsungpayform.P_TAXFREE = pf.comm_free_mny.value;
             <?php } ?>
 
-            samsungpayform.P_RETURN_URL.value = "<?php echo $return_url.$od_id; ?>";
+            samsungpayform.P_RETURN_URL.value = "<?=$return_url.$od_id; ?>";
             samsungpayform.action = "https://mobile.inicis.com/smart/" + paymethod + "/";
 
             // 주문 정보 임시저장

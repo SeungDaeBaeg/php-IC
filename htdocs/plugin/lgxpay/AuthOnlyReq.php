@@ -99,15 +99,15 @@ $_SESSION['lgd_certify'] = $payReqMap;
 <meta charset="utf-8">
 <title>LG유플러스 전자결제 본인확인서비스</title>
 <!-- 고객사 사이트가 https인 경우는 아래 http://을 https:// 으로 변경하시면 됩니다. -->
-<link rel="stylesheet" href="<?php echo G5_CSS_URL;?>/default.css">
-<script language="javascript" src="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') ? 'https' : 'http'; ?>://xpay.uplus.co.kr/xpay/js/xpay_crossplatform.js" type="text/javascript"></script>
+<link rel="stylesheet" href="<?=G5_CSS_URL;?>/default.css">
+<script language="javascript" src="<?=(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') ? 'https' : 'http'; ?>://xpay.uplus.co.kr/xpay/js/xpay_crossplatform.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 
 	/*
 	* 수정불가.
 	*/
-	var LGD_window_type = "<?php echo $LGD_WINDOW_TYPE;?>";
+	var LGD_window_type = "<?=$LGD_WINDOW_TYPE;?>";
 	var lgd_form = "LGD_PAYINFO";
 	/*
 	* 수정불가.
@@ -115,9 +115,9 @@ $_SESSION['lgd_certify'] = $payReqMap;
 	function launchCrossPlatform(){
 		
         <?php if( G5_IS_MOBILE ){   //모바일이면 ?>
-            lgdwin = open_paymentwindow(document.getElementById(lgd_form), '<?php echo $CST_PLATFORM ?>', LGD_window_type);
+            lgdwin = open_paymentwindow(document.getElementById(lgd_form), '<?=$CST_PLATFORM ?>', LGD_window_type);
         <?php } else {  //PC 이면 ?>
-		    lgdwin = openAuthonly( document.getElementById(lgd_form), "<?php echo $CST_PLATFORM; ?>", LGD_window_type, null );
+		    lgdwin = openAuthonly( document.getElementById(lgd_form), "<?=$CST_PLATFORM; ?>", LGD_window_type, null );
         <?php } ?>
 
 	}
@@ -161,7 +161,7 @@ $_SESSION['lgd_certify'] = $payReqMap;
 </head>
 <body>
 
-<form method="post" name ="LGD_PAYINFO" id="LGD_PAYINFO" action="<?php echo G5_LGXPAY_URL; ?>/AuthOnlyRes.php">
+<form method="post" name ="LGD_PAYINFO" id="LGD_PAYINFO" action="<?=G5_LGXPAY_URL; ?>/AuthOnlyRes.php">
 <input type="hidden" name="LGD_ENCODING" value="UTF-8"/>
 <?php
 foreach ($payReqMap as $key => $value) {
@@ -175,9 +175,9 @@ foreach ($payReqMap as $key => $value) {
 
 <div id="uplus_win" class="new_win mbskin">
     <h1 id="win_title">휴대폰 본인확인</h1>
-    <p class="up_cmt"><img src="<?php echo G5_LGXPAY_URL; ?>/img/upluslogo.jpg" alt="">LG유플러스에 휴대폰 본인확인 요청 중입니다.</p>
+    <p class="up_cmt"><img src="<?=G5_LGXPAY_URL; ?>/img/upluslogo.jpg" alt="">LG유플러스에 휴대폰 본인확인 요청 중입니다.</p>
     <div class="up_info">
-        <a href="http://pgweb.uplus.co.kr:8080/pg/wmp/Home2009/skill/payment_error_center01.jsp" target="_blank"><img src="<?php echo G5_LGXPAY_URL; ?>/img/btn_gouplus.jpg" alt="U+ 오류 해결방법 바로가기"></a>
+        <a href="http://pgweb.uplus.co.kr:8080/pg/wmp/Home2009/skill/payment_error_center01.jsp" target="_blank"><img src="<?=G5_LGXPAY_URL; ?>/img/btn_gouplus.jpg" alt="U+ 오류 해결방법 바로가기"></a>
         <p>본인확인이 진행되지 않는다면<br /> 왼쪽의 링크로 이동하여보세요.</p>
         <!--[If lte IE 7]><span style="clear:both; display:block; content:'';"></span><![endif]-->
     </div>

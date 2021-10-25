@@ -9,7 +9,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 <div id="find_info" class="new_win">
     <h1 id="win_title">회원정보 찾기</h1>
     <div class="new_win_con">
-        <form name="fpasswordlost" action="<?php echo $action_url ?>" onsubmit="return fpasswordlost_submit(this);" method="post" autocomplete="off">
+        <form name="fpasswordlost" action="<?=$action_url ?>" onsubmit="return fpasswordlost_submit(this);" method="post" autocomplete="off">
         <fieldset id="info_fs">
             <p>
                 회원가입 시 등록하신 이메일 주소를 입력해 주세요.<br>
@@ -18,7 +18,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
             <label for="mb_email" class="sound_only">E-mail 주소<strong class="sound_only">필수</strong></label>
             <input type="text" name="mb_email" id="mb_email" required class="required frm_input full_input email" size="30" placeholder="E-mail 주소">
         </fieldset>
-        <?php echo captcha_html();  ?>
+        <?=captcha_html();  ?>
         <input type="submit" value="확인" class="btn_submit">
 
     </div>
@@ -30,7 +30,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 <script>
 function fpasswordlost_submit(f)
 {
-    <?php echo chk_captcha_js();  ?>
+    <?=chk_captcha_js();  ?>
 
     return true;
 }

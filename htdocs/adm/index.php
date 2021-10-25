@@ -49,9 +49,9 @@ $colspan = 12;
 ?>
 
 <section>
-    <h2>신규가입회원 <?php echo $new_member_rows ?>건 목록</h2>
+    <h2>신규가입회원 <?=$new_member_rows ?>건 목록</h2>
     <div class="local_desc02 local_desc">
-        총회원수 <?php echo number_format($total_count) ?>명 중 차단 <?php echo number_format($intercept_count) ?>명, 탈퇴 : <?php echo number_format($leave_count) ?>명
+        총회원수 <?=number_format($total_count) ?>명 중 차단 <?=number_format($intercept_count) ?>명, 탈퇴 : <?=number_format($leave_count) ?>명
     </div>
 
     <div class="tbl_head01 tbl_wrap">
@@ -102,16 +102,16 @@ $colspan = 12;
             $mb_id = $row['mb_id'];
         ?>
         <tr>
-            <td class="td_mbid"><?php echo $mb_id ?></td>
-            <td class="td_mbname"><?php echo get_text($row['mb_name']); ?></td>
-            <td class="td_mbname sv_use"><div><?php echo $mb_nick ?></div></td>
-            <td class="td_num"><?php echo $row['mb_level'] ?></td>
-            <td><a href="./point_list.php?sfl=mb_id&amp;stx=<?php echo $row['mb_id'] ?>"><?php echo number_format($row['mb_point']) ?></a></td>
-            <td class="td_boolean"><?php echo $row['mb_mailling']?'예':'아니오'; ?></td>
-            <td class="td_boolean"><?php echo $row['mb_open']?'예':'아니오'; ?></td>
-            <td class="td_boolean"><?php echo preg_match('/[1-9]/', $row['mb_email_certify'])?'예':'아니오'; ?></td>
-            <td class="td_boolean"><?php echo $row['mb_intercept_date']?'예':'아니오'; ?></td>
-            <td class="td_category"><?php echo $group ?></td>
+            <td class="td_mbid"><?=$mb_id ?></td>
+            <td class="td_mbname"><?=get_text($row['mb_name']); ?></td>
+            <td class="td_mbname sv_use"><div><?=$mb_nick ?></div></td>
+            <td class="td_num"><?=$row['mb_level'] ?></td>
+            <td><a href="./point_list.php?sfl=mb_id&amp;stx=<?=$row['mb_id'] ?>"><?=number_format($row['mb_point']) ?></a></td>
+            <td class="td_boolean"><?=$row['mb_mailling']?'예':'아니오'; ?></td>
+            <td class="td_boolean"><?=$row['mb_open']?'예':'아니오'; ?></td>
+            <td class="td_boolean"><?=preg_match('/[1-9]/', $row['mb_email_certify'])?'예':'아니오'; ?></td>
+            <td class="td_boolean"><?=$row['mb_intercept_date']?'예':'아니오'; ?></td>
+            <td class="td_category"><?=$group ?></td>
         </tr>
         <?php
             }
@@ -206,11 +206,11 @@ $colspan = 5;
         ?>
 
         <tr>
-            <td class="td_category"><a href="<?php echo G5_BBS_URL ?>/new.php?gr_id=<?php echo $row['gr_id'] ?>"><?php echo cut_str($row['gr_subject'],10) ?></a></td>
-            <td class="td_category"><a href="<?php echo get_pretty_url($row['bo_table']) ?>"><?php echo cut_str($row['bo_subject'],20) ?></a></td>
-            <td><a href="<?php echo get_pretty_url($row['bo_table'], $row2['wr_id']); ?><?php echo $comment_link ?>"><?php echo $comment ?><?php echo conv_subject($row2['wr_subject'], 100) ?></a></td>
-            <td class="td_mbname"><div><?php echo $name ?></div></td>
-            <td class="td_datetime"><?php echo $datetime ?></td>
+            <td class="td_category"><a href="<?=G5_BBS_URL ?>/new.php?gr_id=<?=$row['gr_id'] ?>"><?=cut_str($row['gr_subject'],10) ?></a></td>
+            <td class="td_category"><a href="<?=get_pretty_url($row['bo_table']) ?>"><?=cut_str($row['bo_subject'],20) ?></a></td>
+            <td><a href="<?=get_pretty_url($row['bo_table'], $row2['wr_id']); ?><?=$comment_link ?>"><?=$comment ?><?=conv_subject($row2['wr_subject'], 100) ?></a></td>
+            <td class="td_mbname"><div><?=$name ?></div></td>
+            <td class="td_datetime"><?=$datetime ?></td>
         </tr>
 
         <?php
@@ -223,7 +223,7 @@ $colspan = 5;
     </div>
 
     <div class="btn_list03 btn_list">
-        <a href="<?php echo G5_BBS_URL ?>/new.php">최근게시물 더보기</a>
+        <a href="<?=G5_BBS_URL ?>/new.php">최근게시물 더보기</a>
     </div>
 </section>
 
@@ -245,7 +245,7 @@ $colspan = 7;
 <section>
     <h2>최근 포인트 발생내역</h2>
     <div class="local_desc02 local_desc">
-        전체 <?php echo number_format($total_count) ?> 건 중 <?php echo $new_point_rows ?>건 목록
+        전체 <?=number_format($total_count) ?> 건 중 <?=$new_point_rows ?>건 목록
     </div>
 
     <div class="tbl_head01 tbl_wrap">
@@ -284,13 +284,13 @@ $colspan = 7;
         ?>
 
         <tr>
-            <td class="td_mbid"><a href="./point_list.php?sfl=mb_id&amp;stx=<?php echo $row['mb_id'] ?>"><?php echo $row['mb_id'] ?></a></td>
-            <td class="td_mbname"><?php echo get_text($row2['mb_name']); ?></td>
-            <td class="td_name sv_use"><div><?php echo $mb_nick ?></div></td>
-            <td class="td_datetime"><?php echo $row['po_datetime'] ?></td>
-            <td><?php echo $link1.$row['po_content'].$link2 ?></td>
-            <td class="td_numbig"><?php echo number_format($row['po_point']) ?></td>
-            <td class="td_numbig"><?php echo number_format($row['po_mb_point']) ?></td>
+            <td class="td_mbid"><a href="./point_list.php?sfl=mb_id&amp;stx=<?=$row['mb_id'] ?>"><?=$row['mb_id'] ?></a></td>
+            <td class="td_mbname"><?=get_text($row2['mb_name']); ?></td>
+            <td class="td_name sv_use"><div><?=$mb_nick ?></div></td>
+            <td class="td_datetime"><?=$row['po_datetime'] ?></td>
+            <td><?=$link1.$row['po_content'].$link2 ?></td>
+            <td class="td_numbig"><?=number_format($row['po_point']) ?></td>
+            <td class="td_numbig"><?=number_format($row['po_mb_point']) ?></td>
         </tr>
 
         <?php

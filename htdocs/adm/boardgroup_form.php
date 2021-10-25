@@ -39,25 +39,25 @@ include_once('./admin.head.php');
 ?>
 
 <form name="fboardgroup" id="fboardgroup" action="./boardgroup_form_update.php" onsubmit="return fboardgroup_check(this);" method="post" autocomplete="off">
-<input type="hidden" name="w" value="<?php echo $w ?>">
-<input type="hidden" name="sfl" value="<?php echo $sfl ?>">
-<input type="hidden" name="stx" value="<?php echo $stx ?>">
-<input type="hidden" name="sst" value="<?php echo $sst ?>">
-<input type="hidden" name="sod" value="<?php echo $sod ?>">
-<input type="hidden" name="page" value="<?php echo $page ?>">
+<input type="hidden" name="w" value="<?=$w ?>">
+<input type="hidden" name="sfl" value="<?=$sfl ?>">
+<input type="hidden" name="stx" value="<?=$stx ?>">
+<input type="hidden" name="sst" value="<?=$sst ?>">
+<input type="hidden" name="sod" value="<?=$sod ?>">
+<input type="hidden" name="page" value="<?=$page ?>">
 <input type="hidden" name="token" value="">
 
 <div class="tbl_frm01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?></caption>
+    <caption><?=$g5['title']; ?></caption>
     <colgroup>
         <col class="grid_4">
         <col>
     </colgroup>
     <tbody>
     <tr>
-        <th scope="row"><label for="gr_id">그룹 ID<?php echo $sound_only ?></label></th>
-        <td><input type="text" name="gr_id" value="<?php echo $group['gr_id'] ?>" id="gr_id" <?php echo $gr_id_attr; ?> class="<?php echo $gr_id_attr; ?> alnum_ frm_input" maxlength="10">
+        <th scope="row"><label for="gr_id">그룹 ID<?=$sound_only ?></label></th>
+        <td><input type="text" name="gr_id" value="<?=$group['gr_id'] ?>" id="gr_id" <?=$gr_id_attr; ?> class="<?=$gr_id_attr; ?> alnum_ frm_input" maxlength="10">
             <?php
             if ($w=='')
                 echo '영문자, 숫자, _ 만 가능 (공백없이)';
@@ -69,7 +69,7 @@ include_once('./admin.head.php');
     <tr>
         <th scope="row"><label for="gr_subject">그룹 제목<strong class="sound_only"> 필수</strong></label></th>
         <td>
-            <input type="text" name="gr_subject" value="<?php echo get_text($group['gr_subject']) ?>" id="gr_subject" required class="required frm_input" size="80">
+            <input type="text" name="gr_subject" value="<?=get_text($group['gr_subject']) ?>" id="gr_subject" required class="required frm_input" size="80">
             <?php
             if ($w == 'u')
                 echo '<a href="./board_form.php?gr_id='.$gr_id.'" class="btn_frmline">게시판생성</a>';
@@ -79,11 +79,11 @@ include_once('./admin.head.php');
     <tr>
         <th scope="row"><label for="gr_device">접속기기</label></th>
         <td>
-            <?php echo help("PC 와 모바일 사용을 구분합니다.") ?>
+            <?=help("PC 와 모바일 사용을 구분합니다.") ?>
             <select id="gr_device" name="gr_device">
-                <option value="both"<?php echo get_selected($group['gr_device'], 'both', true); ?>>PC와 모바일에서 모두 사용</option>
-                <option value="pc"<?php echo get_selected($group['gr_device'], 'pc'); ?>>PC 전용</option>
-                <option value="mobile"<?php echo get_selected($group['gr_device'], 'mobile'); ?>>모바일 전용</option>
+                <option value="both"<?=get_selected($group['gr_device'], 'both', true); ?>>PC와 모바일에서 모두 사용</option>
+                <option value="pc"<?=get_selected($group['gr_device'], 'pc'); ?>>PC 전용</option>
+                <option value="mobile"<?=get_selected($group['gr_device'], 'mobile'); ?>>모바일 전용</option>
             </select>
         </td>
     </tr>
@@ -101,8 +101,8 @@ include_once('./admin.head.php');
     <tr>
         <th scope="row"><label for="gr_use_access">접근회원사용</label></th>
         <td>
-            <?php echo help("사용에 체크하시면 이 그룹에 속한 게시판은 접근가능한 회원만 접근이 가능합니다.") ?>
-            <input type="checkbox" name="gr_use_access" value="1" id="gr_use_access" <?php echo $gr['gr_use_access']?'checked':''; ?>>
+            <?=help("사용에 체크하시면 이 그룹에 속한 게시판은 접근가능한 회원만 접근이 가능합니다.") ?>
+            <input type="checkbox" name="gr_use_access" value="1" id="gr_use_access" <?=$gr['gr_use_access']?'checked':''; ?>>
             사용
         </td>
     </tr>
@@ -119,12 +119,12 @@ include_once('./admin.head.php');
     </tr>
     <?php for ($i=1;$i<=10;$i++) { ?>
     <tr>
-        <th scope="row">여분필드<?php echo $i ?></th>
+        <th scope="row">여분필드<?=$i ?></th>
         <td class="td_extra">
-            <label for="gr_<?php echo $i ?>_subj">여분필드 <?php echo $i ?> 제목</label>
-            <input type="text" name="gr_<?php echo $i ?>_subj" value="<?php echo isset($group['gr_'.$i.'_subj']) ? get_text($group['gr_'.$i.'_subj']) : ''; ?>" id="gr_<?php echo $i ?>_subj" class="frm_input">
-            <label for="gr_<?php echo $i ?>">여분필드 <?php echo $i ?> 내용</label>
-            <input type="text" name="gr_<?php echo $i ?>" value="<?php echo isset($gr['gr_'.$i]) ? get_sanitize_input($gr['gr_'.$i]) : ''; ?>" id="gr_<?php echo $i ?>" class="frm_input">
+            <label for="gr_<?=$i ?>_subj">여분필드 <?=$i ?> 제목</label>
+            <input type="text" name="gr_<?=$i ?>_subj" value="<?=isset($group['gr_'.$i.'_subj']) ? get_text($group['gr_'.$i.'_subj']) : ''; ?>" id="gr_<?=$i ?>_subj" class="frm_input">
+            <label for="gr_<?=$i ?>">여분필드 <?=$i ?> 내용</label>
+            <input type="text" name="gr_<?=$i ?>" value="<?=isset($gr['gr_'.$i]) ? get_sanitize_input($gr['gr_'.$i]) : ''; ?>" id="gr_<?=$i ?>" class="frm_input">
         </td>
     </tr>
     <?php } ?>
@@ -133,7 +133,7 @@ include_once('./admin.head.php');
 </div>
 
 <div class="btn_fixed_top">
-    <a href="./boardgroup_list.php?<?php echo $qstr ?>" class="btn btn_02">목록</a>
+    <a href="./boardgroup_list.php?<?=$qstr ?>" class="btn btn_02">목록</a>
     <input type="submit" class="btn_submit btn" accesskey="s" value="확인">
 </div>
 

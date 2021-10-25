@@ -159,8 +159,8 @@ switch ($day) {
     </select>
 
     <select name="graph">
-    <option value="line" <?php echo ($graph == 'line' ? 'selected="selected"' : ''); ?>>선그래프</option>
-    <option value="bar" <?php echo ($graph == 'bar' ? 'selected="selected"' : ''); ?>>막대그래프</option>
+    <option value="line" <?=($graph == 'line' ? 'selected="selected"' : ''); ?>>선그래프</option>
+    <option value="bar" <?=($graph == 'bar' ? 'selected="selected"' : ''); ?>>막대그래프</option>
     </select>
 
     <input type="submit" class="btn_submit" value="확인">
@@ -180,8 +180,8 @@ if (empty($line1) || empty($line2)) {
 <div id="chart1" style="height:500px; width:100%;"></div>
 <script>
 $(document).ready(function(){
-    var line1 = [<?php echo implode(',', $line1); ?>];
-    var line2 = [<?php echo implode(',', $line2); ?>];
+    var line1 = [<?=implode(',', $line1); ?>];
+    var line2 = [<?=implode(',', $line2); ?>];
     var plot1 = $.jqplot ('chart1', [line1, line2], {
             seriesDefaults: {
                 <?php if ($graph == 'bar') { ?>
@@ -192,7 +192,7 @@ $(document).ready(function(){
             axes:{
                 xaxis: {
                     renderer: $.jqplot.CategoryAxisRenderer,
-                    label: '<?php echo $day; ?>',
+                    label: '<?=$day; ?>',
                     pad:0,
                     max:23
                 },

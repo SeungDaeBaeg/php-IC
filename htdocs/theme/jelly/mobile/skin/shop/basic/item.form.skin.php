@@ -286,7 +286,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
                 </a>
                 <button type="button" id="btn_zzim" class="btn_b02" style="width:24%;height:30px;">찜하기</button>
                 <button type="button" id="btn_myshop" class="btn_b02" style="width:24%;height:30px;">마이샵</button>
-                <button type="button" class="btn_b02" style="width:24%;height:30px;">판매링크</button>
+                <button type="button" id="btn_link" data-it-id="<?=$it['it_id']?>" class="btn_b02" style="width:24%;height:30px;">판매링크</button>
             <? } else { ?>
                 <button type="button" id="buy_op_btn" class="btn_b02">
                     구매하기
@@ -564,7 +564,14 @@ $("#btn_zzim").click(function() {
 });
 $("#btn_myshop").click(function() {
     alert("마이샵은 준비중입니다.");
-})
+});
+$("#btn_link").click(function() {
+    util.clipboardCopy(url.getClickUrl({
+        m: data.getLoginId(),
+        p: $(this).data('it-id')
+    }));
+    alert("판매링크가 복사되었습니다.");
+});
 
 </script>
 <?php /* 2017 리뉴얼한 테마 적용 스크립트입니다. 기존 스크립트를 오버라이드 합니다. */ ?>

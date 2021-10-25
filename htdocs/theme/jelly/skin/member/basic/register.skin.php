@@ -13,7 +13,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
     @include_once(get_social_skin_path().'/social_register.skin.php');
     ?>
 
-    <form  name="fregister" id="fregister" action="<?php echo $register_action_url ?>" onsubmit="return fregister_submit(this);" method="POST" autocomplete="off">
+    <form  name="fregister" id="fregister" action="<?=$register_action_url ?>" onsubmit="return fregister_submit(this);" method="POST" autocomplete="off">
 
     <p>회원가입약관 및 개인정보처리방침안내의 내용에 동의하셔야 회원가입 하실 수 있습니다.</p>
     <div id="fregister_chkall">
@@ -23,7 +23,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
     </div>
     <section id="fregister_term">
         <h2><i class="fa fa-check-square-o" aria-hidden="true"></i> 회원가입약관</h2>
-        <textarea readonly><?php echo get_text($config['cf_stipulation']) ?></textarea>
+        <textarea readonly><?=get_text($config['cf_stipulation']) ?></textarea>
         <fieldset class="fregister_agree">
             <label for="agree11">회원가입약관의 내용에 동의합니다.</label>
             <input type="checkbox" name="agree" value="1" id="agree11">

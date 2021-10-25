@@ -14,7 +14,7 @@ include_once(G5_ADMIN_PATH.'/admin.head.php');
 ?>
 
 <div class="local_ov01 local_ov">
-    회원정보 최근 업데이트 : <?php echo isset($sms5['cf_datetime']) ? $sms5['cf_datetime'] : ''; ?>
+    회원정보 최근 업데이트 : <?=isset($sms5['cf_datetime']) ? $sms5['cf_datetime'] : ''; ?>
 </div>
 
 <?php
@@ -37,7 +37,7 @@ if ($config['cf_sms_use'] == 'icode') { // 아이코드 사용
             <label for="wr_message" id="wr_message_lbl">내용</label>
             <textarea name="wr_message" id="wr_message" class="box_txt box_square" onkeyup="byte_check('wr_message', 'sms_bytes');" accesskey="m"></textarea>
 
-            <div id="sms_byte"><span id="sms_bytes">0</span> / <span id="sms_max_bytes"><?php echo ($config['cf_sms_type'] == 'LMS' ? 90 : 80); ?></span> byte</div>
+            <div id="sms_byte"><span id="sms_bytes">0</span> / <span id="sms_max_bytes"><?=($config['cf_sms_type'] == 'LMS' ? 90 : 80); ?></span> byte</div>
 
             <button type="button" id="write_sc_btn" class="write_scemo_btn">특수<br>기호</button>
             <div id="write_sc" class="write_scemo">
@@ -118,7 +118,7 @@ if ($config['cf_sms_use'] == 'icode') { // 아이코드 사용
 
         <div id="write_reply">
             <label for="wr_reply">회신<strong class="sound_only"> 필수</strong></label>
-            <input type="text" name="wr_reply" value="<?php echo isset($sms5['cf_phone']) ? get_sanitize_input($sms5['cf_phone']) : ''; ?>" id="wr_reply" required class="frm_input required" size="17" maxlength="20" readonly="readonly">
+            <input type="text" name="wr_reply" value="<?=isset($sms5['cf_phone']) ? get_sanitize_input($sms5['cf_phone']) : ''; ?>" id="wr_reply" required class="frm_input required" size="17" maxlength="20" readonly="readonly">
         </div>
 
         <div id="write_recv" class="write_inner">
@@ -146,31 +146,31 @@ if ($config['cf_sms_use'] == 'icode') { // 아이코드 사용
             </div>
 
             <select name="wr_by" id="wr_by" disabled>
-                <option value="<?php echo date('Y')?>"><?php echo date('Y')?></option>
-                <option value="<?php echo date('Y')+1?>"><?php echo date('Y')+1?></option>
+                <option value="<?=date('Y')?>"><?=date('Y')?></option>
+                <option value="<?=date('Y')+1?>"><?=date('Y')+1?></option>
             </select>
             <label for="wr_by">년</label><br>
             <select name="wr_bm" id="wr_bm" disabled>
                 <?php for ($i=1; $i<=12; $i++) { ?>
-                <option value="<?php echo sprintf("%02d",$i)?>"<?php echo get_selected(date('m'), $i); ?>><?php echo sprintf("%02d",$i)?></option>
+                <option value="<?=sprintf("%02d",$i)?>"<?=get_selected(date('m'), $i); ?>><?=sprintf("%02d",$i)?></option>
             <?php } ?>
             </select>
             <label for="wr_bm">월</label>
             <select name="wr_bd" id="wr_bd" disabled>
                 <?php for ($i=1; $i<=31; $i++) { ?>
-                <option value="<?php echo sprintf("%02d",$i)?>"<?php echo get_selected(date('d'), $i); ?>><?php echo sprintf("%02d",$i)?></option>
+                <option value="<?=sprintf("%02d",$i)?>"<?=get_selected(date('d'), $i); ?>><?=sprintf("%02d",$i)?></option>
                 <?php } ?>
             </select>
             <label for="wr_bd">일</label><br>
                 <select name="wr_bh" id="wr_bh" disabled>
                 <?php for ($i=0; $i<24; $i++) { ?>
-                <option value="<?php echo sprintf("%02d",$i)?>"<?php echo get_selected(date('H')+1, $i); ?>><?php echo sprintf("%02d",$i)?></option>
+                <option value="<?=sprintf("%02d",$i)?>"<?=get_selected(date('H')+1, $i); ?>><?=sprintf("%02d",$i)?></option>
                 <?php } ?>
             </select>
             <label for="wr_bh">시</label>
             <select name="wr_bi" id="wr_bi" disabled>
                 <?php for ($i=0; $i<=59; $i+=5) { ?>
-                <option value="<?php echo sprintf("%02d",$i)?>"><?php echo sprintf("%02d",$i)?></option>
+                <option value="<?=sprintf("%02d",$i)?>"><?=sprintf("%02d",$i)?></option>
                 <?php } ?>
             </select>
             <label for="wr_bi">분</label>
@@ -411,7 +411,7 @@ function byte_check(wr_message, sms_bytes)
     var conts = document.getElementById(wr_message);
     var bytes = document.getElementById(sms_bytes);
     var max_bytes = document.getElementById("sms_max_bytes");
-    var lms_max_length = <?php echo G5_ICODE_LMS_MAX_LENGTH;?>
+    var lms_max_length = <?=G5_ICODE_LMS_MAX_LENGTH;?>
 
     var i = 0;
     var cnt = 0;
@@ -500,8 +500,8 @@ $row = sql_fetch("select * from {$g5['sms5_book_table']} where bk_no='$bk_no'");
 ?>
 
 var hp_list = document.getElementById('hp_list');
-var item    = "<?php echo $row['bk_name']?> (<?php echo $row['bk_hp']?>)";
-var value   = "p,<?php echo $row['bk_no']?>";
+var item    = "<?=$row['bk_name']?> (<?=$row['bk_hp']?>)";
+var value   = "p,<?=$row['bk_no']?>";
 
 hp_list.options[hp_list.length] = new Option(item, value);
 

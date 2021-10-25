@@ -41,7 +41,7 @@ function m_Completepayment( FormOrJson, closeEvent )
 }
 </script>
 
-<script src="<?php echo $g_conf_js_url; ?>"></script>
+<script src="<?=$g_conf_js_url; ?>"></script>
 <script>
 /* Payplus Plug-in 실행 */
 function jsf__pay( form )

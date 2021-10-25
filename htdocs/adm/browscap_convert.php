@@ -29,7 +29,7 @@ $(function() {
         $.ajax({
             method: "GET",
             url: "./browscap_converter.php",
-            data: { rows: "<?php echo $rows; ?>" },
+            data: { rows: "<?=$rows; ?>" },
             async: true,
             cache: false,
             dataType: "html",

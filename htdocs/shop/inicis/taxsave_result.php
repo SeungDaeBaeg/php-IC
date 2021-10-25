@@ -156,23 +156,23 @@ function showreceipt() // 현금 영수증 출력
         <tbody>
         <tr>
             <th scope="row">결과코드</th>
-            <td><?php echo $inipay->GetResult('ResultCode'); ?></td>
+            <td><?=$inipay->GetResult('ResultCode'); ?></td>
         </tr>
         <tr>
             <th scope="row">결과 메세지</th>
-            <td><?php echo iconv_utf8($inipay->GetResult('ResultMsg')); ?></td>
+            <td><?=iconv_utf8($inipay->GetResult('ResultMsg')); ?></td>
         </tr>
         <tr>
             <th scope="row">현금영수증 거래번호</th>
-            <td><?php echo $inipay->GetResult('TID'); ?></td>
+            <td><?=$inipay->GetResult('TID'); ?></td>
         </tr>
         <tr>
             <th scope="row">현금영수증 승인번호</th>
-            <td><?php echo $inipay->GetResult('ApplNum'); ?></td>
+            <td><?=$inipay->GetResult('ApplNum'); ?></td>
         </tr>
         <tr>
             <th scope="row">승인시간</th>
-            <td><?php echo preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/", "\\1-\\2-\\3 \\4:\\5:\\6",$inipay->GetResult('ApplDate').$inipay->GetResult('ApplTime')); ?></td>
+            <td><?=preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/", "\\1-\\2-\\3 \\4:\\5:\\6",$inipay->GetResult('ApplDate').$inipay->GetResult('ApplTime')); ?></td>
         </tr>
         <tr>
             <th scope="row">현금영수증 URL</th>

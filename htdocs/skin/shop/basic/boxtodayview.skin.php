@@ -14,7 +14,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
 
 <!-- 오늘 본 상품 시작 { -->
 <div id="stv">
-    <h2 class="s_h2">오늘 본 상품 <span><?php echo get_view_today_items_count(); ?></span></h2>
+    <h2 class="s_h2">오늘 본 상품 <span><?=get_view_today_items_count(); ?></span></h2>
 
     <?php if ($tv_datas) { // 오늘 본 상품이 1개라도 있을 때 ?>
     <?php
@@ -60,15 +60,15 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
 
     <script>
     $(function() {
-        var itemQty = <?php echo $tv_tot_count; ?>; // 총 아이템 수량
-        var itemShow = <?php echo $tv_div['img_length']; ?>; // 한번에 보여줄 아이템 수량
+        var itemQty = <?=$tv_tot_count; ?>; // 총 아이템 수량
+        var itemShow = <?=$tv_div['img_length']; ?>; // 한번에 보여줄 아이템 수량
         if (itemQty > itemShow)
         {
             $('#stv_btn').append('<button type="button" id="up"><i class="fa fa-angle-left" aria-hidden="true"></i> 이전</button><button type="button" id="down">다음 <i class="fa fa-angle-right" aria-hidden="true"></i></button>');
         }
         var Flag = 1; // 페이지
-        var EOFlag = parseInt(<?php echo $i-1; ?>/itemShow); // 전체 리스트를 3(한 번에 보여줄 값)으로 나눠 페이지 최댓값을 구하고
-        var itemRest = parseInt(<?php echo $i-1; ?>%itemShow); // 나머지 값을 구한 후
+        var EOFlag = parseInt(<?=$i-1; ?>/itemShow); // 전체 리스트를 3(한 번에 보여줄 값)으로 나눠 페이지 최댓값을 구하고
+        var itemRest = parseInt(<?=$i-1; ?>%itemShow); // 나머지 값을 구한 후
         if (itemRest > 0) // 나머지 값이 있다면
         {
             EOFlag++; // 페이지 최댓값을 1 증가시킨다.
@@ -107,5 +107,5 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
     <?php } ?>
 </div>
 
-<script src="<?php echo G5_JS_URL ?>/scroll_oldie.js"></script>
+<script src="<?=G5_JS_URL ?>/scroll_oldie.js"></script>
 <!-- } 오늘 본 상품 끝 -->

@@ -20,7 +20,7 @@ if ($exists_data_dir && $write_data_dir) {
     </p>
 
     <div class="ins_ta ins_license">
-        <textarea name="textarea" id="ins_license" readonly><?php echo implode('', file('../LICENSE.txt')); ?></textarea>
+        <textarea name="textarea" id="ins_license" readonly><?=implode('', file('../LICENSE.txt')); ?></textarea>
     </div>
 
     <div id="ins_agree">

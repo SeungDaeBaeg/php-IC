@@ -14,10 +14,10 @@ $fg_no = isset($_REQUEST['fg_no']) ? (int) $_REQUEST['fg_no'] : 0;
 <form name="emo_frm">
     <label for="emo_sel" class="sound_only">이모티콘 그룹</label>
     <select name="fg_no" id="emo_sel">
-        <option value=""<?php echo get_selected('', $fg_no); ?>> 전체 </option>
-        <option value="0"<?php echo get_selected('0', $fg_no); ?>> 미분류 (<?php echo number_format($no_count)?>) </option>
+        <option value=""<?=get_selected('', $fg_no); ?>> 전체 </option>
+        <option value="0"<?=get_selected('0', $fg_no); ?>> 미분류 (<?=number_format($no_count)?>) </option>
         <?php for($i=0; $i<count($group); $i++) {?>
-        <option value="<?php echo $group[$i]['fg_no']?>"<?php echo get_selected($fg_no, $group[$i]['fg_no']);?>> <?php echo $group[$i]['fg_name']?> (<?php echo number_format($group[$i]['fg_count'])?>) </option>
+        <option value="<?=$group[$i]['fg_no']?>"<?=get_selected($fg_no, $group[$i]['fg_no']);?>> <?=$group[$i]['fg_name']?> (<?=number_format($group[$i]['fg_count'])?>) </option>
         <?php } ?>
     </select>
 </form>
@@ -25,18 +25,18 @@ $fg_no = isset($_REQUEST['fg_no']) ? (int) $_REQUEST['fg_no'] : 0;
 <ul class="emo_list">
 </ul>
 
-<form name="emo_sch" id="emo_sch" method="get" action="<?php echo $_SERVER['SCRIPT_NAME']?>">
-<input type="hidden" name="fg_no" value="<?php echo $fg_no?>">
+<form name="emo_sch" id="emo_sch" method="get" action="<?=$_SERVER['SCRIPT_NAME']?>">
+<input type="hidden" name="fg_no" value="<?=$fg_no?>">
 <input type="hidden" name="page" id="hidden_page" >
 <input type="hidden" name="fg_no" id="hidden_fg_no" >
 <label for="st" class="sound_only">검색대상</label>
 <select name="st" id="st">
-    <option value="all"<?php echo get_selected('all', $st); ?>>제목 + 이모티콘</option>
-    <option value="name"<?php echo get_selected('name', $st); ?>>제목</option>
-    <option value="content"<?php echo get_selected('content', $st); ?>>이모티콘</option>
+    <option value="all"<?=get_selected('all', $st); ?>>제목 + 이모티콘</option>
+    <option value="name"<?=get_selected('name', $st); ?>>제목</option>
+    <option value="content"<?=get_selected('content', $st); ?>>이모티콘</option>
 </select>
 <label for="sv" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-<input type="text" name="sv" value="<?php echo $sv?>" id="sv" required class="frm_input required" size="15">
+<input type="text" name="sv" value="<?=$sv?>" id="sv" required class="frm_input required" size="15">
 <input type="submit" value="검색" class="btn_submit">
 </form>
 
@@ -44,7 +44,7 @@ $fg_no = isset($_REQUEST['fg_no']) ? (int) $_REQUEST['fg_no'] : 0;
     <span class="pg" id="emo_pg"></span>
 </nav>
 
-<script src="<?php echo G5_JS_URL?>/jquery.sms_paging.js"></script>
+<script src="<?=G5_JS_URL?>/jquery.sms_paging.js"></script>
 <script>
 var emoticon_list = {
     go : function(fo_no){

@@ -6,7 +6,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$latest_skin_url.'/style.css">', 
 ?>
 
 <div class="lt">
-    <h2><a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?php echo $bo_table ?>"><?php echo $bo_subject ?></a></h2>
+    <h2><a href="<?=G5_BBS_URL ?>/board.php?bo_table=<?=$bo_table ?>"><?=$bo_subject ?></a></h2>
     <ul>
     <?php for ($i=0; $i<count($list); $i++) { ?>
         <li>
@@ -38,5 +38,5 @@ add_stylesheet('<link rel="stylesheet" href="'.$latest_skin_url.'/style.css">', 
     <li class="empty_li">게시물이 없습니다.</li>
     <?php } ?>
     </ul>
-    <a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?php echo $bo_table ?>" class="more_btn"><span class="sound_only"><?php echo $bo_subject ?></span>전체보기</a>
+    <a href="<?=G5_BBS_URL ?>/board.php?bo_table=<?=$bo_table ?>" class="more_btn"><span class="sound_only"><?=$bo_subject ?></span>전체보기</a>
 </div>

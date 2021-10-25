@@ -46,30 +46,30 @@ include_once('./admin.head.php');
 ?>
 
 <div class="local_ov01 local_ov">
-    전체회원 <?php echo number_format($tot_cnt) ?>명 , 탈퇴대기회원 <?php echo number_format($finish_cnt) ?>명, 정상회원 <?php echo number_format($tot_cnt - $finish_cnt) ?>명 중 메일 발송 대상 선택
+    전체회원 <?=number_format($tot_cnt) ?>명 , 탈퇴대기회원 <?=number_format($finish_cnt) ?>명, 정상회원 <?=number_format($tot_cnt - $finish_cnt) ?>명 중 메일 발송 대상 선택
 </div>
 
 <form name="frmsendmailselectform" id="frmsendmailselectform" action="./mail_select_list.php" method="post" autocomplete="off">
-<input type="hidden" name="ma_id" value="<?php echo $ma_id ?>">
+<input type="hidden" name="ma_id" value="<?=$ma_id ?>">
 
 <div class="tbl_frm01 tbl_wrap">
     <table>
-    <caption><?php echo $g5['title']; ?> 대상선택</caption>
+    <caption><?=$g5['title']; ?> 대상선택</caption>
     <tbody>
     <tr>
         <th scope="row">회원 ID</th>
         <td>
-            <input type="radio" name="mb_id1" value="1" id="mb_id1_all" <?php echo $mb_id1?"checked":""; ?>> <label for="mb_id1_all">전체</label>
-            <input type="radio" name="mb_id1" value="0" id="mb_id1_section" <?php echo !$mb_id1?"checked":""; ?>> <label for="mb_id1_section">구간</label>
-            <input type="text" name="mb_id1_from" value="<?php echo get_sanitize_input($mb_id1_from); ?>" id="mb_id1_from" title="시작구간" class="frm_input"> 에서
-            <input type="text" name="mb_id1_to" value="<?php echo get_sanitize_input($mb_id1_to); ?>" id="mb_id1_to" title="종료구간" class="frm_input"> 까지
+            <input type="radio" name="mb_id1" value="1" id="mb_id1_all" <?=$mb_id1?"checked":""; ?>> <label for="mb_id1_all">전체</label>
+            <input type="radio" name="mb_id1" value="0" id="mb_id1_section" <?=!$mb_id1?"checked":""; ?>> <label for="mb_id1_section">구간</label>
+            <input type="text" name="mb_id1_from" value="<?=get_sanitize_input($mb_id1_from); ?>" id="mb_id1_from" title="시작구간" class="frm_input"> 에서
+            <input type="text" name="mb_id1_to" value="<?=get_sanitize_input($mb_id1_to); ?>" id="mb_id1_to" title="종료구간" class="frm_input"> 까지
         </td>
     </tr>
     <tr>
         <th scope="row"><label for="mb_email">E-mail</label></th>
         <td>
-            <?php echo help("메일 주소에 단어 포함 (예 : @".preg_replace('#^(www[^\.]*\.){1}#', '', $_SERVER['HTTP_HOST']).")") ?>
-            <input type="text" name="mb_email" value="<?php echo get_sanitize_input($mb_email); ?>" id="mb_email" class="frm_input" size="50">
+            <?=help("메일 주소에 단어 포함 (예 : @".preg_replace('#^(www[^\.]*\.){1}#', '', $_SERVER['HTTP_HOST']).")") ?>
+            <input type="text" name="mb_email" value="<?=get_sanitize_input($mb_email); ?>" id="mb_email" class="frm_input" size="50">
         </td>
     </tr>
     <tr>
@@ -87,13 +87,13 @@ include_once('./admin.head.php');
             <label for="mb_level_from" class="sound_only">최소권한</label>
             <select name="mb_level_from" id="mb_level_from">
             <?php for ($i=1; $i<=10; $i++) { ?>
-                <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                <option value="<?=$i ?>"><?=$i ?></option>
             <?php } ?>
             </select> 에서
             <label for="mb_level_to" class="sound_only">최대권한</label>
             <select name="mb_level_to" id="mb_level_to">
             <?php for ($i=1; $i<=10; $i++) { ?>
-                <option value="<?php echo $i ?>"<?php echo $i==10 ? " selected" : ""; ?>><?php echo $i ?></option>
+                <option value="<?=$i ?>"<?=$i==10 ? " selected" : ""; ?>><?=$i ?></option>
             <?php } ?>
             </select> 까지
         </td>

@@ -7,7 +7,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     <h2>에스크로 안내</h2>
     <table>
     <tr>
-        <td><a href="http://admin.kcp.co.kr/Modules/escrow/kcp_pop.jsp?site_cd=<?php echo $default['de_kcp_mid']; ?>" class="nhnkcp_escrow_popup" data-sitecd="<?php echo $default['de_kcp_mid']; ?>" target="_blank"><img src="<?php echo G5_SHOP_URL; ?>/img/marks_escrow/escrow_foot.gif" width="290" height="92" border="0" usemap="#Map"></a></td>
+        <td><a href="http://admin.kcp.co.kr/Modules/escrow/kcp_pop.jsp?site_cd=<?=$default['de_kcp_mid']; ?>" class="nhnkcp_escrow_popup" data-sitecd="<?=$default['de_kcp_mid']; ?>" target="_blank"><img src="<?=G5_SHOP_URL; ?>/img/marks_escrow/escrow_foot.gif" width="290" height="92" border="0" usemap="#Map"></a></td>
     </tr>
     <tr>
         <td>

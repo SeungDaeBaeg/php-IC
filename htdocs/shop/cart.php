@@ -42,12 +42,12 @@ include_once('./_head.php');
 ?>
 
 <!-- 장바구니 시작 { -->
-<script src="<?php echo G5_JS_URL; ?>/shop.js"></script>
-<script src="<?php echo G5_JS_URL; ?>/shop.override.js"></script>
+<script src="<?=G5_JS_URL; ?>/shop.js"></script>
+<script src="<?=G5_JS_URL; ?>/shop.override.js"></script>
 
 <div id="sod_bsk" class="od_prd_list">
 
-    <form name="frmcartlist" id="sod_bsk_list" class="2017_renewal_itemform" method="post" action="<?php echo $cart_action_url; ?>">
+    <form name="frmcartlist" id="sod_bsk_list" class="2017_renewal_itemform" method="post" action="<?=$cart_action_url; ?>">
     <div class="tbl_head03 tbl_wrap">
         <table>
         <thead>
@@ -145,23 +145,23 @@ include_once('./_head.php');
 
         <tr>
             <td class="td_chk chk_box">
-                <input type="checkbox" name="ct_chk[<?php echo $i; ?>]" value="1" id="ct_chk_<?php echo $i; ?>" checked="checked" class="selec_chk">
-            	<label for="ct_chk_<?php echo $i; ?>"><span></span><b class="sound_only">상품</b></label>
+                <input type="checkbox" name="ct_chk[<?=$i; ?>]" value="1" id="ct_chk_<?=$i; ?>" checked="checked" class="selec_chk">
+            	<label for="ct_chk_<?=$i; ?>"><span></span><b class="sound_only">상품</b></label>
             </td> 
             
             <td class="td_prd">
-                <div class="sod_img"><a href="<?php echo shop_item_url($row['it_id']); ?>"><?php echo $image; ?></a></div>
+                <div class="sod_img"><a href="<?=shop_item_url($row['it_id']); ?>"><?=$image; ?></a></div>
                 <div class="sod_name">
-                    <input type="hidden" name="it_id[<?php echo $i; ?>]" value="<?php echo $row['it_id']; ?>">
-                    <input type="hidden" name="it_name[<?php echo $i; ?>]" value="<?php echo get_text($row['it_name']); ?>">
-                    <?php echo $it_name.$mod_options; ?>
+                    <input type="hidden" name="it_id[<?=$i; ?>]" value="<?=$row['it_id']; ?>">
+                    <input type="hidden" name="it_name[<?=$i; ?>]" value="<?=get_text($row['it_name']); ?>">
+                    <?=$it_name.$mod_options; ?>
                 </div>
             </td>
-            <td class="td_num"><?php echo number_format($sum['qty']); ?></td>
-            <td class="td_numbig"><?php echo number_format($row['ct_price']); ?></td>
-            <td class="td_numbig"><?php echo number_format($point); ?></td>
-            <td class="td_dvr"><?php echo $ct_send_cost; ?></td>
-            <td class="td_numbig text_right"><span id="sell_price_<?php echo $i; ?>" class="total_prc"><?php echo number_format($sell_price); ?></span></td>
+            <td class="td_num"><?=number_format($sum['qty']); ?></td>
+            <td class="td_numbig"><?=number_format($row['ct_price']); ?></td>
+            <td class="td_numbig"><?=number_format($point); ?></td>
+            <td class="td_dvr"><?=$ct_send_cost; ?></td>
+            <td class="td_numbig text_right"><span id="sell_price_<?=$i; ?>" class="total_prc"><?=number_format($sell_price); ?></span></td>
         </tr>
 
         <?php
@@ -192,17 +192,17 @@ include_once('./_head.php');
         <ul>
             <li class="sod_bsk_dvr">
                 <span>배송비</span>
-                <strong><?php echo number_format($send_cost); ?></strong> 원
+                <strong><?=number_format($send_cost); ?></strong> 원
             </li>
 
             <li class="sod_bsk_pt">
                 <span>포인트</span>
-                <strong><?php echo number_format($tot_point); ?></strong> 점
+                <strong><?=number_format($tot_point); ?></strong> 점
             </li>
 
             <li class="sod_bsk_cnt">
                 <span>총계 가격</span>
-                <strong><?php echo number_format($tot_price); ?></strong> 원 
+                <strong><?=number_format($tot_price); ?></strong> 원
             </li>
         </ul>
     </div>
@@ -210,16 +210,16 @@ include_once('./_head.php');
 
     <div id="sod_bsk_act">
         <?php if ($i == 0) { ?>
-        <a href="<?php echo G5_SHOP_URL; ?>/" class="btn01">쇼핑 계속하기</a>
+        <a href="<?=G5_SHOP_URL; ?>/" class="btn01">쇼핑 계속하기</a>
         <?php } else { ?>
         <input type="hidden" name="url" value="./orderform.php">
-        <input type="hidden" name="records" value="<?php echo $i; ?>">
+        <input type="hidden" name="records" value="<?=$i; ?>">
         <input type="hidden" name="act" value="">
-        <a href="<?php echo shop_category_url($continue_ca_id); ?>" class="btn01">쇼핑 계속하기</a>
+        <a href="<?=shop_category_url($continue_ca_id); ?>" class="btn01">쇼핑 계속하기</a>
         <button type="button" onclick="return form_check('buy');" class="btn_submit">주문하기</button>
 
         <?php if ($naverpay_button_js) { ?>
-        <div class="cart-naverpay"><?php echo $naverpay_request_js.$naverpay_button_js; ?></div>
+        <div class="cart-naverpay"><?=$naverpay_request_js.$naverpay_button_js; ?></div>
         <?php } ?>
         <?php } ?>
     </div>

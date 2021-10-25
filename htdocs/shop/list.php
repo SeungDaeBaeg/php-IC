@@ -69,9 +69,9 @@ if ($is_admin)
 ?>
 
 <script>
-var itemlist_ca_id = "<?php echo $ca_id; ?>";
+var itemlist_ca_id = "<?=$ca_id; ?>";
 </script>
-<script src="<?php echo G5_JS_URL; ?>/shop.list.js"></script>
+<script src="<?=G5_JS_URL; ?>/shop.list.js"></script>
 
 <!-- 상품 목록 시작 { -->
 <div id="sct">

@@ -90,7 +90,7 @@ include_once('./_head.php');
     include "./orderinquiry.sub.php";
     ?>
 
-    <?php echo get_paging($config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
+    <?=get_paging($config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>
 </div>
 <!-- } 주문 내역 끝 -->
 

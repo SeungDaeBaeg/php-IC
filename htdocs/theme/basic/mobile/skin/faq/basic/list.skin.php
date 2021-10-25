@@ -17,9 +17,9 @@ if( count($faq_master_list) ){
 
 <div id="faq_sch">
     <form name="faq_search_form" method="get">
-    <input type="hidden" name="fm_id" value="<?php echo $fm_id;?>">
+    <input type="hidden" name="fm_id" value="<?=$fm_id;?>">
     <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-    <input type="text" name="stx" value="<?php echo $stx;?>" required id="stx" class="frm_input" size="15" maxlength="15">
+    <input type="text" name="stx" value="<?=$stx;?>" required id="stx" class="frm_input" size="15" maxlength="15">
     <button type="submit" value="검색" class="btn_submit"><i class="fa fa-search" aria-hidden="true"></i><span class="sound_only">검색</span></button>
     </form>
 </div>
@@ -36,7 +36,7 @@ if( count($faq_master_list) ){
                 $category_msg = '<span class="sound_only">열린 분류 </span>';
             }
         ?>
-        <li><a href="<?php echo $category_href;?>?fm_id=<?php echo $v['fm_id']?>" <?php echo $category_option;?> ><?php echo $category_msg.$v['fm_subject'];?></a></li>
+        <li><a href="<?=$category_href;?>?fm_id=<?=$v['fm_id']?>" <?=$category_option;?> ><?=$category_msg.$v['fm_subject'];?></a></li>
         <?php
         }
         ?>
@@ -44,12 +44,12 @@ if( count($faq_master_list) ){
 </nav>
 <?php } ?>
 
-<div id="faq_wrap" class="faq_<?php echo $fm_id; ?>">
+<div id="faq_wrap" class="faq_<?=$fm_id; ?>">
     <?php // FAQ 내용
     if( count($faq_list) ){
     ?>
     <section id="faq_con">
-        <h2><?php echo $g5['title']; ?> 목록</h2>
+        <h2><?=$g5['title']; ?> 목록</h2>
         <ol>
             <?php
             foreach($faq_list as $key=>$v){
@@ -58,11 +58,11 @@ if( count($faq_master_list) ){
             ?>
             <li>
                 <h3>
-                	<span class="tit_bg">Q</span><a href="#none" onclick="return faq_open(this);"><?php echo conv_content($v['fa_subject'], 1); ?></a>
+                	<span class="tit_bg">Q</span><a href="#none" onclick="return faq_open(this);"><?=conv_content($v['fa_subject'], 1); ?></a>
                 	<button class="tit_btn" onclick="return faq_open(this);"><i class="fa fa-plus" aria-hidden="true"></i><span class="sound_only">열기</span></button>
                 </h3>
                 <div class="con_inner">
-                    <?php echo conv_content($v['fa_content'], 1); ?>
+                    <?=conv_content($v['fa_content'], 1); ?>
                     <button type="button" class="closer_btn"><i class="fa fa-minus" aria-hidden="true"></i><span class="sound_only">닫기</span></button>
                 </div>
             </li>
@@ -86,7 +86,7 @@ if( count($faq_master_list) ){
     ?>
 </div>
 
-<?php echo get_paging($page_rows, $page, $total_page, $_SERVER['SCRIPT_NAME'].'?'.$qstr.'&amp;page='); ?>
+<?=get_paging($page_rows, $page, $total_page, $_SERVER['SCRIPT_NAME'].'?'.$qstr.'&amp;page='); ?>
 
 <?php
 // 하단 HTML
@@ -96,7 +96,7 @@ echo '<div id="faq_thtml">'.conv_content($fm['fm_mobile_tail_html'], 1).'</div>'
 
 <!-- } FAQ 끝 -->
 
-<script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
+<script src="<?=G5_JS_URL; ?>/viewimageresize.js"></script>
 <script>
 jQuery(function() {
     $(".closer_btn").on("click", function() {

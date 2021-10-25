@@ -33,6 +33,6 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 ?>
 
 <div id="sct_location">
-    <a href='<?php echo G5_SHOP_URL; ?>/' class="sct_bg">Home</a>
-    <?php echo $str; ?>
+    <a href='<?=G5_SHOP_URL; ?>/' class="sct_bg">Home</a>
+    <?=$str; ?>
 </div>

@@ -87,7 +87,7 @@ require_once(G5_SHOP_PATH.'/settle_kcp.inc.php');
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>현금영수증발급 <?php echo $req_tx_name; ?> | <?php echo $config['cf_title']; ?></title>
+<title>현금영수증발급 <?=$req_tx_name; ?> | <?=$config['cf_title']; ?></title>
 <?php
 echo '<link rel="stylesheet" href="'.G5_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'default').'_shop.css">'.PHP_EOL;
 ?>
@@ -98,7 +98,7 @@ echo '<link rel="stylesheet" href="'.G5_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'defa
     //현금영수증 연동 스크립트
     function receiptView(auth_no)
     {
-        var receiptWin = "<?php echo G5_CASH_RECEIPT_URL.$default['de_kcp_mid'].'&orderid='.$ordr_idxx.'&bill_yn=Y&authno='; ?>"+auth_no;
+        var receiptWin = "<?=G5_CASH_RECEIPT_URL.$default['de_kcp_mid'].'&orderid='.$ordr_idxx.'&bill_yn=Y&authno='; ?>"+auth_no;
         window.open(receiptWin , "" , "width=360, height=647")
     }
 </script>
@@ -106,7 +106,7 @@ echo '<link rel="stylesheet" href="'.G5_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'defa
 <body>
 
 <div id="kcp_req_rx" class="new_win">
-    <h1 id="win_title">현금영수증 <?php echo $req_tx_name; ?> - KCP Online Payment System</h1>
+    <h1 id="win_title">현금영수증 <?=$req_tx_name; ?> - KCP Online Payment System</h1>
 
 
     <div class="tbl_head01 tbl_wrap">
@@ -126,36 +126,36 @@ echo '<link rel="stylesheet" href="'.G5_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'defa
 ?>
         <tr>
             <th scope="row">결과코드</th>
-            <td><?php echo $res_cd; ?></td>
+            <td><?=$res_cd; ?></td>
         </tr>
         <tr>
             <th scope="row">결과 메세지</th>
-            <td><?php echo $res_msg; ?></td>
+            <td><?=$res_msg; ?></td>
         </tr>
         <tr>
             <th scope="row">현금영수증 거래번호</th>
-            <td><?php echo $cash_no; ?></td>
+            <td><?=$cash_no; ?></td>
         </tr>
         <tr>
             <th scope="row">현금영수증 승인번호</th>
-            <td><?php echo $receipt_no; ?></td>
+            <td><?=$receipt_no; ?></td>
         </tr>
         <tr>
             <th scope="row">등록 상태 코드</th>
-            <td><?php echo $reg_stat; ?></td>
+            <td><?=$reg_stat; ?></td>
         </tr>
         <tr>
             <th scope="row">등록 상태 설명</th>
-            <td><?php echo $reg_desc; ?></td>
+            <td><?=$reg_desc; ?></td>
         </tr>
         <tr>
             <th scope="row">승인시간</th>
-            <td><?php echo preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/", "\\1-\\2-\\3 \\4:\\5:\\6",$app_time); ?></td>
+            <td><?=preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/", "\\1-\\2-\\3 \\4:\\5:\\6",$app_time); ?></td>
         </tr>
         <tr>
             <th scope="row">현금영수증 URL</th>
             <td>
-                <button type="button" name="receiptView" class="btn_frmline" onClick="javascript:receiptView('<?php echo $receipt_no; ?>')">영수증 확인</button>
+                <button type="button" name="receiptView" class="btn_frmline" onClick="javascript:receiptView('<?=$receipt_no; ?>')">영수증 확인</button>
                 <p>영수증 확인은 실 등록의 경우에만 가능합니다.</p>
             </td>
         </tr>
@@ -169,11 +169,11 @@ echo '<link rel="stylesheet" href="'.G5_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'defa
 ?>
         <tr>
             <th scope="row">결과코드</th>
-            <td><?php echo $res_cd; ?></td>
+            <td><?=$res_cd; ?></td>
         </tr>
         <tr>
             <th scope="row">결과 메세지</th>
-            <td><?php echo $res_msg; ?></td>
+            <td><?=$res_msg; ?></td>
         </tr>
 <?php
             }
@@ -184,11 +184,11 @@ echo '<link rel="stylesheet" href="'.G5_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'defa
 ?>
         <tr>
             <th scope="row">취소 결과코드</th>
-            <td><?php echo $res_cd; ?></td>
+            <td><?=$res_cd; ?></td>
         </tr>
         <tr>
             <th scope="row">취소 결과 메세지</th>
-            <td><?php echo $res_msg; ?></td>
+            <td><?=$res_msg; ?></td>
         </tr>
         <tr>
             <th scope="row">상세메세지</th>
@@ -216,36 +216,36 @@ echo '<link rel="stylesheet" href="'.G5_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'defa
 ?>
         <tr>
             <th scope="row">결과코드</th>
-            <td><?php echo $res_cd; ?></td>
+            <td><?=$res_cd; ?></td>
         </tr>
         <tr>
             <th scope="row">결과 메세지</th>
-            <td><?php echo $res_msg; ?></td>
+            <td><?=$res_msg; ?></td>
         </tr>
         <tr>
             <th scope="row">현금영수증 거래번호</th>
-            <td><?php echo $cash_no; ?></td>
+            <td><?=$cash_no; ?></td>
         </tr>
         <tr>
             <th scope="row">현금영수증 승인번호</th>
-            <td><?php echo $receipt_no; ?></td>
+            <td><?=$receipt_no; ?></td>
         </tr>
         <tr>
             <th scope="row">등록 상태 코드</th>
-            <td><?php echo $reg_stat; ?></td>
+            <td><?=$reg_stat; ?></td>
         </tr>
         <tr>
             <th scope="row">등록 상태 설명</th>
-            <td><?php echo $reg_desc; ?></td>
+            <td><?=$reg_desc; ?></td>
         </tr>
         <tr>
             <th scope="row">승인시간</th>
-            <td><?php echo preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/", "\\1-\\2-\\3 \\4:\\5:\\6", $app_time); ?></td>
+            <td><?=preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/", "\\1-\\2-\\3 \\4:\\5:\\6", $app_time); ?></td>
         </tr>
         <tr>
             <th scope="row">현금영수증 URL</th>
             <td>
-                <input type="button" name="receiptView" value="영수증 확인" class="box" onClick="javascript:receiptView('<?php echo $receipt_no; ?>')">
+                <input type="button" name="receiptView" value="영수증 확인" class="box" onClick="javascript:receiptView('<?=$receipt_no; ?>')">
                 <p>영수증 확인은 실 등록의 경우에만 가능합니다.</p>
             </td>
         </tr>
@@ -256,11 +256,11 @@ echo '<link rel="stylesheet" href="'.G5_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'defa
 ?>
         <tr>
             <th scope="row">결과코드</th>
-            <td><?php echo $res_cd; ?></td>
+            <td><?=$res_cd; ?></td>
         </tr>
         <tr>
             <th scope="row">결과 메세지</th>
-            <td><?php echo $res_msg; ?></td>
+            <td><?=$res_msg; ?></td>
         </tr>
 <?php
         }
