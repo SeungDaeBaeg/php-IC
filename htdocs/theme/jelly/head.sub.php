@@ -95,6 +95,7 @@ if (defined('_SHOP_')) {
 <script src="<?=G5_JS_URL ?>/jquery.bxslider.js"></script>
 <script src="<?=G5_JS_URL ?>/lodash.js?ver=<?=G5_JS_VER; ?>"></script>
 <link rel="stylesheet" href="<?=G5_JS_URL ?>/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="<?=G5_CSS_URL ?>/alert.css">
 <?php
 if(G5_IS_MOBILE) {
     echo '<script src="'.G5_JS_URL.'/modernizr.custom.70111.js"></script>'.PHP_EOL; // overflow scroll 감지
