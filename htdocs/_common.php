@@ -1,6 +1,12 @@
 <?php
 include_once('./common.php');
 
+
+if(SERVER_STAGING == $_SERVER['REMOTE_ADDR']) {
+    error_reporting(E_ALL);
+    ini_set('display_errors', '1');
+}
+
 // 커뮤니티 사용여부
 if(defined('G5_COMMUNITY_USE') && G5_COMMUNITY_USE === false) {
     if (!defined('G5_USE_SHOP') || !G5_USE_SHOP)

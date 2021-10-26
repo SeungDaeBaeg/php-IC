@@ -23,8 +23,5 @@ sql_fetch_arrays("
 
 foreach($res as $v) {
     // @todo : [승대] PPT 6페이지, DESC 7번
-    echo util::component('itemBox', $v, array(
-        'js'    => 'itemBox',
-        'css'   => 'itemBox'
-    ));
+    echo util::component('itemBox', $v);
 }
