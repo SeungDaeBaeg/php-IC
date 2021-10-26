@@ -33,16 +33,16 @@ $img_src_url = G5_DATA_URL.'/event/';
 </div>
 
 <script>
-    const getListparam = {
+    var getListparam = {
         action:'getList',
         order: 'new',
         type: ''
     }
 
     function btnClick(_this) {
-        util.removeClass(_this.parentNode.children,'selected');
+        util.removeListClass(_this.parentNode.children,'selected');
         _this.classList.add('selected');
-        const ids = _this.id.split('_');
+        var ids = _this.id.split('_');
         if(ids[0] === 'type') {
             getTypeList(ids[1]);
         }
@@ -60,27 +60,24 @@ $img_src_url = G5_DATA_URL.'/event/';
 
     function getLink(_this) {
         util.clipboardCopy(_this.getAttribute('target-link'));
-        util.showModal('info','판매링크가<br> 복사 되었습니다.');
+        util.alert('판매링크가<br> 복사 되었습니다.','clip.png');
     }
 
-    function getTypeList(types) {
-        let type = '';
-
-        if(types !== 'all') type = types;
-
+    function getTypeList(type) {
         getListparam['type'] = type;
-
+        if(type) history.pushState(null,null,location.origin+location.pathname+'?type='+type);
+        else history.pushState(null,null,location.origin+location.pathname);
         data.ajaxCall('post','<?=$ajax_event_url ?>',getListparam,getListCB);
     }
 
     function getListCB(res) {
-        const listBox = document.getElementById('listBox');
-        let _html = '';
+        var listBox = document.getElementById('listBox');
+        var _html = '';
         if(res === null) {
             _html = gridNullList();
         }
         else {
-            for(let i = 0; i < res.length; i++) {
+            for(var i = 0; i < res.length; i++) {
                 _html += gridList(res[i]);
             }  
         }
@@ -89,7 +86,7 @@ $img_src_url = G5_DATA_URL.'/event/';
     }
 
     function getOrderList(_this) {
-        const order = getListparam['order'];
+        var order = getListparam['order'];
         if(order === 'new') {
             getListparam['order'] = 'deadline';
             _this.textContent = '마감순';            
@@ -102,8 +99,8 @@ $img_src_url = G5_DATA_URL.'/event/';
     }
 
     function gridList(item) {        
-        const imgSrc = '<?=$img_src_url ?>';
-        const _html = `
+        var imgSrc = '<?=$img_src_url ?>';
+        var _html = `
         <div class="event_item_box">
             <div class="event_item_thumbnail">
                 <img src='${imgSrc+item.ev_id}_m'>
@@ -123,26 +120,40 @@ $img_src_url = G5_DATA_URL.'/event/';
     }
 
     function gridNullList() {
-        const _html = `
+        var _html = `
         <div>진행 중인 이벤트가 없습니다.</div>
         `
         return _html;
     }
 
     function getCodeNameCB(res) {
-        const typeBox = document.getElementById('typeBox');
-        let _html = '<div class="selected" id="type_all" onclick="btnClick(this)">전체</div>';
-        for(let i = 0; i < res.length; i++) {
-            const code = res[i].code;
-            const code_name = res[i].code_name;
+        var typeBox = document.getElementById('typeBox');
+        var codes = [];
+        var type = '';
+        var _html = '<div class="" id="type_" onclick="btnClick(this)">전체</div>';
+        for(var i = 0; i < res.length; i++) {
+            var code = res[i].code;
+            var code_name = res[i].code_name;
             _html += `<div id="type_${code}" onclick="btnClick(this)">${code_name}</div>`;
+            codes.push(code);
         }
         typeBox.innerHTML = _html;        
+
+        if(codes.indexOf(getListparam.type) === -1) {
+            getListparam.type = '';
+        }
+
+        document.getElementById('type_'+getListparam.type).click();
     }
 
-    data.ajaxCall('post','<?=$ajax_event_url ?>',{action:'getCodeName'},getCodeNameCB);
-    data.ajaxCall('post','<?=$ajax_event_url ?>',getListparam,getListCB);
+    function initPage() {
+        var getParam = url.getUrlListParam(['type','order']);
+        getListparam.type = getParam.type;
+        getListparam.order = getParam.order;
+        data.ajaxCall('post','<? echo $ajax_event_url ?>',{action:'getCodeName'},getCodeNameCB);
+    }
 
+    initPage();
         
 </script>
 

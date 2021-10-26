@@ -1,0 +1,34 @@
+.modal_background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    background-color: rgba(177,177,177,0.8);
+}
+
+.modal_box {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1000;
+    padding: 10px;
+    text-align: center;
+}
+
+.modal_box.info {
+    background-color: #FAC090;
+}
+
+.modal_box.error {
+    background-color: red;
+}
+
+.modal_box img {
+    width: 50%;
+    height: 50%;
+    display: block;
+    margin: 0 auto 10px;
+}

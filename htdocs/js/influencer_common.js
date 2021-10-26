@@ -61,14 +61,15 @@ var util = {
         return (url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g) !== null);
     },
     /**
-     * 클래스 제거
+     * 리스트 클래스 제거
      * @param list
      * @param className
      */
-    removeClass: function(list,className) {
-        for(let item of list) {
+    removeListClass: function(list,className) {
+        for(var i = 0; i < list.length; i ++) {
+            var item = list[i];
             item.classList.remove(className);
-        }
+        };
     },
     /**
      * 클립보드 복사
@@ -84,17 +85,27 @@ var util = {
         document.body.removeChild(tempElem);
     },
     /**
-     * 모달창
-     * @param type
-     * @param msg
-     * @param icon
+     * alert창
+     * @param msg 
+     * @param icon /img에서 시작하는 파일
+     * @param type info error로 구분하는 타입값
      */
-    showModal: function(type,msg,icon) {
-        const div = document.createElement('div');
+    alert: function(msg,icon,type='info') {
+        var background = document.createElement('div');
+        background.id = 'modal_alert';
+        background.classList.add('modal_background');
+        background.addEventListener("click",function(){document.getElementById('modal_alert').remove()},true);
+        var div = document.createElement('div');
+        background.appendChild(div);
         div.classList.add(type);
-        div.classList.add('modal');
+        div.classList.add('modal_box');
         div.innerHTML = msg;
-        document.body.append(div);
+        if(icon) {
+            var img = document.createElement('img');
+            img.src = '../../img/'+icon;
+            div.prepend(img);
+        }
+        document.body.append(background);
     }
 };
 
@@ -107,10 +118,10 @@ var data = {
      * php에서 데이터 가져오는게 성공하면 {"status":"OK","data":data} 형식으로 내려옴
      * 실패하면 {"status":"OOPS","msg":msg} 형식으로 내려옴
      * 성공한 data를 콜백함수로 보내줌
-     * @param {*} method t1
-     * @param {*} url t2
-     * @param {*} data t3
-     * @param {*} CB t4
+     * @param {*} method post/get
+     * @param {*} url 데이터를 받아올 URL
+     * @param {*} data 받아온 데이터
+     * @param {*} CB 데이터 가공할 콜백
      */
     ajaxCall: function(method,url,data,CB) {
         $.ajax({
@@ -128,7 +139,7 @@ var data = {
                 }
                 CB(res.data);
             }
-            catch {
+            catch(e) {
                 alert('ajax 에러가 등장했습니다.');
             }
         })
@@ -152,7 +163,7 @@ var url = {
         }
         return g5_url + '/tracking/click.php?' + this.httpBuildQuery(obj);
     },
-    httpBuildQuery(jsonObj) {
+    httpBuildQuery: function(jsonObj) {
         var keys = Object.keys(jsonObj);
         var values = keys.map(key => jsonObj[key]);
 
@@ -162,4 +173,33 @@ var url = {
             return `${key}=${values[index]}`;
         }).join("&");
     },
+    /**
+     * url get 파라미터 리턴하는 함수
+     * @param {string} param 가져올 키 파라미터 
+     * @returns 키에 대응되는 밸류값 리턴
+     */
+    getUrlParam: function(param) {
+        var getParam = location.search.substr(location.search.indexOf("?") + 1);
+        var res = "";
+        var getParams = getParam.split("&");
+
+        for(var i = 0; i < getParams.length; i++) {
+            var temp = getParams[i].split("=");
+            if ([temp[0]] == param) res = temp[1];
+        }
+        return res;    
+    },
+    /**
+     * url get 파라미터 리턴하는 함수
+     * @param {array} param 가져올 키 파라미터 배열
+     * @returns 키에 대응되는 밸류값 오브젝트 리턴
+     */
+    getUrlListParam: function(params) {
+        var res = {};
+        for(var i = 0; i < params.length; i++) {
+            var param = params[i];
+            res[param] = this.getUrlParam(param);
+        }
+        return res;
+    }
 };
