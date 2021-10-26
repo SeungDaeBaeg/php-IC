@@ -20,9 +20,11 @@ sql_fetch_arrays("
     WHERE   it_soldout = 0
     AND     it_stock_qty > 0
 ", $res);
-?>
 
-<?php foreach($res as $v) { ?>
-    <!-- @todo : [승대] PPT 6페이지, DESC 7번-->
-    <?=util::component('itemBox', $v)?>
-<?php } ?>
+foreach($res as $v) {
+    // @todo : [승대] PPT 6페이지, DESC 7번
+    echo util::component('itemBox', $v, array(
+        'js'    => 'itemBox',
+        'css'   => 'itemBox'
+    ));
+}
