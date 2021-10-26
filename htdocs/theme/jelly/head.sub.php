@@ -77,6 +77,7 @@ var g5_logined_id = "<?=data::getLoginMember()['mb_no']?>";
 
 </script>
 <script src="<?=G5_JS_URL ?>/jquery-1.8.3.min.js"></script>
+<script src="<?=G5_JS_URL ?>/lodash.js?ver=<?=G5_JS_VER; ?>"></script>
 <?php
 if (defined('_SHOP_')) {
     if(!G5_IS_MOBILE) {
@@ -93,7 +94,6 @@ if (defined('_SHOP_')) {
 <script src="<?=G5_JS_URL ?>/wrest.js?ver=<?=G5_JS_VER; ?>"></script>
 <script src="<?=G5_JS_URL ?>/placeholders.min.js"></script>
 <script src="<?=G5_JS_URL ?>/jquery.bxslider.js"></script>
-<script src="<?=G5_JS_URL ?>/lodash.js?ver=<?=G5_JS_VER; ?>"></script>
 <link rel="stylesheet" href="<?=G5_JS_URL ?>/font-awesome/css/font-awesome.min.css">
 <?php
 if(G5_IS_MOBILE) {

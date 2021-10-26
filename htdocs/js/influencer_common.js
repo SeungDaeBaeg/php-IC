@@ -13,18 +13,24 @@ var util = {
      * @param obj
      * @returns {boolean}
      */
-    formSubmit: function(url, obj) {
+    formSubmit: function(url, obj, opt) {
         if(typeof obj !== 'object' || obj.length <= 0) return false;
         var frm = document.createElement("form");
 
-        frm.setAttribute("method", "post");
+        if(_.isEmpty(opt.method)) opt.method = 'post';
+
+        frm.setAttribute("method", opt.method);
         frm.setAttribute("action", url);
-        frm.setAttribute("target", "formSubmitIframe");
+
+        if(!opt.isNotIframe) {
+            frm.setAttribute("target", "formSubmitIframe");
+        }
 
         var isSubmit = true;
 
         $.each(obj, function(k, o) {
             if(typeof o.validation === 'string' && _.isEmpty(o.value)) {
+                alert(o.validation);
                 isSubmit = false;
                 return false;
             } else if(typeof o.validation === 'function') {
@@ -140,7 +146,8 @@ var data = {
 
 var url = {
     getClickUrl: function(obj) {
-        if(_.get(obj, 'm', '') === '') {
+        console.log(obj);
+        if(_.isEmpty(obj.m)) {
             return false;
         }
         return g5_url + '/tracking/click.php?' + this.httpBuildQuery(obj);
@@ -150,7 +157,7 @@ var url = {
         var values = keys.map(key => jsonObj[key]);
 
         return keys.filter((key, index) => {
-            return !_.isEmpty(values[index]);
+            return !_.isEmpty(values[index].toString());
         }).map((key, index) => {
             return `${key}=${values[index]}`;
         }).join("&");

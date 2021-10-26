@@ -14,4 +14,8 @@ class url {
     public static function getDetailUrl(int $itId): string {
         return G5_SHOP_URL . '/item.php?it_id=' . $itId;
     }
+
+    public static function getBoardUrl(string $tableId): string {
+        return G5_URL . '/bbs/board.php?bo_table=' . $tableId;
+    }
 }

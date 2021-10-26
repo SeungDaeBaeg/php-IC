@@ -24,11 +24,5 @@ sql_fetch_arrays("
 
 <?php foreach($res as $v) { ?>
     <!-- @todo : [승대] PPT 6페이지, DESC 7번-->
-    <div>
-        <a href="<?=url::getDetailUrl($v['it_id'])?>">
-            <img style="width:100%;height:auto;" alt="" src="<?=url::getThumbnailUrl($v['it_img1'])?>" />
-            <p><b><?=$v['it_name']?></b></p>
-            <p>정상가 : <?=$v['it_cust_price']?> / 할인가 : <?=$v['it_price']?> / 할인율 : <?=util::percent($v['it_cust_price'], $v['it_price'])?>%</p>
-        </a>
-    </div>
+    <?=util::component('itemBox', $v)?>
 <?php } ?>

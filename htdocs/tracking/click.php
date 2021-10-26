@@ -15,7 +15,8 @@ $it_no = util::paramCheck("p");
 $data = json_encode(array(
     'm' => $mb_no
 ));
-setcookie("ICINFO", $data, time() + 3600);
+
+setcookie("ICINFO", $data, time() + 3600, "/", ".linkprice.com");
 
 if(empty($it_no)) {
     //지정된 상품 코드가 없으면 메인으로 리다이렉션

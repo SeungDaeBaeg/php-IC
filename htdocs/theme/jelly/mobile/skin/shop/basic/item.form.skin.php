@@ -570,6 +570,7 @@ $("#btn_link").click(function() {
         m: data.getLoginId(),
         p: $(this).data('it-id')
     }));
+
     alert("판매링크가 복사되었습니다.");
 });
 

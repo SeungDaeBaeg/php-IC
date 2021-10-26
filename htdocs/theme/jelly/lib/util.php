@@ -88,4 +88,10 @@ class util {
         echo "</script>";
         exit();
     }
+
+    public static function component(string $path, array $param = array()) {
+        ob_start();
+        include $_SERVER['DOCUMENT_ROOT'] . '/component/' . $path . '.php';
+        return ob_get_clean();
+    }
 }

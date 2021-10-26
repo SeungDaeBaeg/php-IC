@@ -1682,6 +1682,10 @@ function sql_fetch_data(string $query, &$res = array(), array $params = array())
 function sql_fetch_arrays(string $query, &$res = array(), array $params = array()): void {
     global $g5;
 
+    if(!is_array($res)) {
+        $res = array();
+    }
+
     $result = $g5['connect_db']->execute($query, $params);
 
     while($list = $result->FetchRow()) {
