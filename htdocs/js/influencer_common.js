@@ -170,7 +170,7 @@ var url = {
         return keys.filter((key, index) => {
             return !_.isEmpty(values[index].toString());
         }).map((key, index) => {
-            return `${key}=${values[index]}`;
+            return key + '=' + values[index];
         }).join("&");
     },
     /**
@@ -201,5 +201,24 @@ var url = {
             res[param] = this.getUrlParam(param);
         }
         return res;
+    },
+    /**
+     * GET QueryString을 Object로 변환
+     * @param queryString
+     * @returns {{}|*}
+     */
+    getUrlParams(queryString) {
+        let query = (queryString || window.location.search).substring(1);
+        if (!query) {
+            return {};
+        }
+        console.log(_);
+        return _.chain(query.split('&'))
+            .map(function(params) {
+                let p = params.split('=');
+                return [p[0], decodeURIComponent(p[1])];
+            })
+            .fromPairs()
+            .value();
     }
 };

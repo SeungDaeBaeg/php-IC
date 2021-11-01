@@ -29,7 +29,7 @@ class util {
                 $r[$p] = $_REQUEST[$p] ?? '';
             }
             return $r;
-        } else if(is_string($param)) {;
+        } else if(is_string($param)) {
             if(empty($_REQUEST[$param]) && gettype($callbackOrMsg) === 'string' && trim($callbackOrMsg) !== '') {
                 util::alert($callbackOrMsg, true);
             } else if(empty($_REQUEST[$param]) && gettype($callbackOrMsg) === 'object') {
@@ -89,7 +89,7 @@ class util {
         exit();
     }
 
-    public static function component(string $path, &$param = array()) {
+    public static function component(string $path, $param = array()) {
         ob_start();
 
         static $isJsImport, $isCssImport;

@@ -169,7 +169,7 @@ box-shadow: 0 2px 9px rgba(0,0,0,0.1)}
     .sub_cate button{display:none}
  }
 /* 중간 레이아웃 */
-#container {margin-top:75px}
+#container {margin-top:125px}
 #container_title {margin:0 auto;max-width:1200px;padding:40px 20px 20px;text-align:center;font-size:1.846em}
 .idx_c{margin:0 auto;max-width:1200px;}
 .idx_c:after {display:block;visibility:hidden;clear:both;content:""}

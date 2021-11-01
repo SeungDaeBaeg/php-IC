@@ -1688,8 +1688,10 @@ function sql_fetch_arrays(string $query, &$res = array(), array $params = array(
 
     $result = $g5['connect_db']->execute($query, $params);
 
-    while($list = $result->FetchRow()) {
-        $res[] = $list;
+    if(method_exists($result,'FetchRow')) {
+        while ($list = $result->FetchRow()) {
+            $res[] = $list;
+        }
     }
 }
 

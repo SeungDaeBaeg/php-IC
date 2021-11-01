@@ -1,3 +1,8 @@
+<?php
+/**
+ * 상품 박스
+ */
+?>
 <div>
     <a href="<?=$param['detail_url']?>">
         <img style="width:100%;height:auto;" alt="" src="<?=url::getThumbnailUrl($param['it_img1'])?>" />
