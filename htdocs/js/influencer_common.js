@@ -117,7 +117,10 @@ var util = {
      * @param {*} type number | string 기본값 number+string
      * @returns 
      */
-    getRandom: function(len=32,type) {
+    getRandom: function(len,type) {
+        if(_.isEmpty(len)) {
+            len = 32;
+        }
         var data = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
         var res = '';
         if(type === 'number') {
