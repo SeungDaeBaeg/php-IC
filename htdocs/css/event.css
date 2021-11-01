@@ -102,3 +102,23 @@
     height: 30px;
     margin: 10px auto;
 }
+
+/*sample.php */
+.sample_head {
+    text-align: center;
+    font-size: 20px;
+}
+
+.smaple_box table {
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.smaple_box table td {
+    border: 1px solid black;
+}
+
+.smaple_box button {
+    margin: 10px auto;
+    display: block;
+}

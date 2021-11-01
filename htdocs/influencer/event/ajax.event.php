@@ -20,7 +20,9 @@
         $order = $_POST['order'] ?? '';
         $today = date('Y-m-d');
 
-        $sql = "select ev_id, ev_subject, ev_thumbnail_content, (select code_name from g5_code where code = ev_type and meta_code = 'event' and del_yn = 'N') code_name, ev_link, ev_party_id from g5_shop_event where ev_start_date <= ? and ev_end_date >= ? and ev_use = 1";
+        $userData = data::getLoginMember();
+
+        $sql = "select ev_id, ev_subject, ev_thumbnail_content, (select code_name from g5_code where code = ev_type and meta_code = 'event' and del_yn = 'N') code_name, ev_link, (select count(*) from g5_shop_party_join where ev_id = ev_id and mb_id = ?) party from g5_shop_event where ev_start_date <= ? and ev_end_date >= ? and ev_use = 1";
         if($type) {
             $sql .= " and ev_type = '".$type."'";
         }
@@ -31,7 +33,7 @@
         else if($order === 'deadline') {
             $sql .= " order by ev_end_date";
         }
-        sql_fetch_arrays($sql,$list,array($today,$today));
+        sql_fetch_arrays($sql,$list,array($userData['mb_id'],$today,$today));
         $res->data = $list;
         echo json_encode($res);
     }

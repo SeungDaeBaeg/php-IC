@@ -95,22 +95,44 @@ var util = {
             type = 'info';
         }
 
-        var background = document.createElement('div');
-        background.id = 'modal_alert';
-        background.classList.add('modal_background');
-        background.addEventListener("click",function(){document.getElementById('modal_alert').remove()},true);
         var div = document.createElement('div');
-        background.appendChild(div);
         div.classList.add(type);
         div.classList.add('modal_box');
+        var id = this.getRandom();
+        div.id = id; 
         div.innerHTML = msg;
         if(icon) {
             var img = document.createElement('img');
             img.src = '../../img/'+icon;
             div.prepend(img);
         }
-        document.body.append(background);
+        document.body.append(div);
+        setTimeout(function(){
+            document.getElementById(id).remove();
+        },1000);
+    },
+    /**
+     * 랜덤값 뽑아내는 함수
+     * @param {*} len 랜덤길이 기본값 32자리
+     * @param {*} type number | string 기본값 number+string
+     * @returns 
+     */
+    getRandom: function(len=32,type) {
+        var data = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
+        var res = '';
+        if(type === 'number') {
+            data = '0123456789';
+        }
+        else if(type === 'string') {
+            data = 'ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
+        }
+        data = data.split('');
+        for(var i = 0; i < len; i++) {
+            res += data[Math.floor(Math.random() * data.length)];
+        }
+        return res;
     }
+    
 };
 
 /**

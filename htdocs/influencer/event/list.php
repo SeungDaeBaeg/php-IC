@@ -7,10 +7,30 @@ include_once('../_common.php');
 define("_INDEX_", TRUE);
 include_once(G5_THEME_MSHOP_PATH.'/shop.head.php');
 
-add_stylesheet('<link rel="stylesheet" href="'.G5_INFLUENCER_URL.'/event/event.css">', 0);
+add_stylesheet('<link rel="stylesheet" href="'.G5_CSS_URL.'/event.css">', 0);
 
 $ajax_event_url = G5_INFLUENCER_URL.'/event/ajax.event.php';
 $img_src_url = G5_DATA_URL.'/event/';
+
+//codeName 불러오기
+$sql = "select code, code_name from g5_code where meta_code = 'event' and del_yn = 'N'";
+sql_fetch_arrays($sql,$codes);
+
+$type = $_GET['type'] ?? '';
+$order = $_GET['order'] ?? '';
+$today = date('Y-m-d');
+
+$userData = data::getLoginMember();
+
+//mb_id는 로그인한 유저가 있을 경우 해당 이벤트를 참여했는지 안 했는지
+$sql = "
+SELECT ev_id, ev_subject, ev_thumbnail_content, 
+(select code_name from g5_code where code = ev_type and meta_code = 'event' and del_yn = 'N') code_name, ev_link, 
+(select count(*) from g5_shop_party_join where ev_id = ev_id and mb_id = ?) party 
+FROM g5_shop_event 
+WHERE ev_start_date <= ? and ev_end_date >= ? and ev_use = 1";
+
+sql_fetch_arrays($sql, $eventBox, array($userData['mb_id'],$today,$today));
 
 ?>
 
@@ -22,18 +42,30 @@ $img_src_url = G5_DATA_URL.'/event/';
             <div id="menu_1" onclick="btnClick(this)">참여내역</div>
         </div>
         <div class="event_type_box" id="typeBox">
-            
+        <?
+            foreach($codes as $v) {
+                // @todo : [승대] PPT 28페이지, DESC 1번
+                echo util::component('eventBox', $v);
+            }
+        ?>
         </div>
         <div class="event_order_box">
             <div class="selected new" id="order" onclick="btnClick(this)">최신순</div>
         </div>
     </div>
     <div class="event_list_box" id="listBox">
+        <?
+            foreach($eventBox as $v) {
+                // @todo : [승대] PPT 28페이지, DESC 1번
+                $v['img_url'] = $img_src_url.$v['ev_id'].'_m';
+                echo util::component('eventBox', $v);
+            }
+        ?>
     </div>
 </div>
 
 <script>
-    var getListparam = {
+    /* var getListparam = {
         action:'getList',
         order: 'new',
         type: ''
@@ -53,8 +85,7 @@ $img_src_url = G5_DATA_URL.'/event/';
             getLink(_this);
         }
         else if(ids[0] === 'join') {
-            //ajaxCall('post','<?=$ajax_event_url ?>',{action:'getPartyById',ev_id:ids[1]},getPartyByIdCB);
-            location.href = '/influencer/event/party.php?ev_id=' + ids[1];
+            location.href = '/influencer/event/sample.php?ev_id=' + ids[1];
         }
     }
 
@@ -147,13 +178,16 @@ $img_src_url = G5_DATA_URL.'/event/';
     }
 
     function initPage() {
-        var getParam = url.getUrlListParam(['type','order']);
+        var getParam = url.getUrlListParam(['type','order','join']);
         getListparam.type = getParam.type;
-        getListparam.order = getParam.order;
+        getListparam.order = (getParam.order === '')? 'new': getParam.order;
+        if(getParam.join === 'success') {
+            util.alert('참여성공!');
+        }
         data.ajaxCall('post','<? echo $ajax_event_url ?>',{action:'getCodeName'},getCodeNameCB);
     }
 
-    initPage();
+    initPage(); */
         
 </script>
 
