@@ -90,7 +90,11 @@ var util = {
      * @param icon /img에서 시작하는 파일
      * @param type info error로 구분하는 타입값
      */
-    alert: function(msg,icon,type='info') {
+    alert: function(msg, icon, type) {
+        if(_.isEmpty(type)) {
+            type = 'info';
+        }
+
         var background = document.createElement('div');
         background.id = 'modal_alert';
         background.classList.add('modal_background');
@@ -165,11 +169,13 @@ var url = {
     },
     httpBuildQuery: function(jsonObj) {
         var keys = Object.keys(jsonObj);
-        var values = keys.map(key => jsonObj[key]);
+        var values = keys.map(function(key) {
+            return jsonObj[key];
+        });
 
-        return keys.filter((key, index) => {
+        return keys.filter(function(key, index) {
             return !_.isEmpty(values[index].toString());
-        }).map((key, index) => {
+        }).map(function(key, index) {
             return key + '=' + values[index];
         }).join("&");
     },
@@ -212,10 +218,10 @@ var url = {
         if (!query) {
             return {};
         }
-        console.log(_);
+
         return _.chain(query.split('&'))
             .map(function(params) {
-                let p = params.split('=');
+                var p = params.split('=');
                 return [p[0], decodeURIComponent(p[1])];
             })
             .fromPairs()
