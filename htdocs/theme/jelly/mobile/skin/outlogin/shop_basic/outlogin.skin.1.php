@@ -5,15 +5,16 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">', 0);
 
 ?>
+<!-- @todo [승대] 소셜계정으로 로그인 PPT 17페이지 -->
 <div class="ol tnb_con ol_before_wr">
     <aside id="ol_before" class="ol">
+        <div style="float:right" id="btn_close">X</div>
         <img src="<?=G5_DATA_URL; ?>/common/logo.jpg">
         <div>
             전상품 최저가 보장<br>
             365일 할인구매<br>
             SNS 채널 등록만 하면, 혜택이 쏟아진다<br>
         </div>
-        <!-- todo [승대] 소셜계정으로 로그인 PPT 17페이지 -->
         <div><?php require_once (G5_THEME_MOBILE_PATH.'/'.G5_SKIN_DIR.'/social/social_outlogin.skin.1.php'); ?></div>
         <div>비회원 주문조회</div>
         <!-- 로그인 전 외부로그인 시작 -->
@@ -64,5 +65,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
     {
         return true;
     }
+
+    $('#btn_close').click(function(){
+        $('.ol_before_wr').hide();
+    })
 </script>
 <!-- } 로그인 전 아웃로그인 끝 -->

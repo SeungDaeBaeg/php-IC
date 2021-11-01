@@ -14,15 +14,15 @@ $admin = get_admin("super");
             <div class="ft_item_icon category_icon"></div>
             <div class="ft_nabi_txt">카테고리</div>
         </div>
-        <div class="ft_item">
+        <div class="ft_item" id="reco_btn">
             <div class="ft_item_icon star_icon"></div>
             <div class="ft_nabi_txt">추천상품</div>
         </div>
-        <div class="ft_item">
+        <div class="ft_item" id="info_btn">
             <div class="ft_item_icon myinfo_icon"></div>    
             <div class="ft_nabi_txt">내정보</div>
         </div>
-        <div class="ft_item">
+        <div class="ft_item" id="wish_btn">
             <div class="ft_item_icon heart_icon"></div>    
             <div class="ft_nabi_txt">나의찜</div>
         </div>
@@ -94,5 +94,14 @@ include_once(G5_THEME_PATH.'/tail.sub.php');
 <script>
 $("#cate_btn").on("click", function() {
     $("#category").show();
+});
+$("#reco_btn").on("click", function() {
+    location.href = '/influencer/tail/recommend.php';
+});
+$("#info_btn").on("click", function() {
+    location.href = '/influencer/tail/info.php';
+});
+$("#wish_btn").on("click", function() {
+    location.href = '/influencer/tail/wish.php';
 });
 </script>
