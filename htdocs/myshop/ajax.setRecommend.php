@@ -13,8 +13,13 @@ $it_id = util::paramCheck("it_id", function() {
     util::ajaxResult("상품 아이디가 없습니다.", -2);
 });
 
+$sort = util::paramCheck("sort", function() {
+    util::ajaxResult("지정된 소팅번호가 없습니다.", -3);
+});
+
+
 if(!data::isInfluencer($mb_id)) {
-    util::ajaxResult("해당 회원은 인플루언서가 아닙니다.", -3);
+    util::ajaxResult("해당 회원은 인플루언서가 아닙니다.", -4);
 }
 
 $id = sql_fetch_insert("g5_shop_item_recommend", array(
@@ -24,7 +29,7 @@ $id = sql_fetch_insert("g5_shop_item_recommend", array(
 ));
 
 if($id <= 0) {
-    util::ajaxResult("등록이 제대로 되지 않았습니다.", -4);
+    util::ajaxResult("등록이 제대로 되지 않았습니다.", -5);
 }
 
 util::ajaxResult();
