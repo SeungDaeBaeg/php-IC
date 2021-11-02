@@ -22,10 +22,3 @@ sql_fetch_arrays($sql,$banner_res,array($today,$today));
         }
     ?>
 </div>
-
-<script>
-    $('#banner_box input').click(function(){
-        var type = $(this).data('type');
-        if(type)
-    })
-</script>
