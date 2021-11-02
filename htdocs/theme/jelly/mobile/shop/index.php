@@ -17,6 +17,11 @@ include_once(G5_THEME_MSHOP_PATH.'/shop.head.php');
     <?php include_once(G5_MSHOP_SKIN_PATH . "/main.middle.menu.php"); ?>
 </div>
 
+<!-- 배너 -->
+<div class="idx_c">
+    <?php include_once(G5_MSHOP_SKIN_PATH . "/main.banner.php"); ?>
+</div>
+
 <!-- 추천 상품 -->
 <div class="idx_c">
     <?php include_once(G5_MSHOP_SKIN_PATH.'/main.recommend.product.php'); ?>

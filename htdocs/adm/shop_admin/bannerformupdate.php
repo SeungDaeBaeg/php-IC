@@ -29,6 +29,7 @@ $bn_new_win = isset($_POST['bn_new_win']) ? (int) $_POST['bn_new_win'] : 0;
 $bn_begin_time = isset($_POST['bn_begin_time']) ? clean_xss_tags($_POST['bn_begin_time'], 1, 1) : '';
 $bn_end_time = isset($_POST['bn_end_time']) ? clean_xss_tags($_POST['bn_end_time'], 1, 1) : '';
 $bn_order = isset($_POST['bn_order']) ? (int) $_POST['bn_order'] : 0;
+$bn_visible = isset($_POST['bn_visible']) ? clean_xss_tags($_POST['bn_visible']) : '';
 
 if ($bn_bimg_del)  @unlink(G5_DATA_PATH."/banner/$bn_id");
 
@@ -62,7 +63,8 @@ if ($w=="")
                     bn_end_time   = '$bn_end_time',
                     bn_time       = '".G5_TIME_YMDHIS."',
                     bn_hit        = '0',
-                    bn_order      = '$bn_order' ";
+                    bn_order      = '$bn_order',
+                    bn_visible    = '$bn_visible'";
     sql_query($sql);
 
     $bn_id = sql_insert_id();
@@ -79,7 +81,8 @@ else if ($w=="u")
                     bn_begin_time = '$bn_begin_time',
                     bn_end_time   = '$bn_end_time',
                     bn_time       = '".G5_TIME_YMDHIS."',
-                    bn_order      = '$bn_order'
+                    bn_order      = '$bn_order',
+                    bn_visible    = '$bn_visible'
               where bn_id = '$bn_id' ";
     sql_query($sql);
 }
