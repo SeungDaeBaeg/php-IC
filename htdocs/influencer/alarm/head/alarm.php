@@ -1,7 +1,7 @@
 <?php
 /**
  * @todo: [승대] 알람페이지 코딩 필요
- * 알람 head
+ * 알람 상단
  */
 
 
@@ -15,7 +15,6 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
 ?>
 
 <p>읽지 않은 메세지 <?=$alarmCnt['cnt']?>통</p>
-
 
 <p>
     <a href="/influencer/alarm/list.php">

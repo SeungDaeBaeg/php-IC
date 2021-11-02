@@ -53,14 +53,6 @@ var util = {
         }
     },
     /**
-     * URL 형식 체크 함수
-     * @param string
-     * @returns {boolean}
-     */
-    isValidURL: function(url) {
-        return (url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g) !== null);
-    },
-    /**
      * 리스트 클래스 제거
      * @param list
      * @param className
@@ -251,5 +243,13 @@ var url = {
             })
             .fromPairs()
             .value();
+    },
+    /**
+     * URL 형식 체크 함수
+     * @param string
+     * @returns {boolean}
+     */
+    isValidURL: function(url) {
+        return (url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g) !== null);
     }
 };

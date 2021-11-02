@@ -6,7 +6,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     <a href="/influencer/event/list.php">
         <button>이벤트</button>
     </a>
-    <a href="/influencer/myshop.php">
+    <a href="/myshop/">
         <button>마이샵</button>
     </a>
     <a href="/influencer/report.php">

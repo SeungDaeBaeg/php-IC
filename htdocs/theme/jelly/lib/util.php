@@ -89,7 +89,21 @@ class util {
         exit();
     }
 
+
+    /**
+     * 컴포넌트 로드
+     *
+     * @param string $path
+     * @param array  $param
+     *
+     * @return false|string
+     */
     public static function component(string $path, $param = array()) {
+
+        if(count($param) > 0) {
+            foreach($param as $k => $v) $$k = $v;
+        }
+
         ob_start();
 
         static $isJsImport, $isCssImport;
@@ -106,5 +120,27 @@ class util {
 
         include $_SERVER['DOCUMENT_ROOT'] . '/component/' . $path . '.php';
         return ob_get_clean();
+    }
+
+    /**
+     * AJAX 결과 리턴 데이터
+     *
+     * @param string $msg
+     * @param int    $code
+     * @param array  $extra
+     *
+     * @return string
+     */
+    public static function ajaxResult(string $msg = 'success', int $code = 0, array $extra = array()): string {
+        $returnData = array(
+            'msg'   => $msg,
+            'code'  => $code
+        );
+
+        if(count($extra) > 0) {
+            $returnData = array_merge($returnData, $extra);
+        }
+
+        die(json_encode($returnData));
     }
 }

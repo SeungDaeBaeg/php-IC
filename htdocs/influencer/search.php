@@ -68,12 +68,7 @@ if(!empty($sort)) {
 
 
 // 쿼리
-sql_fetch_arrays("
-SELECT  it_id, it_img1, it_name, it_cust_price, it_price
-FROM    g5_shop_item
-WHERE   it_soldout = 0
-AND     it_stock_qty > 0
-".$where, $items);
+$items = data::getAvailbleItems($where);
 
 // 카테고리 정보 로드
 sql_fetch_arrays("
@@ -135,7 +130,7 @@ $eventArr = array(
 <?
 foreach($items as $v) {
     echo util::component('itemBox', array(
-        'detail_url'    => $v['detail_url'],
+        'detail_url'    => url::getDetailUrl($v['it_id']),
         'it_img1'       => $v['it_img1'],
         'it_name'       => $v['it_name'],
         'it_cust_price' => $v['it_cust_price'],

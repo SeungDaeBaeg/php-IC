@@ -6,20 +6,20 @@
 ?>
 <div class="event_item_box">
     <div class="event_item_thumbnail">
-        <img src="<?=$param['img_url']?>">
+        <img src="<?=$img_url?>">
         <div class="event_badge">
-            <?=$param['code_name']?>
+            <?=$code_name?>
         </div>                
     </div>
     <div class="event_item_content">
-        <div><?=$param['ev_subject']?></div>
-        <?=$param['ev_thumbnail_content']?>
-        <? if($param['ev_link']) { ?>
-            <div class="event_join_box" target-link="<?=$param['ev_link']?>" data-id="link_true">
+        <div><?=$ev_subject?></div>
+        <?=$ev_thumbnail_content?>
+        <? if($ev_link) { ?>
+            <div class="event_join_box" target-link="<?=$ev_link?>" data-id="link_true">
                 <div class="ev_link_icon"></div>
             </div>
         <? } else { ?>
-            <div class="event_join_box" data-id="join_<?=$param['ev_id']?>">참여신청</div>
+            <div class="event_join_box" data-id="join_<?=$ev_id?>">참여신청</div>
         <? } ?>
     </div>
 </div>

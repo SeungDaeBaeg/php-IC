@@ -32,11 +32,8 @@ if(!empty($action)) {
 }
 
 //상품 정보
-sql_fetch_data("
-SELECT  it_name, it_option_subject
-FROM    g5_shop_item
-WHERE   it_id = ?
-", $item, array($it_id));
+$item = data::getAvailbleItems("it_id = $it_id");
+
 $it_option_subjects = explode(",", $item['it_option_subject']) ?? array();
 
 //상품 옵션 정보
@@ -187,7 +184,7 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
                 if($.trim(value) === '') {
                     alert('SNS 계정링크를 입력해주세요.');
                     return false;
-                } else if(!util.isValidURL(value)) {
+                } else if(!url.isValidURL(value)) {
                     alert("계정 링크 형식이 맞지 않습니다.");
                     return false;
                 }

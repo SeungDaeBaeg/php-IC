@@ -2558,7 +2558,6 @@ if (!function_exists('file_put_contents')) {
 function html_end()
 {
     global $html_process;
-
     return $html_process->run();
 }
 
