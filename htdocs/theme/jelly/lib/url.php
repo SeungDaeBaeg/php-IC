@@ -18,4 +18,8 @@ class url {
     public static function getBoardUrl(string $tableId): string {
         return G5_URL . '/bbs/board.php?bo_table=' . $tableId;
     }
+
+    public static function getBannerUrl(string $filename): string {
+        return G5_DATA_URL . '/banner/' . $filename;
+    }
 }

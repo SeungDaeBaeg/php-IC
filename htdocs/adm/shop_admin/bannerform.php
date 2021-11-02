@@ -107,9 +107,9 @@ include_once (G5_ADMIN_PATH.'/admin.head.php');
     <tr>
         <th scope="row"><label for="bn_position">출력위치</label></th>
         <td>
-            <?=help("왼쪽 : 쇼핑몰화면 왼쪽에 출력합니다.\n메인 : 쇼핑몰 메인화면(index.php)에만 출력합니다."); ?>
+            <?=help("아래 : 쇼핑몰 롤링화면 아래에 출력합니다.\n메인 : 쇼핑몰 메인 로링화면(index.php)에 출력합니다."); ?>
             <select name="bn_position" id="bn_position">
-                <option value="왼쪽" <?=get_selected($bn['bn_position'], '왼쪽'); ?>>왼쪽</option>
+                <option value="아래" <?=get_selected($bn['bn_position'], '아래'); ?>>아래</option>
                 <option value="메인" <?=get_selected($bn['bn_position'], '메인'); ?>>메인</option>
         </select>
         </td>
@@ -157,6 +157,16 @@ include_once (G5_ADMIN_PATH.'/admin.head.php');
         <td>
            <?=help("배너를 출력할 때 순서를 정합니다. 숫자가 작을수록 먼저 출력됩니다."); ?>
            <?=order_select("bn_order", $bn['bn_order']); ?>
+        </td>
+    </tr>
+    <tr>
+        <th scope="row"><label for="bn_visible">출력 여부</label></th>
+        <td>
+            <?=help("배너의 출력 여부를 정합니다."); ?>
+            <select name="bn_visible" id="bn_visible">
+                <option value="Y" <?=get_selected($bn['bn_visible'], 'Y'); ?>>Y</option>
+                <option value="N" <?=get_selected($bn['bn_visible'], 'N'); ?>>N</option>
+            </select>
         </td>
     </tr>
     </tbody>
