@@ -107,11 +107,7 @@ $ajax_event_url = G5_INFLUENCER_URL.'/event/ajax.event.php';
 <script>
 
 function submit() {
-    var param = {
-        action:'insertParty',
-
-    }
-    data.ajaxCall('post','<? echo $ajax_event_url ?>',{action:'getCodeName'},getCodeNameCB);
+    data.ajax('<?=$ajax_event_url?>', {action:'getCodeName'}, getCodeNameCB);
 }
 
 </script>

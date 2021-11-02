@@ -135,36 +135,39 @@ var util = {
  */
 var data = {
     /**
-     * ajax의 콜하는 로직
+     * ajax 로드 함수
      * php에서 데이터 가져오는게 성공하면 {"status":"OK","data":data} 형식으로 내려옴
      * 실패하면 {"status":"OOPS","msg":msg} 형식으로 내려옴
      * 성공한 data를 콜백함수로 보내줌
-     * @param {*} method post/get
+     * @param {*} method post/get, default post
      * @param {*} url 데이터를 받아올 URL
      * @param {*} data 받아온 데이터
      * @param {*} CB 데이터 가공할 콜백
      */
-    ajaxCall: function(method,url,data,CB) {
+    ajax: function(url, data, callback, method) {
+        if(_.isEmpty(method)) {
+            method = 'post';
+        }
+
         $.ajax({
             type:method,
             url:url,
             data:data
-        })
-        .done(function(res){
-            console.log(res);
+        }).done(function(res) {
             try {
                 res = JSON.parse(res);
                 if(res.status === 'OOPS') {
                     alert(res.msg);
                     return;
                 }
-                CB(res.data);
-            }
-            catch(e) {
+
+                if(typeof callback === 'function') {
+                    callback(res.data);
+                }
+            } catch(e) {
                 alert('ajax 에러가 등장했습니다.');
             }
-        })
-        .fail(function(){
+        }).fail(function(){
             alert('데이터를 가져오는데 실패하였습니다.');
         })
     },
