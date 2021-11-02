@@ -69,7 +69,7 @@ class util {
     public static function alert(string $msg, bool $exit = false): void {
         if($msg !== '') {
             echo "<script>";
-            echo "alert('".$msg."');";
+            echo "util.alert('".$msg."');";
             echo "</script>";
         }
 

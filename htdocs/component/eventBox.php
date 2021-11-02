@@ -15,11 +15,15 @@
         <div><?=$ev_subject?></div>
         <?=$ev_thumbnail_content?>
         <? if($ev_link) { ?>
-            <div class="event_join_box" target-link="<?=$ev_link?>" data-id="link_true">
+            <div class="event_join_box" target-link="<?=$ev_link?>" data-type="link">
                 <div class="ev_link_icon"></div>
             </div>
         <? } else { ?>
-            <div class="event_join_box" data-id="join_<?=$ev_id?>">참여신청</div>
+            <? if($party === '0') { ?>
+                <div class="event_join_box" data-id="<?=$param['ev_id']?>" data-type="join">참여신청</div>
+            <? } else { ?>
+                <div class="event_join_box" data-type="finish">참여완료</div>
+            <? } ?>
         <? } ?>
     </div>
 </div>

@@ -7,8 +7,36 @@ include_once('../_common.php');
 
 util::loginCheck();
 
-$it_id = util::paramCheck("it_id", "상품 아이디가 없습니다.");
+$id = util::paramCheck(array("it_id","ev_id"), "상품 아이디가 없습니다.");
 $action = util::paramCheck("action");
+
+$it_id = $id['it_id'];
+$ev_id = $id['ev_id'];
+$mb_no = data::getLoginMember()['mb_no'];
+
+//이벤트로 들어온거는 event_party_join들어가서 참여내역을 보여줘야된다.
+if($ev_id) {
+    $sql = "
+    SELECT party.it_id, party.is_sample, event.ev_subject
+    FROM g5_shop_party party, g5_shop_event event
+    WHERE party.ev_id = ?
+    AND party.ev_id = event.ev_id";
+
+    sql_fetch_data($sql,$res,array($ev_id));
+
+    //이벤트참여지만 샘플참여가 아닌 경우에는 event_party_join에 바로 insert후 
+    if($res['is_sample'] === 'N') {
+
+        $id = sql_insert("g5_shop_party_join",array(
+            'ev_id'         =>  $ev_id,
+            'mb_no'         =>  $mb_no
+        ));
+
+        $_SESSION['event_join'] = ($id > 0)? 'OK' : 'FAIL';
+        
+        util::location($_SERVER['HTTP_REFERER']);
+    }
+}
 
 if(!empty($action)) {
     $params = util::paramCheck(array('it_id', 'name', 'hp', 'email', 'sns_id', 'sns_followers', 'sns_link', 'sns_channel', 'zip_code', 'addr1', 'addr2', 'options'));

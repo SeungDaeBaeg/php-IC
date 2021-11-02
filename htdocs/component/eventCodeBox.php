@@ -5,4 +5,4 @@
      */
 ?>
 
-<div data-id="type_<?=$code?>"><?=$code_name?></div>
+<div data-id="<?=$code?>" data-type="type"><?=$code_name?></div>
