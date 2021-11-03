@@ -76,40 +76,60 @@ var util = {
         document.execCommand("copy");
         document.body.removeChild(tempElem);
     },
+
     /**
-     * alert창
-     * @param msg 
-     * @param icon /img에서 시작하는 파일
-     * @param type info error로 구분하는 타입값
+     *
+     * @param msg
+     * @param opt
+     *  style : 얼럿 창 스타일 info|danger|success ...
+     *  type : 얼럿 창 타입 alert|instant|confirm
+     *  delay : type이 instant일 경우 노출되는 시간
      */
-    alert: function(msg, icon, type) {
-        if(_.isEmpty(type)) {
-            type = 'info';
+    alert: function(msg, opt) {
+        if(typeof opt !== 'object')     opt = {};
+        if(_.isEmpty(opt.style))        opt.style = 'info';
+        if(_.isEmpty(opt.type))         opt.type = 'alert';
+        if(_.isEmpty(opt.delay) || typeof opt.delay !== "number") opt.delay = 1000;
+
+        var $alert = $("div#icAlert");
+
+        $alert.find("#icAlertMsg").html(msg);
+
+        switch(opt.type) {
+            case 'alert':
+                $alert.find("#icAlertBottom").show();
+                $alert.find("#icAlertOk").unbind('click').click(function() {
+                    if(typeof opt.cb === 'function') opt.cb();
+                    $alert.hide();
+                }).show();
+                $alert.find("#icAlertCancel").hide();
+                break;
+            case 'instant':
+                $alert.find("#icAlertBottom").hide();
+                setTimeout(function() {
+                    $alert.hide();
+                }, opt.delay);
+                break;
+            case 'confirm':
+                $alert.find("#icAlertBottom").show();
+                $alert.find("#icAlertOk").unbind('click').click(function() {
+                    if(typeof opt.cb === 'function') opt.cb();
+                    $alert.hide();
+                }).show();
+                $alert.find("#icAlertCancel").unbind('click').click(function() {
+                    $alert.hide();
+                }).show();
+                break;
         }
 
-        var div = document.createElement('div');
-        div.classList.add(type);
-        div.classList.add('modal_box');
-        var id = this.getRandom();
-        div.id = id; 
-        div.innerHTML = msg;
-        if(icon) {
-            var img = document.createElement('img');
-            img.src = '../../img/'+icon;
-            div.prepend(img);
-        }
-        document.body.append(div);
-        setTimeout(function(){
-            document.getElementById(id).remove();
-        },1000);
+        //얼럿 노출
+        $alert.show();
     },
     /**
      * 랜덤값 뽑아내는 함수
-     * @param {*} len 랜덤길이 기본값 32자리
-     * @param {*} type number | string 기본값 number+string
-     * @returns 
+     * @returns
      */
-    getRandom: function(len,type) {
+    getRandom: function () {
         if(_.isEmpty(len)) {
             len = 32;
         }

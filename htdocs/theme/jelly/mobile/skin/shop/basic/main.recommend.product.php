@@ -24,7 +24,8 @@ sql_fetch_arrays("
 foreach($res as $v) {
     // @todo : [승대] PPT 6페이지, DESC 7번
     echo util::component('itemBox', array(
-        'detail_url'    => $v['detail_url'],
+        'it_id'         => $v['it_id'],
+        'detail_url'    => url::getDetailUrl($v['it_id']),
         'it_img1'       => $v['it_img1'],
         'it_name'       => $v['it_name'],
         'it_cust_price' => $v['it_cust_price'],

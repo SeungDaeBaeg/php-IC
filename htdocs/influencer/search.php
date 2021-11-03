@@ -130,6 +130,7 @@ $eventArr = array(
 <?
 foreach($items as $v) {
     echo util::component('itemBox', array(
+        'it_id'         => $v['it_id'],
         'detail_url'    => url::getDetailUrl($v['it_id']),
         'it_img1'       => $v['it_img1'],
         'it_name'       => $v['it_name'],
