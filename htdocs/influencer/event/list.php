@@ -14,7 +14,11 @@ $event_list_url = G5_INFLUENCER_URL.'/event/list.php';
 $img_src_url = G5_DATA_URL.'/event/';
 
 //codeName 불러오기
-$sql = "select code, code_name from g5_code where meta_code = 'event' and del_yn = 'N'";
+$sql = "
+SELECT code, code_name from g5_code 
+WHERE meta_code = 'event' 
+AND del_yn = 'N'";
+
 sql_fetch_arrays($sql,$codes);
 
 $type = $_GET['type'] ?? 'all';
@@ -22,14 +26,27 @@ $order = $_GET['order'] ?? 'new';
 $order_name = '';
 $today = date('Y-m-d');
 
-$userData = data::getLoginMember();
+$join_status = $_SESSION['event_join'];
+unset($_SESSION['event_join']);
+
+if($join_status === 'OK') {
+    util::alert('이벤트 참여 신청이 되었습니다.');
+}
+else if($join_status === 'FAIL') {
+    util::alert('이벤트 참여 신청이 안되었습니다.<br>관리자에게 연락바랍니다.');
+}
+else if($join_status === 'DUP') {
+    util::alert('이벤트 참여한 신청이 있습니다.<br>다른 이벤트를 참여해주세요.');
+}
+
+$mb_no = data::getLoginMember()['mb_no'];
 
 //mb_id는 로그인한 유저가 있을 경우 해당 이벤트를 참여했는지 안 했는지
 $sql = "
-SELECT ev_id, ev_subject, ev_thumbnail_content, 
+SELECT event.ev_id, ev_subject, ev_thumbnail_content, 
 (select code_name from g5_code where code = ev_type and meta_code = 'event' and del_yn = 'N') code_name, ev_link, 
-(select count(*) from g5_shop_party_join where ev_id = ev_id and mb_id = ?) party 
-FROM g5_shop_event 
+(select count(*) from g5_shop_party_join where ev_id = event.ev_id and mb_no = ?) party 
+FROM g5_shop_event event
 WHERE ev_start_date <= ? and ev_end_date >= ? and ev_use = 1";
 
 if($type !== 'all') {
@@ -45,7 +62,7 @@ else if($order === 'deadline') {
     $order_name = '마감순';
 }
 
-sql_fetch_arrays($sql, $eventBox, array($userData['mb_id'],$today,$today));
+sql_fetch_arrays($sql, $eventBox, array($mb_no,$today,$today));
 
 ?>
 <?php
@@ -55,14 +72,14 @@ sql_fetch_arrays($sql, $eventBox, array($userData['mb_id'],$today,$today));
      */
 ?>
 <!--content start-->
-<div class="event_box">
-    <div class="event_top_box">
+<div class="event_box" id="event_box">
+    <div class="event_top_box" id="event_top_box">
         <div class="event_menu_box">
-            <div class="selected" data-id="menu_0">진행 중인 이벤트</div>
-            <div data-id="menu_1">참여내역</div>
+            <div class="selected" data-id="menu" data-type="menu">진행 중인 이벤트</div>
+            <div data-id="1" data-type="menu">참여내역</div>
         </div>
         <div class="event_type_box">
-            <div data-id="type_all">전체</div>
+            <div data-id="all" data-type="type">전체</div>
             <?
                 foreach($codes as $v) {
                     echo util::component('eventCodeBox', $v);
@@ -70,7 +87,7 @@ sql_fetch_arrays($sql, $eventBox, array($userData['mb_id'],$today,$today));
             ?>
         </div>
         <div class="event_order_box">
-            <div class="selected new" data-id="order_<?=$order?>"><?=$order_name?></div>
+            <div class="selected new" data-id="<?=$order?>" data-type="order"><?=$order_name?></div>
         </div>
     </div>
     <div class="event_list_box" id="listBox">
@@ -84,28 +101,29 @@ sql_fetch_arrays($sql, $eventBox, array($userData['mb_id'],$today,$today));
 </div>
 
 <script>
-    $('div[data-id]').click(function(){
-        var data_id = $(this).attr('data-id');
-        var ids = data_id.split('_');
-        switch(ids[0]) {
+    $('#event_box div[data-type]').click(function(){
+        var _this = $(this);
+        var data_type = _this.data('type');
+        var data_id = _this.data('id');
+        switch(data_type) {
             case 'type':
                 var order = url.getUrlParam('order');
                 var event_list_url = "<?=$event_list_url?>";
-                event_list_url += "?type=" + ids[1];
+                event_list_url += "?type=" + data_id;
                 if(order) event_list_url += "&order="+order;
                 location.href = event_list_url;
                 break;
             case 'order':
-                if(ids[1] === 'new') {
-                    ids[1] = 'deadline';
+                if(data_id === 'new') {
+                    data_id = 'deadline';
                 }
                 else {
-                    ids[1] = 'new';
+                    data_id = 'new';
                 }
                 
                 var type = url.getUrlParam('type');
                 var event_list_url = "<?=$event_list_url?>";
-                event_list_url += "?order=" + ids[1];
+                event_list_url += "?order=" + data_id;
                 if(type) event_list_url += "&type="+type;
                 location.href = event_list_url;
                 break;
@@ -114,13 +132,15 @@ sql_fetch_arrays($sql, $eventBox, array($userData['mb_id'],$today,$today));
                 util.alert('판매링크가<br> 복사 되었습니다.','clip.png');
                 break;
             case 'join':
-                location.href = '/influencer/event/sample.php?ev_id=' + ids[1];
+                location.href = '/influencer/item_detail_navi/sample_subscription.php?ev_id=' + data_id;
+                break;
+            case 'menu':                
                 break;
         }
     });
     
     $(function(){
-        $("div[data-id='type_<?=$type?>']").addClass('selected');        
+        $("#event_top_box div[data-id='<?=$type?>']").addClass('selected');       
     });
 </script>
 
