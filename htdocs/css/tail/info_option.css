@@ -117,6 +117,10 @@ body {
     width: 25%;
 }
 
+.info_option_box > .content_box > .channel_box tr td:nth-child(3) {
+    cursor: pointer;
+}
+
 .info_option_box > .content_box > .update_box {
     width: 60%;
     background-color: #FCD5B5;

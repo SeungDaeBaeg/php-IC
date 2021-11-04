@@ -41,6 +41,18 @@ if(!empty($action)) {
     util::alert('수정완료',$opt);
 }
 
+$sql = "
+SELECT msl_type 
+FROM g5_member_sns_link 
+WHERE del_yn = 'N'
+AND mb_no = ?";
+
+sql_fetch_arrays($sql,$sns_res,array($user['mb_no']));
+$sns_type = array();
+foreach($sns_res as $v) {
+    $sns_type[] = $v['msl_type'];
+}
+
 /**
  * 내정보 화면
  * @todo : [승대] PPT 50페이지, 개인정보 변경
@@ -177,7 +189,8 @@ if(!empty($action)) {
                     if($user['mb_sns_channel'] === $v) echo '<td><input type="radio" name="sns" value="'.$v.'" checked></td>';
                     else echo '<td><input type="radio" name="sns" value="'.$v.'"></td>';
                     echo '<td>'.$n.'</td>';
-                    echo '<td><div data-id="'.$v.'">연결하기</div></td>';
+                    if(in_array($v,$sns_type)) echo '<td><div data-id="'.$v.'">연결해지하기</div></td>';
+                    else echo '<td><div data-id="'.$v.'">연결하기</div></td>';
                     echo '</tr>';
                 }
             ?>
@@ -327,6 +340,25 @@ if(!empty($action)) {
     $('.info_option_box .channel_box div[data-id]').click(function(){
         var id = $(this).data('id');
         location.href = "<?=$link_url?>" + "?sns="+id;
+    })
+
+    $(document).ready(function() {
+        var res = url.getUrlListParam(['sns','code','type']);
+        if(res.code == 1) util.alert('연동되지 않았습니다. 관리자에게 문의주세요');
+        else if(res.code == 2) util.alert('중복된 연결 계정이있습니다. 관리자에게 문의주세요');
+        switch(res.sns) {
+            case 'naver':
+                if(res.type === 'insert') {
+                    var rss_count = parseInt(url.getUrlParam('rss_count'));
+                    if(rss_count === 0) util.alert('블로그 게시물을 한개이상 등록해주세요.',{type:'instant'});
+                    else if(rss_count > 0) util.alert('네이버 채널 연결이 잘 되었습니다.',{type:'instant'});
+                }
+                else if(res.type === 'delete') {
+                    util.alert('네이버 채널 해지되었습니다.',{type:'instant'});
+                }
+                break;
+        }        
+        url.removeGetParams();
     })
 
 </script>

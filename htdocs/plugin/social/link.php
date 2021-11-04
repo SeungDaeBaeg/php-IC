@@ -7,6 +7,7 @@
     $done = $_GET['hauth_done'] ?? '';
 
     $mb_no = data::getLoginMember()['mb_no'];
+    $info_url = G5_INFLUENCER_URL.'/tail/info_option.php';
     
     if($sns) {
         $client_id = $config['cf_'.$sns.'_clientid'];
@@ -78,13 +79,50 @@
 
             curl_close($ch);
 
-            if($status_code == 200) {
-                var_dump($user_profile);
+            if($status == 200) {
+                global $info_url;
+                global $mb_no;
                 $user_profile_arr = json_decode($user_profile, true);
                 $naver_user_email = $user_profile_arr['response']['email'];
                 $naver_sns_id = $user_profile_arr['response']['id'];
                 $blog_id = explode('@',$naver_user_email)[0];
-                getRssBlog($blog_id);
+                $xml = getRssBlog($blog_id);
+                $count_item = count($xml->channel->item);
+                if($count_item > 0) {
+                    
+                    $sql = "
+                    SELECT count(*) cnt, mb_no 
+                    FROM g5_member_sns_link 
+                    WHERE del_yn = 'N'
+                    AND msl_type = 'naver'
+                    AND msl_sns_id = ?";
+                    
+                    sql_fetch_data($sql,$dup_res,array($naver_sns_id));
+                    
+                    if($dup_res['cnt'] > 0) {
+                        if($dup_res['mb_no'] != $mb_no) util::location($info_url."?code=2");
+                        else {
+                            sql_update('g5_member_sns_link',array(
+                                "del_yn"    =>  'Y',
+                                "update_at" => date('Y-m-d H:i:s')
+                            ),"msl_sns_id = '{$naver_sns_id}'");
+
+                            util::location($info_url."?code=0&sns=naver&type=delete");
+                        }
+                    }
+                
+                    $id = sql_insert('g5_member_sns_link',array(
+                        "msl_sns_id"        =>  $naver_sns_id,
+                        "mb_no"             =>  $mb_no,
+                        "msl_email"         =>  $naver_user_email,
+                        "msl_type"          =>  "naver",
+                        "msl_token"         =>  $token,
+                        "msl_url"           =>  $xml->channel->link,
+                        "msl_title"         =>  $xml->channel->title
+                    ));
+                    if($id === 0) util::location($info_url."?code=1");
+                }
+                util::location($info_url."?code=0&rss_count=$count_item&sns=naver&type=insert");
             }
             else {
                 echo "Error 내용:".$response;
@@ -95,19 +133,15 @@
     }
 
     function getRssBlog($id) {
-        $out = "GET /$id.xml HTTP/1.0\r\nHost: rss.blog.naver.com\r\n\r\n";
-        $fp = fsockopen("rss.blog.naver.com", 443, $errno, $errstr, 30);
-        var_dump($fp);
-
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://rss.blog.naver.com/testlsb001.xml");
+        curl_setopt($ch, CURLOPT_URL, "https://rss.blog.naver.com/$id.xml");
         curl_setopt($ch, CURLOPT_POST, "get");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         $res = curl_exec($ch);
         curl_close($ch);
-        var_dump(simplexml_load_string($res));
-
+        
+        return simplexml_load_string($res);
     }
     
     
