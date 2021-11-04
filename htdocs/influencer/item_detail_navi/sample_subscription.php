@@ -4,7 +4,6 @@
  */
 
 include_once('../_common.php');
-
 util::loginCheck();
 
 $id = util::paramCheck(array("it_id","ev_id"), "상품 아이디가 없습니다.");
@@ -17,25 +16,14 @@ $mb_no = data::getLoginMember()['mb_no'];
 //이벤트로 들어온거는 event_party_join들어가서 참여내역을 보여줘야된다.
 if($ev_id) {
     $sql = "
-    SELECT party.it_id, party.is_sample, event.ev_subject
+    SELECT party.it_id
     FROM g5_shop_party party, g5_shop_event event
     WHERE party.ev_id = ?
     AND party.ev_id = event.ev_id";
 
     sql_fetch_data($sql,$res,array($ev_id));
-
-    //이벤트참여지만 샘플참여가 아닌 경우에는 event_party_join에 바로 insert후 
-    if($res['is_sample'] === 'N') {
-
-        $id = sql_insert("g5_shop_party_join",array(
-            'ev_id'         =>  $ev_id,
-            'mb_no'         =>  $mb_no
-        ));
-
-        $_SESSION['event_join'] = ($id > 0)? 'OK' : 'FAIL';
-        
-        util::location($_SERVER['HTTP_REFERER']);
-    }
+    
+    $it_id = $res['it_id'];
 }
 
 if(!empty($action)) {
@@ -60,7 +48,7 @@ if(!empty($action)) {
 }
 
 //상품 정보
-$item = data::getAvailbleItems("it_id = $it_id");
+$item = data::getAvailbleItems(" and it_id = $it_id");
 
 $it_option_subjects = explode(",", $item['it_option_subject']) ?? array();
 
@@ -72,6 +60,11 @@ $member = data::getLoginMember();
 
 define("_INDEX_", TRUE);
 include_once(G5_SHOP_PATH.'/shop.head.php');
+
+/**
+ * 
+ * @todo : [승대] PPT 31페이지, 샘플 신청서
+ */
 ?>
 
 <!--content start-->
@@ -81,7 +74,7 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
     <tr>
         <th>샘플신청 상품</th>
         <td>
-            <p><?=$item['it_name']?></p>
+            <p><?=$item[0]['it_name']?></p>
         </td>
     </tr>
 
@@ -170,6 +163,16 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
     <button id="subscription_complete" style="width:100%;">신청완료</button>
 </p>
 
+<div>
+<pre>
+샘플 신청서에 입력된 정보로 상품 발송되오니,
+기입된 정보 확인 후 신청해 주세요.
+
+정보 변경은 마이페이지(바로가기)에서 가능하오니,
+정보 변경 후 다시 신청해 주세요.
+</pre>
+</div>
+
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script>
     $("#post_btn").click(function() {
@@ -224,7 +227,7 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
             {name: "addr2",             value: $("#addr2").val(),           validation: "주소상세를 입력해주세요."},
             {name: "options",           value: options}
         ]);
-    })
+    });
 </script>
 
 

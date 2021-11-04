@@ -31,7 +31,7 @@ class util {
             return $r;
         } else if(is_string($param)) {
             if(empty($_REQUEST[$param]) && gettype($callbackOrMsg) === 'string' && trim($callbackOrMsg) !== '') {
-                util::alert($callbackOrMsg, true);
+                util::alert($callbackOrMsg,array ("type"=>"instant"),true);
             } else if(empty($_REQUEST[$param]) && gettype($callbackOrMsg) === 'object') {
                 $callbackOrMsg();
                 exit();
@@ -66,10 +66,11 @@ class util {
      * @param string $msg
      * @param bool   $exit
      */
-    public static function alert(string $msg, bool $exit = false): void {
+    public static function alert(string $msg, Array $opt = array(), bool $exit = false): void {
         if($msg !== '') {
+            $opt = json_encode($opt);
             echo "<script>";
-            echo "util.alert('".$msg."');";
+            echo "util.alert('".$msg."',".$opt.");";
             echo "</script>";
         }
 

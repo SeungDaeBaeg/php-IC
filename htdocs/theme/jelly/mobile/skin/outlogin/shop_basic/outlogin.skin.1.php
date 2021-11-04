@@ -6,7 +6,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
 
 ?>
 <!-- @todo [승대] 소셜계정으로 로그인 PPT 17페이지 -->
-<div class="ol tnb_con ol_before_wr">
+<div class="ol tnb_con ol_before_wr" style="display:none">
     <aside id="ol_before" class="ol">
         <div style="float:right" id="btn_close">X</div>
         <img src="<?=G5_DATA_URL; ?>/common/logo.jpg">

@@ -293,4 +293,4 @@ console.log(searchTxt);
 </header>
 
 <div id="container" class="container">
-    <?php if (!defined('_INDEX_') && !empty($g5['title'])) { ?><h1 id="container_title"><?=$g5['title'] ?></h1><?php } ?>
+    <?php if (!defined('_INDEX_') && !empty($g5['title'])) { ?><?php } ?>

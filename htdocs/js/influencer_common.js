@@ -127,9 +127,11 @@ var util = {
     },
     /**
      * 랜덤값 뽑아내는 함수
+     * @param {*} len 랜덤길이 기본값 32자리
+     * @param {*} type number | string 기본값 number+string
      * @returns
      */
-    getRandom: function () {
+    getRandom: function (len,type) {
         if(_.isEmpty(len)) {
             len = 32;
         }
@@ -175,14 +177,15 @@ var data = {
             data:data
         }).done(function(res) {
             try {
+                console.log(res);
                 res = JSON.parse(res);
-                if(res.status === 'OOPS') {
-                    alert(res.msg);
+                if(res.msg !== 'success') {
+                    util.alert(res.msg,{type:'instant'});
                     return;
                 }
 
                 if(typeof callback === 'function') {
-                    callback(res.data);
+                    callback(res);
                 }
             } catch(e) {
                 alert('ajax 에러가 등장했습니다.');

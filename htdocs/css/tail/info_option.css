@@ -1,0 +1,127 @@
+body {
+    background-color: #4F81BD;
+}
+
+#hd_wr .visible-mobile,#logo {
+    display: none;
+}
+
+#hd_wr {
+    padding: 0px;
+}
+
+#container {
+    margin-top: 0px;    
+}
+
+.info_option_box > .top_box {
+    background-color: #D7E4BD;
+    padding: 10px;
+}
+
+.info_option_box > .top_box > .opt_box {
+    float: right;
+}
+
+.info_option_box > .content_box {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.info_option_box > .content_box > .title_box {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.info_option_box > .content_box table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.info_option_box > .content_box table tr td {
+    border: 1px solid black;
+    height: 30px;
+}
+
+.info_option_box > .content_box table tr .th {
+    font-weight: 600;
+    text-align: center;
+    width:30%;
+}
+
+.info_option_box > .content_box table tr td input[type=text] {
+    border: none;
+    background-color: #4F81BD;
+}
+
+.info_option_box > .content_box table tr td .radio_box {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.info_option_box > .content_box table tr td .email_box input[type=text] {
+    width: 30%;
+}
+
+.info_option_box > .content_box table tr td .email_box select {
+    width: 30%;
+    font-size: 10px;
+    padding: 0;
+    height: auto;
+}
+
+.info_option_box > .content_box table tr td .addr_box input[type=text] {
+    width: calc(70% - 5px);
+}
+
+.info_option_box > .content_box table tr td .addr_box .addr_search,
+.info_option_box > .content_box table tr td .phone_box #cert {
+    width: 30%;
+    background-color: grey;
+    text-align: center;
+    float: right;
+    margin-right: 5px;
+}
+
+.info_option_box > .content_box > .category_box {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.info_option_box > .content_box > .category_box > div {
+    width: 20%;
+    background-color: #C6D9F1;
+    color: white;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+
+.info_option_box > .content_box > .category_box > div.sel {
+    background-color: red;
+}
+
+.info_option_box > .content_box > .category_box > div:not(:nth-child(1)) {
+    margin-left: calc(20%/3);
+}
+
+.info_option_box > .content_box > .channel_box tr td {
+    text-align: center;
+}
+
+.info_option_box > .content_box > .channel_box tr td:nth-child(1) {
+    width: 10%;
+}
+
+.info_option_box > .content_box > .channel_box tr td:nth-child(2) {
+    width: 25%;
+}
+
+.info_option_box > .content_box > .update_box {
+    width: 60%;
+    background-color: #FCD5B5;
+    margin: 10px auto;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+}
