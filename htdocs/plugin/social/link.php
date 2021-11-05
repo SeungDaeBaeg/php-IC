@@ -23,12 +23,43 @@
         case "naver":
             naverApi();
             break;
+        case "youtube":
+            youtubeApi();
+            break;
     }
 
     switch($done) {
         case 'naver':
             naverApiDone();
             break;
+    }
+
+    function youtubeApi() {
+        global $client_id;
+        global $redirectURI;
+        $scope = "https://www.googleapis.com/auth/youtube.readonly";
+        $apiURL = "https://accounts.google.com/o/oauth2/auth?client_id=$client_id";
+        $apiURL .= "&scope=$scope";
+        $apiURL .= "&access_type=offline";
+        $apiURL .= "&response_type=code";
+        $apiURL .= "&redirect_uri=".rawurlencode($redirectURI);
+        $apiURL .= "&prompt=consent";
+        util::location($apiURL);
+        exit;
+        /* let client_id = '190472607915-a5d0bt6iaeetpovrj26suugjir37fjms.apps.googleusercontent.com',
+            redirect_uri = "https://ac.linkprice.net/join-sns-auth.html",
+            scope = 'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly';
+        let youtubeAuthUrl = 'https://accounts.google.com/o/oauth2/auth?client_id=' + client_id;
+        youtubeAuthUrl += '&scope=' + scope;
+        youtubeAuthUrl += '&access_type=offline';
+        youtubeAuthUrl += '&response_type=code';
+        youtubeAuthUrl += '&redirect_uri=' + encodeURIComponent(redirect_uri);
+        youtubeAuthUrl += '&prompt=consent';
+        let width = 600,
+            height = 650,
+            left = (screen.width / 2) - (width / 2),
+            top = (screen.height / 2) - (height / 2);
+        window.open(youtubeAuthUrl, '_blank', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+width+', height='+height+', top='+top+', left='+left); */
     }
 
     function naverApi() {
