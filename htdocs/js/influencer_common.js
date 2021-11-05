@@ -17,10 +17,12 @@ var util = {
         if(typeof obj !== 'object' || obj.length <= 0) return false;
         var frm = document.createElement("form");
 
+        if(_.isEmpty(opt))        opt = {};
         if(_.isEmpty(opt.method)) opt.method = 'post';
 
         frm.setAttribute("method", opt.method);
         frm.setAttribute("action", url);
+        frm.setAttribute("entype", "multipart/form-data");
 
         if(!opt.isNotIframe) {
             frm.setAttribute("target", "formSubmitIframe");
@@ -30,7 +32,7 @@ var util = {
 
         $.each(obj, function(k, o) {
             if(typeof o.validation === 'string' && _.isEmpty(o.value)) {
-                alert(o.validation);
+                util.alert(o.validation);
                 isSubmit = false;
                 return false;
             } else if(typeof o.validation === 'function') {
@@ -40,8 +42,12 @@ var util = {
                 }
             }
 
+            if(_.isEmpty(o.isFile)) {
+                o.isFile = false;
+            }
+
             var i = document.createElement("input");
-            i.setAttribute("type", "hidden");
+            i.setAttribute("type", o.isFile ? "file" : "hidden");
             i.setAttribute("name", o.name);
             i.setAttribute("value", o.value);
             frm.appendChild(i);
@@ -127,7 +133,7 @@ var util = {
     },
     /**
      * 랜덤값 뽑아내는 함수
-     * @returns
+     * @returns {string}
      */
     getRandom: function () {
         if(_.isEmpty(len)) {
@@ -155,14 +161,11 @@ var util = {
  */
 var data = {
     /**
-     * ajax 로드 함수
-     * php에서 데이터 가져오는게 성공하면 {"status":"OK","data":data} 형식으로 내려옴
-     * 실패하면 {"status":"OOPS","msg":msg} 형식으로 내려옴
-     * 성공한 data를 콜백함수로 보내줌
-     * @param {*} method post/get, default post
-     * @param {*} url 데이터를 받아올 URL
-     * @param {*} data 받아온 데이터
-     * @param {*} CB 데이터 가공할 콜백
+     * AJAX 로드 함수
+     * @param url       데이터 받아올 URL
+     * @param data      받아온 데이터
+     * @param callback  데이터 가공할 콜백
+     * @param method    post/get, default post
      */
     ajax: function(url, data, callback, method) {
         if(_.isEmpty(method)) {
@@ -170,25 +173,27 @@ var data = {
         }
 
         $.ajax({
-            type:method,
-            url:url,
-            data:data
+            type:   method,
+            url:    url,
+            data:   data
         }).done(function(res) {
             try {
                 res = JSON.parse(res);
-                if(res.status === 'OOPS') {
-                    alert(res.msg);
-                    return;
-                }
-
+                console.log('callback', typeof callback);
                 if(typeof callback === 'function') {
-                    callback(res.data);
+                    callback(res);
+                } else if(!_.isEmpty(res.msg)) {
+                    util.alert(res.msg);
                 }
             } catch(e) {
-                alert('ajax 에러가 등장했습니다.');
+                util.alert('ajax 에러가 등장했습니다.', {
+                    type: 'instant'
+                });
             }
         }).fail(function(){
-            alert('데이터를 가져오는데 실패하였습니다.');
+            util.alert('데이터를 가져오는데 실패하였습니다.', {
+                type: 'instant'
+            });
         })
     },
     getLoginId: function() {
@@ -201,7 +206,6 @@ var data = {
 
 var url = {
     getClickUrl: function(obj) {
-        console.log(obj);
         if(_.isEmpty(obj.m)) {
             return false;
         }

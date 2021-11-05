@@ -1670,7 +1670,7 @@ function sql_fetch_array(&$result) {
  */
 function sql_fetch_data(string $query, &$res = array(), array $params = array()) {
     sql_fetch_arrays($query,$res, $params);
-    $res = $res[0] ?? array();
+    $res = $res[0] ?? null;
 }
 
 /**
@@ -1713,10 +1713,12 @@ function sql_insert(string $table, array $record): ?int {
  * @param string $table
  * @param array  $record
  * @param string $where
+ *
+ * @return bool
  */
-function sql_update(string $table, array $record, string $where): void {
+function sql_update(string $table, array $record, string $where): bool {
     global $g5;
-    $g5['connect_db']->autoExecute($table, $record, 'UPDATE', $where);
+    return $g5['connect_db']->autoExecute($table, $record, 'UPDATE', $where);
 }
 
 // $result에 대한 메모리(memory)에 있는 내용을 모두 제거한다.

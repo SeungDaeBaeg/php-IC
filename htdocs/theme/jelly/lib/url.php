@@ -47,4 +47,14 @@ class url {
         return G5_IMG_URL . '/badge_' . $mbSnsChannel . 'png';
     }
 
+    /**
+     * 마이샵 커버 이미지
+     * @param string $fileName
+     * @return string|null
+     */
+    public static function getMyshopCoverImage(string $fileName): ?string {
+        if(!file_exists(G5_DATA_PATH . '/myshop/coverImage/' . $fileName)) return null;
+        return G5_DATA_URL . '/myshop/coverImage/' . $fileName;
+    }
+
 }

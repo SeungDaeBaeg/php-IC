@@ -278,9 +278,7 @@ if(data::isLogin()) {
         });
 
         $("#btn_search, #btn_search_mobile").click(function() {
-console.log($(this).attr("id"));
             var searchTxt = encodeURIComponent($("#" + ($(this).attr("id") === 'btn_search' ? 'txt_search' : 'txt_search_mobile')).val());
-console.log(searchTxt);
             util.formSubmit('/influencer/search.php', [
                 {name: 'qs',     value: searchTxt}
             ], {
