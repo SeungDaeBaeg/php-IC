@@ -31,7 +31,7 @@ class util {
             return $r;
         } else if(is_string($param)) {
             if(empty($_REQUEST[$param]) && gettype($callbackOrMsg) === 'string' && trim($callbackOrMsg) !== '') {
-                util::alert($callbackOrMsg, true);
+                util::alert($callbackOrMsg,array ("type"=>"instant"),true);
             } else if(empty($_REQUEST[$param]) && gettype($callbackOrMsg) === 'object') {
                 $callbackOrMsg();
                 exit();

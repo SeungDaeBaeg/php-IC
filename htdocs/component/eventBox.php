@@ -20,7 +20,7 @@
             </div>
         <? } else { ?>
             <? if($party === '0') { ?>
-                <div class="event_join_box" data-id="<?=$param['ev_id']?>" data-type="join">참여신청</div>
+                <div class="event_join_box" data-id="<?=$ev_id?>" data-type="join" data-sample=<?=$is_sample?>>참여신청</div>
             <? } else { ?>
                 <div class="event_join_box" data-type="finish">참여완료</div>
             <? } ?>

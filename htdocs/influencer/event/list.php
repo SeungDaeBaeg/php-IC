@@ -26,17 +26,14 @@ $order = $_GET['order'] ?? 'new';
 $order_name = '';
 $today = date('Y-m-d');
 
-$join_status = $_SESSION['event_join'];
+$event_join = $_SESSION['event_join'];
 unset($_SESSION['event_join']);
 
-if($join_status === 'OK') {
+if($event_join === 'OK') {
     util::alert('이벤트 참여 신청이 되었습니다.');
 }
-else if($join_status === 'FAIL') {
+else if($event_join === 'FAIL') {
     util::alert('이벤트 참여 신청이 안되었습니다.<br>관리자에게 연락바랍니다.');
-}
-else if($join_status === 'DUP') {
-    util::alert('이벤트 참여한 신청이 있습니다.<br>다른 이벤트를 참여해주세요.');
 }
 
 $mb_no = data::getLoginMember()['mb_no'];
@@ -45,7 +42,8 @@ $mb_no = data::getLoginMember()['mb_no'];
 $sql = "
 SELECT event.ev_id, ev_subject, ev_thumbnail_content, 
 (select code_name from g5_code where code = ev_type and meta_code = 'event' and del_yn = 'N') code_name, ev_link, 
-(select count(*) from g5_shop_party_join where ev_id = event.ev_id and mb_no = ?) party 
+(select count(*) from g5_shop_party_join where ev_id = event.ev_id and mb_no = ?) party,
+(select is_sample from g5_shop_party where ev_id = event.ev_id) is_sample 
 FROM g5_shop_event event
 WHERE ev_start_date <= ? and ev_end_date >= ? and ev_use = 1";
 
@@ -132,12 +130,25 @@ sql_fetch_arrays($sql, $eventBox, array($mb_no,$today,$today));
                 util.alert('판매링크가<br> 복사 되었습니다.','clip.png');
                 break;
             case 'join':
-                location.href = '/influencer/item_detail_navi/sample_subscription.php?ev_id=' + data_id;
+                var is_sample = _this.data('sample');
+                if(is_sample === 'N') {
+                    data.ajax("<?=$ajax_event_url?>",{action:"joinEvent",ev_id:data_id},joinEventCB);
+                }
+                else {
+                    location.href = '/influencer/item_detail_navi/sample_subscription.php?ev_id=' + data_id;
+                }
                 break;
             case 'menu':                
                 break;
         }
     });
+
+    function joinEventCB(res) {
+        util.alert('참여 신청되었습니다.');
+        var t = $('.event_join_box[data-id='+res.ev_id+']');
+        t.text('참여완료');
+        t.data('type','finish');        
+    }
     
     $(function(){
         $("#event_top_box div[data-id='<?=$type?>']").addClass('selected');       

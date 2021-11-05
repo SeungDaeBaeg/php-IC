@@ -133,9 +133,11 @@ var util = {
     },
     /**
      * 랜덤값 뽑아내는 함수
-     * @returns {string}
+     * @param {*} len 랜덤길이 기본값 32자리
+     * @param {*} type number | string 기본값 number+string
+     * @returns
      */
-    getRandom: function () {
+    getRandom: function (len,type) {
         if(_.isEmpty(len)) {
             len = 32;
         }
@@ -178,6 +180,7 @@ var data = {
             data:   data
         }).done(function(res) {
             try {
+                console.log(res);
                 res = JSON.parse(res);
                 console.log('callback', typeof callback);
                 if(typeof callback === 'function') {
@@ -278,5 +281,41 @@ var url = {
      */
     isValidURL: function(url) {
         return (url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g) !== null);
-    }
+    },
+    /**
+     * URL GET QueryString 제거
+     * param이 없거나 빈문자열이면 모든 QueryString 제거
+     * @param type
+     * @param {*} param 
+     */
+    removeGetParams: function(type,param) {
+        
+        if(_.isEmpty(type)) {
+            type = 'url';
+        }
+
+        var qs_obj = this.getUrlParams(location.search);
+
+        if(typeof param === 'string' && param !== '') delete qs_obj[param];
+        else if(typeof param === 'object'){
+            param.forEach(p=>{
+                delete qs_obj[p];
+            });
+        }
+        else {
+            if(type === 'string') return location.origin+location.pathname;
+            else history.pushState('','',location.origin+location.pathname);
+            return;
+        }
+
+        var q = this.httpBuildQuery(qs_obj);
+        if(q === '') {
+            if(type === 'string') return location.origin+location.pathname;
+            history.pushState('','',location.origin+location.pathname);
+        }
+        else {
+            if(type === 'string') return location.origin+location.pathname + '?' + q;
+            history.pushState('','',location.origin+location.pathname + '?' + q);
+        }
+    } 
 };
