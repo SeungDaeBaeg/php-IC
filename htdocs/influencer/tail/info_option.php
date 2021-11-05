@@ -344,8 +344,13 @@ foreach($sns_res as $v) {
 
     $(document).ready(function() {
         var res = url.getUrlListParam(['sns','code','type']);
-        if(res.code == 1) util.alert('연동되지 않았습니다. 관리자에게 문의주세요');
-        else if(res.code == 2) util.alert('중복된 연결 계정이있습니다. 관리자에게 문의주세요');
+        if(res.code != 0) {
+            if(res.code == 1) util.alert('연동되지 않았습니다. 관리자에게 문의주세요');
+            else if(res.code == 2) util.alert('중복된 연결 계정이있습니다. 관리자에게 문의주세요');
+            else if(res.code == 3) util.alert('유튜브 채널이 없습니다 만들어주세요');
+        }
+        
+        
         switch(res.sns) {
             case 'naver':
                 if(res.type === 'insert') {
