@@ -63,23 +63,22 @@ class util {
     /**
      * 알럿 창
      * @param string $msg
-     * @param string $js
+     * @param callable $js
      * @param bool   $exit
      */
-    public static function alert(string $msg, $js = '', bool $exit = false): void {
-        if(!is_callable($js)) {
-            $js = function() {};
-        }
-
-        echo "
-        <script>
-            window.parent.util.alert('".$msg."', {
-              cb: function() { " . $js() . " }
-            });
-        </script>";
-
-        if($exit) {
-            exit();
+    public static function alert(string $msg, callable $js = null): void {
+        if(is_callable($js)) {
+            die("
+            <script>
+                window.parent.util.alert('".$msg."', {
+                  cb: function() { " . $js() . " }
+                });
+            </script>");
+        } else {
+            echo "
+            <script>
+                window.parent.util.alert('".$msg."');
+            </script>";
         }
     }
 

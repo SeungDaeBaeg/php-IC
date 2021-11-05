@@ -21,8 +21,9 @@ if($action === 'insert') {
     if(!empty($myshopCoverImage)) {
         $isFileUpload = util::upload(G5_DATA_PATH.'/myshop/coverImage', $mbNo);
         if ($isFileUpload === false) {
-            util::alert("파일업로드에 실패하였습니다.");
-            util::reload();
+            util::alert("파일업로드에 실패하였습니다.", function() {
+                util::reload();
+            });
         }
     }
 
@@ -80,9 +81,7 @@ if($action === 'insert') {
         }
     }
 
-    util::alert("수정되었습니다.", function() {
-        return util::reload();
-    }, true);
+    util::alert("수정되었습니다.");
 }
 
 
