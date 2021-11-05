@@ -1,47 +1,30 @@
 <?php
     include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
 
-    $action = $_POST['action'] ?? '';    
-    $res = (object)['status'=>'OK'];
+    $action = $_POST['action'] ?? '';   
 
     switch($action) {
-        case 'getList': 
-        case 'getCodeName':        
-            $action($res);
+        case 'joinEvent':     
+            $action();
             break;
         default:
-            $res->status = "OPPS";
-            $res->msg = "액션이 이상합니다.";
-            echo json_encode($res);
+            util::ajaxResult('해당 액션이 없습니다',-1);
     }
 
-    function getList($res) {
-        $type = $_POST['type'] ?? '';
-        $order = $_POST['order'] ?? '';
-        $today = date('Y-m-d');
+    function joinEvent() {
+        $ev_id = util::paramCheck("ev_id", "이벤트 아이디가 없습니다.");
+        $mb_no = data::getLoginMember()['mb_no'];
 
-        $userData = data::getLoginMember();
+        $id = sql_insert("g5_shop_party_join",array(
+            'ev_id'         =>  $ev_id,
+            'mb_no'         =>  $mb_no
+        ));
 
-        $sql = "select ev_id, ev_subject, ev_thumbnail_content, (select code_name from g5_code where code = ev_type and meta_code = 'event' and del_yn = 'N') code_name, ev_link, (select count(*) from g5_shop_party_join where ev_id = ev_id and mb_id = ?) party from g5_shop_event where ev_start_date <= ? and ev_end_date >= ? and ev_use = 1";
-        if($type) {
-            $sql .= " and ev_type = '".$type."'";
+        if($id > 0) {
+            util::ajaxResult('success',0,array("ev_id"=>$ev_id));
         }
-
-        if($order === 'new') {
-            $sql .= " order by ev_id desc";
+        else {
+            util::ajaxResult('관리자한테 문의해주세요.',-2);
         }
-        else if($order === 'deadline') {
-            $sql .= " order by ev_end_date";
-        }
-        sql_fetch_arrays($sql,$list,array($userData['mb_id'],$today,$today));
-        $res->data = $list;
-        echo json_encode($res);
-    }
-
-    function getCodeName($res) {
-        $sql = "select code, code_name from g5_code where meta_code = 'event' and del_yn = 'N'";
-        sql_fetch_arrays($sql,$codes);
-        $res->data = $codes;
-        echo json_encode($res);
     }
 ?>

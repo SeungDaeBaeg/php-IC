@@ -1,0 +1,92 @@
+body {
+    background-color: #4F81BD;
+}
+
+#hd_wr .visible-mobile,#logo {
+    display: none;
+}
+
+#hd_wr {
+    padding: 0px;
+}
+
+#container {
+    margin-top: 0px;    
+    height: calc(100% - 74px);
+}
+
+.info_box .info_common {    
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.info_box .f_jc_sb_box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info_box > .top_box {
+    background-color: #D7E4BD;
+    padding: 10px;
+}
+
+.info_box > .top_box > .opt_box {
+    float: right;
+}
+
+.info_box > .account_box {
+    width: 80%;
+    margin: 30px auto;
+}
+
+.info_box > .account_box > .money_box {
+    margin-bottom: 30px; 
+}
+
+.info_box > .account_box > .money_box > div {
+    width: 40%;
+    background-color: #FCD5B5;
+}
+
+.info_box > .account_box > .register_box {
+    background-color: #FCD5B5;
+}
+
+.info_box > .notice_box {
+    background-color: #D7E4BD;
+    padding: 20px 0;
+}
+
+.info_box > .notice_box > .notice_sub_box {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.info_box > .notice_box > .notice_sub_box > div {
+    width: 40%;
+    background-color: #8EB4E3;
+}
+
+.info_box > .menu_box {
+    background-color: #F2F2F2;
+}
+
+.info_box > .menu_box > .menu_sub_box {
+    width: 80%;
+    margin: 30px auto;
+}
+
+.info_box > .menu_box > .menu_sub_box > div {
+    width: 20%;
+    background-color: #8EB4E3;
+}
+
+.info_box > .logout_box {
+    width: 80%;
+    margin: 240px auto;
+}
+
+.info_box > .logout_box > .logout_btn_box {
+    background-color: #FCD5B5;
+}
