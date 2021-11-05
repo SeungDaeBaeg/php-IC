@@ -5,7 +5,7 @@
 require_once '../_common.php';
 
 util::loginCheck();
-$alarmId = util::paramCheck('id', "알람 ID가 없습니다.");
+$alarmId = util::param('id', "알람 ID가 없습니다.");
 
 //읽은 시간 업데이트
 sql_update("g5_alarm_detail", array(

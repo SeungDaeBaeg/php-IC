@@ -8,7 +8,7 @@
 include_once('./_common.php');
 include_once(G5_THEME_PATH . '/head.sub.php');
 
-$mb_id = util::paramCheck("id");
+$mb_id = util::param("id");
 
 //관리자 화면
 $isAdmin = false;

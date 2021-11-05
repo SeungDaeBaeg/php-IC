@@ -9,10 +9,10 @@ include_once('./_common.php');
 define("_INDEX_", true);
 include_once(G5_SHOP_PATH.'/shop.head.php');
 
-$qs       = util::paramCheck("qs");
-$sort     = util::paramCheck("sort");
-$category = util::paramCheck("category");
-$event    = util::paramCheck("event");
+$qs       = util::param("qs");
+$sort     = util::param("sort");
+$category = util::param("category");
+$event    = util::param("event");
 
 
 $where    = "";

@@ -10,7 +10,7 @@ if(!data::isLogin()) {
     util::ajaxResult("로그인 상태가 아닙니다.", -2);
 }
 
-$it_id = util::paramCheck("it_id", function() {
+$it_id = util::param("it_id", function() {
     util::ajaxResult("상품 아이디가 없습니다.", -2);
 });
 

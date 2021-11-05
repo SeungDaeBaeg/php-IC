@@ -5,7 +5,7 @@
 include_once('../_common.php');
 util::loginCheck();
 
-$action = util::paramCheck("action");
+$action = util::param("action");
 
 define("_INDEX_", TRUE);
 include_once(G5_THEME_MSHOP_PATH.'/shop.head.php');

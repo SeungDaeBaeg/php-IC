@@ -21,7 +21,7 @@ function get_mshop_category($ca_id, $len) {
 }
 
 
-$searchTxt = util::paramCheck('qs');
+$searchTxt = util::param('qs');
 if($searchTxt != '') {
     $searchTxt = urldecode($searchTxt);
 }

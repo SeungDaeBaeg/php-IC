@@ -12,7 +12,7 @@
     }
 
     function joinEvent() {
-        $ev_id = util::paramCheck("ev_id", "이벤트 아이디가 없습니다.");
+        $ev_id = util::param("ev_id", "이벤트 아이디가 없습니다.");
         $mb_no = data::getLoginMember()['mb_no'];
 
         $id = sql_insert("g5_shop_party_join",array(

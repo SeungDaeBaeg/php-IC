@@ -21,7 +21,7 @@ class util {
      *
      * @return string|array|null
      */
-    public static function paramCheck($param, $callbackOrMsg = '') {
+    public static function param($param, $callbackOrMsg = '') {
 
         if(is_array($param)) {
             $r = array();

@@ -7,7 +7,7 @@ include_once('../_common.php');
 
 util::loginCheck();
 
-$it_id = util::paramCheck("it_id", "상품 아이디가 없습니다.");
+$it_id = util::param("it_id", "상품 아이디가 없습니다.");
 
 sql_fetch_data("
 SELECT  COUNT(1) cnt

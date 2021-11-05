@@ -6,8 +6,8 @@
 include_once('../_common.php');
 util::loginCheck();
 
-$id = util::paramCheck(array("it_id","ev_id"), "상품 아이디가 없습니다.");
-$action = util::paramCheck("action");
+$id = util::param(array("it_id","ev_id"), "상품 아이디가 없습니다.");
+$action = util::param("action");
 
 $it_id = $id['it_id'];
 $ev_id = $id['ev_id'];
@@ -27,7 +27,7 @@ if($ev_id) {
 }
 
 if(!empty($action)) {
-    $params = util::paramCheck(array('it_id', 'name', 'hp', 'email', 'sns_id', 'sns_followers', 'sns_link', 'sns_channel', 'zip_code', 'addr1', 'addr2', 'options'));
+    $params = util::param(array('it_id', 'name', 'hp', 'email', 'sns_id', 'sns_followers', 'sns_link', 'sns_channel', 'zip_code', 'addr1', 'addr2', 'options'));
 
     $id = sql_insert("g5_subscription", array(
         'it_id'             => $params['it_id'],

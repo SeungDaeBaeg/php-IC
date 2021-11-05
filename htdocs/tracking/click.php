@@ -5,11 +5,11 @@
  */
 include_once('_common.php');
 
-$mb_no = util::paramCheck("m", function() {
+$mb_no = util::param("m", function() {
     util::alert("회원코드가 존재하지 않습니다.");
     util::location("/");
 });
-$it_no = util::paramCheck("p");
+$it_no = util::param("p");
 
 //쿠키 저장
 $data = json_encode(array(

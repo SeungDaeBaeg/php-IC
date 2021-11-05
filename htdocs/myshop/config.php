@@ -6,15 +6,15 @@
 
 include_once('./_common.php');
 
-$action = util::paramCheck('action');
+$action = util::param('action');
 
 
 if($action === 'insert') {
-    $myshopName             = util::paramCheck('myshop_name');
-    $configChannelIds       = util::paramCheck('config_channel_ids');
-    $configChannelTypes     = util::paramCheck('config_channel_types');
-    $configChannelUrls      = util::paramCheck('config_channel_urls');
-    $configChannelDefault   = util::paramCheck('config_channel_default');
+    $myshopName             = util::param('myshop_name');
+    $configChannelIds       = util::param('config_channel_ids');
+    $configChannelTypes     = util::param('config_channel_types');
+    $configChannelUrls      = util::param('config_channel_urls');
+    $configChannelDefault   = util::param('config_channel_default');
 
     $mbNo                   = data::getLoginMember()['mb_no'];
 
@@ -88,7 +88,7 @@ if($action === 'insert') {
 include_once(G5_THEME_PATH . '/head.sub.php');
 
 
-$mb_id = util::paramCheck("id");
+$mb_id = util::param("id");
 
 //관리자 화면
 $isAdmin = false;
