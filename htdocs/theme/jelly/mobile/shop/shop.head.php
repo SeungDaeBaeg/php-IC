@@ -36,11 +36,18 @@ if(data::isLogin()) {
     AND     readed_at IS NULL", $alarmCnt, array(data::getLoginMember()['mb_no']));
 }
 
+//카테고리
+sql_fetch_arrays("
+SELECT  ca_id, ca_name
+FROM    g5_shop_category
+WHERE   ca_use = '1'", $categorys);
+
 echo util::component("common/head", array(
     'loginInfo'    => data::getLoginMember(),
     'memberInfo'   => $memberInfo,
     'config'       => $config,
     'searchTxt'    => $searchTxt,
     'g5'           => $g5,
-    'alarmCnt'     => $alarmCnt['cnt']
+    'alarmCnt'     => $alarmCnt['cnt'],
+    'categorys'    => $categorys
 ));

@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * 상단 메뉴
+ */
 
 ?>
 
@@ -66,42 +68,15 @@
             | <a>문의센터</a>
         </div>
 
-
-        <div id="category" class="menu">
-            <button type="button" class="menu_close"><i class="fa fa-times" aria-hidden="true"></i><span class="sound_only">카테고리닫기</span></button>
-            <div class="btn_login">
-                <input type="text" id="txt_search" placeholder="상품을 검색하세요2" value="<?=$searchTxt?>"/>
-                <button id="btn_search">검색</button>
-            </div>
-
-            <div class="menu_wr">
-                <ul class="cate">
-                    <li>
-                        <a>추천</a>
-                    </li>
-                    <li>
-                        <a>이벤트</a>
-                    </li>
-                    <li>
-                        <a>마이샵</a>
-                    </li>
-                    <li>
-                        <a href="/influencer/report.php">리포트</a>
-                    </li>
-                    <li>
-                        <a href="/influencer/withdraw.php">출금관리</a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
+        <!-- 좌측 카테고리 -->
+        <?=util::component('common/leftSideBar', array('categorys' => $categorys))?>
 
         <?=outlogin('theme/shop_basic', !empty($memberInfo)) // 외부 로그인 ?>
 
         <div id="hd_sch">
             <button type="button" class="btn_close"><i class="fa fa-times"></i></button>
             <div class="hd_sch_wr">
-                <form name="frmsearch1" action="<?=G5_SHOP_URL; ?>/search.php" onsubmit="return search_submit(this);">
+                <form name="frmsearch1" action="<?=G5_SHOP_URL?>/search.php" onsubmit="return search_submit(this);">
 
                     <div class="sch_inner">
                         <h2>상품 검색</h2>
@@ -132,24 +107,7 @@
                 <?php } ?>
             </div>
         </div>
-        <!--            <div id="hd_btn">-->
-        <!--                <button type="button" id="btn_sch"><i class="fa fa-search"></i><span class="sound_only">검색열기</span></button>-->
-        <!--                <a href="--><?php //echo G5_SHOP_URL; ?><!--/cart.php" id="btn_cartop"><i class="fa fa-shopping-cart"></i><span class="sound_only">장바구니</span><span class="cart-count">--><?php //echo get_boxcart_datas_count(); ?><!--</span></a>-->
-        <!--            </div>-->
     </div>
-
-    <script>
-        function search_submit(f) {
-            if (f.q.value.length < 2) {
-                alert("검색어는 두글자 이상 입력하십시오.");
-                f.q.select();
-                f.q.focus();
-                return false;
-            }
-
-            return true;
-        }
-    </script>
 
     </div>
 
@@ -174,9 +132,6 @@
             $("#category").show();
         });
 
-        $(".menu_close").on("click", function() {
-            $(".menu").hide();
-        });
         $(".cate_bg").on("click", function() {
             $(".menu").hide();
         });
@@ -242,10 +197,18 @@
                 });
             });
         });
+
+        function search_submit(f) {
+            if (f.q.value.length < 2) {
+                alert("검색어는 두글자 이상 입력하십시오.");
+                f.q.select();
+                f.q.focus();
+                return false;
+            }
+
+            return true;
+        }
     </script>
 </header>
 
 <div id="container" class="container">
-<? if (!defined('_INDEX_') && !empty($g5['title'])) { ?>
-    <h1 id="container_title"><?=$g5['title'] ?></h1>
-<? } ?>

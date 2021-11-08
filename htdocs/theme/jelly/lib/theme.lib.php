@@ -258,14 +258,12 @@ function get_item_event_info($it_id)
 }
 
 /**
- * 공통으로 필요한 함수 로드
+ * IC에 필요한 공통 함수 로드
  * function 폴더에 파일 넣으면 자동으로 로드
  */
-
-$dir = G5_THEME_LIB_PATH;
-
-$dir_handle=opendir($dir);
-while(($file=readdir($dir_handle)) !== false) {
+$dir = G5_PATH . '/influencer/lib';
+$dir_handle = opendir($dir);
+while(($file = readdir($dir_handle)) !== false) {
     $fname = $file;
     if ($fname == "." || $fname == "..") continue;
     include_once $dir . '/' . $fname;
