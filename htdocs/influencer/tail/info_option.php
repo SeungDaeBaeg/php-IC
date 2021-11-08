@@ -32,6 +32,7 @@ $sns_name = ['네이버','인스타그램','페이스북','유튜브','기타'];
 
 $ajax_info_url = G5_INFLUENCER_URL.'/tail/ajax.info.php';
 $link_url = G5_SOCIAL_LOGIN_URL.'/link.php';
+$cert_url = G5_INFLUENCER_URL.'/cert/kmc.php';
 
 if(!empty($action)) {
     $opt = array(
@@ -234,34 +235,20 @@ foreach($sns_res as $v) {
     });
 
     $('.info_option_box #cert').click(function(){
+        
+        var param=  {};
+
         //안드로이드나 iOS일 경우 파라미터 추가
         if(navigator.userAgent.indexOf('Mobile') > -1) {
             param.app = 1;
         }
 
-        data
-        
+        data.ajax("<?=$cert_url?>",param,certCB);
 
-        
-        //안드로이드나 iOS일 경우 파라미터 추가
-        /* if(navigator.userAgent.indexOf('Mobile') > -1) {
-            param.app = 1;
-        }
-
-        $.ajax({
-            method: 'post',
-            url: 'https://api.linkprice.com/certification/person_check.php',
-            headers: {
-                'Content-type': 'application/x-www-form-urlencoded'
-            },
-            data: param
-        }).then(response => {
+        function certCB(solution) {
             window.open('', 'popForm', "toolbar=no, width=540, height=467, directories=no, status=no, scrollorbars=no, resizable=no");
             
-            var solution = JSON.parse(response);
-
             var f = document.createElement("form");
-
             f.setAttribute('id',"reqKMCISForm");
             f.setAttribute('name',"reqKMCISForm");
             f.setAttribute('target', (navigator.userAgent.indexOf('lp_android') > -1 || navigator.userAgent.indexOf('lp_ios') > -1) ? '_self' : 'popForm');
@@ -284,10 +271,9 @@ foreach($sns_res as $v) {
             document.body.appendChild(f);
             document.reqKMCISForm.submit();
 
-            // 폼 객체 삭제
             var child = document.getElementById("reqKMCISForm");
             child.parentNode.removeChild(child);
-        }); */
+        }
     })
 
     $('.info_option_box div[name=category]').click(function(){
