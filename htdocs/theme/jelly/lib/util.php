@@ -316,7 +316,7 @@ class util {
      * 
      * @return array
      */
-    public static function curlCall(string $url, array $options = array()) {
+    public static function curl(string $url, array $options = array()) {
 
         $params     = $options['params'] ?? array();
         $method     = $options['method'] ?? "get";
