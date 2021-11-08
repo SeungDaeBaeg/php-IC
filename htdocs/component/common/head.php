@@ -43,6 +43,9 @@
         <div class="visible-mobile">
             <input type="text" id="txt_search_mobile" style="width:79%;" value="<?=$searchTxt?>"/>
             <button style="width:20%" id="btn_search_mobile">검색</button>
+
+            <!-- 좌측 카테고리 -->
+            <?=util::component('common/leftSideBar', array('categorys' => $categorys))?>
         </div>
 
         <div class="visible-pc">
@@ -66,10 +69,35 @@
             <? } ?>
 
             | <a>문의센터</a>
-        </div>
 
-        <!-- 좌측 카테고리 -->
-        <?=util::component('common/leftSideBar', array('categorys' => $categorys))?>
+            <hr/>
+
+            <div class="btn_login">
+                <input type="text" id="txt_search" placeholder="상품을 검색하세요" value="<?=$searchTxt?>"/>
+                <button id="btn_search">검색</button>
+            </div>
+
+            <div class="menu_wr">
+                <ul class="cate">
+                    <li>
+                        <a>추천</a>
+                    </li>
+                    <li>
+                        <a>이벤트</a>
+                    </li>
+                    <li>
+                        <a>마이샵</a>
+                    </li>
+                    <li>
+                        <a href="/influencer/report.php">리포트</a>
+                    </li>
+                    <li>
+                        <a href="/influencer/withdraw.php">출금관리</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
 
         <?=outlogin('theme/shop_basic', !empty($memberInfo)) // 외부 로그인 ?>
 

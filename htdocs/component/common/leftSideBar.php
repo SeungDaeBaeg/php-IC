@@ -4,7 +4,7 @@
 
     <div>
         <? foreach($categorys as $category) { ?>
-            <div class="category_list">
+            <div class="category_list -mouse-pointer" data-ca-id="<?=$category['ca_id']?>">
                 <?=$category['ca_name']?>
             </div>
         <? } ?>
@@ -13,8 +13,12 @@
 
 <script>
     $(function() {
-        $(".menu_close").on("click", function() {
+        $(".menu_close").click(function() {
             $(".menu").hide();
+        });
+
+        $(".category_list").click(function() {
+            window.location = "/influencer/search.php?category=" + $(this).data('ca-id');
         });
     });
 </script>
