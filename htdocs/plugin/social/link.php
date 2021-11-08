@@ -62,7 +62,7 @@
         $options = array();
         $options['params'] = $params;
 
-        list($error, $response) = util::curlCall($url,$options);
+        list($error, $response) = util::curl($url,$options);
 
         if(!$error) {
             $response_arr = json_decode($response,true);
@@ -79,7 +79,7 @@
             $options = array();
             $options['params'] = $params;
 
-            list($error, $response) = util::curlCall($url.'me',$options);
+            list($error, $response) = util::curl($url.'me',$options);
 
             if(!$error) {
                 $response_user = json_decode($response,true);
@@ -102,7 +102,7 @@
                 $options = array();
                 $options['params'] = $params;
 
-                list($error, $response) = util::curlCall($insta_account_url,$options);
+                list($error, $response) = util::curl($insta_account_url,$options);
                 if(!$error) {
                     $response_arr = json_decode($response,true);
                     if(count($response_arr['data'])) {
@@ -116,7 +116,7 @@
                         $options = array();
                         $options['params'] = $params;
                         
-                        list($error, $response) = util::curlCall($url.$page_id,$options);
+                        list($error, $response) = util::curl($url.$page_id,$options);
                         if(!$error) {
                             $response_arr = json_decode($response,true);
 
@@ -130,7 +130,7 @@
                             $options = array();
                             $options['params'] = $params;
 
-                            list($error, $response) = util::curlCall($url.$insta_id,$options);
+                            list($error, $response) = util::curl($url.$insta_id,$options);
                             if(!$error) {
                                 $response_arr = json_decode($response,true);
                                 
@@ -175,7 +175,7 @@
         $options = array();
         $options['params'] = $params;
 
-        list($error, $response) = util::curlCall($url,$options);
+        list($error, $response) = util::curl($url,$options);
 
         if(!$error) {
             $response_arr = json_decode($response,true);
@@ -192,7 +192,7 @@
             $options = array();
             $options['params'] = $params;
 
-            list($error, $response) = util::curlCall($url,$options);
+            list($error, $response) = util::curl($url,$options);
 
             if(!$error) {
                 $response_user = json_decode($response,true);
@@ -248,7 +248,7 @@
         $options['params'] = $params;
         $options['method'] = 'post';
 
-        list($error, $response) = util::curlCall($url,$options);
+        list($error, $response) = util::curl($url,$options);
 
         if(!$error) {
             $response_arr = json_decode($response,true);
@@ -262,7 +262,7 @@
             $options = array();
             $options['params'] = $params;
 
-            list($error, $response) = util::curlCall("https://www.googleapis.com/youtube/v3/channels", $options);
+            list($error, $response) = util::curl("https://www.googleapis.com/youtube/v3/channels", $options);
 
             if(!$error) {
                 $response_arr = json_decode($response,true);
@@ -322,7 +322,7 @@
         $state = $_GET["state"];
         $url = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=".$client_id."&client_secret=".$client_secret."&redirect_uri=".$redirectURI."&code=".$code."&state=".$state;
 
-        list($error, $response) = util::curlCall($url);
+        list($error, $response) = util::curl($url);
         if(!$error) {
             $response_arr = json_decode($response, true);
             $token = $response_arr['access_token'];
@@ -335,7 +335,7 @@
             $options = array();
             $options['headers'] = $headers;
 
-            list($error, $response) = util::curlCall($user_profile_url,$options);
+            list($error, $response) = util::curl($user_profile_url,$options);
             if(!$error) {                
                 global $info_url;
                 global $mb_no;
