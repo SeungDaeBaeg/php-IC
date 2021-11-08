@@ -27,8 +27,8 @@ sql_fetch_arrays($sql,$cats);
 $select_category = $user['mb_category'];
 $select_categorys = explode('',$select_category);
 
-$sns_value = ['naver','instagram','facebook','youtube'];
-$sns_name = ['네이버','인스타그램','페이스북','유튜브'];
+$sns_value = ['naver','instagram','facebook','youtube','other'];
+$sns_name = ['네이버','인스타그램','페이스북','유튜브','기타'];
 
 $ajax_info_url = G5_INFLUENCER_URL.'/tail/ajax.info.php';
 $link_url = G5_SOCIAL_LOGIN_URL.'/link.php';
@@ -189,8 +189,13 @@ foreach($sns_res as $v) {
                     if($user['mb_sns_channel'] === $v) echo '<td><input type="radio" name="sns" value="'.$v.'" checked></td>';
                     else echo '<td><input type="radio" name="sns" value="'.$v.'"></td>';
                     echo '<td>'.$n.'</td>';
-                    if(in_array($v,$sns_type)) echo '<td><div data-id="'.$v.'">연결해지하기</div></td>';
-                    else echo '<td><div data-id="'.$v.'">연결하기</div></td>';
+                    if($v !== 'other') {
+                        if(in_array($v,$sns_type)) echo '<td><div data-id="'.$v.'">연결해지하기</div></td>';
+                        else echo '<td><div data-id="'.$v.'">연결하기</div></td>';
+                    }
+                    else {
+                        echo '<td><input class="other_input" id="other_url" value="'.$user['mb_other_url'].'" placeholder="채널 URL을 입력해주세요"></td>';
+                    }
                     echo '</tr>';
                 }
             ?>
@@ -301,6 +306,7 @@ foreach($sns_res as $v) {
         var addr2       = $('.info_option_box #addr2').val();
         var category    = [];
         var sns_channel = $('.info_option_box [name=sns]:checked').val();
+        var other_url   = $('.info_option_box #other_url').val();
 
         if(_.isEmpty(name)) {
             util.alert('이름을 입력해주세요',{type:'instant'});
@@ -315,6 +321,7 @@ foreach($sns_res as $v) {
         $(".info_option_box .category_box .sel").each(function(k, v) {
             category.push($(v).data('id'));
         });
+
         category = category.join('');
 
         data.ajax("<?=$ajax_info_url?>",{
@@ -327,7 +334,8 @@ foreach($sns_res as $v) {
             addr1       : addr1,
             addr2       : addr2,
             sns_channel : sns_channel,
-            name        : name
+            name        : name,
+            other_url   : other_url
         },updateCB);
     })
 
