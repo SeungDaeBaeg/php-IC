@@ -12,7 +12,7 @@
     }
 
     function updateInfo() {
-        $p = array('category','sex','email','agree','zip_code','addr1','addr2','sns_channel','name');
+        $p = array('category','sex','email','agree','zip_code','addr1','addr2','sns_channel','name','other_url');
         $param = util::param($p, "파라미터가 없습니다.");
         $mb_no = data::getLoginMember()['mb_no'];
         
@@ -25,7 +25,8 @@
             'mb_addr1'          =>  $param['addr1'],
             'mb_addr2'          =>  $param['addr2'],
             'mb_sns_channel'    =>  $param['sns_channel'],
-            'mb_name'           =>  $param['name']
+            'mb_name'           =>  $param['name'],
+            'mb_other_url'      =>  $param['other_url']
         ),"mb_no = {$mb_no}");
 
         util::ajaxResult('success',0);

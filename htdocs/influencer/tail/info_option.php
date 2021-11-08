@@ -27,8 +27,8 @@ sql_fetch_arrays($sql,$cats);
 $select_category = $user['mb_category'];
 $select_categorys = explode('',$select_category);
 
-$sns_value = ['naver','instagram','facebook','youtube'];
-$sns_name = ['네이버','인스타그램','페이스북','유튜브'];
+$sns_value = ['naver','instagram','facebook','youtube','other'];
+$sns_name = ['네이버','인스타그램','페이스북','유튜브','기타'];
 
 $ajax_info_url = G5_INFLUENCER_URL.'/tail/ajax.info.php';
 $link_url = G5_SOCIAL_LOGIN_URL.'/link.php';
@@ -189,8 +189,13 @@ foreach($sns_res as $v) {
                     if($user['mb_sns_channel'] === $v) echo '<td><input type="radio" name="sns" value="'.$v.'" checked></td>';
                     else echo '<td><input type="radio" name="sns" value="'.$v.'"></td>';
                     echo '<td>'.$n.'</td>';
-                    if(in_array($v,$sns_type)) echo '<td><div data-id="'.$v.'">연결해지하기</div></td>';
-                    else echo '<td><div data-id="'.$v.'">연결하기</div></td>';
+                    if($v !== 'other') {
+                        if(in_array($v,$sns_type)) echo '<td><div data-id="'.$v.'">연결해지하기</div></td>';
+                        else echo '<td><div data-id="'.$v.'">연결하기</div></td>';
+                    }
+                    else {
+                        echo '<td><input class="other_input" id="other_url" value="'.$user['mb_other_url'].'" placeholder="채널 URL을 입력해주세요"></td>';
+                    }
                     echo '</tr>';
                 }
             ?>
@@ -301,6 +306,7 @@ foreach($sns_res as $v) {
         var addr2       = $('.info_option_box #addr2').val();
         var category    = [];
         var sns_channel = $('.info_option_box [name=sns]:checked').val();
+        var other_url   = $('.info_option_box #other_url').val();
 
         if(_.isEmpty(name)) {
             util.alert('이름을 입력해주세요',{type:'instant'});
@@ -315,6 +321,7 @@ foreach($sns_res as $v) {
         $(".info_option_box .category_box .sel").each(function(k, v) {
             category.push($(v).data('id'));
         });
+
         category = category.join('');
 
         data.ajax("<?=$ajax_info_url?>",{
@@ -327,7 +334,8 @@ foreach($sns_res as $v) {
             addr1       : addr1,
             addr2       : addr2,
             sns_channel : sns_channel,
-            name        : name
+            name        : name,
+            other_url   : other_url
         },updateCB);
     })
 
@@ -339,27 +347,73 @@ foreach($sns_res as $v) {
 
     $('.info_option_box .channel_box div[data-id]').click(function(){
         var id = $(this).data('id');
-        location.href = "<?=$link_url?>" + "?sns="+id;
-    })
+        if(id === 'facebook') {
+            FB.init({
+                appId      : '224463146286770',
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v12.0'
+            });
+            FB.login(
+                facebookCB,
+                {scope: 'public_profile,email'}
+            );    
+        }
+        else if(id === 'instagram') {
+            FB.init({
+                appId      : '185660146991931',
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v12.0'
+            });
+            FB.login(
+                instagramCB,
+                {scope: 'public_profile,email,instagram_basic,pages_show_list,pages_read_engagement'}
+            ); 
+        }
+        else location.href = "<?=$link_url?>" + "?sns="+id;
+    });
+
+    function facebookCB(response) {
+        location.href = "<?=$link_url?>" + "?hauth_done=facebook&token="+response['authResponse']['accessToken'];
+    }
+
+    function instagramCB(response) {
+        location.href = "<?=$link_url?>" + "?hauth_done=instagram&token="+response['authResponse']['accessToken'];
+    }
 
     $(document).ready(function() {
         var res = url.getUrlListParam(['sns','code','type']);
-        if(res.code == 1) util.alert('연동되지 않았습니다. 관리자에게 문의주세요');
-        else if(res.code == 2) util.alert('중복된 연결 계정이있습니다. 관리자에게 문의주세요');
-        switch(res.sns) {
-            case 'naver':
-                if(res.type === 'insert') {
-                    var rss_count = parseInt(url.getUrlParam('rss_count'));
-                    if(rss_count === 0) util.alert('블로그 게시물을 한개이상 등록해주세요.',{type:'instant'});
-                    else if(rss_count > 0) util.alert('네이버 채널 연결이 잘 되었습니다.',{type:'instant'});
-                }
-                else if(res.type === 'delete') {
-                    util.alert('네이버 채널 해지되었습니다.',{type:'instant'});
-                }
-                break;
-        }        
+        if(res.code != 0) {
+            if(res.code == 1) util.alert('연동되지 않았습니다. 관리자에게 문의주세요');
+            else if(res.code == 2) util.alert('중복된 연결 계정이있습니다. 관리자에게 문의주세요');
+            else if(res.code == 3) util.alert('유튜브 채널이 없습니다 만들어주세요');
+            else if(res.code == 4) util.alert('블로그 게시물을 한개이상 등록해주세요.',{type:'instant'});
+            else if(res.code == 5) util.alert('동의를 해주세요.',{type:'instant'});
+        }
+        else {
+            codeZeroAlert(res.sns,res.type);
+        }
+
         url.removeGetParams();
-    })
+    });
+
+    function codeZeroAlert(sns,type) {
+        if(type === 'insert') {
+            util.alert(sns + ' 채널 연결이 잘 되었습니다.',{type:'instant'});
+        }
+        else if(type === 'delete') {
+            util.alert(sns + '채널 해지되었습니다.',{type:'instant'});
+        }
+    }
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
 
 </script>
 

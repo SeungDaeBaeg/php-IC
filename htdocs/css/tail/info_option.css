@@ -121,6 +121,18 @@ body {
     cursor: pointer;
 }
 
+.info_option_box > .content_box > .channel_box tr .other_input {
+    border-radius: 5px;
+    border: none;
+    background-color: #20487B;
+    color: white;
+    text-indent: 10px;
+}
+
+.info_option_box > .content_box > .channel_box tr .other_input::placeholder {
+    text-indent: 10px;
+}
+
 .info_option_box > .content_box > .update_box {
     width: 60%;
     background-color: #FCD5B5;
