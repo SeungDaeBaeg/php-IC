@@ -43,8 +43,25 @@ if(!empty($action)) {
         'su_sns_link'       => $params['sns_link']
     ));
 
-    util::alert($id > 0 ? "정상적으로 등록이 완료되었습니다." : "등록되지 않았습니다. 관리자에게 문의해주세요.");
-    util::location('/shop/item.php?it_id=' . $it_id);
+    if($ev_id) {
+        $ajax_event_url = G5_INFLUENCER_URL.'/event/ajax.event.php';
+        $params = array(
+            "action"    =>  "joinEvent",
+            "ev_id"     =>  $ev_id,
+            "su_id"     =>  $id
+        );
+
+        $options = array();
+        $options['params'] = $params;
+        $options['method'] = "post";
+
+        list($error, $response) = util::curl($ajax_event_url,$options);
+        var_dump($response);
+    }
+    else {
+        util::alert($id > 0 ? "정상적으로 등록이 완료되었습니다." : "등록되지 않았습니다. 관리자에게 문의해주세요.");
+        util::location('/shop/item.php?it_id=' . $it_id);
+    }
 }
 
 //상품 정보
@@ -57,6 +74,9 @@ $options = item::getItemOptions($it_id);
 
 //회원 정보
 $member = data::getLoginMember();
+
+//마이페이지 수정 바로가기
+$my_url = G5_INFLUENCER_URL.'/tail/info_option.php';
 
 define("_INDEX_", TRUE);
 include_once(G5_SHOP_PATH.'/shop.head.php');
@@ -119,42 +139,41 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
     <tr>
         <th>SNS 채널</th>
         <td>
-            <input type="text" id="sns_channel" value="" />
+            <input type="text" id="sns_channel" value="test" />
         </td>
     </tr>
     <tr>
         <th>SNS 아이디</th>
         <td>
-            <input type="text" id="sns_id" value="" />
+            <input type="text" id="sns_id" value="test" />
         </td>
     </tr>
     <tr>
         <th>SNS 팔로워/구독자수</th>
         <td>
-            <input type="number" id="sns_followers" value="1" />
+            <input type="number" id="sns_followers" value="3" />
         </td>
     </tr>
     <tr>
         <th>SNS 계정링크</th>
         <td>
-            <input type="text" id="sns_link" value="" />
+            <input type="text" id="sns_link" value="https:www.test.com" />
         </td>
     </tr>
     <tr style="height: 18px;">
         <th rowspan="3">주소</th>
         <td>
-            <input type="text" id="zip_code" value="" readonly />
-            <button id="post_btn">우편번호 찾기</button>
+            <input type="text" id="zip_code" value="<?=$member['mb_zip1']?>" readonly />
         </td>
     </tr>
     <tr style="height: 18px;">
         <td>
-            <input type="text" id="addr1" value="" readonly />
+            <input type="text" id="addr1" value="<?=$member['mb_addr1']?>" readonly />
         </td>
     </tr>
     <tr style="height: 18px;">
         <td>
-            <input type="text" id="addr2" value="" />
+            <input type="text" id="addr2" value="<?=$member['mb_addr2']?>" readonly />
         </td>
     </tr>
 </table>
@@ -168,7 +187,7 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
 샘플 신청서에 입력된 정보로 상품 발송되오니,
 기입된 정보 확인 후 신청해 주세요.
 
-정보 변경은 마이페이지(바로가기)에서 가능하오니,
+정보 변경은 <a href="<?=$my_url?>">마이페이지(바로가기)</a>에서 가능하오니,
 정보 변경 후 다시 신청해 주세요.
 </pre>
 </div>

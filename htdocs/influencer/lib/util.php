@@ -310,13 +310,14 @@ class util {
         return $r;
     }
     
-    /* curl 호출
+    /**
+     * curl 호출
+     * 
      * @param string $url
      * @param array $options params | method | headers
-     * 
      * @return array
      */
-    public static function curl(string $url, array $options = array()) {
+    public static function curl(string $url, array $options = array()): array {
 
         $params     = $options['params'] ?? array();
         $method     = $options['method'] ?? "get";

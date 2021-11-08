@@ -132,7 +132,7 @@ sql_fetch_arrays($sql, $eventBox, array($mb_no,$today,$today));
             case 'join':
                 var is_sample = _this.data('sample');
                 if(is_sample === 'N') {
-                    data.ajax("<?=$ajax_event_url?>",{action:"joinEvent",ev_id:data_id},joinEventCB);
+                    data.ajax("<?=$ajax_event_url?>",{action:"joinEvent",ev_id:data_id,su_id:''},joinEventCB);
                 }
                 else {
                     location.href = '/influencer/item_detail_navi/sample_subscription.php?ev_id=' + data_id;

@@ -234,15 +234,17 @@ foreach($sns_res as $v) {
     });
 
     $('.info_option_box #cert').click(function(){
-
-        var param = {
-            'urlcode' : '030002', //KMC 어드민에서 등록한 URLCODE (https://ac2.linkprice.com)
-            'nation': 0,
-            'app': 0
-        }
-        
         //안드로이드나 iOS일 경우 파라미터 추가
         if(navigator.userAgent.indexOf('Mobile') > -1) {
+            param.app = 1;
+        }
+
+        data
+        
+
+        
+        //안드로이드나 iOS일 경우 파라미터 추가
+        /* if(navigator.userAgent.indexOf('Mobile') > -1) {
             param.app = 1;
         }
 
@@ -285,7 +287,7 @@ foreach($sns_res as $v) {
             // 폼 객체 삭제
             var child = document.getElementById("reqKMCISForm");
             child.parentNode.removeChild(child);
-        });
+        }); */
     })
 
     $('.info_option_box div[name=category]').click(function(){

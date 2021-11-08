@@ -6,7 +6,7 @@ header('Expires: 0');
 try {
 
     $ICERTSecu      = './ICERTSecu';
-    $mode = $_REQUEST['mode'] ?? '';
+    $mode           = $_REQUEST['mode'] ?? '';
 
     switch($mode) {
         default:
@@ -17,7 +17,7 @@ try {
         $certMet        = 'M';
         $extendVar      = '0000000000000000';
 
-        $tr_url         = "https://".$_SERVER['HTTP_HOST']."/certification/person_check.php?mode=auth_complete";    // 본인인증 결과수신 URL
+        $tr_url         = "https://".$_SERVER['HTTP_HOST']."/influencer/cert/kmc.php?mode=auth_complete";    // 본인인증 결과수신 URL
 
         $redirect       = $_POST['redirect'] ?? '';
         $app            = $_POST['app'] ?? '';
