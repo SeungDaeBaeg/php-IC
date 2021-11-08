@@ -44,7 +44,7 @@ class url {
      * @return string
      */
     public static function getSnsChannelImage(string $mbSnsChannel): string {
-        return G5_IMG_URL . '/badge_' . $mbSnsChannel . 'png';
+        return G5_IMG_URL . '/badge_' . strtolower($mbSnsChannel) . '.png';
     }
 
     /**
@@ -55,6 +55,15 @@ class url {
     public static function getMyshopCoverImage(string $fileName): ?string {
         if(!file_exists(G5_DATA_PATH . '/myshop/coverImage/' . $fileName)) return null;
         return G5_DATA_URL . '/myshop/coverImage/' . $fileName;
+    }
+
+    /**
+     * 마이샵 링크 주소
+     * @param int $mbNo
+     * @return string
+     */
+    public static function getMyshopLink(int $mbNo): string {
+        return G5_URL . '/myshop?id=' . $mbNo;
     }
 
 }

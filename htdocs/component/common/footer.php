@@ -1,7 +1,8 @@
 </div>
 
-
 <!-- footer 시작 -->
+
+<!-- @todo: [승대] 하단 네비게이션바 -->
 <div id="ft">
     <div class="ft_nabi visible-mobile">
         <div class="ft_item" id="cate_btn">
@@ -21,9 +22,7 @@
             <div class="ft_nabi_txt">나의찜</div>
         </div>
     </div>
-
     <a href="#" id="ft_to_top"><i class="fa fa-arrow-up" aria-hidden="true"></i><span class="sound_only">상단으로</span></a>
-
 </div>
 
 <?php
@@ -73,18 +72,6 @@ if ($config['cf_analytics']) {
     });
 </script>
 <![endif]-->
-
-<!-- form submit용 hidden iframe -->
-<iframe name="formSubmitIframe" style="visibility: hidden;display: none;"></iframe>
-
-<!-- 모달창 -->
-<div id="icAlert" style="position:fixed;background-color:green;width:300px;height:200px;margin-left:-150px;margin-top:-100px;left:50%;top:50%;z-index:99999;display: none;">
-    <div id="icAlertMsg"></div>
-    <div id="icAlertBottom" style="display: none;">
-        <button id="icAlertOk">확인</button>
-        <button id="icAlertCancel">취소</button>
-    </div>
-</div>
 
 </body>
 </html>

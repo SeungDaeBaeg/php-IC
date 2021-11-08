@@ -47,26 +47,28 @@ if($action === 'insert') {
     }
 
     //채널 정보 입력
-    foreach($configChannelIds as $cnt => $id) {
+    foreach($configChannelIds as $cnt => $chId) {
         if(empty($configChannelUrls[$cnt])) {
             continue;
         }
 
-        if(empty($id)) {
+        $default = ($configChannelDefault == $cnt) ? 'Y' : 'N';
+
+        if(empty($chId)) {
             //insert
             sql_insert("g5_influencer_myshop_channel", array(
                 'mb_no'                 => $mbNo,
                 'ch_channel_type'       => $configChannelTypes[$cnt],
                 'ch_channel_url'        => $configChannelUrls[$cnt],
-                'ch_channel_default'    => ($configChannelDefault === $cnt) ? 'Y' : 'N'
+                'ch_channel_default'    => $default
             ));
         } else {
             //update
             sql_update("g5_influencer_myshop_channel", array(
                 'ch_channel_type'       => $configChannelTypes[$cnt],
                 'ch_channel_url'        => $configChannelUrls[$cnt],
-                'ch_channel_default'    => ($configChannelDefault === $cnt) ? 'Y' : 'N'
-            ), "mb_no = {$mbNo}");
+                'ch_channel_default'    => $default
+            ), "mb_no = {$mbNo} and ch_id = {$chId}");
         }
     }
 
@@ -81,7 +83,9 @@ if($action === 'insert') {
         }
     }
 
-    util::alert("수정되었습니다.");
+    util::alert("수정되었습니다.", function() {
+        return util::location(G5_URL . '/myshop');
+    });
 }
 
 
@@ -123,8 +127,7 @@ if(empty($myshopData)) {
     sql_fetch_arrays("
     SELECT  ch_id, ch_channel_type, ch_channel_url, ch_channel_default
     FROM    g5_influencer_myshop_channel
-    WHERE   in_id = ?", $channelData, array($myshopData['in_id']));
-
+    WHERE   mb_no = ?", $channelData, array(data::getLoginMember()['mb_no']));
 }
 
 
@@ -137,6 +140,9 @@ if(empty($myshopData)) {
     <p><input type="text" name="myshop_name" value="<?=$myshopData['in_myshop_name']?>" /></p>
 
     <h2>배경 커버</h2>
+    <? if(!empty(url::getMyshopCoverImage($myshopData['in_myshop_cover_image']))) { ?>
+        <img src="<?=url::getMyshopCoverImage($myshopData['in_myshop_cover_image'])?>" />
+    <? } ?>
 
 
     <p><input type="file" name="myshop_cover_image" /></p>
@@ -147,7 +153,7 @@ if(empty($myshopData)) {
         <? if(empty($channelData[$i])) {
             $channelData[$i] = array(
                 'ch_id'              => '',
-                'ch_channel_default' => empty($channelData[$i]) && $i === 1 ? 'Y' : 'N',
+                'ch_channel_default' => empty($channelData[$i]) && $i === 0 ? 'Y' : 'N',
                 'ch_channel_type'    => '',
                 'ch_channel_name'    => ''
             );
@@ -156,8 +162,11 @@ if(empty($myshopData)) {
 
         <div>
             <input type="hidden" name="config_channel_ids[]" value="<?=$c['ch_id']?>"/>
-            <input type="radio" name="config_channel_default" value="<?=$i?>" />
 
+            <!-- 대표채널 지정 -->
+            <input type="radio" name="config_channel_default" value="<?=$i?>" <?=$c['ch_channel_default'] == 'Y' ? 'checked' : ''?> />
+
+            <!-- 채널 종류 -->
             <select name="config_channel_types[]">
                 <option value="INSTAGRAM" <?=$c['ch_channel_type'] === 'INSTAGRAM' ? 'selected' : ''?> >인스타그램</option>
                 <option value="YOUTUBE" <?=$c['ch_channel_type'] === 'YOUTUBE' ? 'selected' : ''?> >유튜브</option>
@@ -166,16 +175,18 @@ if(empty($myshopData)) {
                 <option value="ETC" <?=$c['ch_channel_type'] === 'ETC' ? 'selected' : ''?> >기타</option>
             </select>
 
-            <input type="text" name="config_channel_urls[]"/>
+            <!-- 채널 주소 -->
+            <input type="text" name="config_channel_urls[]" value="<?=$c['ch_channel_url'] ?? ''?>"/>
         </div>
     <? } ?>
 
-    <div id="config_channel_save" style="width:100%;">저장</div>
+    <div id="config_channel_save" style="width:50px; height:50px;background-color: blue;">저장</div>
+    <div id="config_channel_cancel" style="width:50px; height:50px;background-color: red;">취소</div>
 </form>
 
 <script>
     $("#config_channel_save").click(function() {
-
+        var isSubmit = true;
         var myshopName = $("input[name='myshop_name']").val();
 
         if(_.trim(myshopName) === '') {
@@ -183,9 +194,22 @@ if(empty($myshopData)) {
             return false;
         }
 
+        $("input[name='config_channel_urls[]']").each(function() {
+            if(_.trim($(this).val()) === '') return true;
+            if(!url.isValidURL($(this).val())) {
+                util.alert('URL 형식이 맞지 않습니다.');
+                isSubmit = false;
+                return false;
+            }
+        });
 
-        document.frm.submit();
-    })
+        if(isSubmit) document.frm.submit();
+    });
+
+    $("#config_channel_cancel").click(function() {
+        console.log('test');
+        window.location = '/myshop';
+    });
 </script>
 
 <?include_once(G5_SHOP_PATH.'/shop.tail.php');

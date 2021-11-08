@@ -30,18 +30,34 @@ if(!data::isInfluencer($mb_id)) {
 //회원 정보 로드
 $m = data::getLoginMember($mb_id);
 
+
+//오늘 방문자 카운트
+if(!$isAdmin) {
+    sql_fetch_data("
+    UPDATE  g5_influencer_myshop
+    SET     in_today_count = in_today_count + 1
+    WHERE   mb_no = ?", $r, array($mb_id));
+}
+
 //마이샵 정보 로드
 sql_fetch_data("
-SELECT  mb_no, in_myshop_name, in_myshop_cover_image, in_total_count, in_today_count
+SELECT  mb_no, in_myshop_name, in_myshop_cover_image, in_total_count, in_today_count, 
+       (select ch_channel_type from g5_influencer_myshop_channel where mb_no = g5_influencer_myshop.mb_no and ch_channel_default = 'Y' limit 0, 1) as sns_default_type
 FROM    g5_influencer_myshop
-WHERE   mb_no = ?", $myshopData, array(data::getLoginMember()['mb_no']));
+WHERE   mb_no = ?", $myshopData, array($mb_id));
 
 //마이샵이 없을 경우 설정 페이지로 이동
 if(empty($myshopData)) {
-    util::location('/myshop/config.php');
+    if($isAdmin) {
+        util::location('/myshop/config.php');
+    } else {
+        //일반 회원
+        util::location(G5_URL);
+    }
 }
 
 
+//채널
 $myshopName = $myshopData['in_myshop_name'] ?? $m['mb_name'] . '의 공구마켓';
 
 //상품 정보 로드
@@ -50,20 +66,27 @@ $items = data::getAvailbleItems();
 
 <div style="width:100%; text-align: center;">
     <div style="width:80%;display: inline-block;">
+        <button id="btnLinkBack">뒤로가기</button>
+
         <? if($isAdmin) { ?>
-            <button id="btn-config">설정</button>
+            <button id="btnConfig">설정</button>
         <? } ?>
 
-        <!--제목-->
+        <!-- 제목 -->
         <h1><?=$myshopName?></h1>
 
-        <!--배경커버 -->
+        <!-- 배경커버 -->
         <img style="width:100%;height:auto;" src="<?=$myshopData['in_myshop_cover_image']?>" />
+
+        <!-- SNS 뱃지 -->
+        <img src="<?=url::getSnsChannelImage($myshopData['sns_default_type'])?>"/>
 
         <!-- 방문자 섹션 -->
         <div style="width:100%;background-color:red">
             전체 <?=number_format($myshopData['in_total_count'])?>명 / 오늘 <?=number_format($myshopData['in_today_count'])?>명
         </div>
+
+        <button id="btnMyshopCopy" data-myshop-url="<?=url::getMyshopLink(data::getLoginMember()['mb_no'])?>">마이샵 링크</button>
 
         <h2>추천 상품</h2>
 
@@ -86,8 +109,20 @@ $items = data::getAvailbleItems();
 </div>
 <script>
     $(function() {
-        $("#btn-config").click(function() {
+        $("#btnConfig").click(function() {
             window.location = 'config.php';
+        });
+
+        $("#btnLinkBack").click(function() {
+            window.location = '/';
+        });
+
+        $("#btnMyshopCopy").click(function() {
+            util.clipboardCopy($(this).data('myshop-url'));
+
+            util.alert("마이샵 링크를 복사하였습니다.", {
+                type: 'instant'
+            })
         });
     });
 </script>

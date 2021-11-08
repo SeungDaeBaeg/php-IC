@@ -1,5 +1,6 @@
 <?php
 
+
 ?>
 
 <header id="hd">
@@ -12,7 +13,7 @@
                     <? if(!empty($loginInfo)) { ?>
                         <i class="fa fa-money">
                             <a href="/influencer/withdraw.php">
-                                <span style="margin-left:0.2rem;"><?=number_format($memberInfo['mb_save_money'])?>원</span>
+                                <span style="margin-left:0.2rem;"><?=number_format($loginInfo['mb_save_money'])?>원</span>
                             </a>
                         </i>
                         <span class="sound_only">분류열기</span>
@@ -69,11 +70,9 @@
         <div id="category" class="menu">
             <button type="button" class="menu_close"><i class="fa fa-times" aria-hidden="true"></i><span class="sound_only">카테고리닫기</span></button>
             <div class="btn_login">
-                <input type="text" id="txt_search" placeholder="상품을 검색하세요" value="<?=$searchTxt?>"/>
+                <input type="text" id="txt_search" placeholder="상품을 검색하세요2" value="<?=$searchTxt?>"/>
                 <button id="btn_search">검색</button>
             </div>
-
-            <?=outlogin('theme/shop_basic', !empty($memberInfo)) // 외부 로그인 ?>
 
             <div class="menu_wr">
                 <ul class="cate">

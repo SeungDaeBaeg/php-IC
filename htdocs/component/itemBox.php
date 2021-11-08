@@ -3,10 +3,10 @@
  * 상품 박스
  */
 ?>
-<div class="itemBox">
+<div class="itemBox" style="position:relative;">
     <a href="<?=$detail_url?>">
         <? if($recommend) { ?>
-            <div class="btn-add-recommend" data-it-id="<?=$it_id?>">추천</div>
+            <div class="btn-add-recommend" data-it-id="<?=$it_id?>" style="position: absolute;left:5px;top:0px;width:5rem;height:5rem;background-color: red">추천</div>
         <? } ?>
         
         <img style="width:100%;height:auto;" alt="" src="<?=url::getThumbnailUrl($it_img1)?>" />

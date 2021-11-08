@@ -220,4 +220,93 @@ class util {
             return $r;
         }
     }
+
+    /**
+     * 페이지네이션
+     *
+     * @param int      $totalCount
+     * @param int      $nowPage
+     * @param callable $dataCb
+     * @param callable $pageCb
+     * @param array    $opt
+     * @return array
+     */
+    public static function pagination(int $totalCount, int $nowPage, callable $dataCb, callable $pageCb = null, array $opt = array()): array {
+        // 페이지 설정
+        $r = array();
+        $page_set = $opt['page'] ?? 10; // 한페이지 줄수
+        $block_set = $opt['block'] ?? 5; // 한페이지 블럭수
+
+        $total_page = ceil ($totalCount / $page_set); // 총페이지수(올림함수)
+        $total_block = ceil ($total_page / $block_set); // 총블럭수(올림함수)
+
+        $nowPage = $nowPage ?? 1; // 현재페이지(넘어온값)
+        $block = ceil ($nowPage / $block_set); // 현재블럭(올림함수)
+
+        $limit_idx = ($nowPage - 1) * $page_set; // limit 시작위치
+
+        // 현재페이지 쿼리
+        $r['list'] = $dataCb(array(
+            'limit_idx' => $limit_idx,
+            'page_set'  => $page_set
+        ));
+
+        // 페이지번호 & 블럭 설정
+        $first_page = (($block - 1) * $block_set) + 1; // 첫번째 페이지번호
+        $last_page = min ($total_page, $block * $block_set); // 마지막 페이지번호
+
+        $prev_page = $nowPage - 1; // 이전페이지
+        $next_page = $nowPage + 1; // 다음페이지
+
+        $prev_block = $block - 1; // 이전블럭
+        $next_block = $block + 1; // 다음블럭
+
+        // 이전블럭을 블럭의 마지막으로 하려면...
+        $prev_block_page = $prev_block * $block_set; // 이전블럭 페이지번호
+        // 이전블럭을 블럭의 첫페이지로 하려면...
+        //$prev_block_page = $prev_block * $block_set - ($block_set - 1);
+        $next_block_page = $next_block * $block_set - ($block_set - 1); // 다음블럭 페이지번호
+
+        // 페이징 화면 처리
+        $param = array(
+            'now_age'          => $nowPage,
+            'first_page'       => $first_page,
+            'last_page'        => $last_page,
+            'total_block'      => $total_block,
+            'total_page'       => $total_page,
+            'prev_page'        => $prev_page,
+            'prev_block'       => $prev_block,
+            'prev_block_page'  => $prev_block_page,
+            'next_page'        => $next_page,
+            'next_block'       => $next_block,
+            'next_block_page'  => $next_block_page,
+        );
+
+        if(!empty($pageCb)) {
+            $r['pagination'] = $pageCb($param);
+        } else {
+            //페이지네이션 기본 구현부
+
+            $qs = function($p) {
+                $qs = $_GET;
+                $qs['page'] = $p;
+                return http_build_query($qs);
+            };
+
+            $p = '';
+            $p .= ($param['prev_page'] > 0) ? "<a href='{$_SERVER['PHP_SELF']}?{$qs($param['prev_page'])}'>[prev]</a> " : "[prev] ";
+            $p .= ($param['prev_block'] > 0) ? "<a href='{$_SERVER['PHP_SELF']}?{$qs($param['prev_block_page'])}>...</a> " : "... ";
+
+            for ($i=$param['first_page']; $i<=$param['last_page']; $i++) {
+                $p .= ($i != $param['page']) ? "<a href='{$_SERVER['PHP_SELF']}?{$qs($i)}'>$i</a> " : "<b>$i</b> ";
+            }
+
+            $p .= ($param['next_block'] <= $param['total_block']) ? "<a href='{$_SERVER['PHP_SELF']}?{$qs($param['next_block_page'])}>...</a> " : "... ";
+            $p .= ($param['next_page'] <= $param['total_page']) ? "<a href='{$_SERVER['PHP_SELF']}?{$qs($param['next_page'])}'>[next]</a>" : "[next]";
+
+            $r['pagination'] = $p;
+        }
+
+        return $r;
+    }
 }
