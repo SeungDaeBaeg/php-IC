@@ -309,4 +309,41 @@ class util {
 
         return $r;
     }
+    
+    /* curl 호출
+     * @param string $url
+     * @param array $options params | method | headers
+     * 
+     * @return array
+     */
+    public static function curlCall(string $url, array $options = array()) {
+
+        $params     = $options['params'] ?? array();
+        $method     = $options['method'] ?? "get";
+        $headers    = $options['headers'] ?? array();
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        if($method === 'post') {
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+        }
+        else {
+            $url .= '?' . http_build_query($params);
+        }
+
+        if(count($headers) > 0) curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        
+        $res_result = curl_exec($ch);
+        $res_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        return array(
+            $res_code != 200,
+            $res_result
+        );
+    }
 }

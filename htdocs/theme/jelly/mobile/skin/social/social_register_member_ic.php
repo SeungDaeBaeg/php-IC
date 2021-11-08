@@ -66,11 +66,10 @@
             <div>대표 SNS채널</div>
             <div>
                 <select name="channel" id="input_channel">
+                    <option value="naver">블로그</option>
                     <option value="instagram">인스타그램</option>
-                    <option value="youtube">유튜브</option>
                     <option value="facebook">페이스북</option>
-                    <option value="blog">블로그</option>
-                    <option value="tiktok">틱톡</option>
+                    <option value="youtube">유튜브</option>                    
                     <option value="other">기타</option>
                 </select>
             </div>
