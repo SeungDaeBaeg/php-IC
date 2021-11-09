@@ -22,7 +22,7 @@ if(defined('G5_THEME_SHOP_PATH')) {
         <?php
         $sql = " select *,
                     (od_cart_coupon + od_coupon + od_send_coupon) as couponprice
-                   from {$g5['g5_shop_order_table']}
+                   from g5_shop_order
                   where mb_id = '{$member['mb_id']}'
                   order by od_id desc
                   $limit ";
@@ -31,7 +31,7 @@ if(defined('G5_THEME_SHOP_PATH')) {
         {
             // 주문상품
             $sql = " select it_name, ct_option
-                        from {$g5['g5_shop_cart_table']}
+                        from g5_shop_cart
                         where od_id = '{$row['od_id']}'
                         order by io_type, ct_id
                         limit 1 ";
@@ -39,7 +39,7 @@ if(defined('G5_THEME_SHOP_PATH')) {
             $ct_name = get_text($ct['it_name']).' '.get_text($ct['ct_option']);
 
             $sql = " select count(*) as cnt
-                        from {$g5['g5_shop_cart_table']}
+                        from g5_shop_cart
                         where od_id = '{$row['od_id']}' ";
             $ct2 = sql_fetch($sql);
             if($ct2['cnt'] > 1)
@@ -60,6 +60,9 @@ if(defined('G5_THEME_SHOP_PATH')) {
                     break;
                 case '완료':
                     $od_status = '<span class="status_05">배송완료</span>';
+                    break;
+                case '확정':
+                    $od_status = '<span class="status_05">구매확정</span>';
                     break;
                 default:
                     $od_status = '<span class="status_06">주문취소</span>';

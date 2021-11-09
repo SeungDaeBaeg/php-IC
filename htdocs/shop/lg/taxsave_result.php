@@ -17,7 +17,7 @@ if($tx == 'personalpay') {
     $order_price = $od['pp_receipt_price'];
     $od_casseqno = $od['pp_casseqno'];
 } else {
-    $od = sql_fetch(" select * from {$g5['g5_shop_order_table']} where od_id = '$od_id' ");
+    $od = sql_fetch(" select * from g5_shop_order where od_id = '$od_id' ");
     if (!$od)
         die('<p id="scash_empty">주문서가 존재하지 않습니다.</p>');
 
@@ -134,7 +134,7 @@ if ($xpay->TX()) {
                             pp_cash_info = '$cash_info'
                       where pp_id = '$LGD_OID' ";
         } else {
-            $sql = " update {$g5['g5_shop_order_table']}
+            $sql = " update g5_shop_order
                         set od_cash = '1',
                             od_cash_no = '$cash_no',
                             od_cash_info = '$cash_info'

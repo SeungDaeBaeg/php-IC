@@ -6,7 +6,7 @@ auth_check_menu($auth, $sub_menu, "w");
 
 // 주문정보
 $sql = " select *
-            from {$g5['g5_shop_order_table']}
+            from g5_shop_order
             where od_misu = '0'
               and od_status = '준비'
             order by od_id desc ";

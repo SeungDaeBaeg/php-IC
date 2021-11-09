@@ -56,7 +56,7 @@ $inipay->startAction();
     $tno      = $inipay->getResult('PRTC_TID');
     $re_price = $inipay->getResult('PRTC_Price');
 
-    $sql = " update {$g5['g5_shop_order_table']}
+    $sql = " update g5_shop_order
                 set od_refund_price = od_refund_price + '$re_price',
                     od_shop_memo = concat(od_shop_memo, \"$mod_memo\")
                 where od_id = '{$od['od_id']}'
@@ -66,7 +66,7 @@ $inipay->startAction();
     // 미수금 등의 정보 업데이트
     $info = get_order_info($od_id);
 
-    $sql = " update {$g5['g5_shop_order_table']}
+    $sql = " update g5_shop_order
                 set od_misu     = '{$info['od_misu']}',
                     od_tax_mny  = '{$info['od_tax_mny']}',
                     od_vat_mny  = '{$info['od_vat_mny']}',

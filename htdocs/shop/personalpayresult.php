@@ -190,7 +190,7 @@ if($pp['pp_pg'] == 'lg') {
 
                     // 주문내역이 있으면 현금영수증 발급하지 않음
                     if($pp['od_id']) {
-                        $sql = " select count(od_id) as cnt from {$g5['g5_shop_order_table']} where od_id = '{$pp['od_id']}' ";
+                        $sql = " select count(od_id) as cnt from g5_shop_order where od_id = '{$pp['od_id']}' ";
                         $row = sql_fetch($sql);
 
                         if($row['cnt'] > 0)

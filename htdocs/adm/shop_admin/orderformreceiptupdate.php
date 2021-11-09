@@ -40,7 +40,7 @@ foreach($check_keys as $key){
 
 $od_send_mail = $posts['od_send_mail'];
 
-$sql = " select * from {$g5['g5_shop_order_table']} where od_id = '$od_id' ";
+$sql = " select * from g5_shop_order where od_id = '$od_id' ";
 $od  = sql_fetch($sql);
 if(! (isset($od['od_id']) && $od['od_id']))
     alert('주문자료가 존재하지 않습니다.');
@@ -51,7 +51,7 @@ if ($posts['od_receipt_time']) {
 }
 
 // 결제정보 반영
-$sql = " update {$g5['g5_shop_order_table']}
+$sql = " update g5_shop_order
             set od_deposit_name    = '{$posts['od_deposit_name']}',
                 od_bank_account    = '{$posts['od_bank_account']}',
                 od_receipt_time    = '{$posts['od_receipt_time']}',
@@ -95,7 +95,7 @@ $od_misu = ( $od['od_cart_price'] - $od['od_cancel_price'] + (int) $posts['od_se
            - ( (int) $posts['od_receipt_price'] + (int) $posts['od_receipt_point'] - (int) $posts['od_refund_price'] );
 
 // 미수금 정보 등 반영
-$sql = " update {$g5['g5_shop_order_table']}
+$sql = " update g5_shop_order
             set od_misu         = '$od_misu',
                 od_tax_mny      = '{$info['od_tax_mny']}',
                 od_vat_mny      = '{$info['od_vat_mny']}',
@@ -106,7 +106,7 @@ sql_query($sql);
 
 // 장바구니 상태 변경
 if($cart_status) {
-    $sql = " update {$g5['g5_shop_cart_table']}
+    $sql = " update g5_shop_cart
                 set ct_status = '$od_status'
                 where od_id = '$od_id' ";
 
@@ -127,7 +127,7 @@ if($cart_status) {
 
 // 배송때 재고반영
 if($info['od_misu'] == 0 && $od_status == '배송') {
-    $sql = " select * from {$g5['g5_shop_cart_table']} where od_id = '$od_id' ";
+    $sql = " select * from g5_shop_cart where od_id = '$od_id' ";
     $result = sql_query($sql);
 
     for ($i=0; $row=sql_fetch_array($result); $i++)
@@ -141,7 +141,7 @@ if($info['od_misu'] == 0 && $od_status == '배송') {
             subtract_io_stock($row['it_id'], $row['ct_qty'], $row['io_id'], $row['io_type']);
             $stock_use = 1;
 
-            $sql = " update {$g5['g5_shop_cart_table']} set ct_stock_use  = '$stock_use' where ct_id = '{$row['ct_id']}' ";
+            $sql = " update g5_shop_cart set ct_stock_use  = '$stock_use' where ct_id = '{$row['ct_id']}' ";
             sql_query($sql);
         }
     }

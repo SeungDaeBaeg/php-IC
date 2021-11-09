@@ -69,7 +69,7 @@ if( $PG_IP == "203.238.37.3" || $PG_IP == "203.238.37.15" || $PG_IP == "203.238.
             if($row['od_id']) {
                 // 주문서 UPDATE
                 $receipt_time    = preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/", "\\1-\\2-\\3 \\4:\\5:\\6", $receipt_time);
-                $sql = " update {$g5['g5_shop_order_table']}
+                $sql = " update g5_shop_order
                             set od_receipt_price = od_receipt_price + '$amt_input',
                                 od_receipt_time = '$receipt_time',
                                 od_shop_memo = concat(od_shop_memo, \"\\n개인결제 ".$row['pp_id']." 로 결제완료 - ".$receipt_time."\")
@@ -78,7 +78,7 @@ if( $PG_IP == "203.238.37.3" || $PG_IP == "203.238.37.15" || $PG_IP == "203.238.
             }
         } else {
             // 주문서 UPDATE
-            $sql = " update {$g5['g5_shop_order_table']}
+            $sql = " update g5_shop_order
                         set od_receipt_price = '$amt_input',
                             od_receipt_time = '$receipt_time'
                       where od_id = '$no_oid'
@@ -94,7 +94,7 @@ if( $PG_IP == "203.238.37.3" || $PG_IP == "203.238.37.15" || $PG_IP == "203.238.
 
             // 주문정보 체크
             $sql = " select count(od_id) as cnt
-                        from {$g5['g5_shop_order_table']}
+                        from g5_shop_order
                         where od_id = '$od_id'
                           and od_status = '주문' ";
             $row = sql_fetch($sql);
@@ -103,7 +103,7 @@ if( $PG_IP == "203.238.37.3" || $PG_IP == "203.238.37.15" || $PG_IP == "203.238.
                 // 미수금 정보 업데이트
                 $info = get_order_info($od_id);
 
-                $sql = " update {$g5['g5_shop_order_table']}
+                $sql = " update g5_shop_order
                             set od_misu = '{$info['od_misu']}' ";
                 if($info['od_misu'] == 0)
                     $sql .= " , od_status = '입금' ";
@@ -112,7 +112,7 @@ if( $PG_IP == "203.238.37.3" || $PG_IP == "203.238.37.15" || $PG_IP == "203.238.
 
                 // 장바구니 상태변경
                 if($info['od_misu'] == 0) {
-                    $sql = " update {$g5['g5_shop_cart_table']}
+                    $sql = " update g5_shop_cart
                                 set ct_status = '입금'
                                 where od_id = '$od_id' ";
                     sql_query($sql, FALSE);

@@ -133,7 +133,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
         $href = shop_item_url($row['it_id']);
 
         $sql1 = " select SUM(ct_qty) as sum_qty
-                    from {$g5['g5_shop_cart_table']}
+                    from g5_shop_cart
                    where it_id = '{$row['it_id']}'
                      and io_id = '{$row['io_id']}'
                      and ct_stock_use = '0'

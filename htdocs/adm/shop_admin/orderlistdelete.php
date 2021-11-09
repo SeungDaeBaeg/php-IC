@@ -26,7 +26,7 @@ for ($i=0; $i<$count_post_chk; $i++)
     $k     = isset($_POST['chk'][$i]) ? $_POST['chk'][$i] : 0;
     $od_id = isset($_POST['od_id'][$k]) ? safe_replace_regex($_POST['od_id'][$k], 'od_id') : '';
 
-    $od = sql_fetch(" select * from {$g5['g5_shop_order_table']} where od_id = '$od_id' ");
+    $od = sql_fetch(" select * from g5_shop_order where od_id = '$od_id' ");
     if (!$od) continue;
 
     // 주문상태가 주문이 아니면 건너뜀
@@ -38,10 +38,10 @@ for ($i=0; $i<$count_post_chk; $i++)
     sql_query($sql, true);
 
     // cart 테이블의 상품 상태를 삭제로 변경
-    $sql = " update {$g5['g5_shop_cart_table']} set ct_status = '삭제' where od_id = '$od_id' and ct_status = '주문' ";
+    $sql = " update g5_shop_cart set ct_status = '삭제' where od_id = '$od_id' and ct_status = '주문' ";
     sql_query($sql);
 
-    $sql = " delete from {$g5['g5_shop_order_table']} where od_id = '$od_id' ";
+    $sql = " delete from g5_shop_order where od_id = '$od_id' ";
     sql_query($sql);
 }
 

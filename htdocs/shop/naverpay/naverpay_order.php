@@ -26,7 +26,7 @@ if($post_naverpay_form == 'cart.php') {
             continue;
 
         // 장바구니 상품
-        $sql = " select ct_id, it_id, ct_option, io_id, io_type, ct_qty, ct_send_cost, it_sc_type from {$g5['g5_shop_cart_table']} where od_id = '$s_cart_id' and it_id = '$it_id' and ct_status = '쇼핑' order by ct_id asc ";
+        $sql = " select ct_id, it_id, ct_option, io_id, io_type, ct_qty, ct_send_cost, it_sc_type from g5_shop_cart where od_id = '$s_cart_id' and it_id = '$it_id' and ct_status = '쇼핑' order by ct_id asc ";
         $result = sql_query($sql);
 
         for($k=0; $row=sql_fetch_array($result); $k++) {
@@ -43,7 +43,7 @@ if($post_naverpay_form == 'cart.php') {
                 $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price,
                                 SUM(ct_point * ct_qty) as point,
                                 SUM(ct_qty) as qty
-                            from {$g5['g5_shop_cart_table']}
+                            from g5_shop_cart
                             where it_id = '{$row['it_id']}'
                               and od_id = '$s_cart_id' ";
                 $sum = sql_fetch($sql);

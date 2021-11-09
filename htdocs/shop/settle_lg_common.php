@@ -93,7 +93,7 @@ if ( $LGD_HASHDATA2 == $LGD_HASHDATA ) { //해쉬값 검증이 성공이면
                 if($row['od_id']) {
                     // 주문서 UPDATE
                     $receipt_time    = preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/", "\\1-\\2-\\3 \\4:\\5:\\6", $LGD_PAYDATE);
-                    $sql = " update {$g5['g5_shop_order_table']}
+                    $sql = " update g5_shop_order
                                 set od_receipt_price = od_receipt_price + '$LGD_AMOUNT',
                                     od_receipt_time  = '$LGD_PAYDATE',
                                     od_casseqno      = '$LGD_CASSEQNO',
@@ -103,7 +103,7 @@ if ( $LGD_HASHDATA2 == $LGD_HASHDATA ) { //해쉬값 검증이 성공이면
                 }
             } else {
                 // 주문서 UPDATE
-                $sql = " update {$g5['g5_shop_order_table']}
+                $sql = " update g5_shop_order
                             set od_receipt_price = '$LGD_AMOUNT',
                                 od_receipt_time  = '$LGD_PAYDATE',
                                 od_casseqno      = '$LGD_CASSEQNO'
@@ -120,7 +120,7 @@ if ( $LGD_HASHDATA2 == $LGD_HASHDATA ) { //해쉬값 검증이 성공이면
 
                 // 주문정보 체크
                 $sql = " select count(od_id) as cnt
-                            from {$g5['g5_shop_order_table']}
+                            from g5_shop_order
                             where od_id = '$od_id'
                               and od_status = '주문' ";
                 $row = sql_fetch($sql);
@@ -129,7 +129,7 @@ if ( $LGD_HASHDATA2 == $LGD_HASHDATA ) { //해쉬값 검증이 성공이면
                     // 미수금 정보 업데이트
                     $info = get_order_info($od_id);
 
-                    $sql = " update {$g5['g5_shop_order_table']}
+                    $sql = " update g5_shop_order
                                 set od_misu = '{$info['od_misu']}' ";
                     if($info['od_misu'] == 0)
                         $sql .= " , od_status = '입금' ";
@@ -138,7 +138,7 @@ if ( $LGD_HASHDATA2 == $LGD_HASHDATA ) { //해쉬값 검증이 성공이면
 
                     // 장바구니 상태변경
                     if($info['od_misu'] == 0) {
-                        $sql = " update {$g5['g5_shop_cart_table']}
+                        $sql = " update g5_shop_cart
                                     set ct_status = '입금'
                                     where od_id = '$od_id' ";
                         sql_query($sql, FALSE);

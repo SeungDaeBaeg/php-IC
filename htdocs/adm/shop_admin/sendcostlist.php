@@ -4,7 +4,7 @@ include_once('./_common.php');
 
 auth_check_menu($auth, $sub_menu, "r");
 
-$sql_common = " from {$g5['g5_shop_sendcost_table']} ";
+$sql_common = " from g5_shop_sendcost ";
 
 $sql_search = " where (1) ";
 $sql_order = " order by sc_id desc ";

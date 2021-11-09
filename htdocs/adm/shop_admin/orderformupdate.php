@@ -34,7 +34,7 @@ if(isset($_POST['mod_type']) && $_POST['mod_type'] === 'info') {
     $od_b_addr_jibeon = isset($_POST['od_b_addr_jibeon']) ? clean_xss_tags($_POST['od_b_addr_jibeon'], 1, 1) : '';
     $od_hope_date = isset($_POST['od_hope_date']) ? clean_xss_tags($_POST['od_hope_date'], 1, 1) : '';
 
-    $sql = " update {$g5['g5_shop_order_table']}
+    $sql = " update g5_shop_order
                 set od_name = '$od_name',
                     od_tel = '$od_tel',
                     od_hp = '$od_hp',
@@ -58,7 +58,7 @@ if(isset($_POST['mod_type']) && $_POST['mod_type'] === 'info') {
     if ($default['de_hope_date_use'])
         $sql .= " , od_hope_date = '$od_hope_date' ";
 } else {
-    $sql = "update {$g5['g5_shop_order_table']}
+    $sql = "update g5_shop_order
                 set od_shop_memo = '$od_shop_memo' ";
 }
 $sql .= " where od_id = '$od_id' ";

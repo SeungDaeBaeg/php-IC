@@ -6,7 +6,7 @@ auth_check_menu($auth, $sub_menu, "w");
 
 $od_id = isset($_REQUEST['od_id']) ? safe_replace_regex($_REQUEST['od_id'], 'od_id') : '';
 
-$sql = " select * from {$g5['g5_shop_order_table']} where od_id = '$od_id' ";
+$sql = " select * from g5_shop_order where od_id = '$od_id' ";
 $od = sql_fetch($sql);
 
 if(! (isset($od['od_id']) && $od['od_id']))

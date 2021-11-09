@@ -28,16 +28,16 @@ if($cancelFlag == "true")
         $ini_oid = preg_replace('/[^a-z0-9_\-]/i', '', get_session('ss_order_id'));
         $tno = preg_replace('/[^a-z0-9_\-]/i', '', $tno);
 
-        $sql = "select oid from {$g5['g5_shop_inicis_log_table']} where oid = '$ini_oid' and P_TID = '$tno' ";
+        $sql = "select oid from g5_shop_inicis_log where oid = '$ini_oid' and P_TID = '$tno' ";
 
         $exists_log = sql_fetch($sql);
         
         if( $exists_log['oid'] ){
-            $sql = " update {$g5['g5_shop_inicis_log_table']}
+            $sql = " update g5_shop_inicis_log
                         set P_STATUS  = 'cancel',
                         P_AUTH_DT = '".preg_replace('/[^0-9]/', '', G5_TIME_YMDHIS)."' where oid = '$ini_oid' and P_TID = '$tno' ";
         } else {
-            $sql = " insert into {$g5['g5_shop_inicis_log_table']}
+            $sql = " insert into g5_shop_inicis_log
                         set oid = '$ini_oid',
                             P_TID     = '$tno',
                             P_STATUS  = 'cancel',

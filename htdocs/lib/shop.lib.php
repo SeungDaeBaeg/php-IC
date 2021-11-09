@@ -353,7 +353,7 @@ function get_cart_count($cart_id)
 {
     global $g5, $default;
 
-    $sql = " select count(ct_id) as cnt from {$g5['g5_shop_cart_table']} where od_id = '$cart_id' ";
+    $sql = " select count(ct_id) as cnt from g5_shop_cart where od_id = '$cart_id' ";
     $row = sql_fetch($sql);
     $cnt = (int)$row['cnt'];
     return $cnt;
@@ -544,7 +544,7 @@ function get_it_stock_qty($it_id)
 
     // 재고에서 빼지 않았고 주문인것만
     $sql = " select SUM(ct_qty) as sum_qty
-               from {$g5['g5_shop_cart_table']}
+               from g5_shop_cart
               where it_id = '$it_id'
                 and io_id = ''
                 and ct_stock_use = 0
@@ -569,7 +569,7 @@ function get_option_stock_qty($it_id, $io_id, $type)
 
     // 재고에서 빼지 않았고 주문인것만
     $sql = " select SUM(ct_qty) as sum_qty
-               from {$g5['g5_shop_cart_table']}
+               from g5_shop_cart
               where it_id = '$it_id'
                 and io_id = '$io_id'
                 and io_type = '$type'
@@ -1151,7 +1151,7 @@ function print_item_options($it_id, $cart_id)
     global $g5;
 
     $sql = " select ct_option, ct_qty, io_price
-                from {$g5['g5_shop_cart_table']} where it_id = '$it_id' and od_id = '$cart_id' order by io_type asc, ct_id asc ";
+                from g5_shop_cart where it_id = '$it_id' and od_id = '$cart_id' order by io_type asc, ct_id asc ";
     $result = sql_query($sql);
 
     $str = '';
@@ -1259,7 +1259,7 @@ function get_goods($cart_id)
     global $g5;
 
     // 상품명만들기
-    $row = sql_fetch(" select a.it_id, b.it_name from {$g5['g5_shop_cart_table']} a, g5_shop_item b where a.it_id = b.it_id and a.od_id = '$cart_id' order by ct_id limit 1 ");
+    $row = sql_fetch(" select a.it_id, b.it_name from g5_shop_cart a, g5_shop_item b where a.it_id = b.it_id and a.od_id = '$cart_id' order by ct_id limit 1 ");
     // 상품명에 "(쌍따옴표)가 들어가면 오류 발생함
     $goods['it_id'] = $row['it_id'];
     $goods['full_name']= $goods['name'] = addslashes($row['it_name']);
@@ -1267,7 +1267,7 @@ function get_goods($cart_id)
     $goods['full_name'] = preg_replace ("/[ #\&\+\-%@=\/\\\:;,\.'\"\^`~\_|\!\?\*$#<>()\[\]\{\}]/i", "",  $goods['full_name']);
 
     // 상품건수
-    $row = sql_fetch(" select count(*) as cnt from {$g5['g5_shop_cart_table']} where od_id = '$cart_id' ");
+    $row = sql_fetch(" select count(*) as cnt from g5_shop_cart where od_id = '$cart_id' ");
     $cnt = $row['cnt'] - 1;
     if ($cnt)
         $goods['full_name'] .= ' 외 '.$cnt.'건';
@@ -1363,10 +1363,10 @@ function get_new_od_id()
     global $g5;
 
     // 주문서 테이블 Lock 걸고
-    sql_query(" LOCK TABLES {$g5['g5_shop_order_table']} READ, {$g5['g5_shop_order_table']} WRITE ", FALSE);
+    sql_query(" LOCK TABLES g5_shop_order READ, g5_shop_order WRITE ", FALSE);
     // 주문서 번호를 만든다.
     $date = date("ymd", time());    // 2002년 3월 7일 일경우 020307
-    $sql = " select max(od_id) as max_od_id from {$g5['g5_shop_order_table']} where SUBSTRING(od_id, 1, 6) = '$date' ";
+    $sql = " select max(od_id) as max_od_id from g5_shop_order where SUBSTRING(od_id, 1, 6) = '$date' ";
     $row = sql_fetch($sql);
     $od_id = $row['max_od_id'];
     if ($od_id == 0)
@@ -1417,7 +1417,7 @@ function set_cart_id($direct)
 
         // 보관된 회원장바구니 자료 cart id 변경
         if($member['mb_id'] && $tmp_cart_id) {
-            $sql = " update {$g5['g5_shop_cart_table']}
+            $sql = " update g5_shop_cart
                         set od_id = '$tmp_cart_id'
                         where mb_id = '{$member['mb_id']}'
                           and ct_direct = '0'
@@ -1489,7 +1489,7 @@ function item_icon($it)
 
     // 쿠폰상품
     $sql = " select count(*) as cnt
-                from {$g5['g5_shop_coupon_table']}
+                from g5_shop_coupon
                 where cp_start <= '".G5_TIME_YMD."'
                   and cp_end >= '".G5_TIME_YMD."'
                   and (
@@ -1584,7 +1584,7 @@ function get_order_info($od_id)
     global $g5;
 
     // 주문정보
-    $sql = " select * from {$g5['g5_shop_order_table']} where od_id = '$od_id' ";
+    $sql = " select * from g5_shop_order where od_id = '$od_id' ";
     $od = sql_fetch($sql);
 
     if(!$od['od_id'])
@@ -1597,7 +1597,7 @@ function get_order_info($od_id)
                     SUM(cp_price) as coupon,
                     SUM( IF( ct_notax = 0, ( IF(io_type = 1, (io_price * ct_qty), ( (ct_price + io_price) * ct_qty) ) - cp_price ), 0 ) ) as tax_mny,
                     SUM( IF( ct_notax = 1, ( IF(io_type = 1, (io_price * ct_qty), ( (ct_price + io_price) * ct_qty) ) - cp_price ), 0 ) ) as free_mny
-                from {$g5['g5_shop_cart_table']}
+                from g5_shop_cart
                 where od_id = '$od_id'
                   and ct_status IN ( '주문', '입금', '준비', '배송', '완료' ) ";
     $sum = sql_fetch($sql);
@@ -1613,7 +1613,7 @@ function get_order_info($od_id)
     if($od['mb_id']) {
         // 주문할인 쿠폰
         $sql = " select a.cp_id, a.cp_type, a.cp_price, a.cp_trunc, a.cp_minimum, a.cp_maximum
-                    from {$g5['g5_shop_coupon_table']} a right join {$g5['g5_shop_coupon_log_table']} b on ( a.cp_id = b.cp_id )
+                    from g5_shop_coupon a right join g5_shop_coupon_log b on ( a.cp_id = b.cp_id )
                     where b.od_id = '$od_id'
                       and b.mb_id = '{$od['mb_id']}'
                       and a.cp_method = '2' ";
@@ -1644,7 +1644,7 @@ function get_order_info($od_id)
 
         // 배송쿠폰 할인
         $sql = " select a.cp_id, a.cp_type, a.cp_price, a.cp_trunc, a.cp_minimum, a.cp_maximum
-                    from {$g5['g5_shop_coupon_table']} a right join {$g5['g5_shop_coupon_log_table']} b on ( a.cp_id = b.cp_id )
+                    from g5_shop_coupon a right join g5_shop_coupon_log b on ( a.cp_id = b.cp_id )
                     where b.od_id = '$od_id'
                       and b.mb_id = '{$od['mb_id']}'
                       and a.cp_method = '3' ";
@@ -1693,7 +1693,7 @@ function get_order_info($od_id)
 
     // 장바구니 취소금액 정보
     $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price
-                from {$g5['g5_shop_cart_table']}
+                from g5_shop_cart
                 where od_id = '$od_id'
                   and ct_status IN ( '취소', '반품', '품절' ) ";
     $sum = sql_fetch($sql);
@@ -1766,7 +1766,7 @@ function get_sendcost($cart_id, $selected=1)
     $diff = 0;
 
     $sql = " select distinct it_id
-                from {$g5['g5_shop_cart_table']}
+                from g5_shop_cart
                 where od_id = '$cart_id'
                   and ct_send_cost = '0'
                   and ct_status IN ( '쇼핑', '주문', '입금', '준비', '배송', '완료' )
@@ -1777,7 +1777,7 @@ function get_sendcost($cart_id, $selected=1)
         // 합계
         $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price,
                         SUM(ct_qty) as qty
-                    from {$g5['g5_shop_cart_table']}
+                    from g5_shop_cart
                     where it_id = '{$sc['it_id']}'
                       and od_id = '$cart_id'
                       and ct_status IN ( '쇼핑', '주문', '입금', '준비', '배송', '완료' )
@@ -1820,7 +1820,7 @@ function get_item_sendcost($it_id, $price, $qty, $cart_id)
     global $g5, $default;
 
     $sql = " select it_id, it_sc_type, it_sc_method, it_sc_price, it_sc_minimum, it_sc_qty
-                from {$g5['g5_shop_cart_table']}
+                from g5_shop_cart
                 where it_id = '$it_id'
                   and od_id = '$cart_id'
                 order by ct_id
@@ -1922,7 +1922,7 @@ function is_used_coupon($mb_id, $cp_id)
 
     $used = false;
 
-    $sql = " select count(*) as cnt from {$g5['g5_shop_coupon_log_table']} where mb_id = '$mb_id' and cp_id = '$cp_id' ";
+    $sql = " select count(*) as cnt from g5_shop_coupon_log where mb_id = '$mb_id' and cp_id = '$cp_id' ";
     $row = sql_fetch($sql);
 
     if($row['cnt'])
@@ -1998,7 +1998,7 @@ function check_itemuse_write($it_id, $mb_id, $close=true)
     if(!$is_admin && $default['de_item_use_write'])
     {
         $sql = " select count(*) as cnt
-                    from {$g5['g5_shop_cart_table']}
+                    from g5_shop_cart
                     where it_id = '$it_id'
                       and mb_id = '$mb_id'
                       and ct_status = '완료' ";
@@ -2198,7 +2198,7 @@ function get_boxcart_datas($is_cache=false)
         return $cache;
     }
 
-    $sql  = " select * from {$g5['g5_shop_cart_table']} ";
+    $sql  = " select * from g5_shop_cart ";
     $sql .= " where od_id = '".$cart_id."' group by it_id ";
     $result = sql_query($sql);
     for ($i=0; $row=sql_fetch_array($result); $i++)
@@ -2288,7 +2288,7 @@ function get_shop_order_data($od_id, $type='item')
     if( $type == 'personal' ){
         $row = sql_fetch("select * from {$g5['g5_shop_personalpay_table']} where pp_id = $od_id ", false);
     } else {
-        $row = sql_fetch("select * from {$g5['g5_shop_order_table']} where od_id = $od_id ", false);
+        $row = sql_fetch("select * from g5_shop_order where od_id = $od_id ", false);
     }
 
     return $row;
@@ -2355,17 +2355,17 @@ function save_order_point($ct_status="완료")
     global $g5, $default;
 
     $beforedays = date("Y-m-d H:i:s", ( time() - (86400 * (int)$default['de_point_days']) ) ); // 86400초는 하루
-    $sql = " select * from {$g5['g5_shop_cart_table']} where ct_status = '$ct_status' and ct_point_use = '0' and ct_time <= '$beforedays' ";
+    $sql = " select * from g5_shop_cart where ct_status = '$ct_status' and ct_point_use = '0' and ct_time <= '$beforedays' ";
     $result = sql_query($sql);
     for ($i=0; $row=sql_fetch_array($result); $i++) {
         // 회원 ID 를 얻는다.
-        $od_row = sql_fetch("select od_id, mb_id from {$g5['g5_shop_order_table']} where od_id = '{$row['od_id']}' ");
+        $od_row = sql_fetch("select od_id, mb_id from g5_shop_order where od_id = '{$row['od_id']}' ");
         if ($od_row['mb_id'] && $row['ct_point'] > 0) { // 회원이면서 포인트가 0보다 크다면
             $po_point = $row['ct_point'] * $row['ct_qty'];
             $po_content = "주문번호 {$od_row['od_id']} ({$row['ct_id']}) 배송완료";
             insert_point($od_row['mb_id'], $po_point, $po_content, "@delivery", $od_row['mb_id'], "{$od_row['od_id']},{$row['ct_id']}");
         }
-        sql_query("update {$g5['g5_shop_cart_table']} set ct_point_use = '1' where ct_id = '{$row['ct_id']}' ");
+        sql_query("update g5_shop_cart set ct_point_use = '1' where ct_id = '{$row['ct_id']}' ");
     }
 }
 
@@ -2490,7 +2490,7 @@ function before_check_cart_price($s_cart_id, $is_ct_select_condition=false, $is_
         $select_where_add = " and ct_select = '0' ";
     }
 
-    $sql = " select * from `{$g5['g5_shop_cart_table']}` where od_id = '$s_cart_id' {$select_where_add} ";
+    $sql = " select * from `g5_shop_cart` where od_id = '$s_cart_id' {$select_where_add} ";
 
     $result = sql_query($sql);
     $check_need_update = false;
@@ -2557,7 +2557,7 @@ function before_check_cart_price($s_cart_id, $is_ct_select_condition=false, $is_
             }
 
             if( $col_querys = implode(',', $conditions) ) {
-                $sql_query = "update `{$g5['g5_shop_cart_table']}` set {$col_querys} where it_id = '{$it['it_id']}' and od_id = '$s_cart_id' and ct_id =  '{$row['ct_id']}' ";
+                $sql_query = "update `g5_shop_cart` set {$col_querys} where it_id = '{$it['it_id']}' and od_id = '$s_cart_id' and ct_id =  '{$row['ct_id']}' ";
                 sql_query($sql_query, false);
             }
         }
@@ -2593,7 +2593,7 @@ function cart_item_clean()
             $cart_stock_limit = $keep_term * 24;
 
         $stocktime = G5_SERVER_TIME - (3600 * $cart_stock_limit);
-        $sql = " update {$g5['g5_shop_cart_table']}
+        $sql = " update g5_shop_cart
                     set ct_select = '0'
                     where ct_select = '1'
                       and ct_status = '쇼핑'
@@ -2604,7 +2604,7 @@ function cart_item_clean()
     // 설정 시간이상 경과된 상품 삭제
     $statustime = G5_SERVER_TIME - (86400 * $keep_term);
 
-    $sql = " delete from {$g5['g5_shop_cart_table']}
+    $sql = " delete from g5_shop_cart
                 where ct_status = '쇼핑'
                   and UNIX_TIMESTAMP(ct_time) < '$statustime' ";
     sql_query($sql);
@@ -2702,7 +2702,7 @@ function is_inicis_order_pay($type){
 
     if( $default['de_pg_service'] === 'inicis' && get_session('P_TID') ){
         $tid = preg_replace('/[^A-Za-z0-9_\-]/', '', get_session('P_TID'));
-        $sql = "select P_TID from `{$g5['g5_shop_inicis_log_table']}` where P_TID = '$tid' and P_STATUS = 'cancel' ";
+        $sql = "select P_TID from `g5_shop_inicis_log` where P_TID = '$tid' and P_STATUS = 'cancel' ";
 
         $row = sql_fetch($sql);
 
@@ -2782,7 +2782,7 @@ function is_coupon_downloaded($mb_id, $cz_id)
     if(!$mb_id)
         return false;
 
-    $sql = " select count(*) as cnt from {$g5['g5_shop_coupon_table']} where mb_id = '$mb_id' and cz_id = '$cz_id' ";
+    $sql = " select count(*) as cnt from g5_shop_coupon where mb_id = '$mb_id' and cz_id = '$cz_id' ";
     $row = sql_fetch($sql);
 
     return ($row['cnt'] > 0);

@@ -28,7 +28,7 @@ if($tx == 'personalpay') {
     $amt_svc = 0;
     $amt_tax = (int)($amt_tot - $amt_sup);
 } else {
-    $od = sql_fetch(" select * from {$g5['g5_shop_order_table']} where od_id = '$od_id' ");
+    $od = sql_fetch(" select * from g5_shop_order where od_id = '$od_id' ");
     if (!$od)
         die('<p id="scash_empty">주문서가 존재하지 않습니다.</p>');
 

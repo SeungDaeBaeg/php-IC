@@ -176,7 +176,7 @@ if($pp_receipt_price > 0 && $pp['pp_id'] && $pp['od_id']) {
     if($escw_yn == 'Y')
         $od_escrow = 1;
 
-    $sql = " update {$g5['g5_shop_order_table']}
+    $sql = " update g5_shop_order
                 set od_receipt_price    = od_receipt_price + '$pp_receipt_price',
                     od_receipt_time     = '$pp_receipt_time',
                     od_pg               = '$pp_pg',
@@ -211,7 +211,7 @@ if($pp_receipt_price > 0 && $pp['pp_id'] && $pp['od_id']) {
     // 미수금 정보 업데이트
     $info = get_order_info($pp['od_id']);
 
-    $sql = " update {$g5['g5_shop_order_table']}
+    $sql = " update g5_shop_order
                 set od_misu     = '{$info['od_misu']}' ";
     if($info['od_misu'] == 0)
         $sql .= " , od_status = '입금' ";
@@ -220,7 +220,7 @@ if($pp_receipt_price > 0 && $pp['pp_id'] && $pp['od_id']) {
 
     // 장바구니 상태변경
     if($info['od_misu'] == 0) {
-        $sql = " update {$g5['g5_shop_cart_table']}
+        $sql = " update g5_shop_cart
                     set ct_status = '입금'
                     where od_id = '{$pp['od_id']}' ";
         sql_query($sql, FALSE);

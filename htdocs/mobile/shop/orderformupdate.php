@@ -56,11 +56,11 @@ if (get_cart_count($tmp_cart_id) == 0) {    // 장바구니에 담기
     alert('장바구니가 비어 있습니다.\\n\\n이미 주문하셨거나 장바구니에 담긴 상품이 없는 경우입니다.', G5_SHOP_URL.'/cart.php');
 }
 
-$sql = "select * from {$g5['g5_shop_order_table']} limit 1";
+$sql = "select * from g5_shop_order limit 1";
 $check_tmp = sql_fetch($sql);
 
 if(!isset($check_tmp['od_other_pay_type'])){
-    $sql = "ALTER TABLE `{$g5['g5_shop_order_table']}` 
+    $sql = "ALTER TABLE `g5_shop_order` 
             ADD COLUMN `od_other_pay_type` VARCHAR(100) NOT NULL DEFAULT '' AFTER `od_settle_case`; ";
     sql_query($sql, false);
 }
@@ -80,7 +80,7 @@ $sql = " select it_id,
                 io_id,
                 io_type,
                 ct_option
-           from {$g5['g5_shop_cart_table']}
+           from g5_shop_cart
           where od_id = '$tmp_cart_id'
             and ct_select = '1' ";
 $result = sql_query($sql);
@@ -92,9 +92,12 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     } else {
         $it_stock_qty = (int)get_it_stock_qty($row['it_id']);
     }
+
     // 장바구니 수량이 재고수량보다 많다면 오류
     if ($row['ct_qty'] > $it_stock_qty)
         $error .= "{$row['ct_option']} 의 재고수량이 부족합니다. 현재고수량 : $it_stock_qty 개\\n\\n";
+
+    //
 }
 
 if($i == 0) {
@@ -117,11 +120,17 @@ $i_temp_point = isset($_POST['od_temp_point']) ? (int) $_POST['od_temp_point'] :
 
 
 // 주문금액이 상이함
-$sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as od_price,
-              COUNT(distinct it_id) as cart_count
-            from {$g5['g5_shop_cart_table']} where od_id = '$tmp_cart_id' and ct_select = '1' ";
+$sql = "
+select  SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as od_price, COUNT(distinct it_id) as cart_count,
+        SUM(it_earn_price) as od_earn_price, SUM(it_earn_price_lp) as od_earn_price_lp
+from    g5_shop_cart
+where   od_id = '$tmp_cart_id' 
+and     ct_select = '1' ";
 $row = sql_fetch($sql);
 $tot_ct_price = $row['od_price'];
+$tot_earn_price = $row['od_earn_price'];
+$tot_earn_price_lp = $row['od_earn_price_lp'];
+
 $cart_count = $row['cart_count'];
 $tot_od_price = $tot_ct_price;
 
@@ -135,7 +144,7 @@ if($is_member) {
         $cid = isset($_POST['cp_id'][$i]) ? $_POST['cp_id'][$i] : '';
         $it_id = isset($_POST['it_id'][$i]) ? safe_replace_regex($_POST['it_id'][$i], 'it_id') : '';
         $sql = " select cp_id, cp_method, cp_target, cp_type, cp_price, cp_trunc, cp_minimum, cp_maximum
-                    from {$g5['g5_shop_coupon_table']}
+                    from g5_shop_coupon
                     where cp_id = '$cid'
                       and mb_id IN ( '{$member['mb_id']}', '전체회원' )
                       and cp_start <= '".G5_TIME_YMD."'
@@ -168,7 +177,7 @@ if($is_member) {
 
         // 상품금액
         $sql = " select SUM( IF(io_type = '1', io_price * ct_qty, (ct_price + io_price) * ct_qty)) as sum_price
-                    from {$g5['g5_shop_cart_table']}
+                    from g5_shop_cart
                     where od_id = '$tmp_cart_id'
                       and it_id = '$it_id'
                       and ct_select = '1' ";
@@ -200,7 +209,7 @@ if($is_member) {
     // 주문쿠폰
     if(isset($_POST['od_cp_id']) && $_POST['od_cp_id']) {
         $sql = " select cp_id, cp_type, cp_price, cp_trunc, cp_minimum, cp_maximum
-                    from {$g5['g5_shop_coupon_table']}
+                    from g5_shop_coupon
                     where cp_id = '{$_POST['od_cp_id']}'
                       and mb_id IN ( '{$member['mb_id']}', '전체회원' )
                       and cp_start <= '".G5_TIME_YMD."'
@@ -246,7 +255,7 @@ if($is_member && $send_cost > 0) {
     // 배송쿠폰
     if(isset($_POST['sc_cp_id']) && $_POST['sc_cp_id']) {
         $sql = " select cp_id, cp_type, cp_price, cp_trunc, cp_minimum, cp_maximum
-                    from {$g5['g5_shop_coupon_table']}
+                    from g5_shop_coupon
                     where cp_id = '{$_POST['sc_cp_id']}'
                       and mb_id IN ( '{$member['mb_id']}', '전체회원' )
                       and cp_start <= '".G5_TIME_YMD."'
@@ -286,7 +295,7 @@ $od_b_zip   = preg_replace('/[^0-9]/', '', $od_b_zip);
 $od_b_zip1  = substr($od_b_zip, 0, 3);
 $od_b_zip2  = substr($od_b_zip, 3);
 $zipcode = $od_b_zip1 . $od_b_zip2;
-$sql = " select sc_id, sc_price from {$g5['g5_shop_sendcost_table']} where sc_zip1 <= '$zipcode' and sc_zip2 >= '$zipcode' ";
+$sql = " select sc_id, sc_price from g5_shop_sendcost where sc_zip1 <= '$zipcode' and sc_zip2 >= '$zipcode' ";
 $tmp = sql_fetch($sql);
 if(! (isset($tmp['sc_id']) && $tmp['sc_id']))
     $send_cost2 = 0;
@@ -594,7 +603,7 @@ $od_deposit_name  = clean_xss_tags($od_deposit_name);
 $od_tax_flag      = $default['de_tax_flag_use'];
 
 // 주문서에 입력
-$sql = " insert {$g5['g5_shop_order_table']}
+$sql = " insert g5_shop_order
             set od_id             = '$od_id',
                 mb_id             = '{$member['mb_id']}',
                 od_pwd            = '$od_pwd',
@@ -622,6 +631,8 @@ $sql = " insert {$g5['g5_shop_order_table']}
                 od_cart_count     = '$cart_count',
                 od_cart_price     = '$tot_ct_price',
                 od_cart_coupon    = '$tot_it_cp_price',
+                od_cart_earn_price    = '$tot_earn_price',
+                od_cart_earn_price_lp = '$tot_earn_price_lp',
                 od_send_cost      = '$od_send_cost',
                 od_send_coupon    = '$tot_sc_cp_price',
                 od_send_cost2     = '$od_send_cost2',
@@ -652,8 +663,9 @@ $sql = " insert {$g5['g5_shop_order_table']}
 $result = sql_query($sql, false);
 
 // 정말로 insert 가 되었는지 한번더 체크한다.
-$exists_sql = "select od_id, od_tno, od_ip from {$g5['g5_shop_order_table']} where od_id = '$od_id'";
+$exists_sql = "select od_id, od_tno, od_ip from g5_shop_order where od_id = '$od_id'";
 $exists_order = sql_fetch($exists_sql);
+
 
 if(! $result && (isset($exists_order['od_id']) && $od_id && $exists_order['od_id'] === $od_id)) {
     if(isset($exists_order['od_tno']) && $exists_order['od_tno']){
@@ -693,7 +705,7 @@ if(! $result || ! (isset($exists_order['od_id']) && $od_id && $exists_order['od_
 
     if(function_exists('add_order_post_log')) add_order_post_log($cancel_msg);
     // 주문삭제
-    sql_query(" delete from {$g5['g5_shop_order_table']} where od_id = '$od_id' ", false);
+    sql_query(" delete from g5_shop_order where od_id = '$od_id' ", false);
 
     die('<p>고객님의 주문 정보를 처리하는 중 오류가 발생해서 주문이 완료되지 않았습니다.</p><p>'.strtoupper($od_pg).'를 이용한 전자결제(신용카드, 계좌이체, 가상계좌 등)은 자동 취소되었습니다.');
 }
@@ -705,7 +717,7 @@ $sql_card_point = "";
 if ($od_receipt_price > 0 && !$default['de_card_point']) {
     $sql_card_point = " , ct_point = '0' ";
 }
-$sql = "update {$g5['g5_shop_cart_table']}
+$sql = "update g5_shop_cart
            set od_id = '$od_id',
                ct_status = '$cart_status'
                $sql_card_point
@@ -743,10 +755,35 @@ if(!$result) {
 
     if(function_exists('add_order_post_log')) add_order_post_log($cancel_msg);
     // 주문삭제
-    sql_query(" delete from {$g5['g5_shop_order_table']} where od_id = '$od_id' ");
+    sql_query(" delete from g5_shop_order where od_id = '$od_id' ");
 
     die('<p>고객님의 주문 정보를 처리하는 중 오류가 발생해서 주문이 완료되지 않았습니다.</p><p>'.strtoupper($od_pg).'를 이용한 전자결제(신용카드, 계좌이체, 가상계좌 등)은 자동 취소되었습니다.');
 }
+
+
+
+## ICINFO가 있다면 ttranslog 에 적재
+if(!empty($_COOKIE['ICINFO'])) {
+    $icinfo = json_decode(str_replace("\\", "", $_COOKIE['ICINFO']), true);
+
+    if(!empty($icinfo['m'])) {
+        //실적 전송
+        $res = util::curl(G5_URL . '/tracking/purchase.php', array(
+            'params' => array(
+                'ymd'           => date('Ymd'),
+                'his'           => date('His'),
+                'ocd'           => $od_id,
+                'mno'           => $icinfo['m'],
+                'fp'            => !empty($icinfo['ms']) ? 'MYSHOP' : 'IC',
+                'bc'            => 'N',
+                'sales'         => $tot_ct_price,
+                'comm'          => $tot_earn_price,
+                'comm_lp'       => $tot_earn_price_lp
+            )
+        ));
+    }
+}
+
 
 // 회원이면서 포인트를 사용했다면 포인트 테이블에 사용을 추가
 if ($is_member && $od_receipt_point)
@@ -760,10 +797,11 @@ if($is_member) {
     for($i=0; $i<$it_cp_cnt; $i++) {
         $cid = isset($_POST['cp_id'][$i]) ? $_POST['cp_id'][$i] : '';
         $cp_it_id = isset($_POST['it_id'][$i]) ? safe_replace_regex($_POST['it_id'][$i], 'it_id') : '';
+
         $cp_prc = isset($arr_it_cp_prc[$cp_it_id]) ? (int) $arr_it_cp_prc[$cp_it_id] : 0;
 
         if(trim($cid)) {
-            $sql = " insert into {$g5['g5_shop_coupon_log_table']}
+            $sql = " insert into g5_shop_coupon_log
                         set cp_id       = '$cid',
                             mb_id       = '{$member['mb_id']}',
                             od_id       = '$od_id',
@@ -773,7 +811,7 @@ if($is_member) {
         }
 
         // 쿠폰사용금액 cart에 기록
-        $sql = " update {$g5['g5_shop_cart_table']}
+        $sql = " update g5_shop_cart
                     set cp_price = '$cp_prc'
                     where od_id = '$od_id'
                       and it_id = '$cp_it_id'
@@ -784,7 +822,7 @@ if($is_member) {
     }
 
     if(isset($_POST['od_cp_id']) && $_POST['od_cp_id']) {
-        $sql = " insert into {$g5['g5_shop_coupon_log_table']}
+        $sql = " insert into g5_shop_coupon_log
                     set cp_id       = '{$_POST['od_cp_id']}',
                         mb_id       = '{$member['mb_id']}',
                         od_id       = '$od_id',
@@ -794,7 +832,7 @@ if($is_member) {
     }
 
     if(isset($_POST['sc_cp_id']) && $_POST['sc_cp_id']) {
-        $sql = " insert into {$g5['g5_shop_coupon_log_table']}
+        $sql = " insert into g5_shop_coupon_log
                     set cp_id       = '{$_POST['sc_cp_id']}',
                         mb_id       = '{$member['mb_id']}',
                         od_id       = '$od_id',
@@ -910,11 +948,11 @@ $uid = md5($od_id.G5_TIME_YMDHIS.$REMOTE_ADDR);
 set_session('ss_orderview_uid', $uid);
 
 // 주문 정보 임시 데이터 삭제
-$sql = " delete from {$g5['g5_shop_order_data_table']} where od_id = '$od_id' and dt_pg = '$od_pg' ";
+$sql = " delete from g5_shop_order_data where od_id = '$od_id' and dt_pg = '$od_pg' ";
 sql_query($sql);
 
 if( $od_pg == 'inicis' && $od_tno ){
-    $sql = "delete from {$g5['g5_shop_inicis_log_table']} where oid = '$od_id' and P_TID = '$od_tno' ";
+    $sql = "delete from g5_shop_inicis_log where oid = '$od_id' and P_TID = '$od_tno' ";
     sql_query($sql, false);
 }
 
@@ -929,7 +967,7 @@ if (get_session('ss_direct'))
 
 // 배송지처리
 if($is_member) {
-    $sql = " select * from {$g5['g5_shop_order_address_table']}
+    $sql = " select * from g5_shop_order_address
                 where mb_id = '{$member['mb_id']}'
                   and ad_name = '$od_b_name'
                   and ad_tel = '$od_b_tel'
@@ -943,7 +981,7 @@ if($is_member) {
 
     // 기본배송지 체크
     if($ad_default) {
-        $sql = " update {$g5['g5_shop_order_address_table']}
+        $sql = " update g5_shop_order_address
                     set ad_default = '0'
                     where mb_id = '{$member['mb_id']}' ";
         sql_query($sql);
@@ -952,14 +990,14 @@ if($is_member) {
     $ad_subject = clean_xss_tags($ad_subject);
 
     if($row['ad_id']){
-        $sql = " update {$g5['g5_shop_order_address_table']}
+        $sql = " update g5_shop_order_address
                       set ad_default = '$ad_default',
                           ad_subject = '$ad_subject',
                           ad_jibeon  = '$od_b_addr_jibeon'
                     where mb_id = '{$member['mb_id']}'
                       and ad_id = '{$row['ad_id']}' ";
     } else {
-        $sql = " insert into {$g5['g5_shop_order_address_table']}
+        $sql = " insert into g5_shop_order_address
                     set mb_id       = '{$member['mb_id']}',
                         ad_subject  = '$ad_subject',
                         ad_default  = '$ad_default',

@@ -17,7 +17,7 @@ if( ! $p_req_url || !preg_match('/^https\:\/\//i', $p_req_url)){
     alert("잘못된 요청 URL 입니다.");
 }
 
-$sql = " select * from {$g5['g5_shop_order_data_table']} where od_id = '$oid' ";
+$sql = " select * from g5_shop_order_data where od_id = '$oid' ";
 $row = sql_fetch($sql);
 
 $data = isset($row['dt_data']) ? unserialize(base64_decode($row['dt_data'])) : array();
@@ -48,7 +48,7 @@ if(isset($data['pp_id']) && $data['pp_id']) {
                     io_id,
                     io_type,
                     ct_option
-               from {$g5['g5_shop_cart_table']}
+               from g5_shop_cart
               where od_id = '$tmp_cart_id'
                 and ct_select = '1' ";
     $result = sql_query($sql);

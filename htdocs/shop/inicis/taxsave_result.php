@@ -29,7 +29,7 @@ if($tx == 'personalpay') {
     $amt_svc   = 0;
     $amt_tax   = (int)($amt_tot - $amt_sup);
 } else {
-    $od = sql_fetch(" select * from {$g5['g5_shop_order_table']} where od_id = '$od_id' ");
+    $od = sql_fetch(" select * from g5_shop_order where od_id = '$od_id' ");
     if (!$od)
         die('<p id="scash_empty">주문서가 존재하지 않습니다.</p>');
 
@@ -119,7 +119,7 @@ if($inipay->GetResult('ResultCode') == '00') {
                         pp_cash_info = '$cash_info'
                   where pp_id = '$od_id' ";
     } else {
-        $sql = " update {$g5['g5_shop_order_table']}
+        $sql = " update g5_shop_order
                     set od_cash = '1',
                         od_cash_no = '$cash_no',
                         od_cash_info = '$cash_info'

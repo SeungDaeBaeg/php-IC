@@ -34,7 +34,7 @@ save_order_point("완료");
 //------------------------------------------------------------------------------
 // 주문서 정보
 //------------------------------------------------------------------------------
-$sql = " select * from {$g5['g5_shop_order_table']} where od_id = '$od_id' ";
+$sql = " select * from g5_shop_order where od_id = '$od_id' ";
 $od = sql_fetch($sql);
 if (! (isset($od['od_id']) && $od['od_id'])) {
     alert("해당 주문번호로 주문서가 존재하지 않습니다.");
@@ -69,7 +69,7 @@ $sql = " select it_id,
                 ct_notax,
                 ct_send_cost,
                 it_sc_type
-           from {$g5['g5_shop_cart_table']}
+           from g5_shop_cart
           where od_id = '{$od['od_id']}'
           group by it_id
           order by ct_id ";
@@ -77,25 +77,25 @@ $result = sql_query($sql);
 
 // 주소 참고항목 필드추가
 if(!isset($od['od_addr3'])) {
-    sql_query(" ALTER TABLE `{$g5['g5_shop_order_table']}`
+    sql_query(" ALTER TABLE `g5_shop_order`
                     ADD `od_addr3` varchar(255) NOT NULL DEFAULT '' AFTER `od_addr2`,
                     ADD `od_b_addr3` varchar(255) NOT NULL DEFAULT '' AFTER `od_b_addr2` ", true);
 }
 
 // 배송목록에 참고항목 필드추가
-if(!sql_query(" select ad_addr3 from {$g5['g5_shop_order_address_table']} limit 1", false)) {
-    sql_query(" ALTER TABLE `{$g5['g5_shop_order_address_table']}`
+if(!sql_query(" select ad_addr3 from g5_shop_order_address limit 1", false)) {
+    sql_query(" ALTER TABLE `g5_shop_order_address`
                     ADD `ad_addr3` varchar(255) NOT NULL DEFAULT '' AFTER `ad_addr2` ", true);
 }
 
 // 결제 PG 필드 추가
-if(!sql_query(" select od_pg from {$g5['g5_shop_order_table']} limit 1 ", false)) {
-    sql_query(" ALTER TABLE `{$g5['g5_shop_order_table']}`
+if(!sql_query(" select od_pg from g5_shop_order limit 1 ", false)) {
+    sql_query(" ALTER TABLE `g5_shop_order`
                     ADD `od_pg` varchar(255) NOT NULL DEFAULT '' AFTER `od_mobile`,
                     ADD `od_casseqno` varchar(255) NOT NULL DEFAULT '' AFTER `od_escrow` ", true);
 
     // 주문 결제 PG kcp로 설정
-    sql_query(" update {$g5['g5_shop_order_table']} set od_pg = 'kcp' ");
+    sql_query(" update g5_shop_order set od_pg = 'kcp' ");
 }
 
 // LG 현금영수증 JS
@@ -170,7 +170,7 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
 
             // 상품의 옵션정보
             $sql = " select ct_id, it_id, ct_price, ct_point, ct_qty, ct_option, ct_status, cp_price, ct_stock_use, ct_point_use, ct_send_cost, io_type, io_price
-                        from {$g5['g5_shop_cart_table']}
+                        from g5_shop_cart
                         where od_id = '{$od['od_id']}'
                           and it_id = '{$row['it_id']}'
                         order by io_type asc, ct_id asc ";
@@ -180,7 +180,7 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
             // 합계금액 계산
             $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price,
                             SUM(ct_qty) as qty
-                        from {$g5['g5_shop_cart_table']}
+                        from g5_shop_cart
                         where it_id = '{$row['it_id']}'
                           and od_id = '{$od['od_id']}' ";
             $sum = sql_fetch($sql);
@@ -295,7 +295,7 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
 <div class="od_test_caution">주의) 이 주문은 테스트용으로 실제 결제가 이루어지지 않았으므로 절대 배송하시면 안됩니다.</div>
 <?php } ?>
 <?php if($od['od_pg'] === 'inicis' && !$od['od_test']) {
-    $sql = "select P_TID from {$g5['g5_shop_inicis_log_table']} where oid = '$od_id' and P_STATUS = 'cancel' ";
+    $sql = "select P_TID from g5_shop_inicis_log where oid = '$od_id' and P_STATUS = 'cancel' ";
     $tmp_row = sql_fetch($sql);
     if(isset($tmp_row['P_TID']) && $tmp_row['P_TID']){
 ?>

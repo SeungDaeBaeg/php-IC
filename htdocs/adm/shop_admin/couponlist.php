@@ -4,7 +4,7 @@ include_once('./_common.php');
 
 auth_check_menu($auth, $sub_menu, "r");
 
-$sql_common = " from {$g5['g5_shop_coupon_table']} ";
+$sql_common = " from g5_shop_coupon ";
 
 $sql_search = " where (1) ";
 if ($stx) {
@@ -123,7 +123,7 @@ $colspan = 9;
         $link2 = '</a>';
 
         // 쿠폰사용회수
-        $sql = " select count(*) as cnt from {$g5['g5_shop_coupon_log_table']} where cp_id = '{$row['cp_id']}' ";
+        $sql = " select count(*) as cnt from g5_shop_coupon_log where cp_id = '{$row['cp_id']}' ";
         $tmp = sql_fetch($sql);
         $used_count = $tmp['cnt'];
 

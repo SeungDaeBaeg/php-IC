@@ -229,7 +229,7 @@ if($enc_data != '' && $enc_info != '' && $tran_cd != '') {
     // 제외할 필드
     $exclude = array('req_tx', 'res_cd', 'tran_cd', 'ordr_idxx', 'good_mny', 'good_name', 'buyr_name', 'buyr_tel1', 'buyr_tel2', 'buyr_mail', 'enc_info', 'enc_data', 'use_pay_method', 'rcvr_name', 'rcvr_tel1', 'rcvr_tel2', 'rcvr_mail', 'rcvr_zipx', 'rcvr_add1', 'rcvr_add2', 'param_opt_1', 'param_opt_2', 'param_opt_3');
 
-    $sql = " select * from {$g5['g5_shop_order_data_table']} where od_id = '$ordr_idxx' ";
+    $sql = " select * from g5_shop_order_data where od_id = '$ordr_idxx' ";
     $row = sql_fetch($sql);
 
     $data = isset($row['dt_data']) ? unserialize(base64_decode($row['dt_data'])) : array();

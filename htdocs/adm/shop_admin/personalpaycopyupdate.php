@@ -14,7 +14,7 @@ if(preg_match('/[^0-9]/', $_POST['pp_price']))
     alert('주문금액은 숫자만 입력해 주십시오.');
 
 if($_POST['od_id']) {
-    $sql = " select od_id from {$g5['g5_shop_order_table']} where od_id = '{$_POST['od_id']}' ";
+    $sql = " select od_id from g5_shop_order where od_id = '{$_POST['od_id']}' ";
     $od = sql_fetch($sql);
     if(!$od['od_id'])
         alert('입력하신 주문번호는 존재하지 않습니다.');

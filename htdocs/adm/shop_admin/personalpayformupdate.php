@@ -32,7 +32,7 @@ if($w == 'd') {
     $od_id = isset($_POST['od_id']) ? safe_replace_regex($_POST['od_id'], 'od_id') : '';
 
     if($od_id) {
-        $sql = " select od_id from {$g5['g5_shop_order_table']} where od_id = '$od_id' ";
+        $sql = " select od_id from g5_shop_order where od_id = '$od_id' ";
         $row = sql_fetch($sql);
         if(! (isset($row['od_id']) && $row['od_id']))
             alert('입력하신 주문번호는 존재하지 않는 주문 자료입니다.');

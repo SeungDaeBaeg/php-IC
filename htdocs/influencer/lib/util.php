@@ -31,7 +31,7 @@ class util {
             return $r;
         } else if(is_string($param)) {
             if(empty($_REQUEST[$param]) && gettype($callbackOrMsg) === 'string' && trim($callbackOrMsg) !== '') {
-                util::alert($callbackOrMsg,array ("type"=>"instant"),true);
+                util::alert($callbackOrMsg);
             } else if(empty($_REQUEST[$param]) && gettype($callbackOrMsg) === 'object') {
                 $callbackOrMsg();
                 exit();
@@ -91,6 +91,7 @@ class util {
         $tag = "window.parent.location.href = '".$link."';";
         if(debug_backtrace()[1]['function'] !== '{closure}') {
             echo "<script>".$tag."</script>";
+            exit();
         }
         return $tag;
     }
@@ -103,6 +104,7 @@ class util {
         $tag = "window.parent.location.reload();";
         if(debug_backtrace()[1]['function'] !== '{closure}') {
             echo "<script>".$tag."</script>";
+            exit();
         }
         return $tag;
     }

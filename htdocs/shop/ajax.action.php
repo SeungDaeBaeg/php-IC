@@ -13,7 +13,7 @@ switch ($action) {
 
         // 선택필드 초기화
         if( $s_cart_id ){
-            $sql = " update {$g5['g5_shop_cart_table']} set ct_select = '0' where od_id = '$s_cart_id' ";
+            $sql = " update g5_shop_cart set ct_select = '0' where od_id = '$s_cart_id' ";
             sql_query($sql);
         }
 
@@ -38,7 +38,7 @@ switch ($action) {
         $it_id = isset($_POST['it_id']) ? safe_replace_regex($_POST['it_id'], 'it_id') : '';
 
         // 장바구니 상품삭제
-        $sql = " delete from {$g5['g5_shop_cart_table']}
+        $sql = " delete from g5_shop_cart
                     where od_id = '".$s_cart_id."'
                       and it_id = '{$it_id}' ";
         sql_query($sql);
@@ -115,7 +115,7 @@ switch ($action) {
 
             // 바로구매에 있던 장바구니 자료를 지운다.
             if($i == 0 && $sw_direct)
-                sql_query(" delete from {$g5['g5_shop_cart_table']} where od_id = '$tmp_cart_id' and ct_direct = 1 ", false);
+                sql_query(" delete from g5_shop_cart where od_id = '$tmp_cart_id' and ct_direct = 1 ", false);
 
             // 최소, 최대 수량 체크
             if($it['it_buy_min_qty'] || $it['it_buy_max_qty']) {
@@ -136,7 +136,7 @@ switch ($action) {
                 // 기존에 장바구니에 담긴 상품이 있는 경우에 최대 구매수량 체크
                 if($it['it_buy_max_qty'] > 0) {
                     $sql4 = " select sum(ct_qty) as ct_sum
-                                from {$g5['g5_shop_cart_table']}
+                                from g5_shop_cart
                                 where od_id = '$tmp_cart_id'
                                   and it_id = '$it_id'
                                   and io_type = '0'
@@ -155,9 +155,10 @@ switch ($action) {
 
             // 장바구니에 Insert
             $comma = '';
-            $sql = " INSERT INTO {$g5['g5_shop_cart_table']}
-                            ( od_id, mb_id, it_id, it_name, it_sc_type, it_sc_method, it_sc_price, it_sc_minimum, it_sc_qty, ct_status, ct_price, ct_point, ct_point_use, ct_stock_use, ct_option, ct_qty, ct_notax, io_id, io_type, io_price, ct_time, ct_ip, ct_send_cost, ct_direct, ct_select, ct_select_time )
-                        VALUES ";
+            $sql = "
+            INSERT INTO g5_shop_cart (
+                od_id, mb_id, it_id, it_name, it_sc_type, it_sc_method, it_sc_price, it_sc_minimum, it_sc_qty, it_earn_price, it_earn_price_lp, ct_status, ct_price, ct_point, ct_point_use, ct_stock_use, ct_option, ct_qty, ct_notax, io_id, io_type, io_price, ct_time, ct_ip, ct_send_cost, ct_direct, ct_select, ct_select_time
+            ) VALUES ";
 
             for($k=0; $k<$opt_count; $k++) {
                 $io_id = isset($_POST['io_id'][$it_id][$k]) ? preg_replace(G5_OPTION_ID_FILTER, '', $_POST['io_id'][$it_id][$k]) : '';
@@ -187,7 +188,7 @@ switch ($action) {
 
                 // 동일옵션의 상품이 있으면 수량 더함
                 $sql2 = " select ct_id, io_type, ct_qty
-                            from {$g5['g5_shop_cart_table']}
+                            from g5_shop_cart
                             where od_id = '$tmp_cart_id'
                               and it_id = '$it_id'
                               and io_id = '$io_id'
@@ -206,7 +207,7 @@ switch ($action) {
                         die(json_encode(array('error' => $io_value." 의 재고수량이 부족합니다.\n\n현재 재고수량 : " . number_format($tmp_it_stock_qty) . " 개")));
                     }
 
-                    $sql3 = " update {$g5['g5_shop_cart_table']}
+                    $sql3 = " update g5_shop_cart
                                 set ct_qty = ct_qty + '$ct_qty'
                                 where ct_id = '{$row2['ct_id']}' ";
                     sql_query($sql3);
@@ -236,7 +237,7 @@ switch ($action) {
 
                 $io_value = sql_real_escape_string(strip_tags($io_value));
 
-                $sql .= $comma."( '$tmp_cart_id', '{$member['mb_id']}', '{$it['it_id']}', '".addslashes($it['it_name'])."', '{$it['it_sc_type']}', '{$it['it_sc_method']}', '{$it['it_sc_price']}', '{$it['it_sc_minimum']}', '{$it['it_sc_qty']}', '쇼핑', '{$it['it_price']}', '$point', '0', '0', '$io_value', '$ct_qty', '{$it['it_notax']}', '$io_id', '$io_type', '$io_price', '".G5_TIME_YMDHIS."', '".$_SERVER['REMOTE_ADDR']."', '$ct_send_cost', '$sw_direct', '$ct_select', '$ct_select_time' )";
+                $sql .= $comma."( '$tmp_cart_id', '{$member['mb_id']}', '{$it['it_id']}', '".addslashes($it['it_name'])."', '{$it['it_sc_type']}', '{$it['it_sc_method']}', '{$it['it_sc_price']}', '{$it['it_sc_minimum']}', '{$it['it_sc_qty']}', '{$it['it_earn_price']}', '{$it['it_earn_price_lp']}', '쇼핑', '{$it['it_price']}', '$point', '0', '0', '$io_value', '$ct_qty', '{$it['it_notax']}', '$io_id', '$io_type', '$io_price', '".G5_TIME_YMDHIS."', '".$_SERVER['REMOTE_ADDR']."', '$ct_send_cost', '$sw_direct', '$ct_select', '$ct_select_time' )";
                 $comma = ' , ';
                 $ct_count++;
             }

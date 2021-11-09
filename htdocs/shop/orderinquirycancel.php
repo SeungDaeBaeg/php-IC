@@ -12,7 +12,7 @@ if ($token && get_session("ss_token") == $token) {
     alert("토큰 에러", G5_SHOP_URL);
 }
 
-$od = sql_fetch(" select * from {$g5['g5_shop_order_table']} where od_id = '$od_id' and mb_id = '{$member['mb_id']}' ");
+$od = sql_fetch(" select * from g5_shop_order where od_id = '$od_id' and mb_id = '{$member['mb_id']}' ");
 
 if (! (isset($od['od_id']) && $od['od_id'])) {
     alert("존재하는 주문이 아닙니다.");
@@ -21,7 +21,7 @@ if (! (isset($od['od_id']) && $od['od_id'])) {
 // 주문상품의 상태가 주문인지 체크
 $sql = " select SUM(IF(ct_status = '주문', 1, 0)) as od_count2,
                 COUNT(*) as od_count1
-            from {$g5['g5_shop_cart_table']}
+            from g5_shop_cart
             where od_id = '$od_id' ";
 $ct = sql_fetch($sql);
 
@@ -132,13 +132,13 @@ if($od['od_tno']) {
 }
 
 // 장바구니 자료 취소
-sql_query(" update {$g5['g5_shop_cart_table']} set ct_status = '취소' where od_id = '$od_id' ");
+sql_query(" update g5_shop_cart set ct_status = '취소' where od_id = '$od_id' ");
 
 // 주문 취소
 $cancel_memo = addslashes(strip_tags($cancel_memo));
 $cancel_price = $od['od_cart_price'];
 
-$sql = " update {$g5['g5_shop_order_table']}
+$sql = " update g5_shop_order
             set od_send_cost = '0',
                 od_send_cost2 = '0',
                 od_receipt_price = '0',
