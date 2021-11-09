@@ -160,7 +160,7 @@ box-shadow:0 0 10px rgba(0, 0, 0,0.8)}
 #register_influencer_box .register_row input {width:100%;height: 45px;text-align: center;}
 #register_influencer_box .register_row select {width:100%;}
 #register_influencer_box .red_color {color:red}
-#register_influencer_box .phone_number_box input{width:21%}
+#register_influencer_box .phone_number_box input{width:66%}
 #register_influencer_box .phone_number_box button{width:32%;height: 45px;}
 
 #register_influencer_box .agree_box {margin-top: 20px;}

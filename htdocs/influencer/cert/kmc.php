@@ -1,5 +1,5 @@
 <?php
-
+include_once($_SERVER['DOCUMENT_ROOT'] . '/common.php');
 header("Content-Type: text/html; charset=UTF-8");
 header('Expires: 0');
     
@@ -11,15 +11,17 @@ try {
     switch($mode) {
         default:
             $cpId           = 'LINM1001';
-            $urlCode        = '032001';
+            $urlCode        = $_POST['url_code'] ?? '';
             $certNum        = uniqid();
             $date           = date('YmdHis');
             $certMet        = 'M';
             $extendVar      = '0000000000000000';
+            $from           = $_POST['from'] ?? '';
+            $plusInfo       = $from; 
 
             $tr_url         = "https://".$_SERVER['HTTP_HOST']."/influencer/cert/kmc.php?mode=auth_complete";    // 본인인증 결과수신 URL
 
-            $tr_cert        = $cpId . "/" . $urlCode . "/" . $certNum . "/" . $date . "/" . $certMet . "/" . "/" . "/" . "/" . "/" .  "/" . "/" . "/" . $extendVar;
+            $tr_cert        = $cpId . "/" . $urlCode . "/" . $certNum . "/" . $date . "/" . $certMet . "/" . "/" . "/" . "/" . "/" .  "/" . "/" . $plusInfo . "/" . $extendVar;
 
             $enc_tr_cert    = exec("$ICERTSecu SEED 1 0 $tr_cert ");
 
@@ -34,7 +36,7 @@ try {
 
             throw new Exception('success', 0);
         case 'auth_complete':
-            //https://www.inburstshop.com/influencer/cert/kmc.php?mode=auth_complete&rec_cert=D4D4284652744B163A0A9DDE718F74D04BBEAFD6C30279F187A6DBC61BC01208AF9354E26FC034A85F85B7298ABA27D8EDAFD5EC1D13557311E10E205A92DBDDC72497B918924E50A705F5849CBB4D5CF6E59DB885A33719912558C4AB42946EDEDD36745CCF479EB1F738E04AA56923546CC2507C8108E2D756BBA56AB9216D19BF555860BEF3E63BE70D0818FD13D4C3B96900FCA1BA7AE9A1D7BCC105AE195A7A13ADDCAFD0F44087C79F24B5E441C3F9C640174F2A53E59F03631CF85390E6CFF23F2142F9D916B6524495818996C1A386935CE8C980F76640CA9E8E21F01364D9160E4E5C2CA19B475821A1F8E58F439A04ABDEE4FD4A15C54221F4C32CC12B9A5DBFA568C8CBFA4A2B0C41ABA4497F28B373DF906734EABD75DEE723BA5B40FEBACB230DBA1509A88544332CB7ADCB9317B421289FFCC819427479C153B2FBD10A57F69B18B3A89301075BAA98347747D075657241FC51840E4A4C217EA7FCB6584193F929290FC847AC92DF6F0164EEB3667E34C7C5AB1BD4BA4834918D046DAF69FB9A78ECE5026045043D094A021ED1349332E2442C225F2FF2A995C687D6625894AF0DC7A908004CE911F1C3926C0A159D21D03E4FF84C608AB7AA32593A3E38F8FCBE6434F6F0C66A2FC78999C514F345EC8F385F0E2D59D3F84A56D78C52A19F3E90919966B44DA7CE3E499BC47112DB0BC0DC21D89D2F509372C6D4F2AB8ADF397602B2A5DEC1BE7667AE5811AB1C52D497BDEDC20D30322BDF4B493BA81C4430313B3F2A77D1FDCA45104D4CACE121A19E2872D7169B995D7330B35C2CDCDCE255446B7CB28E65CABDB16B8B9109D57C0B265247D6D21E60C502135961276A7F78B54D1CE69F9B20528A7D091DA20CF8097B55874B951EEBEA7255356C4A4BDB1F7B70E31F3E8F2282641BC2F016270994FAB9BE55B3E33F1A989C3403A5D896742FA3ADC55051F4F3C3FA25A98DB5501C379439454884BF53D49C1DA5F1D87FB5A9EA3BF63AD92FC7BDAE2C9EBAE36DB2815A56FAAD1EE87515A8B2DD06D7C2D92879CDE89732143817A3A8A73F27ABCA0FC7DEBFF3B94E5CAF4C922CA4621008482C6645968CC10CE50392D8CCA3566BEB9D58F4565877A02415A5178D5F95D57218545C980696C2EA471CC76671E70C4F3A7EF742429F7D4151D9A15791120BC6FC3410339427600E2E5E26AC34A848EED6CE17B1A68144A249BACE8B5D3399DCECD3E7D794666CC73EDAC2416822E333EA332B6AD63623260F914BDE14A9D1FE3FE66DBAE3D68C47773B39F7612C078B89B2B5AC3E444C&certNum=6189149f209d9
+            //https://www.inburstshop.com/influencer/cert/kmc.php?mode=auth_complete&rec_cert=CA3090C4A8CD2B334BF1CAA1C7CCEFD6577B7137C8330E903CBA80562C37FABD175F13A477FDBFC8C89D0C9E720474BFCAAF88E7C9C648AC060E4CBE2E4CB8BACE4D695045C8A2D04DDBEAA70F5B0FC1B21E9D600D0CEC46DD4AC16DE0FB02A4C522FFD7C725670489631618F7AF31EB3B8149B95E87788B461487C1BF320BFDA2289629236F4685613F2527E4813A6F31A9859B54FC0E40B67B295453472790C8D92B9C592BBC07896CF09E05D29CD01F871E70973D26E01812F88BAFD03681B2A7EC590B5BF30E543EC36A4D0BC52E1DAB9E4E8B77D41FD5BB12650DF7755FF888FEDD9E3EEE0595CD196FD9D7ED048587278111619367C2E329665C28876CB1C34734D99279837FB4209EBE03A14F33DBE5C699285523453A436C7DFC184A2255473C87E5D9ED24897C8F66ED9D2172F65799BE4ED0DB5AC30A26B1014B794BB312F6D3BB72AEE11ACF18CC2F7BDD779DBF92AC465FB4723E7CFC3CB5881E4B12BB5953C30BD7235D663FAEB564C76EBED61F6C5E83104A9B442C9B98F0124296791933991B81C8B983AEA4298A6D3203F1D3E42088A5B5BC435BBF1AC3CC953711EA624006B1FEB29759FD63EAD198453DE2B91D1C3929ECBC83560CDB7D4E3B4EE45984E4377BACC5DF48515E35D679BBC583B0BCD0D7992BA0B8E2978BDB90E33280F6801854479EA236F4C27898042EF330A98DF3D2294F00C28808CD60A065CCD544A76192177FB362E6E613000859F112E96E1FD26EEFA3A2C3765751C258FD9782E4FE060E924208749FBB3D8EA2E2F670D543417CB35D73F7F1F7D5D86D0526225E0364D2EC70B54D2C1E886F5E6B9EFB3B0D2B7D5A8EEC3E88386598DC559B2CD9C0EB18A0E8B55FF424616E53BDAC2C3F00BFE384960EFB19993747EC818E7D27B1FCC44515A9B9CFC3BA3168ED5552E990138CB3573FCE32F34CA2B93A7E6725682BEE90B0C496AEC1FEF07AB286256F9423221D6C1B1EB6F7B6F9D98F1D47421F76EE77E479F68826CE411F38DA68945F1BFC88775D7FBEDB9C0FBCB47E9BE01FF39DD2265A7C9B90F547C80C94699D550032C2BF888BCF12D7A1500EFFE3D40B3166450DA89FFA80A3CA1B85E6DD87D290DBD6ACDF5BFA9AC876A04E0E8E276FD7AE24DE795D938925CF61BA536DE7B5CFDB5A4962B7BEB44AF66FA09C62911B79EB8BA6DEEFED2478F3B50B8E639E487FF34B2A3F26DB8C5B3264E9B5EED0693D7C4D48501E9743B3EB3C3F873E2D3C81B6CF8FF4F0D5941650C6D1A931DD19E745733D440496E6C63F24135281DB148021FDB7FA6EA0217B2144B8D2629D3A81B380252B59938AD27A1D6AFD9EC0106AEB918D65DB0973&certNum=6189bd0e81f4e
 
             // Parameter 수신
             $rec_cert = $_REQUEST['rec_cert'] ?? "";
@@ -54,9 +56,6 @@ try {
     
             // 04. 복호화 된 결과자료 '/'로 Split 하기
             $decStr_Split = explode('/', $rec_cert);
-
-            var_dump($decStr_Split);
-            exit;
             
             //Array ( [0] => 60a77936d8e1c [1] => 20210521181118 [2] => 5DAE7DE89F313736BD629B9414A300034F5891CA2E485D6195194CF7B1ED6EF40193412D40272FB45B5AA27E86235A24A953D4C4042830FC29FD236BB5D588746DA0DA72D575728E52A723B9CFFAC2BF7BE9C2BA6886BB03157406B3420DC0FB [3] => 01037632756 [4] => KTM [5] => 19850805 [6] => 0 [7] => 0 [8] => ������ [9] => Y [10] => M [11] => 211.189.137.203 [12] => [13] => [14] => [15] => [16] => join^kjs503^pw-find^ [17] => 2B759E03665E4960A054C087295A6BB8E46880043BBC2B01287CC21E81EEC603D99A24E00207A87178994EF8F631A91E0ED9093DAB00445E1E015297AE542DE4 [18] => 0000000000000000 )
     
@@ -111,13 +110,6 @@ try {
                     $ipin_birth = 4;
             }
     
-            if ($result == 'Y')            // 성공
-                $db_result = 1;
-            else if ($result == 'N')    // 실패
-                $db_result = 2;
-            else                        // 오류
-                $db_result = 5;
-    
             $name = mb_convert_encoding($name, "utf-8", "euc-kr");
             $phoneNo = mb_convert_encoding($phoneNo,"utf-8", "euc-kr");
             $birthDay = mb_convert_encoding($birthDay, "utf-8", "euc-kr");
@@ -131,198 +123,55 @@ try {
             $rtn['certNum']     = $cookieCertNum;
     
             //========================================================== 인증 후 처리 ==========================================================
-            $plusInfo = explode('^', trim($plusInfo));
-            $app = trim($plusInfo[3]);
-    
-            if($plusInfo[2] == 'ac2') {
-                //ac2.linkprice.com 처리
-                $accountCheck = true;
-    
-                phoneNumberUpdate($account_id, $name, $phoneNo);
-            } else if($plusInfo[2] == 'id-find') {
-                $accountCheck = getAccountCheck(null, $name, $phoneNo, getSsn($birthDay, $gender));
-    
-                //ac2.linkprice.com/id-find 처리
-                $account_id = getAccountInfo($name, $phoneNo, getSsn($birthDay, $gender));
-            } else if ($plusInfo[2] =='pw-find') {
-                $accountCheck = getAccountCheck($account_id, $name, $phoneNo, getSsn($birthDay, $gender));
-    
-                $account_id = $plusInfo[1];
-                $old_password = getPasswordInfo($account_id, $name, $phoneNo, getSsn($birthDay, $gender));
-            } else if($plusInfo[2] == 'dormancy') {
-                //휴면 계정
-                $account_id        = getAccountDormancy($type, $account_id, $name, $phoneNo, getSsn($birthDay, $gender));
-    
-                if(trim($account_id) != '') {
-                    setDormancyRelease($account_id);
-                } else {
-                    //본인인증 실패
+            if($plusInfo === 'update') {
+                $sql = "select count(*) cnt from g5_member where mb_hp = ? and mb_no <> ?";
+                sql_fetch_data($sql,$dupCheck,array($phoneNo,data::getLoginMember()['mb_no']));
+                
+                if((int)$dupCheck['cnt'] > 0) {
                     echo "
                     <script>
-                        alert(\"입력하신 정보가 등록된 정보와 달라 휴면 계정 해제가 불가능 합니다. 고객센터로 휴면 계정 해제 요청 부탁드립니다.\");
-                        window.opener.location = 'https://www2.linkprice.com/views/about_us/contact_us.html';
-                        window.close();
-                    </script>";
-                    exit();
-                }
-    
-                $accountCheck    = ($account_id != '');
-            } else {
-                $accountCheck = true;
-            }
-    
-            if(!$accountCheck) {
-                $result = 'N';
-            }
-    
-            if($result == 'N') {
-                if(!$accountCheck) {
-                    $result_msg = "존재하지 않는 계정이거나 휴대폰번호 입니다.";
-                } else {
-                    $result_msg = "인증이 되지 않았습니다.";
-                }
-            }
-    
-    
-            if ($result == 'Y') {
-                if($account_id != '') {
-                    //본인 인증 완료 후, 필수 업데이트
-                    $row = getQuery(
-                        'ADM',
-                        'dc_lpop/taccount/v1/GetAccount',
-                        array(
-                            "acc_id"=>$account_id
-                        ),
-                        'PHP_API'
-                    );
-                    $row = $row[0];
-    
-                    if((isset($row['password']) && $row['password'] == '0') || (isset($row['contact_name']) && $row['contact_name'] == '휴면계정상태')) {
-                        $row = getQuery(
-                            'ADM',
-                            'dc_lpop/taccount_dormancy/v1/Update',
-                            array(
-                                "acc_id"=>$account_id,
-                                "contact_phone2"=>$phoneNo,
-                                "discrhash"=>$DI,
-                                "ciscrhash"=>$CI,
-                                "ssn1"=>getSsn($birthDay, $gender)
-                            ),
-                            'PHP_API'
-                        );
-                    } else {
-                        $row = getQuery(
-                            'ADM',
-                            'dc_lpop/taccount/v1/Update',
-                            array(
-                                "acc_id"=>$account_id,
-                                "contact_phone2"=>$phoneNo,
-                                "discrhash"=>$DI,
-                                "ciscrhash"=>$CI,
-                                "ssn1"=>getSsn($birthDay, $gender)
-                            ),
-                            'PHP_API'
-                        );
-                    }
-    
-                    $row = getQuery(
-                        'ADM',
-                        'dc_lpop/taccount/v1/Update',
-                        array(
-                            "acc_id"=>$account_id,
-                            "remind_mail_date"=>date('YmdHis')
-                        ),
-                        'PHP_API'
-                    );
-                }
-    
-                if($plusInfo[2] == 'id-find' || $plusInfo[2] == 'pw-find') {
-                    echo "
-                    <script>
-                        var objReturn = {};
-                        objReturn.contact_name = '".$name."';
-                        objReturn.reqnum = '".$cookieCertNum."';
-                        objReturn.phoneNo = '".$phoneNo."';
-                        objReturn.birthDay = '".$birthDay."';
-                        objReturn.DI = '".$DI."';
-                        objReturn.account_id = '".$account_id."';
-                        objReturn.old_password = '".$old_password."';
-                        objReturn.redirect = '".$plusInfo[2]."';
-                        objReturn.gender = '".$gender."';
-                        objReturn.app = '".$app."';
-                        
-                        var str = [];
-                        for (var p in objReturn)
-                        if (objReturn.hasOwnProperty(p)) {
-                            str.push(encodeURIComponent(p) + '=' + encodeURIComponent(objReturn[p]));
-                        }
-                        var qs = str.join('&');
-    
-                        window.location = 'https://ac.linkprice.net/person_check.html?' + qs;
-                    </script>";
-                } else if($plusInfo[2] == 'dormancy') {
-                    echo "
-                    <script>
-                        var objReturn = {};
-                        objReturn.contact_name = '".$name."';
-                        objReturn.reqnum = '".$cookieCertNum."';
-                        objReturn.phoneNo = '".$phoneNo."';
-                        objReturn.birthDay = '".$birthDay."';
-                        objReturn.DI = '".$DI."';
-                        objReturn.account_id = '".$account_id."';
-                        objReturn.old_password = '".$old_password."';
-                        objReturn.redirect = '".$plusInfo[2]."';
-                        objReturn.type = '".$type."';
-                        objReturn.gender = '".$gender."';
-                        objReturn.app = '".$app."';
-                        
-                        var str = [];
-                        for (var p in objReturn)
-                        if (objReturn.hasOwnProperty(p)) {
-                            str.push(encodeURIComponent(p) + '=' + encodeURIComponent(objReturn[p]));
-                        }
-                        var qs = str.join('&');
-                        
-                        
-                        alert(\"인증 완료 되었습니다. 원활한 활동을 위해 개인정보 변경 페이지로 이동합니다.\");
-                        
-                        window.location = 'https://ac.linkprice.net/person_check.html?' + qs;
-                    </script>";
-                } else {
-                    echo "
-                    <script>
-                        var objReturn = {};
-                        objReturn.contact_name = '".$name."';
-                        objReturn.reqnum = '".$cookieCertNum."';
-                        objReturn.phoneNo = '".$phoneNo."';
-                        objReturn.birthDay = '".$birthDay."';
-                        objReturn.DI = '".$DI."';
-                        objReturn.redirect = '".$plusInfo[2]."';
-                        objReturn.type = '".$type."';
-                        objReturn.gender = '".$gender."';
-                        objReturn.app = '".$app."';
-    
-                        var str = [];
-                        for (var p in objReturn)
-                        if (objReturn.hasOwnProperty(p)) {
-                            str.push(encodeURIComponent(p) + '=' + encodeURIComponent(objReturn[p]));
-                        }
-                        var qs = str.join('&');
-    
-                        window.location = 'https://ac.linkprice.net/person_check.html?' + qs;
-                        
-                    </script>";
-                }
-            } else {
-                $result_msg = isset($result_msg) ? $result_msg : '';
-                echo "
-                <script>
-                    alert('".$result_msg."');
-                    window.opener.location.href = 'https://www2.linkprice.com/views/about_us/contact_us_detail.html?cat_id=1';
+                    opener.util.alert('중복된 핸드폰 번호가 있습니다.');
                     window.close();
-                </script>";
+                    </script>
+                    ";
+                }
+                else {
+                    echo "
+                    <script>
+                    opener.document.getElementById('name').value = '$name'
+                    opener.document.getElementById('info_update_phone').value = '$phoneNo'
+                    opener.cert_phone = '$phoneNo'
+                    opener.cert_name = '$name'
+                    window.close();
+                    </script>
+                    ";
+                }                
             }
-            exit();
+            else if($plusInfo === 'join') {
+                $sql = "select count(*) cnt from g5_member where mb_hp = ?";
+                sql_fetch_data($sql,$dupCheck,array($phoneNo));
+                
+                //신규가입 중복된 핸드폰 번호가 있을때
+                if((int)$dupCheck['cnt'] > 0) {
+                    echo "
+                    <script>
+                    opener.document.getElementById('error_phone').textContent = '중복된 핸드폰 번호가 있습니다.';
+                    window.close();
+                    </script>
+                    ";
+                }
+                else {
+                    echo "
+                    <script>
+                    opener.document.getElementById('input_phone').value = '$phoneNo'
+                    opener.document.getElementById('reg_mb_name').value = '$name'
+                    opener.document.getElementById('reg_mb_sex').value = '$db_gender'
+                    opener.kmc_hp = '$phoneNo'
+                    window.close();
+                    </script>
+                    ";
+                }                
+            }
     }    
 } catch(Exception $e) {
     $r['result']        = $e->getCode();

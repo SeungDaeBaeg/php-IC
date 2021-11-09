@@ -33,10 +33,12 @@ $mb_referer     = isset($_POST['mb_referer']) ? trim($_POST['mb_referer']) : '';
 $mb_channel     = isset($_POST['mb_channel']) ? trim($_POST['mb_channel']) : '';
 $mb_category    = isset($_POST['mb_category']) ? trim($_POST['mb_category']) : '';
 $mb_influencer  = isset($_POST['mb_influencer']) ? trim($_POST['mb_influencer']) : 'N';
+$mb_sex       = isset($_POST['mb_sex']) ? trim($_POST['mb_sex']) : '';
 
 // 이름, 닉네임에 utf-8 이외의 문자가 포함됐다면 오류
 // 서버환경에 따라 정상적으로 체크되지 않을 수 있음.
-$tmp_mb_name = iconv('UTF-8', 'UTF-8//IGNORE', $mb_name);
+
+/* $tmp_mb_name = iconv('UTF-8', 'UTF-8//IGNORE', $mb_name);
 if($tmp_mb_name != $mb_name) {
     $mb_name = $tmp_mb_name;
 }
@@ -44,13 +46,12 @@ $tmp_mb_nick = iconv('UTF-8', 'UTF-8//IGNORE', $mb_nick);
 if($tmp_mb_nick != $mb_nick) {
     $mb_nick = $tmp_mb_nick;
 }
-
 if( ! $mb_nick || ! $mb_name ){
     $tmp = explode('@', $mb_email);
     $mb_nick = $mb_nick ? $mb_nick : $tmp[0];
     $mb_name = $mb_name ? $mb_name : $tmp[0];
     $mb_nick = exist_mb_nick_recursive($mb_nick, '');
-}
+} */
 
 if( ! isset($mb_password) || ! $mb_password ){
 
@@ -120,7 +121,8 @@ $sql = " insert into g5_member
                 mb_recommend = '{$mb_referer}',
                 mb_sns_channel = '{$mb_channel}',
                 mb_category = '{$mb_category}',
-                mb_is_influencer = '{$mb_influencer}'
+                mb_is_influencer = '{$mb_influencer}',
+                mb_sex = '{$mb_sex}'
         ";
 
 $result = sql_query($sql, false);

@@ -75,12 +75,16 @@ body {
 }
 
 .info_option_box > .content_box table tr td .addr_box .addr_search,
-.info_option_box > .content_box table tr td .phone_box #cert {
+.info_option_box > .content_box table tr td .phone_box .cert {
     width: 30%;
     background-color: grey;
     text-align: center;
     float: right;
     margin-right: 5px;
+}
+
+.info_option_box > .content_box table tr td .phone_box .phone_input {
+    width: 66%;
 }
 
 .info_option_box > .content_box > .category_box {

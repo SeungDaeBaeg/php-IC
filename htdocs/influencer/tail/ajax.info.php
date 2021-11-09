@@ -12,14 +12,14 @@
     }
 
     function updateInfo() {
-        $p = array('category','sex','email','agree','zip_code','addr1','addr2','sns_channel','name','other_url');
+        $p = array('category','email','phone','agree','zip_code','addr1','addr2','sns_channel','name','other_url');
         $param = util::param($p, "파라미터가 없습니다.");
         $mb_no = data::getLoginMember()['mb_no'];
         
         $id = sql_update("g5_member",array(
             'mb_category'       =>  $param['category'],
-            'mb_sex'            =>  $param['sex'],
             'mb_email'          =>  $param['email'],
+            'mb_hp'             =>  $param['phone'],
             'mb_alert'          =>  $param['agree'],
             'mb_zip1'           =>  $param['zip_code'],
             'mb_addr1'          =>  $param['addr1'],

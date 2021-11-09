@@ -180,3 +180,27 @@ function exist_mb_hp($reg_mb_hp, $reg_mb_id)
     else
         return "";
 }
+
+function exist_mb_recommend($reg_mb_recommend) 
+{
+    if (!trim($reg_mb_recommend)) return "";
+
+    $sql = " select count(*) as cnt from g5_member where mb_id = '$reg_mb_recommend' ";
+    $row = sql_fetch($sql);
+
+    if($row['cnt'])
+        return "";
+    else
+        return "not_ref";
+}
+
+function exist_join_mb_hp($reg_mb_hp)
+{
+    $sql = "select count(*) as cnt from g5_member where mb_hp = '$reg_mb_hp'";
+    $row = sql_fetch($sql);
+
+    if($row['cnt'])
+        return "dup_hp";
+    else
+        return "";
+}

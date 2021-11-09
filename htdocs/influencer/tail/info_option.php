@@ -54,6 +54,8 @@ foreach($sns_res as $v) {
     $sns_type[] = $v['msl_type'];
 }
 
+$mb_sex = ($user['mb_sex'] === 'M') ? '남성' : '여성';
+
 /**
  * 내정보 화면
  * @todo : [승대] PPT 50페이지, 개인정보 변경
@@ -72,25 +74,14 @@ foreach($sns_res as $v) {
             <tr>
                 <td class="th">이름</td>
                 <td>
-                    <input type="text" value="<?=$user['mb_name']?>" id="name">
+                    <input type="text" value="<?=$user['mb_name']?>" id="name" readonly>
                 </td>
             </tr>
             <tr>
                 <td class="th">성별</td>
                 <td>
-                    <div class="radio_box">
-                        <div>
-                            <label>
-                                <input type="radio" name="sex" value="m" <?if($user['mb_sex'] === 'm') echo 'checked'?>>
-                                <span>남자</span>
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                <input type="radio" name="sex" value="w" <?if($user['mb_sex'] === 'w') echo 'checked'?>>
-                                <span>여자</span>
-                            </label>
-                        </div>
+                    <div class="sex_box">
+                        <div><?=$mb_sex?></div>
                     </div>
                 </td>
             </tr>
@@ -135,7 +126,8 @@ foreach($sns_res as $v) {
                 <td class="th">휴대폰 번호</td>
                 <td>
                     <div class="phone_box">
-                        <div id="cert">본인인증</div>
+                        <input class="phone_input" type="text" id="info_update_phone" value="<?=$user['mb_hp']?>" readonly>
+                        <div class="cert" id="cert">본인인증</div>
                     </div>
                 </td>
             </tr>
@@ -207,6 +199,8 @@ foreach($sns_res as $v) {
 <!--content end -->
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script>
+    var cert_name = "<?=$user['mb_name']?>";
+    var cert_phone = "<?=$user['mb_hp']?>";
 
     $(".info_option_box #addr_search").click(function() {
         new daum.Postcode({
@@ -236,7 +230,10 @@ foreach($sns_res as $v) {
 
     $('.info_option_box #cert').click(function(){
         
-        var param=  {};
+        var param=  {
+            from : 'update',
+            url_code : '032001'
+        };
 
         //안드로이드나 iOS일 경우 파라미터 추가
         if(navigator.userAgent.indexOf('Mobile') > -1) {
@@ -283,8 +280,12 @@ foreach($sns_res as $v) {
     })
 
     $('.info_option_box #update').click(function(){
+        var _this       = $(this);
+        if(_this.hasClass('disabled')) return;
+        _this.addClass('disabled');
+
         var name        = $('.info_option_box #name').val();
-        var sex         = $('.info_option_box [name=sex]:checked').val();
+        var phone       = $('.info_option_box #info_update_phone').val();
         var email1      = $('.info_option_box #email1').val();
         var email2      = $('.info_option_box #email2').val();
         var email       = email1 + '@' + email2;
@@ -296,13 +297,15 @@ foreach($sns_res as $v) {
         var sns_channel = $('.info_option_box [name=sns]:checked').val();
         var other_url   = $('.info_option_box #other_url').val();
 
-        if(_.isEmpty(name)) {
-            util.alert('이름을 입력해주세요',{type:'instant'});
+        if(cert_name !== name || cert_phone !== phone) {
+            util.alert('이름과 핸드폰을 학인해주세요.',{type:'instant'});
+            _this.removeClass('disabled');
             return;
         }
 
         if (!email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
             util.alert('이메일을 확인해주세요',{type:'instant'});
+            _this.removeClass('disabled');
             return;
         }
 
@@ -315,7 +318,7 @@ foreach($sns_res as $v) {
         data.ajax("<?=$ajax_info_url?>",{
             action      : 'updateInfo',
             category    : category,
-            sex         : sex,
+            phone       : phone,
             email       : email,
             agree       : agree,
             zip_code    : zip_code,
@@ -328,7 +331,8 @@ foreach($sns_res as $v) {
     })
 
     function updateCB(res) {
-        if(res.code === 0) {
+        if(res.code == 0) {
+            _this.removeClass('disabled');
             util.alert('정보 수정 완료',{type:'instant'});
         }
     }
@@ -372,6 +376,7 @@ foreach($sns_res as $v) {
 
     $(document).ready(function() {
         var res = url.getUrlListParam(['sns','code','type']);
+        console.log(res);
         if(res.code != 0) {
             if(res.code == 1) util.alert('연동되지 않았습니다. 관리자에게 문의주세요');
             else if(res.code == 2) util.alert('중복된 연결 계정이있습니다. 관리자에게 문의주세요');
