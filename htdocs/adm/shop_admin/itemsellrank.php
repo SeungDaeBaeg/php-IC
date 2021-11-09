@@ -29,7 +29,7 @@ $sql  = " select a.it_id,
                  SUM(IF(ct_status = '반품',ct_qty, 0)) as ct_status_8,
                  SUM(IF(ct_status = '품절',ct_qty, 0)) as ct_status_9,
                  SUM(ct_qty) as ct_status_sum
-            from {$g5['g5_shop_cart_table']} a, g5_shop_item b ";
+            from g5_shop_cart a, g5_shop_item b ";
 $sql .= " where a.it_id = b.it_id ";
 if ($fr_date && $to_date)
 {

@@ -4,7 +4,7 @@ include_once('./_common.php');
 
 auth_check_menu($auth, $sub_menu, "r");
 
-$sql_common = " from {$g5['g5_shop_order_data_table']} ";
+$sql_common = " from g5_shop_order_data ";
 
 $sql_search = " where cart_id <> '0' ";
 if ($stx) {
@@ -110,7 +110,7 @@ $colspan = 10;
         }
 
         // 주문금액
-        $sql = " select sum(if(io_type = '1', io_price, (ct_price + io_price)) * ct_qty) as price from {$g5['g5_shop_cart_table']} where od_id = '{$row['cart_id']}' and ct_status = '쇼핑' ";
+        $sql = " select sum(if(io_type = '1', io_price, (ct_price + io_price)) * ct_qty) as price from g5_shop_cart where od_id = '{$row['cart_id']}' and ct_status = '쇼핑' ";
         $ct = sql_fetch($sql);
 
         $bg = 'bg'.($i%2);

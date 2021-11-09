@@ -26,7 +26,7 @@ if($cart_stock_limit > 0) {
     $stocktime = G5_SERVER_TIME - (3600 * $cart_stock_limit);
 
     $sql = " select count(*) as cnt
-                from {$g5['g5_shop_cart_table']}
+                from g5_shop_cart
                 where od_id = '$tmp_cart_id'
                   and ct_status = '쇼핑'
                   and ct_select = '1'
@@ -43,7 +43,7 @@ if (function_exists('before_check_cart_price')) {
 
 // 재고체크
 $sql = " select *
-            from {$g5['g5_shop_cart_table']}
+            from g5_shop_cart
             where od_id = '$tmp_cart_id'
               and ct_select = '1'
               and ct_status = '쇼핑' ";

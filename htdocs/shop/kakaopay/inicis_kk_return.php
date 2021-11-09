@@ -23,7 +23,7 @@ if( !$orderNumber ){
     alert("주문번호가 없습니다.");
 }
 
-$sql = " select * from {$g5['g5_shop_order_data_table']} where od_id = '$orderNumber' ";
+$sql = " select * from g5_shop_order_data where od_id = '$orderNumber' ";
 $row = sql_fetch($sql);
 
 if( empty($row) ){

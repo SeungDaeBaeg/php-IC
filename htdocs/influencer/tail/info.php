@@ -26,7 +26,7 @@ $user = data::getLoginMember();
     <div class="account_box">
         <div class="money_box f_jc_sb_box">
             <div class="info_common">수익금</div>
-            <div class="info_common"><?=number_format($user['mb_save_money'])?>원</div>
+            <div class="info_common"><?=number_format($user['mb_commission'])?>원</div>
         </div>
         <div class="register_box info_common">계좌등록</div>
     </div>

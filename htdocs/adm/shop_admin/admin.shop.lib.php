@@ -46,11 +46,24 @@ function change_status($od_id, $current_status, $change_status)
 {
     global $g5;
 
-    $sql = " update {$g5['g5_shop_order_table']} set od_status = '{$change_status}' where od_id = '{$od_id}' and od_status = '{$current_status}' ";
+    $sql = " update g5_shop_order set od_status = '{$change_status}' where od_id = '{$od_id}' and od_status = '{$current_status}' ";
     sql_query($sql, true);
 
-    $sql = " update {$g5['g5_shop_cart_table']} set ct_status = '{$change_status}' where od_id = '{$od_id}' and ct_status = '{$current_status}' ";
+    $sql = " update g5_shop_cart set ct_status = '{$change_status}' where od_id = '{$od_id}' and ct_status = '{$current_status}' ";
     sql_query($sql, true);
+
+
+    // [IC] : 배송 완료일 경우에는 ttranslog 의 적립 상태를 완료 상태로 변경
+
+    if($change_status === '완료') {
+        sql_update("g5_translog", array(
+            'buy_confirm'  => 'Y'
+        ), "od_id = '{$od_id}'");
+    } else if($change_status === '확정') {
+        sql_update("g5_translog", array(
+            'buy_confirm'  => 'Y'
+        ), "od_id = '{$od_id}'");
+    }
 }
 
 
@@ -59,7 +72,7 @@ function order_update_receipt($od_id)
 {
     global $g5;
 
-    $sql = " update {$g5['g5_shop_order_table']} set od_receipt_price = od_misu, od_misu = 0, od_receipt_time = '".G5_TIME_YMDHIS."' where od_id = '$od_id' and od_status = '입금' ";
+    $sql = " update g5_shop_order set od_receipt_price = od_misu, od_misu = 0, od_receipt_time = '".G5_TIME_YMDHIS."' where od_id = '$od_id' and od_status = '입금' ";
     return sql_query($sql);
 }
 
@@ -72,10 +85,10 @@ function order_update_delivery($od_id, $mb_id, $change_status, $delivery)
     if($change_status != '배송')
         return;
 
-    $sql = " update {$g5['g5_shop_order_table']} set od_delivery_company = '{$delivery['delivery_company']}', od_invoice = '{$delivery['invoice']}', od_invoice_time = '{$delivery['invoice_time']}' where od_id = '$od_id' and od_status = '준비' ";
+    $sql = " update g5_shop_order set od_delivery_company = '{$delivery['delivery_company']}', od_invoice = '{$delivery['invoice']}', od_invoice_time = '{$delivery['invoice_time']}' where od_id = '$od_id' and od_status = '준비' ";
     sql_query($sql);
 
-    $sql = " select * from {$g5['g5_shop_cart_table']} where od_id = '$od_id' ";
+    $sql = " select * from g5_shop_cart where od_id = '$od_id' ";
     $result = sql_query($sql);
 
     for ($i=0; $row=sql_fetch_array($result); $i++)
@@ -89,7 +102,7 @@ function order_update_delivery($od_id, $mb_id, $change_status, $delivery)
             subtract_io_stock($row['it_id'], $row['ct_qty'], $row['io_id'], $row['io_type']);
             $stock_use = 1;
 
-            $sql = " update {$g5['g5_shop_cart_table']} set ct_stock_use  = '$stock_use' where ct_id = '{$row['ct_id']}' ";
+            $sql = " update g5_shop_cart set ct_stock_use  = '$stock_use' where ct_id = '{$row['ct_id']}' ";
             sql_query($sql);
         }
     }
@@ -105,7 +118,7 @@ function conv_sms_contents($od_id, $contents)
     if ($od_id && $config['cf_sms_use'] == 'icode')
     {
         $sql = " select od_id, od_name, od_invoice, od_receipt_price, od_delivery_company
-                    from {$g5['g5_shop_order_table']} where od_id = '$od_id' ";
+                    from g5_shop_order where od_id = '$od_id' ";
         $od = sql_fetch($sql);
 
         $sms_contents = $contents;
@@ -164,7 +177,7 @@ function check_order_inicis_tmps(){
     if( ! $admin_cookie_time ){
 
         if( $default['de_pg_service'] === 'inicis' && empty($default['de_card_test']) ){
-            $sql = " select * from {$g5['g5_shop_inicis_log_table']} where P_TID <> '' and P_TYPE in ('CARD', 'ISP', 'BANK') and P_MID <> '' and P_STATUS = '00' and is_mail_send = 0 and substr(P_AUTH_DT, 1, 14) < '".date('YmdHis', strtotime('-3 minutes', G5_SERVER_TIME))."' ";
+            $sql = " select * from g5_shop_inicis_log where P_TID <> '' and P_TYPE in ('CARD', 'ISP', 'BANK') and P_MID <> '' and P_STATUS = '00' and is_mail_send = 0 and substr(P_AUTH_DT, 1, 14) < '".date('YmdHis', strtotime('-3 minutes', G5_SERVER_TIME))."' ";
 
             $result = sql_query($sql, false);
             
@@ -182,10 +195,10 @@ function check_order_inicis_tmps(){
 
                 if( in_array($p_mid, array('iniescrow0', 'inipaytest')) ) continue;
 
-                $sql = "update {$g5['g5_shop_inicis_log_table']} set is_mail_send = 1 where oid = '".$oid."' and P_TID = '".$p_tid."' ";
+                $sql = "update g5_shop_inicis_log set is_mail_send = 1 where oid = '".$oid."' and P_TID = '".$p_tid."' ";
                 sql_query($sql);
 
-                $sql = " select od_id from {$g5['g5_shop_order_table']} where od_id = '$oid' and od_tno = '$p_tid' ";
+                $sql = " select od_id from g5_shop_order where od_id = '$oid' and od_tno = '$p_tid' ";
                 $tmp = sql_fetch($sql);
 
                 if( $tmp['od_id'] ) continue;

@@ -40,7 +40,7 @@ for ($i=0; $i<$count_post_chk; $i++)
     $invoice_time = isset($_POST['od_invoice_time'][$k]) ? safe_replace_regex($_POST['od_invoice_time'][$k], 'time') : '';
     $delivery_company = isset($_POST['od_delivery_company'][$k]) ? clean_xss_tags($_POST['od_delivery_company'][$k], 1, 1) : '';
 
-    $od = sql_fetch(" select * from {$g5['g5_shop_order_table']} where od_id = '$od_id' ");
+    $od = sql_fetch(" select * from g5_shop_order where od_id = '$od_id' ");
     if (!$od) continue;
 
     //change_order_status($od['od_status'], $_POST['od_status'], $od);
@@ -122,17 +122,17 @@ for ($i=0; $i<$count_post_chk; $i++)
             change_status($od_id, '배송', '완료');
 
             // 완료인 경우에만 상품구입 합계수량을 상품테이블에 저장한다.
-            $sql2 = " select it_id from {$g5['g5_shop_cart_table']} where od_id = '$od_id' and ct_status = '완료' group by it_id ";
+            $sql2 = " select it_id from g5_shop_cart where od_id = '$od_id' and ct_status = '완료' group by it_id ";
             $result2 = sql_query($sql2);
             for ($k=0; $row2=sql_fetch_array($result2); $k++) {
-                $sql3 = " select sum(ct_qty) as sum_qty from {$g5['g5_shop_cart_table']} where it_id = '{$row2['it_id']}' and ct_status = '완료' ";
+                $sql3 = " select sum(ct_qty) as sum_qty from g5_shop_cart where it_id = '{$row2['it_id']}' and ct_status = '완료' ";
                 $row3 = sql_fetch($sql3);
 
                 $sql4 = " update g5_shop_item set it_sum_qty = '{$row3['sum_qty']}' where it_id = '{$row2['it_id']}' ";
                 sql_query($sql4);
             }
             /*
-            $sql2 = " select it_id, sum(ct_qty) as sum_qty from {$g5['g5_shop_cart_table']} where od_id = '$od_id' and ct_status = '완료' group by it_id ";
+            $sql2 = " select it_id, sum(ct_qty) as sum_qty from g5_shop_cart where od_id = '$od_id' and ct_status = '완료' group by it_id ";
             $result2 = sql_query($sql2);
             for ($k=0; $row2=sql_fetch_array($result2); $k++) {
                 $sql3 = " update g5_shop_item set it_sum_qty = it_sum_qty + '{$row2['sum_qty']}' where it_id = '{$row2['it_id']}' ";
@@ -148,7 +148,7 @@ for ($i=0; $i<$count_post_chk; $i++)
     $info = get_order_info($od_id);
     if(!$info) continue;
 
-    $sql = " update {$g5['g5_shop_order_table']}
+    $sql = " update g5_shop_order
                 set od_misu         = '{$info['od_misu']}',
                     od_tax_mny      = '{$info['od_tax_mny']}',
                     od_vat_mny      = '{$info['od_vat_mny']}',

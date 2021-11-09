@@ -39,8 +39,8 @@ switch($groupby) {
         break;
     case 'product':
         //상품별
-        $extraColumn = "(select it_name from g5_shop_item where it_id = g5_translog.it_no)";
-        $extraGroupBy .= " GROUP BY it_no";
+        $extraColumn = "(select it_name from g5_shop_item where it_id = g5_translog.it_id)";
+        $extraGroupBy .= " GROUP BY it_id";
         break;
 }
 

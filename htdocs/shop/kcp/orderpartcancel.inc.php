@@ -112,7 +112,7 @@ if ( $req_tx == "mod" )
         $rem_mny = $c_PayPlus->mf_get_res_data( "panc_rem_mny" ); // 취소요청후 잔액
 
         // 환불금액기록
-        $sql = " update {$g5['g5_shop_order_table']}
+        $sql = " update g5_shop_order
                     set od_refund_price = od_refund_price + '$mod_mny',
                         od_shop_memo = concat(od_shop_memo, \"$mod_memo\")
                     where od_id = '{$od['od_id']}'
@@ -122,7 +122,7 @@ if ( $req_tx == "mod" )
         // 미수금 등의 정보 업데이트
         $info = get_order_info($od_id);
 
-        $sql = " update {$g5['g5_shop_order_table']}
+        $sql = " update g5_shop_order
                     set od_misu     = '{$info['od_misu']}',
                         od_tax_mny  = '{$info['od_tax_mny']}',
                         od_vat_mny  = '{$info['od_vat_mny']}',

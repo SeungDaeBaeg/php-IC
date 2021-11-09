@@ -39,7 +39,7 @@ for ($i=0; $i<$cnt; $i++)
     if(!$ct_id)
         continue;
 
-    $sql = " select * from {$g5['g5_shop_cart_table']} where od_id = '$od_id' and ct_id  = '$ct_id' ";
+    $sql = " select * from g5_shop_cart where od_id = '$od_id' and ct_id  = '$ct_id' ";
     $ct = sql_fetch($sql);
     if(! (isset($ct['ct_id']) && $ct['ct_id']))
         continue;
@@ -67,7 +67,7 @@ for ($i=0; $i<$cnt; $i++)
         }
 
         // 수량변경
-        $sql = " update {$g5['g5_shop_cart_table']}
+        $sql = " update g5_shop_cart
                     set ct_qty = '$ct_qty'
                     where ct_id = '$ct_id'
                       and od_id = '$od_id' ";
@@ -143,7 +143,7 @@ for ($i=0; $i<$cnt; $i++)
     $now = G5_TIME_YMDHIS;
     $ct_history="\n$ct_status|{$member['mb_id']}|$now|$REMOTE_ADDR";
 
-    $sql = " update {$g5['g5_shop_cart_table']}
+    $sql = " update g5_shop_cart
                 set ct_point_use  = '$point_use',
                     ct_stock_use  = '$stock_use',
                     ct_status     = '$ct_status',
@@ -162,7 +162,7 @@ if(is_array($arr_it_id) && !empty($arr_it_id)) {
     $unq_it_id = array_unique($arr_it_id);
 
     foreach($unq_it_id as $it_id) {
-        $sql2 = " select sum(ct_qty) as sum_qty from {$g5['g5_shop_cart_table']} where it_id = '$it_id' and ct_status = '완료' ";
+        $sql2 = " select sum(ct_qty) as sum_qty from g5_shop_cart where it_id = '$it_id' and ct_status = '완료' ";
         $row2 = sql_fetch($sql2);
 
         $sql3 = " update g5_shop_item set it_sum_qty = '{$row2['sum_qty']}' where it_id = '$it_id' ";
@@ -175,7 +175,7 @@ $cancel_change = false;
 if (in_array($_POST['ct_status'], $status_cancel)) {
     $sql = " select count(*) as od_count1,
                     SUM(IF(ct_status = '취소' OR ct_status = '반품' OR ct_status = '품절', 1, 0)) as od_count2
-                from {$g5['g5_shop_cart_table']}
+                from g5_shop_cart
                 where od_id = '$od_id' ";
     $row = sql_fetch($sql);
 
@@ -188,7 +188,7 @@ if (in_array($_POST['ct_status'], $status_cancel)) {
 
         // PG 신용카드 결제 취소일 때
         if($pg_cancel == 1) {
-            $sql = " select * from {$g5['g5_shop_order_table']} where od_id = '$od_id' ";
+            $sql = " select * from g5_shop_order where od_id = '$od_id' ";
             $od = sql_fetch($sql);
 
             if($od['od_tno'] && ($od['od_settle_case'] == '신용카드' || $od['od_settle_case'] == '간편결제' || $od['od_settle_case'] == 'KAKAOPAY') || ($od['od_pg'] == 'inicis' && is_inicis_order_pay($od['od_settle_case']) )) {
@@ -316,7 +316,7 @@ if (in_array($_POST['ct_status'], $status_cancel)) {
                 // PG 취소요청 성공했으면
                 if($pg_res_cd == '') {
                     $pg_cancel_log = ' PG 신용카드 승인취소 처리';
-                    $sql = " update {$g5['g5_shop_order_table']}
+                    $sql = " update g5_shop_order
                                 set od_refund_price = '{$od['od_receipt_price']}'
                                 where od_id = '$od_id' ";
                     sql_query($sql);
@@ -335,7 +335,7 @@ $info = get_order_info($od_id);
 if(!$info)
     alert('주문자료가 존재하지 않습니다.');
 
-$sql = " update {$g5['g5_shop_order_table']}
+$sql = " update g5_shop_order
             set od_cart_price   = '{$info['od_cart_price']}',
                 od_cart_coupon  = '{$info['od_cart_coupon']}',
                 od_coupon       = '{$info['od_coupon']}',
@@ -370,7 +370,7 @@ if($pg_cancel == 1 && $pg_res_cd && $pg_res_msg) {
     alert('오류코드 : '.$pg_res_cd.' 오류내용 : '.$pg_res_msg, $url);
 } else {
     // 1.06.06
-    $od = sql_fetch(" select od_receipt_point from {$g5['g5_shop_order_table']} where od_id = '$od_id' ");
+    $od = sql_fetch(" select od_receipt_point from g5_shop_order where od_id = '$od_id' ");
     if ($od['od_receipt_point'])
         alert("포인트로 결제한 주문은,\\n\\n주문상태 변경으로 인해 포인트의 가감이 발생하는 경우\\n\\n회원관리 > 포인트관리에서 수작업으로 포인트를 맞추어 주셔야 합니다.", $url);
     else

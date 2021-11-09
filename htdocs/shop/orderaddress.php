@@ -7,12 +7,12 @@ if(!$is_member)
 $ad_id = isset($_REQUEST['ad_id']) ? (int) $_REQUEST['ad_id'] : 0;
 
 if($w == 'd') {
-    $sql = " delete from {$g5['g5_shop_order_address_table']} where mb_id = '{$member['mb_id']}' and ad_id = '$ad_id' ";
+    $sql = " delete from g5_shop_order_address where mb_id = '{$member['mb_id']}' and ad_id = '$ad_id' ";
     sql_query($sql);
     goto_url($_SERVER['SCRIPT_NAME']);
 }
 
-$sql_common = " from {$g5['g5_shop_order_address_table']} where mb_id = '{$member['mb_id']}' ";
+$sql_common = " from g5_shop_order_address where mb_id = '{$member['mb_id']}' ";
 
 $sql = " select count(ad_id) as cnt " . $sql_common;
 $row = sql_fetch($sql);

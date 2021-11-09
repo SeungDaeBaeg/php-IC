@@ -32,7 +32,7 @@ $j = 0;
 do {
     $cp_id = get_coupon_id();
 
-    $sql3 = " select count(*) as cnt from {$g5['g5_shop_coupon_table']} where cp_id = '$cp_id' ";
+    $sql3 = " select count(*) as cnt from g5_shop_coupon where cp_id = '$cp_id' ";
     $row3 = sql_fetch($sql3);
 
     if(!$row3['cnt'])
@@ -52,7 +52,7 @@ if($period < 0)
 $cp_end = date('Y-m-d', strtotime("+{$period} days", G5_SERVER_TIME));
 $result = false;
 
-$sql = " INSERT INTO {$g5['g5_shop_coupon_table']}
+$sql = " INSERT INTO g5_shop_coupon
             ( cp_id, cp_subject, cp_method, cp_target, mb_id, cz_id, cp_start, cp_end, cp_type, cp_price, cp_trunc, cp_minimum, cp_maximum, cp_datetime )
         VALUES
             ( '$cp_id', '{$cp['cz_subject']}', '{$cp['cp_method']}', '{$cp['cp_target']}', '{$member['mb_id']}', '$cz_id', '$cp_start', '$cp_end', '{$cp['cp_type']}', '{$cp['cp_price']}', '{$cp['cp_trunc']}', '{$cp['cp_minimum']}', '{$cp['cp_maximum']}', '".G5_TIME_YMDHIS."' ) ";

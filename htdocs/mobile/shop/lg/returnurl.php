@@ -22,7 +22,7 @@ $LGD_PAYKEY   = '';
 
 $LGD_OID          = $payReqMap['LGD_OID'];
 
-$sql = " select * from {$g5['g5_shop_order_data_table']} where od_id = '$LGD_OID' ";
+$sql = " select * from g5_shop_order_data where od_id = '$LGD_OID' ";
 $row = sql_fetch($sql);
 
 $data = isset($row['dt_data']) ? unserialize(base64_decode($row['dt_data'])) : array();

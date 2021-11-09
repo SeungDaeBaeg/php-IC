@@ -23,7 +23,7 @@ $g5['title'] = $member['mb_nick'].' 님의 쿠폰 내역';
 include_once(G5_PATH.'/head.sub.php');
 
 $sql = " select cp_id, cp_subject, cp_method, cp_target, cp_start, cp_end, cp_type, cp_price
-            from {$g5['g5_shop_coupon_table']}
+            from g5_shop_coupon
             where mb_id IN ( '{$member['mb_id']}', '전체회원' )
               and cp_start <= '".G5_TIME_YMD."'
               and cp_end >= '".G5_TIME_YMD."'

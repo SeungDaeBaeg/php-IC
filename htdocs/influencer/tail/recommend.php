@@ -10,7 +10,9 @@ include_once(G5_THEME_MSHOP_PATH.'/shop.head.php');
 ?>
 
 <!--content start-->
-추천상품
+
+
+
 <!--content end -->
 
 <?

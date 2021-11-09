@@ -22,7 +22,7 @@ function get_order_status_sum($status)
 
     $sql = " select count(*) as cnt,
                     sum(od_cart_price + od_send_cost + od_send_cost2 - od_cancel_price) as price
-                from {$g5['g5_shop_order_table']}
+                from g5_shop_order
                 where od_status = '$status' ";
     $row = sql_fetch($sql);
 
@@ -41,7 +41,7 @@ function get_order_date_sum($date)
 
     $sql = " select sum(od_cart_price + od_send_cost + od_send_cost2) as orderprice,
                     sum(od_cancel_price) as cancelprice
-                from {$g5['g5_shop_order_table']}
+                from g5_shop_order
                 where SUBSTRING(od_time, 1, 10) = '$date' ";
     $row = sql_fetch($sql);
 
@@ -65,7 +65,7 @@ function get_order_settle_sum($date)
     {
         $sql = " select sum(od_cart_price + od_send_cost + od_send_cost2 - od_receipt_point - od_cart_coupon - od_coupon - od_send_coupon) as price,
                         count(*) as cnt
-                    from {$g5['g5_shop_order_table']}
+                    from g5_shop_order
                     where SUBSTRING(od_time, 1, 10) = '$date'
                       and od_settle_case = '$val' ";
         $row = sql_fetch($sql);
@@ -77,7 +77,7 @@ function get_order_settle_sum($date)
     // 포인트 합계
     $sql = " select sum(od_receipt_point) as price,
                     count(*) as cnt
-                from {$g5['g5_shop_order_table']}
+                from g5_shop_order
                 where SUBSTRING(od_time, 1, 10) = '$date'
                   and od_receipt_point > 0 ";
     $row = sql_fetch($sql);
@@ -87,7 +87,7 @@ function get_order_settle_sum($date)
     // 쿠폰 합계
     $sql = " select sum(od_cart_coupon + od_coupon + od_send_coupon) as price,
                     count(*) as cnt
-                from {$g5['g5_shop_order_table']}
+                from g5_shop_order
                 where SUBSTRING(od_time, 1, 10) = '$date'
                   and ( od_cart_coupon > 0 or od_coupon > 0 or od_send_coupon > 0 ) ";
     $row = sql_fetch($sql);

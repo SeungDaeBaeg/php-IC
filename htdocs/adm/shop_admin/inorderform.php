@@ -12,7 +12,7 @@ include_once(G5_ADMIN_PATH.'/admin.head.php');
 //------------------------------------------------------------------------------
 // 주문서 정보
 //------------------------------------------------------------------------------
-$sql = " select * from {$g5['g5_shop_order_data_table']} where od_id = '$od_id' ";
+$sql = " select * from g5_shop_order_data where od_id = '$od_id' ";
 $od = sql_fetch($sql);
 if (!$od['od_id']) {
     alert("해당 주문번호로 미완료 주문서가 존재하지 않습니다.");
@@ -21,12 +21,21 @@ if (!$od['od_id']) {
 // 주문정보
 $data = unserialize(base64_decode($od['dt_data']));
 
-$sql_common = " from {$g5['g5_shop_cart_table']} where od_id = '{$od['cart_id']}' and ct_status = '쇼핑' and ct_select = '1' ";
+$sql_common = " from g5_shop_cart where od_id = '{$od['cart_id']}' and ct_status = '쇼핑' and ct_select = '1' ";
 
 // 주문금액
-$sql = " select SUM(IF(io_type = 1, io_price, (ct_price + io_price)) * ct_qty) as od_price, COUNT(distinct it_id) as cart_count $sql_common ";
+$sql = "
+select  SUM(IF(io_type = 1, io_price, (ct_price + io_price)) * ct_qty) as od_price, COUNT(distinct it_id) as cart_count,
+        SUM(it_earn_price) as od_earn_price, SUM(it_earn_price_lp) as od_earn_price_lp
+from    g5_shop_cart
+where   od_id = '{$od['cart_id']}' 
+and     ct_status = '쇼핑' 
+and     ct_select = '1'";
 $row = sql_fetch($sql);
 $tot_ct_price = $row['od_price'];
+$tot_earn_price = $row['od_earn_price'];
+$tot_earn_price_lp = $row['od_earn_price_lp'];
+
 $cart_count   = $row['cart_count'];
 $tot_od_price = $tot_ct_price;
 
@@ -41,7 +50,7 @@ if($od['mb_id']) {
         $cid = $data['cp_id'][$i];
         $it_id = $data['it_id'][$i];
         $sql = " select cp_id, cp_method, cp_target, cp_type, cp_price, cp_trunc, cp_minimum, cp_maximum
-                    from {$g5['g5_shop_coupon_table']}
+                    from g5_shop_coupon
                     where cp_id = '$cid'
                       and mb_id IN ( '{$od['mb_id']}', '전체회원' )
                       and cp_method IN ( 0, 1 ) ";
@@ -100,7 +109,7 @@ if($od['mb_id']) {
     // 주문쿠폰
     if(isset($data['od_cp_id']) && $data['od_cp_id']) {
         $sql = " select cp_id, cp_type, cp_price, cp_trunc, cp_minimum, cp_maximum
-                    from {$g5['g5_shop_coupon_table']}
+                    from g5_shop_coupon
                     where cp_id = '{$data['od_cp_id']}'
                       and mb_id IN ( '{$od['mb_id']}', '전체회원' )
                       and cp_method = '2' ";
@@ -136,7 +145,7 @@ if($od['mb_id'] && $od_send_cost > 0) {
     // 배송쿠폰
     if($data['sc_cp_id']) {
         $sql = " select cp_id, cp_type, cp_price, cp_trunc, cp_minimum, cp_maximum
-                    from {$g5['g5_shop_coupon_table']}
+                    from g5_shop_coupon
                     where cp_id = '{$data['sc_cp_id']}'
                       and mb_id IN ( '{$od['mb_id']}', '전체회원' )
                       and cp_method = '3' ";
@@ -388,14 +397,14 @@ $pg_anchor = '<ul class="anchor">
     <?php
     // 이니시스를 사용하고 있다면
     if( $default['de_pg_service'] === 'inicis' && empty($default['de_card_test']) ){
-        $sql = " select * from {$g5['g5_shop_inicis_log_table']} where P_TID <> '' and P_TYPE in ('CARD', 'ISP', 'BANK') and P_MID <> '' and P_STATUS = '00' and oid = '".$od['od_id']."' ";
+        $sql = " select * from g5_shop_inicis_log where P_TID <> '' and P_TYPE in ('CARD', 'ISP', 'BANK') and P_MID <> '' and P_STATUS = '00' and oid = '".$od['od_id']."' ";
         $results = sql_query($sql);
 
         $tmps = array();
 
         while( $tmp=sql_fetch_array($results) ){
 
-            $sql = " select od_id from {$g5['g5_shop_order_table']} where od_id = '".$tmp['oid']."' and od_tno = '".$tmp['P_TID']."' ";
+            $sql = " select od_id from g5_shop_order where od_id = '".$tmp['oid']."' and od_tno = '".$tmp['P_TID']."' ";
             $exist_od = sql_fetch($sql);
 
             if( $exist_od['od_id'] ) continue;

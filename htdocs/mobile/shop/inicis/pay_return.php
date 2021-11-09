@@ -9,7 +9,7 @@ set_session('P_HASH', '');
 
 $oid = isset($_REQUEST['oid']) ? preg_replace('/[^0-9a-z_\-]/i', '', $_REQUEST['oid']) : '';
 
-$sql = " select * from {$g5['g5_shop_order_data_table']} where od_id = '$oid' ";
+$sql = " select * from g5_shop_order_data where od_id = '$oid' ";
 $row = sql_fetch($sql);
 
 if( empty($row) ){  //이미 결제가 완료 되었다면
@@ -38,7 +38,7 @@ if(isset($data['pp_id']) && $data['pp_id']) {
         $page_return_url .= '?sw_direct=1';
 }
 
-$sql = " select * from {$g5['g5_shop_inicis_log_table']} where oid = '$oid' ";
+$sql = " select * from g5_shop_inicis_log where oid = '$oid' ";
 $row = sql_fetch($sql);
 
 if(! (isset($row['oid']) && $row['oid']))
@@ -56,7 +56,7 @@ set_session('P_AMT',  $PAY['P_AMT']);
 set_session('P_HASH', $hash);
 
 // 로그 삭제
-@sql_query(" delete from {$g5['g5_shop_inicis_log_table']} where oid = '$oid' ");
+@sql_query(" delete from g5_shop_inicis_log where oid = '$oid' ");
 
 $g5['title'] = 'KG 이니시스 결제';
 $g5['body_script'] = ' onload="setPAYResult();"';

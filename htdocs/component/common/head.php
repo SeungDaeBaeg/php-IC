@@ -14,8 +14,8 @@
                 <div class="visible-mobile" style="position:absolute;left:0px;top:0px;height:25px;">
                     <? if(!empty($loginInfo)) { ?>
                         <i class="fa fa-money">
-                            <a href="/influencer/withdraw.php">
-                                <span style="margin-left:0.2rem;"><?=number_format($loginInfo['mb_save_money'])?>원</span>
+                            <a href="/influencer/withdraw">
+                                <span style="margin-left:0.2rem;"><?=number_format($loginInfo['mb_commission'])?>원</span>
                             </a>
                         </i>
                         <span class="sound_only">분류열기</span>
@@ -53,8 +53,8 @@
 
             <? if(!empty($loginInfo)) { ?>
                 <i class="fa fa-money">
-                    <a href="/influencer/withdraw.php">
-                        <span style="margin-left:0.2rem;"><?=number_format($loginInfo['mb_save_money'])?>원</span>
+                    <a href="/influencer/withdraw">
+                        <span style="margin-left:0.2rem;"><?=number_format($loginInfo['mb_commission'])?>원</span>
                     </a>
                 </i>
 
@@ -92,7 +92,7 @@
                         <a href="/influencer/report.php">리포트</a>
                     </li>
                     <li>
-                        <a href="/influencer/withdraw.php">출금관리</a>
+                        <a href="/influencer/withdraw">출금관리</a>
                     </li>
                 </ul>
 

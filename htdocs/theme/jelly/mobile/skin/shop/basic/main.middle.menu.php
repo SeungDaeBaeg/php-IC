@@ -12,7 +12,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     <a href="/influencer/report.php">
         <button>리포트</button>
     </a>
-    <a href="/influencer/withdraw.php">
+    <a href="/influencer/withdraw">
         <button>출금관리</button>
     </a>
 </div>

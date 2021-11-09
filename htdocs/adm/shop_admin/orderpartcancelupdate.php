@@ -14,7 +14,7 @@ if(!trim($mod_memo))
     alert('요청사유를 입력해 주십시오.');
 
 // 주문정보
-$sql = " select * from {$g5['g5_shop_order_table']} where od_id = '$od_id' ";
+$sql = " select * from g5_shop_order where od_id = '$od_id' ";
 $od = sql_fetch($sql);
 
 if(! (isset($od['od_id']) && $od['od_id']))

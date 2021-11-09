@@ -18,7 +18,7 @@ if (!$is_member) {
 
 $tot_point = 0;
 
-$sql = "select * from {$g5['g5_shop_order_table']} where od_id = '$od_id' ";
+$sql = "select * from g5_shop_order where od_id = '$od_id' ";
 if($is_member && !$is_admin)
     $sql .= " and mb_id = '{$member['mb_id']}' ";
 $od = sql_fetch($sql);
@@ -69,7 +69,7 @@ if($od['od_pg'] == 'lg') {
         $custom_cancel = false;
 
         $sql = " select it_id, it_name, ct_send_cost, it_sc_type
-                    from {$g5['g5_shop_cart_table']}
+                    from g5_shop_cart
                     where od_id = '$od_id'
                     group by it_id
                     order by ct_id ";
@@ -98,7 +98,7 @@ if($od['od_pg'] == 'lg') {
                 $image = get_it_image($row['it_id'], 70, 70);
 
                 $sql = " select ct_id, it_name, ct_option, ct_qty, ct_price, ct_point, ct_status, io_type, io_price
-                            from {$g5['g5_shop_cart_table']}
+                            from g5_shop_cart
                             where od_id = '$od_id'
                               and it_id = '{$row['it_id']}'
                             order by io_type asc, ct_id asc ";
@@ -108,7 +108,7 @@ if($od['od_pg'] == 'lg') {
                 // 합계금액 계산
                 $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price,
                                 SUM(ct_qty) as qty
-                            from {$g5['g5_shop_cart_table']}
+                            from g5_shop_cart
                             where it_id = '{$row['it_id']}'
                               and od_id = '$od_id' ";
                 $sum = sql_fetch($sql);

@@ -7,7 +7,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
 // 쿠폰
 $cp_count = 0;
 $sql = " select cp_id
-            from {$g5['g5_shop_coupon_table']}
+            from g5_shop_coupon
             where mb_id IN ( '{$member['mb_id']}', '전체회원' )
               and cp_start <= '".G5_TIME_YMD."'
               and cp_end >= '".G5_TIME_YMD."' ";

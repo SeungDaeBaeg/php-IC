@@ -6,7 +6,7 @@ auth_check_menu($auth, $sub_menu, "r");
 
 $od_id = isset($_POST['od_id']) ? safe_replace_regex($_POST['od_id'], 'od_id') : 0;
 
-$sql = " select * from {$g5['g5_shop_order_table']} where od_id = '$od_id' ";
+$sql = " select * from g5_shop_order where od_id = '$od_id' ";
 $od = sql_fetch($sql);
 
 if(! ($od['od_id'] && $od['od_id']))
@@ -19,7 +19,7 @@ $sql = " select it_id,
                 ct_notax,
                 ct_send_cost,
                 it_sc_type
-           from {$g5['g5_shop_cart_table']}
+           from g5_shop_cart
           where od_id = '$od_id'
           group by it_id
           order by ct_id ";
@@ -53,7 +53,7 @@ $result = sql_query($sql);
 
             // 상품의 옵션정보
             $sql = " select ct_id, it_id, ct_price, ct_qty, ct_option, ct_status, cp_price, ct_send_cost, io_type, io_price
-                        from {$g5['g5_shop_cart_table']}
+                        from g5_shop_cart
                         where od_id = '$od_id'
                           and it_id = '{$row['it_id']}'
                         order by io_type asc, ct_id asc ";
@@ -80,7 +80,7 @@ $result = sql_query($sql);
                 // 합계금액 계산
                 $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price,
                            SUM(ct_qty) as qty
-                           from {$g5['g5_shop_cart_table']}
+                           from g5_shop_cart
                           where it_id = '{$row['it_id']}'
                          and od_id = '$od_id' ";
                 $sum = sql_fetch($sql);

@@ -64,13 +64,13 @@ if($PGIP == "211.219.96.165" || $PGIP == "118.129.210.25" || $PGIP == "183.109.7
     // 결과 incis log 테이블 기록
     if($P_TYPE == 'BANK' || $P_SRC_CODE == 'A') {
 
-        if(!sql_query(" select post_data from {$g5['g5_shop_inicis_log_table']} limit 1 ", false)) {
-            sql_query(" ALTER TABLE `{$g5['g5_shop_inicis_log_table']}`
+        if(!sql_query(" select post_data from g5_shop_inicis_log limit 1 ", false)) {
+            sql_query(" ALTER TABLE `g5_shop_inicis_log`
                             ADD `post_data` text NOT NULL AFTER `P_RMESG1`,
                             ADD `is_mail_send` tinyint(4) NOT NULL DEFAULT '1' AFTER `post_data` ", false);
         }
 
-        $sql = " insert into {$g5['g5_shop_inicis_log_table']}
+        $sql = " insert into g5_shop_inicis_log
                     set oid       = '$P_OID',
                         P_TID     = '$P_TID',
                         P_MID     = '$P_MID',
@@ -90,13 +90,13 @@ if($PGIP == "211.219.96.165" || $PGIP == "118.129.210.25" || $PGIP == "183.109.7
     if( $P_STATUS == "00" && $P_TID && $P_MID && $P_TYPE != "VBANK" ){
 
         // 주문이 있는지 체크
-        $sql = "select count(od_id) as cnt from {$g5['g5_shop_order_table']} where od_id = '$P_OID' and od_tno = '$P_TID' ";
+        $sql = "select count(od_id) as cnt from g5_shop_order where od_id = '$P_OID' and od_tno = '$P_TID' ";
         $exist_order = sql_fetch($sql);
         
         if( !$exist_order['cnt'] ){
             //주문정보를 insert 합니다.
             
-            $sql = " select * from {$g5['g5_shop_order_data_table']} where od_id = '$P_OID' ";
+            $sql = " select * from g5_shop_order_data where od_id = '$P_OID' ";
             $od = sql_fetch($sql);
             $data = unserialize(base64_decode($od['dt_data']));
 
@@ -148,7 +148,7 @@ if($PGIP == "211.219.96.165" || $PGIP == "118.129.210.25" || $PGIP == "183.109.7
                     if( !$order_id ){
                         echo "FAIL";
                     } else {
-                        $sql = " delete from {$g5['g5_shop_inicis_log_table']} where (oid = '$P_OID' and P_TID = '$P_TID') OR substr(P_AUTH_DT, 1, 8) < '".date('Ymd', strtotime('-1 month', G5_SERVER_TIME))."' ";
+                        $sql = " delete from g5_shop_inicis_log where (oid = '$P_OID' and P_TID = '$P_TID') OR substr(P_AUTH_DT, 1, 8) < '".date('Ymd', strtotime('-1 month', G5_SERVER_TIME))."' ";
                         sql_query( $sql , false);
                     }
                 }
@@ -236,7 +236,7 @@ if($PGIP == "211.219.96.165" || $PGIP == "118.129.210.25" || $PGIP == "183.109.7
                     if( !$order_id ){
                         echo "FAIL";
                     } else {
-                        $sql = " delete from {$g5['g5_shop_inicis_log_table']} where (oid = '$P_OID' and P_TID = '$P_TID') OR substr(P_AUTH_DT, 1, 8) < '".date('Ymd', strtotime('-1 month', G5_SERVER_TIME))."' ";
+                        $sql = " delete from g5_shop_inicis_log where (oid = '$P_OID' and P_TID = '$P_TID') OR substr(P_AUTH_DT, 1, 8) < '".date('Ymd', strtotime('-1 month', G5_SERVER_TIME))."' ";
                         sql_query( $sql , false);
                     }
                 }
@@ -274,7 +274,7 @@ if($PGIP == "211.219.96.165" || $PGIP == "118.129.210.25" || $PGIP == "183.109.7
             if($row['od_id']) {
                 // 주문서 UPDATE
                 $receipt_time    = preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/", "\\1-\\2-\\3 \\4:\\5:\\6", $receipt_time);
-                $sql = " update {$g5['g5_shop_order_table']}
+                $sql = " update g5_shop_order
                             set od_receipt_price = od_receipt_price + '$P_AMT',
                                 od_receipt_time = '$receipt_time',
                                 od_shop_memo = concat(od_shop_memo, \"\\n개인결제 ".$row['pp_id']." 로 결제완료 - ".$receipt_time."\")
@@ -283,7 +283,7 @@ if($PGIP == "211.219.96.165" || $PGIP == "118.129.210.25" || $PGIP == "183.109.7
             }
         } else {
             // 주문서 UPDATE
-            $sql = " update {$g5['g5_shop_order_table']}
+            $sql = " update g5_shop_order
                         set od_receipt_price = '$P_AMT',
                             od_receipt_time = '$receipt_time'
                       where od_id = '$P_OID'
@@ -299,7 +299,7 @@ if($PGIP == "211.219.96.165" || $PGIP == "118.129.210.25" || $PGIP == "183.109.7
 
             // 주문정보 체크
             $sql = " select count(od_id) as cnt
-                        from {$g5['g5_shop_order_table']}
+                        from g5_shop_order
                         where od_id = '$od_id'
                           and od_status = '주문' ";
             $row = sql_fetch($sql);
@@ -308,7 +308,7 @@ if($PGIP == "211.219.96.165" || $PGIP == "118.129.210.25" || $PGIP == "183.109.7
                 // 미수금 정보 업데이트
                 $info = get_order_info($od_id);
 
-                $sql = " update {$g5['g5_shop_order_table']}
+                $sql = " update g5_shop_order
                             set od_misu = '{$info['od_misu']}' ";
                 if($info['od_misu'] == 0)
                     $sql .= " , od_status = '입금' ";
@@ -317,7 +317,7 @@ if($PGIP == "211.219.96.165" || $PGIP == "118.129.210.25" || $PGIP == "183.109.7
 
                 // 장바구니 상태변경
                 if($info['od_misu'] == 0) {
-                    $sql = " update {$g5['g5_shop_cart_table']}
+                    $sql = " update g5_shop_cart
                                 set ct_status = '입금'
                                 where od_id = '$od_id' ";
                     sql_query($sql, FALSE);

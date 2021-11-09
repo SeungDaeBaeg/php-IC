@@ -91,7 +91,7 @@ if($w == '') {
     do {
         $cp_id = get_coupon_id();
 
-        $sql3 = " select count(*) as cnt from {$g5['g5_shop_coupon_table']} where cp_id = '$cp_id' ";
+        $sql3 = " select count(*) as cnt from g5_shop_coupon where cp_id = '$cp_id' ";
         $row3 = sql_fetch($sql3);
 
         if(!$row3['cnt'])
@@ -105,14 +105,14 @@ if($w == '') {
 
     } while(1);
 
-    $sql = " INSERT INTO {$g5['g5_shop_coupon_table']}
+    $sql = " INSERT INTO g5_shop_coupon
                 ( cp_id, cp_subject, cp_method, cp_target, mb_id, cp_start, cp_end, cp_type, cp_price, cp_trunc, cp_minimum, cp_maximum, cp_datetime )
             VALUES
                 ( '$cp_id', '$cp_subject', '$cp_method', '$cp_target', '$mb_id', '$cp_start', '$cp_end', '$cp_type', '$cp_price', '$cp_trunc', '$cp_minimum', '$cp_maximum', '".G5_TIME_YMDHIS."' ) ";
 
     sql_query($sql);
 } else if($w == 'u') {
-    $sql = " select * from {$g5['g5_shop_coupon_table']} where cp_id = '$cp_id' ";
+    $sql = " select * from g5_shop_coupon where cp_id = '$cp_id' ";
     $cp = sql_fetch($sql);
 
     if(!$cp['cp_id'])
@@ -122,7 +122,7 @@ if($w == '') {
         $mb_id = '전체회원';
     }
 
-    $sql = " update {$g5['g5_shop_coupon_table']}
+    $sql = " update g5_shop_coupon
                 set cp_subject  = '$cp_subject',
                     cp_method   = '$cp_method',
                     cp_target   = '$cp_target',

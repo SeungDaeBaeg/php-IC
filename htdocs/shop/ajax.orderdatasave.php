@@ -7,7 +7,7 @@ if(empty($_POST))
 // 일정 기간이 경과된 임시 데이터 삭제
 /*
 $limit_time = date("Y-m-d H:i:s", (G5_SERVER_TIME - 86400 * 1));
-$sql = " delete from {$g5['g5_shop_order_data_table']} where dt_type = '1' and dt_time < '$limit_time' ";
+$sql = " delete from g5_shop_order_data where dt_type = '1' and dt_time < '$limit_time' ";
 sql_query($sql);
 */
 
@@ -47,10 +47,10 @@ if(isset($_POST['pp_id']) && $_POST['pp_id']) {
 $dt_data = base64_encode(serialize($_POST));
 
 // 동일한 주문번호가 있는지 체크
-$sql = " select count(*) as cnt from {$g5['g5_shop_order_data_table']} where od_id = '$od_id' ";
+$sql = " select count(*) as cnt from g5_shop_order_data where od_id = '$od_id' ";
 $row = sql_fetch($sql);
 if($row['cnt'])
-    sql_query(" delete from {$g5['g5_shop_order_data_table']} where od_id = '$od_id' ");
+    sql_query(" delete from g5_shop_order_data where od_id = '$od_id' ");
 
 $default_pg = $default['de_pg_service'];
 
@@ -58,7 +58,7 @@ if( $od_settle_case == '삼성페이' ){    //현재 삼성페이인 경우에�
     $default_pg = 'inicis';
 }
 
-$sql = " insert into {$g5['g5_shop_order_data_table']}
+$sql = " insert into g5_shop_order_data
             set od_id   = '$od_id',
                 cart_id = '$cart_id',
                 mb_id   = '{$member['mb_id']}',

@@ -5,7 +5,7 @@ include_once G5_LIB_PATH.'/etc.lib.php';
 if($tx == 'personalpay')
     $sql = " select count(*) as cnt from {$g5['g5_shop_personalpay_table']} where pp_id = '{$_POST['ordr_idxx']}' and pp_cash = 1 ";
 else
-    $sql = " select count(*) as cnt from {$g5['g5_shop_order_table']} where od_id = '{$_POST['ordr_idxx']}' and od_cash = 1 ";
+    $sql = " select count(*) as cnt from g5_shop_order where od_id = '{$_POST['ordr_idxx']}' and od_cash = 1 ";
 
 $row = sql_fetch($sql);
 if ($row['cnt']) {
@@ -247,7 +247,7 @@ setlocale(LC_CTYPE, 'ko_KR.euc-kr');
                                     pp_cash_info = '$cash_info'
                               where pp_id = '$ordr_idxx' ";
                 } else {
-                    $sql = " update {$g5['g5_shop_order_table']}
+                    $sql = " update g5_shop_order
                                 set od_cash = '1',
                                     od_cash_no = '$cash_no',
                                     od_cash_info = '$cash_info'
