@@ -331,8 +331,9 @@ $mb_sex = ($user['mb_sex'] === 'M') ? '남성' : '여성';
     })
 
     function updateCB(res) {
-        if(res.code == 0) {
-            _this.removeClass('disabled');
+        $('.info_option_box #update').removeClass('disabled');
+
+        if(res.code == 0) {            
             util.alert('정보 수정 완료',{type:'instant'});
         }
     }
@@ -346,10 +347,13 @@ $mb_sex = ($user['mb_sex'] === 'M') ? '남성' : '여성';
     });
 
     function getSnsCB(res) {
-       /*  res.item.msl_follower
-        res.item.msl_post
-        res.item.msl_title
-        res.item.msl_url */
+        util.alert(`
+        <pre>
+user url : ${res.item.msl_url},
+user title : ${res.item.msl_title},
+user follower: ${res.item.msl_follower},
+user posts: ${res.item.msl_post}
+        </pre>`);
     }
 
     $('.info_option_box .channel_box div[data-id]').click(function(){

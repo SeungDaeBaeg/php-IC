@@ -18,6 +18,8 @@
         $ev_id = $id['ev_id'] ?? '';
         $su_id = $id['su_id'] ?? '';
 
+        if(is_null($mb_no)) $mb_no = $_POST['mb_no'] ?? '';
+
         $id = sql_insert("g5_shop_party_join",array(
             'ev_id'         =>  $ev_id,
             'mb_no'         =>  $mb_no,
