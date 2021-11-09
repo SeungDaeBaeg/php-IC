@@ -123,6 +123,7 @@ body {
 
 .info_option_box > .content_box > .channel_box tr td:nth-child(3) {
     cursor: pointer;
+    position: relative;
 }
 
 .info_option_box > .content_box > .channel_box tr .other_input {
@@ -135,6 +136,15 @@ body {
 
 .info_option_box > .content_box > .channel_box tr .other_input::placeholder {
     text-indent: 10px;
+}
+
+.info_option_box > .content_box > .channel_box tr td .sns_detail {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-color: grey;
+    height: 29px;
+    line-height: 29px;
 }
 
 .info_option_box > .content_box > .update_box {

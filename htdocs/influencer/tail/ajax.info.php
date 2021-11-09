@@ -4,7 +4,8 @@
     $action = $_POST['action'] ?? '';   
 
     switch($action) {
-        case 'updateInfo':     
+        case 'updateInfo':
+        case 'getSnsInfo':
             $action();
             break;
         default:
@@ -30,5 +31,16 @@
         ),"mb_no = {$mb_no}");
 
         util::ajaxResult('success',0);
+    }
+
+    function getSnsInfo() {
+        $param = util::param('sns',"파라미터가 없습니다.");
+        $mb_no = data::getLoginMember()['mb_no'];
+
+        $sql = "select msl_follower,msl_post,msl_url,msl_title from g5_member_sns_link where mb_no = ? and msl_type = ? and del_yn = 'N'";
+        
+        sql_fetch_data($sql,$res,array($mb_no,$param));
+        $item = array('item'=>$res);
+        util::ajaxResult('success',0,$item);
     }
 ?>

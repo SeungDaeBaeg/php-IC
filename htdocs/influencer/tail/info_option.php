@@ -183,7 +183,7 @@ $mb_sex = ($user['mb_sex'] === 'M') ? '남성' : '여성';
                     else echo '<td><input type="radio" name="sns" value="'.$v.'"></td>';
                     echo '<td>'.$n.'</td>';
                     if($v !== 'other') {
-                        if(in_array($v,$sns_type)) echo '<td><div data-id="'.$v.'">연결해지하기</div></td>';
+                        if(in_array($v,$sns_type)) echo '<td><div class="sns_detail_box" data-id="'.$v.'">연결해지하기</div><div class="sns_detail" data-detail="'.$v.'" >상세정보</div></td>';
                         else echo '<td><div data-id="'.$v.'">연결하기</div></td>';
                     }
                     else {
@@ -335,6 +335,21 @@ $mb_sex = ($user['mb_sex'] === 'M') ? '남성' : '여성';
             _this.removeClass('disabled');
             util.alert('정보 수정 완료',{type:'instant'});
         }
+    }
+
+    $('.info_option_box .channel_box div[data-detail]').click(function(){
+        var detail = $(this).data('detail');
+        data.ajax("<?=$ajax_info_url?>",{
+            action      : 'getSnsInfo',
+            sns         : detail
+        },getSnsCB)
+    });
+
+    function getSnsCB(res) {
+       /*  res.item.msl_follower
+        res.item.msl_post
+        res.item.msl_title
+        res.item.msl_url */
     }
 
     $('.info_option_box .channel_box div[data-id]').click(function(){
