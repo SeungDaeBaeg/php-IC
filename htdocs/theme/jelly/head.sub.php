@@ -57,7 +57,12 @@ if($config['cf_add_meta'])
 $shop_css = '';
 if (defined('_SHOP_')) $shop_css = '_shop';
 echo '<link rel="stylesheet" href="'.G5_THEME_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'default').$shop_css.'.css?ver='.G5_CSS_VER.'">'.PHP_EOL;
+
 ?>
+
+
+<link rel="stylesheet" href="<?=G5_THEME_URL?>/mobile/skin/shop/basic/style.css">
+
 <!--[if lte IE 8]>
 <script src="<?=G5_JS_URL ?>/html5.js"></script>
 <![endif]-->
@@ -78,17 +83,11 @@ var g5_logined_id = "<?=data::getLoginMember()['mb_no']?>";
 </script>
 <script src="<?=G5_JS_URL ?>/jquery-1.8.3.min.js"></script>
 <script src="<?=G5_JS_URL ?>/lodash.js?ver=<?=G5_JS_VER; ?>"></script>
-<?php
-if (defined('_SHOP_')) {
-    if(!G5_IS_MOBILE) {
-?>
-<script src="<?=G5_JS_URL ?>/jquery.shop.menu.js?ver=<?=G5_JS_VER; ?>"></script>
-<?php
-    }
-} else {
-?>
-<script src="<?=G5_JS_URL ?>/jquery.menu.js?ver=<?=G5_JS_VER; ?>"></script>
-<?php } ?>
+<? if (defined('_SHOP_') && !G5_IS_MOBILE) { ?>
+    <script src="<?=G5_JS_URL ?>/jquery.shop.menu.js?ver=<?=G5_JS_VER; ?>"></script>
+<? } else { ?>
+    <script src="<?=G5_JS_URL ?>/jquery.menu.js?ver=<?=G5_JS_VER; ?>"></script>
+<? } ?>
 <script src="<?=G5_JS_URL ?>/common.js?ver=<?=G5_JS_VER; ?>"></script>
 <script src="<?=G5_JS_URL ?>/influencer_common.js"></script>
 <script src="<?=G5_JS_URL ?>/wrest.js?ver=<?=G5_JS_VER; ?>"></script>
@@ -106,14 +105,10 @@ if(!defined('G5_IS_ADMIN'))
 </head>
 <body<?=isset($g5['body_script']) ? $g5['body_script'] : ''; ?>>
 
-<?php
-if ($is_member) { // 회원이라면 로그인 중이라는 메세지를 출력해준다.
-    $sr_admin_msg = '';
-    if ($is_admin == 'super') $sr_admin_msg = "최고관리자 ";
-    else if ($is_admin == 'group') $sr_admin_msg = "그룹관리자 ";
-    else if ($is_admin == 'board') $sr_admin_msg = "게시판관리자 ";
+<!-- form submit용 hidden iframe -->
+<iframe name="formSubmitIframe" style="visibility: hidden;display: none;"></iframe>
 
-    echo '<div id="hd_login_msg">'.$sr_admin_msg.get_text($member['mb_nick']).'님 로그인 중 ';
-    echo '<a href="'.G5_BBS_URL.'/logout.php">로그아웃</a></div>';
-}
+<?php
+//[IC] 공통 컴포넌트 로드
+echo util::component('common/alert');
 ?>

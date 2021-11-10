@@ -3,7 +3,7 @@
  * 알람 리스트 페이지
  */
 
-include_once('head/alarm.php');
+include_once('head.php');
 
 sql_fetch_arrays("
 SELECT  ad.id, a.title, a.created_at
@@ -33,6 +33,4 @@ AND     ad.mb_no = ?", $alarmList, array(data::getLoginMember()['mb_no']));
 <? } ?>
 
 
-<?
-include_once(G5_THEME_MSHOP_PATH.'/shop.tail.php');
-?>
+<? include_once(G5_THEME_MSHOP_PATH.'/shop.tail.php');

@@ -42,6 +42,7 @@ SELECT  ca_id, ca_name
 FROM    g5_shop_category
 WHERE   ca_use = '1'", $categorys);
 
+
 echo util::component("common/head", array(
     'loginInfo'    => data::getLoginMember(),
     'memberInfo'   => $memberInfo,

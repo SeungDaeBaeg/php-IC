@@ -116,7 +116,7 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
                 <li class="gnb_1dli gnb_mnal"><button type="button" class="gnb_menu_btn"><i class="fa fa-bars" aria-hidden="true"></i><span class="sound_only">전체메뉴열기</span></button></li>
                 <?php
                 $sql = " select *
-                            from {$g5['menu_table']}
+                            from g5_menu
                             where me_use = '1'
                               and length(me_code) = '2'
                             order by me_order, me_id ";
@@ -128,7 +128,7 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
                     $menu_datas[$i] = $row;
 
                     $sql2 = " select *
-                                from {$g5['menu_table']}
+                                from g5_menu
                                 where me_use = '1'
                                   and length(me_code) = '4'
                                   and substring(me_code, 1, 2) = '{$row['me_code']}'

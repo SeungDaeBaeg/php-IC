@@ -39,9 +39,15 @@ $user = data::getLoginMember();
     <div class="menu_box">
         <div class="menu_sub_box f_jc_sb_box">
             <div class="info_common">이벤트</div>
-            <div class="info_common">마이샵</div>
-            <div class="info_common">리포트</div>
-            <div class="info_common">출금관리</div>
+            <div class="info_common">
+                <a href="/myshop">마이샵</a>
+            </div>
+            <div class="info_common">
+                <a href="/influencer/report.php">리포트</a>
+            </div>
+            <div class="info_common">
+                <a href="/influencer/withdraw">출금관리</a>
+            </div>
         </div>            
     </div>
     <div class="logout_box">
@@ -54,11 +60,11 @@ $user = data::getLoginMember();
 
     $('#logout').click(function() {
         location.href = "<?=G5_BBS_URL ?>"+'/logout.php';
-    })
+    });
 
     $('#option').click(function() {
         location.href = '/influencer/tail/info_option.php';
-    })
+    });
 
 </script>
 

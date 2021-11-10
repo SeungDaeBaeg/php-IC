@@ -4,9 +4,14 @@
  */
 include_once('./_common.php');
 
+//인플루언서가 아니면 메인으로 강제로 리다이렉션
+if(!data::isInfluencer()) {
+    util::location('/');
+}
+
 define("_INDEX_", true);
 
-include_once(G5_SHOP_PATH.'/shop.head.php');
+include_once(G5_THEME_MSHOP_PATH.'/shop.head.php');
 include_once(G5_PLUGIN_PATH.'/jquery-ui/datepicker.php');
 
 
@@ -153,4 +158,4 @@ $list = util::pagination(
 
 <!--content end -->
 
-<? include_once(G5_SHOP_PATH.'/shop.tail.php');
+<? include_once(G5_THEME_MSHOP_PATH.'/shop.tail.php');

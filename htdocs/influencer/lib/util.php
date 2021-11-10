@@ -66,7 +66,7 @@ class util {
      * @param callable $js
      * @param bool   $exit
      */
-    public static function alert(string $msg, callable $js = null): void {
+    public static function alert(string $msg, $js = null): void {
         if(is_callable($js)) {
             die("
             <script>
@@ -126,16 +126,16 @@ class util {
 
         ob_start();
 
-        static $isJsImport, $isCssImport;
+        static $isJsImports = array(), $isCssImports = array();
 
-        if(empty($isJsImport) && file_exists($_SERVER['DOCUMENT_ROOT'] . '/js/component/' . $path . '.js')) {
+        if(!in_array($path, $isJsImports) && file_exists($_SERVER['DOCUMENT_ROOT'] . '/js/component/' . $path . '.js')) {
             add_javascript('<script src="'.G5_JS_URL.'/component/'.$path.'.js"></script>', 10);
-            $isJsImport = true;
+            $isJsImports[] = $path;
         }
 
-        if(empty($isCssImport) && file_exists($_SERVER['DOCUMENT_ROOT'] . '/css/component/' . $path . '.css')) {
+        if(!in_array($path, $isCssImports) && file_exists($_SERVER['DOCUMENT_ROOT'] . '/css/component/' . $path . '.css')) {
             add_stylesheet('<link rel="stylesheet" href="'.G5_CSS_URL.'/component/'.$path.'.css">', 0);
-            $isCssImport = true;
+            $isCssImports[] = $path;
         }
 
         include $_SERVER['DOCUMENT_ROOT'] . '/component/' . $path . '.php';

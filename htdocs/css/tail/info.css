@@ -2,7 +2,7 @@ body {
     background-color: #4F81BD;
 }
 
-#hd_wr .visible-mobile,#logo {
+#hd_wr .visible-mobile {
     display: none;
 }
 

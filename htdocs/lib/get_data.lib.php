@@ -109,7 +109,7 @@ function get_menu_db($use_mobile=0, $is_cache=false){
 
     if( !($cache[$key] = run_replace('get_menu_db', array(), $use_mobile)) ){
         $sql = " select *
-                from {$g5['menu_table']}
+                from g5_menu
                 where $where
                 and length(me_code) = '2'
                 order by me_order, me_id ";
@@ -123,7 +123,7 @@ function get_menu_db($use_mobile=0, $is_cache=false){
             $cache[$key][$i] = $row;
 
             $sql2 = " select *
-                    from {$g5['menu_table']}
+                    from g5_menu
                     where $where
                     and length(me_code) = '4'
                     and substring(me_code, 1, 2) = '{$row['me_code']}'

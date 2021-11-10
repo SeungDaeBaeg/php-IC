@@ -261,9 +261,23 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 
             <div id="sit_ov_btn">
                 <? if ($is_orderable) { ?>
-                <button type="submit" onclick="document.pressed=this.value;" value="장바구니" id="sit_btn_cart" class="btn_b03">장바구니</button>
-                <button type="submit" onclick="document.pressed=this.value;" value="바로구매" id="sit_btn_buy" class="btn_b02">바로구매</button>
+                    <div class="position-relative">
+                        <button type="submit" onclick="document.pressed=this.value;" value="장바구니" id="sit_btn_cart" class="btn_b03">장바구니</button>
+                        <button type="submit" onclick="document.pressed=this.value;" value="바로구매" id="sit_btn_buy" class="btn_b02">바로구매</button>
+                    </div>
                 <? } ?>
+
+                <? if(data::isInfluencer()) { ?>
+                    <div style="margin-top:10px;" class="position-relative">
+                        <a href="/influencer/navigation/sample_subscription.php?it_id=<?=$it['it_id']?>">
+                            <button type="button" class="btn_b02" style="width:24%;height:30px;">샘플신청</button>
+                        </a>
+                        <button type="button" id="btn_zzim" class="btn_b02" style="width:24%;height:30px;">찜하기</button>
+                        <button type="button" id="btn_myshop" class="btn_b02" style="width:24%;height:30px;">마이샵</button>
+                        <button type="button" id="btn_link" data-it-id="<?=$it['it_id']?>" class="btn_b02" style="width:24%;height:30px;">판매링크</button>
+                    </div>
+                <? } ?>
+
                 <? if(!$is_orderable && $it['it_soldout'] && $it['it_stock_sms']) { ?>
                 <a href="javascript:popup_stocksms('<?=$it['it_id']?>');" id="sit_btn_buy" class="btn_b02">재입고알림</a>
                 <? } ?>
@@ -279,14 +293,14 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 
     <div id="sit_buy_op">
         <!-- @todo: [승대] 인플루언서 센터 PPT 12P, 하단 구매버튼 코딩작업 -->
-        <div style="position: absolute; bottom: 4em; left: 0em; width:100%;">
-            <? if(data::getLoginMember()['mb_is_influencer'] == 'Y') { ?>
-                <a href="/influencer/item_detail_navi/sample_subscription.php?it_id=<?=$it['it_id']?>">
+        <div style="position: fixed; bottom: 0.5em; left: 0em; width:100%;">
+            <? if(data::isInfluencer()) { ?>
+                <a href="/influencer/navigation/sample_subscription.php?it_id=<?=$it['it_id']?>">
                     <button type="button" class="btn_b02" style="width:24%;height:30px;">샘플신청</button>
                 </a>
                 <button type="button" id="btn_zzim" class="btn_b02" style="width:24%;height:30px;">찜하기</button>
                 <button type="button" id="btn_myshop" class="btn_b02" style="width:24%;height:30px;">마이샵</button>
-                <button type="button" id="btn_link" data-it-id="<?=$it['it_id']?>" class="btn_b02" style="width:24%;height:30px;">판매링크</button>
+                <button type="button" id="btn_link" class="btn_b02" style="width:24%;height:30px;">판매링크</button>
             <? } else { ?>
                 <button type="button" id="buy_op_btn" class="btn_b02">
                     구매하기
@@ -558,7 +572,7 @@ function fitem_submit(f)
 $("#container").removeClass("container").addClass("view-container");
 
 $("#btn_zzim").click(function() {
-   util.formSubmit('/influencer/item_detail_navi/zzim.php', [
+   util.formSubmit('/influencer/navigation/wish.php', [
        {name: "it_id",  value: "<?=$it['it_id']?>",  validation: "상품 아이디가 존재하지 않습니다."},
    ]);
 });
@@ -566,12 +580,15 @@ $("#btn_myshop").click(function() {
     alert("마이샵은 준비중입니다.");
 });
 $("#btn_link").click(function() {
+    console.log(encodeURIComponent(window.location.href));
     util.clipboardCopy(url.getClickUrl({
         m: data.getLoginId(),
-        p: $(this).data('it-id')
+        tu: encodeURIComponent(window.location.pathname + window.location.search)
     }));
 
-    alert("판매링크가 복사되었습니다.");
+    util.alert("판매링크가 복사되었습니다.", {
+        type: 'instant'
+    });
 });
 
 </script>
