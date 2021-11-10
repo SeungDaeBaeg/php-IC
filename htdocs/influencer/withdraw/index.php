@@ -10,7 +10,8 @@ if(!data::isInfluencer()) {
 }
 
 define("_INDEX_", TRUE);
-include_once(G5_SHOP_PATH.'/shop.head.php');
+
+include_once(G5_THEME_MSHOP_PATH.'/shop.head.php');
 include_once(G5_PLUGIN_PATH.'/jquery-ui/datepicker.php');
 
 
@@ -144,7 +145,7 @@ $totalPayable = 0;
 
 <script>
     $(function() {
-        $("#start_date, #end_date").datepicker({ changeMonth: true, changeYear: true, dateFormat: "yy-mm-dd", showButtonPanel: true, yearRange: "c-99:c+99", maxDate: "+0d" });
+        $("#startDate, #endDate").datepicker({ changeMonth: true, changeYear: true, dateFormat: "yy-mm-dd", showButtonPanel: true, yearRange: "c-99:c+99", maxDate: "+0d" });
 
         $("#btnWithdraw").click(function() {
             util.alert(`
@@ -185,4 +186,5 @@ $totalPayable = 0;
     });
 </script>
 <!--content end -->
-<? include_once(G5_SHOP_PATH.'/shop.tail.php');
+
+<? include_once(G5_THEME_MSHOP_PATH.'/shop.tail.php');

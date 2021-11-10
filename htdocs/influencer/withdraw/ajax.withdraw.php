@@ -5,6 +5,13 @@
 
 include_once('../_common.php');
 
+//수익금 신청 날짜 체크
+$today = (int)date('d');
+if(!($today >= 6 && $today <= 15)) {
+    util::ajaxResult("현재 출금 기간이 아닙니다. (출금기간: 매월 6일 ~ 15일)", -7);
+}
+
+
 if(!data::isLogin()) {
     util::ajaxResult("로그인 상태가 아닙니다.", -1);
 }
@@ -51,5 +58,3 @@ if($res <= 0) {
 }
 
 util::ajaxResult('성공적으로 커미션 신청에 성공하였습니다.', 0);
-
-

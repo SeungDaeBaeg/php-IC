@@ -135,7 +135,7 @@ sql_fetch_arrays($sql, $eventBox, array($mb_no,$today,$today));
                     data.ajax("<?=$ajax_event_url?>",{action:"joinEvent",ev_id:data_id,su_id:''},joinEventCB);
                 }
                 else {
-                    location.href = '/influencer/item_detail_navi/sample_subscription.php?ev_id=' + data_id;
+                    location.href = '/influencer/navigation/sample_subscription.php?ev_id=' + data_id;
                 }
                 break;
             case 'menu':                
@@ -157,6 +157,4 @@ sql_fetch_arrays($sql, $eventBox, array($mb_no,$today,$today));
 
 <!--content end -->
 
-<?
-include_once(G5_THEME_MSHOP_PATH.'/shop.tail.php');
-?>
+<? include_once(G5_THEME_MSHOP_PATH.'/shop.tail.php');

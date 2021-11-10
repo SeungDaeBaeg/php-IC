@@ -10,8 +10,8 @@ if( !isset($g5['menu_table']) ){
     die('<meta charset="utf-8">dbconfig.php 파일에 <strong>$g5[\'menu_table\'] = G5_TABLE_PREFIX.\'menu\';</strong> 를 추가해 주세요.');
 }
 
-if(!sql_query(" DESCRIBE {$g5['menu_table']} ", false)) {
-    sql_query(" CREATE TABLE IF NOT EXISTS `{$g5['menu_table']}` (
+if(!sql_query(" DESCRIBE g5_menu ", false)) {
+    sql_query(" CREATE TABLE IF NOT EXISTS `g5_menu` (
                   `me_id` int(11) NOT NULL AUTO_INCREMENT,
                   `me_code` varchar(255) NOT NULL DEFAULT '',
                   `me_name` varchar(255) NOT NULL DEFAULT '',
@@ -24,7 +24,7 @@ if(!sql_query(" DESCRIBE {$g5['menu_table']} ", false)) {
                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ", true);
 }
 
-$sql = " select * from {$g5['menu_table']} order by me_id ";
+$sql = " select * from g5_menu order by me_id ";
 $result = sql_query($sql);
 
 $g5['title'] = "메뉴설정";

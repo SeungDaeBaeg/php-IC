@@ -1,0 +1,17 @@
+
+
+div#logo > div {
+    position:relative;
+    width:100%;
+    height:25px;
+    float:left;
+    text-align: center;
+}
+
+div#top_right_menu {
+    position:absolute;
+    right:0px;
+    top:0px;
+    width:50%;
+    text-align:right;
+}

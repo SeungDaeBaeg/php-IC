@@ -44,7 +44,7 @@ sql_fetch_data("
 SELECT  mb_no, in_myshop_name, in_myshop_cover_image, in_total_count, in_today_count, 
        (select ch_channel_type from g5_influencer_myshop_channel where mb_no = g5_influencer_myshop.mb_no and ch_channel_default = 'Y' limit 0, 1) as sns_default_type
 FROM    g5_influencer_myshop
-WHERE   mb_no = ?", $myshopData, array($mb_id));
+WHERE   mb_no = ?", $myshopData, array($m['mb_no']));
 
 //마이샵이 없을 경우 설정 페이지로 이동
 if(empty($myshopData)) {

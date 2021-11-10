@@ -57,10 +57,10 @@ if(!empty($action)) {
 
         list($error, $response) = util::curl($ajax_event_url,$options);
         var_dump($response);
-    }
-    else {
-        util::alert($id > 0 ? "정상적으로 등록이 완료되었습니다." : "등록되지 않았습니다. 관리자에게 문의해주세요.");
-        util::location('/shop/item.php?it_id=' . $it_id);
+    } else {
+        util::alert($id > 0 ? "정상적으로 등록이 완료되었습니다." : "등록되지 않았습니다. 관리자에게 문의해주세요.", function() use($it_id) {
+            return util::location('/shop/item.php?it_id=' . $it_id);
+        });
     }
 }
 
@@ -79,7 +79,7 @@ $member = data::getLoginMember();
 $my_url = G5_INFLUENCER_URL.'/tail/info_option.php';
 
 define("_INDEX_", TRUE);
-include_once(G5_SHOP_PATH.'/shop.head.php');
+include_once(G5_THEME_MSHOP_PATH.'/shop.head.php');
 
 /**
  * 
@@ -173,7 +173,8 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
     </tr>
     <tr style="height: 18px;">
         <td>
-            <input type="text" id="addr2" value="<?=$member['mb_addr2']?>" readonly />
+            <input type="text" id="addr2" value="<?=$member['mb_addr2']?>" />
+            <button id="post_btn">우편번호</button>
         </td>
     </tr>
 </table>
@@ -252,6 +253,4 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
 
 <!--content end -->
 
-<?
-include_once(G5_SHOP_PATH.'/shop.tail.php');
-?>
+<? include_once(G5_THEME_MSHOP_PATH.'/shop.tail.php');

@@ -7,35 +7,52 @@
 include_once('./_common.php');
 
 define("_INDEX_", true);
-include_once(G5_SHOP_PATH.'/shop.head.php');
+include_once(G5_THEME_MOBILE_PATH.'/shop/shop.head.php');
 
-$qs       = util::param("qs");
-$sort     = util::param("sort");
-$category = util::param("category");
-$event    = util::param("event");
+$qs         = util::param("qs");
+$sort       = util::param("sort");
+$recommend  = util::param("recommend");
+$wish       = util::param("wish");
+$category   = util::param("category");
+$event      = util::param("event");
 
 
 $where    = "";
+
+if(!empty($recommend)) {
+    // 추천상품 필터
+    $where .= " AND it_recommend = 'Y'";
+
+    $title = "추천상품";
+} else if(!empty($wish)) {
+    //찜한 상품 필터
+    $mb_id  = data::getLoginMember()['mb_id'];
+    $where .= " AND it_id IN (SELECT it_id FROM g5_shop_wish WHERE mb_id='{$mb_id}')";
+
+    $title = "나의 찜";
+} else {
+    $title = "검색 결과";
+}
 
 // 검색어 필터
 if(!empty($qs)) {
     $qs       = explode(" ", trim(urldecode($qs)));
     $qs_where = implode("|", $qs);
-    $where    .= "AND it_name REGEXP '".$qs_where."'";
+    $where    .= " AND it_name REGEXP '".$qs_where."'";
 }
 
 // 이벤트 필터
 if(!empty($event)) {
-    $events  = explode("|", trim($event));
-    $where  .= "AND ev_id IN (SELECT ev_id FROM g5_shop_event WHERE ev_type IN ('".implode("','", $events)."'))";
+    $events  = explode(",", trim($event));
+    $where  .= " AND ev_id IN (SELECT ev_id FROM g5_shop_event WHERE ev_type IN ('".implode("','", $events)."'))";
 } else {
     $events = array();
 }
 
 // 카테고리 필터
 if(!empty($category)) {
-    $categorys   = explode("|", trim($category));
-    $where      .= "AND ca_id IN ('".implode("','", $categorys)."')";
+    $categorys   = explode(",", trim($category));
+    $where      .= " AND ca_id IN ('".implode("','", $categorys)."')";
 } else {
     $categorys   = array();
 }
@@ -117,11 +134,11 @@ $eventArr = array(
         <p><input type="checkbox" name="category" value="<?=$v['ca_id']?>" <?=in_array($v['ca_id'], $categorys) ? 'checked':''?>  /> <?=$v['ca_name']?></p>
     <? } ?>
 
-    <button class="btn_top_filter" style="width:100%;">검 색 적 용</button>
+    <button id="btn_top_filter" class="btn_top_filter" style="width:100%;">검 색 적 용</button>
 </div>
 <!-- 상세필터 버튼 end -->
 
-<h2>검색 결과</h2>
+<h2><?=$title?></h2>
 
 <? if(count($items) <= 0) { ?>
     <p>검색결과가 존재하지 않습니다.</p>
@@ -141,7 +158,7 @@ foreach($items as $v) {
 ?>
 
 <script>
-    $("button.btn_top_filter").click(function() {
+    $("button#btn_top_filter").click(function() {
         var qs = url.getUrlParams();
         var sort = $(this).data("filter") ?? url.getUrlParam('sort');
 
@@ -154,9 +171,9 @@ foreach($items as $v) {
             categorys.push($(this).val());
         });
 
-        qs = _.set(qs, 'sort', sort);
-        if(events.length > 0)    qs = _.set(qs, 'event', events.join('|'));
-        if(categorys.length > 0) qs = _.set(qs, 'category', categorys.join('|'));
+        if(!_.isEmpty(sort)) qs = _.set(qs, 'sort', sort);
+        qs = _.set(qs, 'event', events.length > 0 ? events.join(',') : '');
+        qs = _.set(qs, 'category', categorys.length > 0 ? categorys.join(',') : '');
 
         window.location = '?' + url.httpBuildQuery(qs);
     });
@@ -174,4 +191,4 @@ foreach($items as $v) {
 <!--content end -->
 
 <?
-include_once(G5_SHOP_PATH.'/shop.tail.php');
+include_once(G5_THEME_MOBILE_PATH . '/shop/shop.tail.php');

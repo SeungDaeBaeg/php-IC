@@ -40,6 +40,8 @@ var util = {
                     isSubmit = false;
                     return false;
                 }
+            } else if((_.isBoolean(o.value) && o.value !== true) && _.isEmpty(o.value)) {
+                return true;
             }
 
             if(_.isEmpty(o.isFile)) {
@@ -67,7 +69,7 @@ var util = {
         for(var i = 0; i < list.length; i ++) {
             var item = list[i];
             item.classList.remove(className);
-        };
+        }
     },
     /**
      * 클립보드 복사
@@ -220,10 +222,11 @@ var url = {
             return jsonObj[key];
         });
 
-        return keys.filter(function(key, index) {
-            return !_.isEmpty(values[index].toString());
-        }).map(function(key, index) {
+        return keys.map(function(key, index) {
+            if(_.isEmpty(values[index])) return null;
             return key + '=' + values[index];
+        }).filter(function(string) {
+            return !_.isEmpty(string);
         }).join("&");
     },
     /**

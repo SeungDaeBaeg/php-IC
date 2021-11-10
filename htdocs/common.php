@@ -9,7 +9,10 @@ if(!$isImport) {
 
     $isImport = true;
 
+    // [IC] 추가된 공통 코드
     require 'vendor/autoload.php';
+
+    $isNavigation = true;
 
     error_reporting( E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_ERROR | E_WARNING | E_PARSE | E_USER_ERROR | E_USER_WARNING );
 

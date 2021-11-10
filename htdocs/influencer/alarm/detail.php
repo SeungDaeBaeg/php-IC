@@ -12,7 +12,7 @@ sql_update("g5_alarm_detail", array(
     'readed_at' => date('Y-m-d H:i:s')
 ), "id = {$alarmId} and readed_at IS NULL");
 
-include_once('head/alarm.php');
+include_once('head.php');
 
 sql_fetch_data("
 SELECT  a.msg
@@ -31,6 +31,4 @@ AND     ad.id = ?", $alarmData, array(data::getLoginMember()['mb_no'], $alarmId)
 
 <button onclick="javascript:history.back();" style="width:100%;">뒤로가기</button>
 
-<?
-include_once(G5_THEME_MSHOP_PATH.'/shop.tail.php');
-?>
+<? include_once(G5_THEME_MSHOP_PATH.'/shop.tail.php');
