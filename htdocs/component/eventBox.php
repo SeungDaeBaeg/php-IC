@@ -6,12 +6,17 @@
 ?>
 <div class="event_item_box">
     <div class="event_item_thumbnail">
+        <? if($private_id) { ?>
+            <div class="private_box">
+                <div>프라이빗</div>
+            </div>
+        <? } ?>
         <img src="<?=$img_url?>">
         <div class="event_badge">
             <?=$code_name?>
         </div>                
     </div>
-    <div class="event_item_content">
+    <div class="event_item_content">        
         <div><?=$ev_subject?></div>
         <?=$ev_thumbnail_content?>
         <? if($ev_link) { ?>

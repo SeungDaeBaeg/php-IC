@@ -1,0 +1,33 @@
+body {
+    background-color: #4F81BD;
+}
+
+.event_header_box {
+    padding-top: 10px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.event_header_box div {
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+}
+
+.event_header_box .event_menu_box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.event_header_box .event_menu_box div {
+    width: 30%;    
+}
+
+.event_header_box .event_menu_box div {
+    background-color: #C3D69B;
+    color: white;
+}
+
+.event_header_box .event_menu_box div.selected {
+    background-color: #C0504D;
+}

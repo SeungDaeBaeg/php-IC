@@ -13,6 +13,13 @@
 
     function joinEvent() {
         $id = util::param(array("ev_id","su_id"), "이벤트 아이디가 없습니다.");
+        
+        $ev_id = $id['ev_id'] ?? '';
+        $su_id = $id['su_id'] ?? '';
+
+        $set_id = data::setJoinEvent($ev_id,$su_id);
+
+        /* $id = util::param(array("ev_id","su_id"), "이벤트 아이디가 없습니다.");
         $mb_no = data::getLoginMember()['mb_no'];
 
         $ev_id = $id['ev_id'] ?? '';
@@ -31,6 +38,6 @@
         }
         else {
             util::ajaxResult('관리자한테 문의해주세요.',-2);
-        }
+        } */
     }
 ?>

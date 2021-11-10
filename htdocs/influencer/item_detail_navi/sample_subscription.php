@@ -57,7 +57,14 @@ if(!empty($action)) {
         $options['method'] = "post";
 
         list($error, $response) = util::curl($ajax_event_url,$options);
-        var_dump($response);
+        if(!$error) {
+            $response_arr = json_decode($response,true);
+            if($response_arr['code'] == 0) {
+                echo '<script>history.go(-1)</script>';
+                exit;
+            }
+        }
+        util::alert('등록되지 않았습니다. 관리자에게 문의해주세요.');
     }
     else {
         util::alert($id > 0 ? "정상적으로 등록이 완료되었습니다." : "등록되지 않았습니다. 관리자에게 문의해주세요.");

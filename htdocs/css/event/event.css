@@ -1,6 +1,3 @@
-.event_box {
-    padding-top: 10px;
-}
 /* 이벤트 탑 메뉴 */
 .event_box .event_top_box {
     width: 90%;
@@ -13,7 +10,6 @@
     text-align: center;
 }
 
-.event_box .event_top_box .event_menu_box,
 .event_box .event_top_box .event_type_box {
     display: flex;
     justify-content: space-between;
@@ -21,7 +17,7 @@
 
 .event_box .event_top_box .event_order_box {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;;
 }
 
 .event_box .event_top_box .event_type_box,
@@ -29,25 +25,20 @@
     margin-top: 10px;
 }
 
-.event_box .event_top_box .event_menu_box div {
-    width: 47%;    
-}
-
 .event_box .event_top_box .event_type_box div,
 .event_box .event_top_box .event_order_box div {
     width: 18%;
 }
 
-.event_box .event_top_box .event_menu_box div,
 .event_box .event_top_box .event_type_box div,
 .event_box .event_top_box .event_order_box div {
-    background-color: blue;
+    background-color: #C3D69B;
+    color: white;
 }
 
-.event_box .event_top_box .event_menu_box div.selected,
 .event_box .event_top_box .event_type_box div.selected,
 .event_box .event_top_box .event_order_box div.selected {
-    background-color: red;
+    background-color: #C0504D;
 }
 
 /*sample.php */

@@ -76,4 +76,26 @@ class data {
 
         return $items;
     }
+
+    /**
+     * 이벤트 참여 테이블로 인서트
+     */
+    public static function setJoinEvent($ev_id = '',$su_id = '') {
+        $mb_no = data::getLoginMember()['mb_no'];
+        
+        $id = sql_insert("g5_shop_party_join",array(
+            'ev_id'         =>  $ev_id,
+            'mb_no'         =>  $mb_no,
+            'su_id'         =>  $su_id
+        ));
+
+        return $id;
+
+        /* if($id > 0) {
+            util::ajaxResult('success',0,array("ev_id"=>$ev_id));
+        }
+        else {
+            util::ajaxResult('관리자한테 문의해주세요.',-2);
+        } */
+    }
 }
