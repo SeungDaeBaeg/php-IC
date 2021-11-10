@@ -27,7 +27,7 @@ if($ev_id) {
 }
 
 if(!empty($action)) {
-    $params = util::param(array('it_id', 'name', 'hp', 'email', 'sns_id', 'sns_followers', 'sns_link', 'sns_channel', 'zip_code', 'addr1', 'addr2', 'options'));
+    $params = util::param(array('it_id', 'name', 'hp', 'email', 'sns_id', 'sns_followers', 'sns_link', 'sns_channel', 'zip_code', 'addr1', 'addr2', 'options', 'referer'));
 
     $id = sql_insert("g5_subscription", array(
         'it_id'             => $params['it_id'],
@@ -44,27 +44,12 @@ if(!empty($action)) {
     ));
 
     if($ev_id) {
-        $ajax_event_url = G5_INFLUENCER_URL.'/event/ajax.event.php';
-        $params = array(
-            "action"    =>  "joinEvent",
-            "ev_id"     =>  $ev_id,
-            "su_id"     =>  $id,
-            "mb_no"     =>  $mb_no
-        );
-
-        $options = array();
-        $options['params'] = $params;
-        $options['method'] = "post";
-
-        list($error, $response) = util::curl($ajax_event_url,$options);
-        if(!$error) {
-            $response_arr = json_decode($response,true);
-            if($response_arr['code'] == 0) {
-                echo '<script>history.go(-1)</script>';
-                exit;
-            }
-        }
-        util::alert('등록되지 않았습니다. 관리자에게 문의해주세요.');
+        $set_id = data::setJoinEvent(intval($ev_id),$id);
+        $referer = $params['referer'];
+        
+        util::alert($set_id > 0 ? "정상적으로 등록이 완료되었습니다." : "등록되지 않았습니다. 관리자에게 문의해주세요.", function() use($referer) {
+            return util::location($referer);
+        });
     } else {
         util::alert($id > 0 ? "정상적으로 등록이 완료되었습니다." : "등록되지 않았습니다. 관리자에게 문의해주세요.", function() use($it_id) {
             return util::location('/shop/item.php?it_id=' . $it_id);
@@ -186,6 +171,8 @@ include_once(G5_THEME_MSHOP_PATH.'/shop.head.php');
     </tr>
 </table>
 
+<input type="hidden" id="referer" value="<?=$_SERVER['HTTP_REFERER']?>" />
+
 <p>
     <button id="subscription_complete" style="width:100%;">신청완료</button>
 </p>
@@ -252,7 +239,8 @@ include_once(G5_THEME_MSHOP_PATH.'/shop.head.php');
             {name: "zip_code",          value: $("#zip_code").val(),        validation: "우편번호를 입력해주세요."},
             {name: "addr1",             value: $("#addr1").val(),           validation: "주소를 입력해주세요."},
             {name: "addr2",             value: $("#addr2").val(),           validation: "주소상세를 입력해주세요."},
-            {name: "options",           value: options}
+            {name: "options",           value: options},
+            {name: "referer",           value: $('#referer').val()}
         ]);
     });
 </script>

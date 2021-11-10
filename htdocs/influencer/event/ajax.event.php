@@ -2,7 +2,8 @@
     include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
 
     $action = $_POST['action'] ?? '';   
-
+    
+    // ajax action값으로 밑에 함수를 호출;
     switch($action) {
         case 'joinEvent':     
             $action();
@@ -13,31 +14,14 @@
 
     function joinEvent() {
         $id = util::param(array("ev_id","su_id"), "이벤트 아이디가 없습니다.");
-        
-        $ev_id = $id['ev_id'] ?? '';
-        $su_id = $id['su_id'] ?? '';
 
-        $set_id = data::setJoinEvent($ev_id,$su_id);
+        $set_id = data::setJoinEvent(intval($id['ev_id']),intval($id['su_id']));
 
-        /* $id = util::param(array("ev_id","su_id"), "이벤트 아이디가 없습니다.");
-        $mb_no = data::getLoginMember()['mb_no'];
-
-        $ev_id = $id['ev_id'] ?? '';
-        $su_id = $id['su_id'] ?? '';
-
-        if(is_null($mb_no)) $mb_no = $_POST['mb_no'] ?? '';
-
-        $id = sql_insert("g5_shop_party_join",array(
-            'ev_id'         =>  $ev_id,
-            'mb_no'         =>  $mb_no,
-            'su_id'         =>  $su_id
-        ));
-
-        if($id > 0) {
-            util::ajaxResult('success',0,array("ev_id"=>$ev_id));
+        if($set_id > 0) {
+            util::ajaxResult('success',0,array("ev_id"=>$id['ev_id']));
         }
         else {
             util::ajaxResult('관리자한테 문의해주세요.',-2);
-        } */
+        }
     }
 ?>

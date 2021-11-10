@@ -79,8 +79,12 @@ class data {
 
     /**
      * 이벤트 참여 테이블로 인서트
+     * 
+     * @param int @ev_id 이벤트아이디
+     * @param int @su_id 샘플신청테이블 아이디
+     * @return int
      */
-    public static function setJoinEvent($ev_id = '',$su_id = '') {
+    public static function setJoinEvent(int $ev_id = 0,int $su_id = 0): int {
         $mb_no = data::getLoginMember()['mb_no'];
         
         $id = sql_insert("g5_shop_party_join",array(
@@ -90,12 +94,5 @@ class data {
         ));
 
         return $id;
-
-        /* if($id > 0) {
-            util::ajaxResult('success',0,array("ev_id"=>$ev_id));
-        }
-        else {
-            util::ajaxResult('관리자한테 문의해주세요.',-2);
-        } */
     }
 }

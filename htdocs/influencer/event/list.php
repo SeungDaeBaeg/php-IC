@@ -150,16 +150,20 @@ sql_fetch_arrays($sql, $eventBox, array($mb_no,$today,$today,$mb_id));
     });
 
     function joinEventCB(res) {
-        util.alert('참여 신청되었습니다.');
+        util.alert('참여 신청되었습니다.',{type:'instant'});
         var t = $('.event_join_box[data-id='+res.ev_id+']');
         t.text('참여완료');
         t.data('type','finish');        
+    }
+
+    function test(){
+        console.log('test');
     }
     
     $(function(){
         $("#event_top_box div[data-id='<?=$type?>']").addClass('selected');
         //샘플신청 후 back으로 돌아왔을 때 새로고침으로 정보 업데이트
-        if(window.performance.navigation.type == 2) location.reload();
+        //if(window.performance.navigation.type == 2) location.reload();
     });
 
 
