@@ -32,7 +32,7 @@ if(!empty($action)) {
     $id = sql_insert("g5_subscription", array(
         'it_id'             => $params['it_id'],
         'io_id'             => $params['options'],
-        'mb_no'             => data::getLoginMember()['mb_no'],
+        'mb_no'             => $mb_no,
         'su_name'           => $params['name'],
         'su_hp'             => $params['hp'],
         'su_zip_code'       => $params['zip_code'],
@@ -48,7 +48,8 @@ if(!empty($action)) {
         $params = array(
             "action"    =>  "joinEvent",
             "ev_id"     =>  $ev_id,
-            "su_id"     =>  $id
+            "su_id"     =>  $id,
+            "mb_no"     =>  $mb_no
         );
 
         $options = array();
@@ -213,7 +214,7 @@ include_once(G5_THEME_MSHOP_PATH.'/shop.head.php');
             options.push($(v).val());
         });
         options = options.join('');
-
+        
         util.formSubmit("", [
             {name: "action",            value: true},
             {name: "it_id",             value: "<?=$it_id?>",               validation: "상품 아이디가 없습니다."},
