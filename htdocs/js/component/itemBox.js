@@ -16,4 +16,21 @@ $(function() {
             util.alert(res.msg);
         });
     });
+
+    $(".btn-wish").click(function(event) {
+        //이벤트 버블링 중복 방지
+        event.preventDefault();
+
+        var $t = $(this);
+        data.ajax('/myshop/ajax.setWish.php', {
+            it_id: $t.data('it-id')+'',
+        }, function(res) {
+            if(res.code === 0) {
+                if(res.use === 0) $t[0].textContent = '찜 취소됨';
+                else $t[0].textContent = '찜';
+            }
+
+            util.alert(res.msg);
+        });
+    });
 });

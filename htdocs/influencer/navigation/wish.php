@@ -17,8 +17,9 @@ FROM    g5_shop_wish
 WHERE   mb_id = ?
 AND     it_id = ?", $wish, array($mb_id, $it_id));
 
-if($wish['cnt'] > 0) {
+if(intval($wish['cnt']) > 0) {
     util::alert("해당 상품은 이미 찜한 상태입니다.", true);
+    exit;
 }
 
 $id = sql_insert('g5_shop_wish', array(

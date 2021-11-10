@@ -27,7 +27,7 @@ if(!empty($recommend)) {
 } else if(!empty($wish)) {
     //찜한 상품 필터
     $mb_id  = data::getLoginMember()['mb_id'];
-    $where .= " AND it_id IN (SELECT it_id FROM g5_shop_wish WHERE mb_id='{$mb_id}')";
+    $where .= " AND it_id IN (SELECT it_id FROM g5_shop_wish WHERE mb_id='{$mb_id}' AND wi_use = 1)";
 
     $title = "나의 찜";
 } else {
@@ -139,6 +139,11 @@ $eventArr = array(
 <!-- 상세필터 버튼 end -->
 
 <h2><?=$title?></h2>
+<? if(!empty($wish)) { ?>
+    <input type="checkbox" name="wish_all"> <span>일괄선택</span>
+    <button id="btn_wish_cancel">찜하기 취소</button>
+    <button>마이샵 담기</button>
+<? } ?>
 
 <? if(count($items) <= 0) { ?>
     <p>검색결과가 존재하지 않습니다.</p>
@@ -152,7 +157,8 @@ foreach($items as $v) {
         'it_img1'       => $v['it_img1'],
         'it_name'       => $v['it_name'],
         'it_cust_price' => $v['it_cust_price'],
-        'it_price'      => $v['it_price']
+        'it_price'      => $v['it_price'],
+        'wish'          => $wish
     ));
 }
 ?>
@@ -185,6 +191,38 @@ foreach($items as $v) {
         } else {
             $div.show();
         }
+    });
+
+    // 나의찜 화면에서 일괄선택 로직
+    $('input[name=wish_all]').change(function(e) {
+        var t = $('input[name=wish]');
+        t.each(function() {
+            $(this)[0].checked = e.target.checked;
+        });
+    });
+
+    // 나의찜 화면에서 찜하기취소 버튼 클릭
+    $('button#btn_wish_cancel').click(function() {
+        // 체크된 상품들 배열 푸쉬
+        var t = $('input[name=wish]');
+        var ids = [];
+        t.each(function() {
+            var el = $(this)[0];
+            if(el.checked) ids.push(el.value+'');
+        });
+        
+        if(ids.length === 0) {
+            util.alert('찜하기 취소할 아이템이 없습니다.',{type:'instant'});
+            return;
+        }
+
+        data.ajax('/myshop/ajax.setWish.php', {
+            it_id: ids,
+        }, function(res) {
+            if(res.code === 0) {
+                util.alert('찜하기 취소를 하였습니다.',{cb:function(){location.reload();}});
+            }
+        });
     });
 </script>
 
