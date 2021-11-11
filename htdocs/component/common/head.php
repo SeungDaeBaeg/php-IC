@@ -2,6 +2,10 @@
 /**
  * 상단 메뉴
  */
+
+echo 'test';
+
+print_r($_SESSION);
 ?>
 
 
@@ -21,7 +25,7 @@
                             </i>
                             <span class="sound_only">분류열기</span>
                         <? } else { ?>
-                            <a class="btn_ol">로그인</a>
+                            <a href="/bbs/login.php?url=<?=urlencode($_SERVER['REQUEST_URI'])?>">로그인</a>
                         <? } ?>
                     </div>
 
@@ -66,14 +70,14 @@
                     <div id="top_right_menu">
                         <span><?=$loginInfo['mb_name']?>님</span>
                         | <a href="<?=G5_BBS_URL?>/logout.php">로그아웃</a>
-                        | <a href="/influencer/search.php?wish=Y">나의 찜</a>
+                        | <a href="/influencer/search?wish=Y">나의 찜</a>
                         | <a href="/influencer/alarm/list.php">알림</a>
                         | <a href="/influencer/tail/info.php">마이페이지</a>
                         | <a>문의센터</a>
                     </div>
                 <? } else { ?>
-                    <a class="btn_ol">로그인</a>
-                    | <a>문의센터</a>
+                    <a href="/bbs/login.php?url=<?=urlencode($_SERVER['REQUEST_URI'])?>">로그인</a> |
+                    <a>문의센터</a>
                 <? } ?>
 
                 <hr/>
@@ -86,7 +90,7 @@
                 <div class="menu_wr">
                     <ul class="cate">
                         <li>
-                            <a href="/influencer/search.php?recommend=Y">추천</a>
+                            <a href="/influencer/search?recommend=Y">추천</a>
                         </li>
                         <li>
                             <a href="/influencer/event/list.php">이벤트</a>

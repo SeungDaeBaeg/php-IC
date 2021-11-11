@@ -1721,6 +1721,11 @@ function sql_update(string $table, array $record, string $where): bool {
     return $g5['connect_db']->autoExecute($table, $record, 'UPDATE', $where);
 }
 
+function sql_delete(string $table, string $where): bool {
+    global $g5;
+    return $g5['connect_db']->autoExecute($table, $record, 'UPDATE', $where);
+}
+
 // $result에 대한 메모리(memory)에 있는 내용을 모두 제거한다.
 // sql_free_result()는 결과로부터 얻은 질의 값이 커서 많은 메모리를 사용할 염려가 있을 때 사용된다.
 // 단, 결과 값은 스크립트(script) 실행부가 종료되면서 메모리에서 자동적으로 지워진다.

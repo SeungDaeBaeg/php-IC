@@ -4,7 +4,7 @@
  *
  * @todo: [승대] 검색결과 페이지 코딩 필요
  */
-include_once('./_common.php');
+include_once('../_common.php');
 
 define("_INDEX_", true);
 include_once(G5_THEME_MOBILE_PATH.'/shop/shop.head.php');
@@ -142,7 +142,7 @@ $eventArr = array(
 <? if(!empty($wish)) { ?>
     <input type="checkbox" name="wish_all"> <span>일괄선택</span>
     <button id="btn_wish_cancel">찜하기 취소</button>
-    <button>마이샵 담기</button>
+    <button id="btn_myshop_get">마이샵 담기</button>
 <? } ?>
 
 <? if(count($items) <= 0) { ?>
@@ -222,6 +222,24 @@ foreach($items as $v) {
             if(res.code === 0) {
                 util.alert('찜하기 취소를 하였습니다.',{cb:function(){location.reload();}});
             }
+        });
+    });
+
+    //마이샵 담기
+    $("#btn_myshop_get").click(function() {
+
+        var it_ids = [];
+
+        $(".chk_wish:checked").each(function() {
+            it_ids.push($(this).val());
+        });
+
+        data.ajax('ajax.setMyshop.php', {
+            it_ids: it_ids
+        }, function(res) {
+            util.alert(res.msg, {
+                type: 'instant'
+            });
         });
     });
 </script>

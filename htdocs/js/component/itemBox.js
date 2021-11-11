@@ -1,5 +1,5 @@
 $(function() {
-    $(".btn-add-recommend").click(function(event) {
+    $(".btn_add_recommend").click(function(event) {
         //이벤트 버블링 중복 방지
         event.preventDefault();
 
@@ -17,7 +17,7 @@ $(function() {
         });
     });
 
-    $(".btn-wish").click(function(event) {
+    $(".btn_wish").click(function(event) {
         //이벤트 버블링 중복 방지
         event.preventDefault();
 

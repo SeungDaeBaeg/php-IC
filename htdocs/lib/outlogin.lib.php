@@ -57,8 +57,6 @@ function outlogin($skin_dir='basic', $is_login)
     ob_start();
     if ($is_member && $is_login === true)
         include_once ($outlogin_skin_path.'/outlogin.skin.2.php');
-    else if($is_login === false)// 로그인 전이라면
-        include_once ($outlogin_skin_path.'/outlogin.skin.1.php');
 
     $content = ob_get_contents();
     ob_end_clean();

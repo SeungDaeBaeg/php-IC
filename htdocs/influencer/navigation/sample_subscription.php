@@ -16,12 +16,11 @@ $mb_no = data::getLoginMember()['mb_no'];
 //이벤트로 들어온거는 event_party_join들어가서 참여내역을 보여줘야된다.
 if($ev_id) {
     $sql = "
-    SELECT party.it_id
-    FROM g5_shop_party party, g5_shop_event event
-    WHERE party.ev_id = ?
-    AND party.ev_id = event.ev_id";
-
-    sql_fetch_data($sql,$res,array($ev_id));
+    SELECT  party.it_id
+    FROM    g5_shop_party party, g5_shop_event event
+    WHERE   party.ev_id = ?
+    AND     party.ev_id = event.ev_id";
+    sql_fetch_data($sql,$res, array($ev_id));
     
     $it_id = $res['it_id'];
 }
@@ -29,26 +28,29 @@ if($ev_id) {
 if(!empty($action)) {
     $params = util::param(array('it_id', 'name', 'hp', 'email', 'sns_id', 'sns_followers', 'sns_link', 'sns_channel', 'zip_code', 'addr1', 'addr2', 'options', 'referer'));
 
-    $id = sql_insert("g5_subscription", array(
+    $p = array(
         'it_id'             => $params['it_id'],
         'io_id'             => $params['options'],
         'mb_no'             => $mb_no,
-        'su_name'           => $params['name'],
-        'su_hp'             => $params['hp'],
-        'su_zip_code'       => $params['zip_code'],
-        'su_addr1'          => $params['addr1'],
-        'su_addr2'          => $params['addr2'],
-        'su_sns_channel'    => $params['sns_channel'],
-        'su_sns_followers'  => $params['sns_followers'],
-        'su_sns_link'       => $params['sns_link']
-    ));
+        'join_name'         => $params['name'],
+        'join_hp'           => $params['hp'],
+        'join_zip_code'     => $params['zip_code'],
+        'join_addr1'        => $params['addr1'],
+        'join_addr2'        => $params['addr2'],
+        'sns_channel'       => $params['sns_channel'],
+        'sns_follower'      => $params['sns_followers'],
+        'sns_link'          => $params['sns_link']
+    );
 
     if($ev_id) {
-        $set_id = data::setJoinEvent(intval($ev_id),$id);
-        $referer = $params['referer'];
-        
-        util::alert($set_id > 0 ? "정상적으로 등록이 완료되었습니다." : "등록되지 않았습니다. 관리자에게 문의해주세요.", function() use($referer) {
-            return util::location($referer);
+        $p['ev_id'] = $ev_id;
+    }
+
+    $id = sql_insert("g5_shop_party_join", $p);
+
+    if($ev_id) {
+        util::alert($id > 0 ? "정상적으로 등록이 완료되었습니다." : "등록되지 않았습니다. 관리자에게 문의해주세요.", function() use($params) {
+            return util::location($params['referer']);
         });
     } else {
         util::alert($id > 0 ? "정상적으로 등록이 완료되었습니다." : "등록되지 않았습니다. 관리자에게 문의해주세요.", function() use($it_id) {
@@ -166,7 +168,8 @@ include_once(G5_THEME_MSHOP_PATH.'/shop.head.php');
     </tr>
     <tr style="height: 18px;">
         <td>
-            <input type="text" id="addr2" value="<?=$member['mb_addr2']?>" readonly />
+            <input type="text" id="addr2" value="<?=$member['mb_addr2']?>" />
+            <button id="post_btn">우편번호</button>
         </td>
     </tr>
 </table>

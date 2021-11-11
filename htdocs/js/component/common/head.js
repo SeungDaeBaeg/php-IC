@@ -1,4 +1,4 @@
-$( document ).ready( function() {
+$(function() {
     var jbOffset = $( '#hd_wr' ).offset();
     $( window ).scroll( function() {
         if ( $( document ).scrollTop() > jbOffset.top ) {
@@ -8,34 +8,24 @@ $( document ).ready( function() {
             $( '#hd_wr' ).removeClass( 'fixed' );
         }
     });
-});
 
-$("#btn_cate").on("click", function() {
-    $("#category").show();
-});
+    $("#btn_cate").click(function() {
+        $("#category").show();
+    });
 
-$(".cate_bg").on("click", function() {
-    $(".menu").hide();
-});
+    $(".cate_bg").click(function() {
+        $(".menu").hide();
+    });
 
-$(".btn_ol").on("click", function() {
-    $(".ol").show();
-});
+    $(".ol .btn_close").click(function() {
+        $(".ol").hide();
+    });
 
-$(".ol .btn_close").on("click", function() {
-    $(".ol").hide();
-});
+    $("#btn_sch, #hd_sch .btn_close").click(function() {
+        $("#hd_sch").show();
+    });
 
-$("#btn_sch").on("click", function() {
-    $("#hd_sch").show();
-});
-
-$("#hd_sch .btn_close").on("click", function() {
-    $("#hd_sch").hide();
-});
-
-$(function (){
-    $("button.sub_ct_toggle").on("click", function() {
+    $("button.sub_ct_toggle").click(function() {
         var $this = $(this);
         $sub_ul = $(this).closest("li").children("ul.sub_cate");
 
@@ -71,7 +61,7 @@ $(function (){
 
     $("#btn_search, #btn_search_mobile").click(function() {
         var searchTxt = encodeURIComponent($("#" + ($(this).attr("id") === 'btn_search' ? 'txt_search' : 'txt_search_mobile')).val());
-        util.formSubmit('/influencer/search.php', [
+        util.formSubmit('/influencer/search', [
             {name: 'qs',            value: searchTxt},
             {name: 'recommend',     value: url.getUrlParam('recommend')}
         ], {
@@ -80,14 +70,3 @@ $(function (){
         });
     });
 });
-
-function search_submit(f) {
-    if (f.q.value.length < 2) {
-        alert("검색어는 두글자 이상 입력하십시오.");
-        f.q.select();
-        f.q.focus();
-        return false;
-    }
-
-    return true;
-}

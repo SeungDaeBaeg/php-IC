@@ -18,7 +18,7 @@
         });
 
         $(".category_list").click(function() {
-            window.location = "/influencer/search.php?category=" + $(this).data('ca-id');
+            window.location = "/influencer/search?category=" + $(this).data('ca-id');
         });
     });
 </script>

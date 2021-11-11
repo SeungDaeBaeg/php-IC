@@ -32,13 +32,13 @@
                 $("#category").show();
             });
             $("#reco_btn").click(function() {
-                location.href = '/influencer/search.php?recommend=Y';
+                location.href = '/influencer/search?recommend=Y';
             });
             $("#info_btn").click(function() {
                 location.href = '/influencer/tail/info.php';
             });
             $("#wish_btn").click(function() {
-                location.href = '/influencer/search.php?wish=Y';
+                location.href = '/influencer/search?wish=Y';
             });
         });
     </script>

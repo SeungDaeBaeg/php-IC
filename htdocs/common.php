@@ -225,20 +225,20 @@ if(!$isImport) {
     @ini_set("session.use_trans_sid", 0);    // PHPSESSID를 자동으로 넘기지 않음
     @ini_set("url_rewriter.tags",""); // 링크에 PHPSESSID가 따라다니는것을 무력화함 (해뜰녘님께서 알려주셨습니다.)
 
-    session_save_path(G5_SESSION_PATH);
+    @session_save_path(G5_SESSION_PATH);
 
     if (isset($SESSION_CACHE_LIMITER))
         @session_cache_limiter($SESSION_CACHE_LIMITER);
     else
         @session_cache_limiter("no-cache, must-revalidate");
 
-    ini_set("session.cache_expire", 180); // 세션 캐쉬 보관시간 (분)
-    ini_set("session.gc_maxlifetime", 10800); // session data의 garbage collection 존재 기간을 지정 (초)
-    ini_set("session.gc_probability", 1); // session.gc_probability는 session.gc_divisor와 연계하여 gc(쓰레기 수거) 루틴의 시작 확률을 관리합니다. 기본값은 1입니다. 자세한 내용은 session.gc_divisor를 참고하십시오.
-    ini_set("session.gc_divisor", 100); // session.gc_divisor는 session.gc_probability와 결합하여 각 세션 초기화 시에 gc(쓰레기 수거) 프로세스를 시작할 확률을 정의합니다. 확률은 gc_probability/gc_divisor를 사용하여 계산합니다. 즉, 1/100은 각 요청시에 GC 프로세스를 시작할 확률이 1%입니다. session.gc_divisor의 기본값은 100입니다.
+    @ini_set("session.cache_expire", 180); // 세션 캐쉬 보관시간 (분)
+    @ini_set("session.gc_maxlifetime", 10800); // session data의 garbage collection 존재 기간을 지정 (초)
+    @ini_set("session.gc_probability", 1); // session.gc_probability는 session.gc_divisor와 연계하여 gc(쓰레기 수거) 루틴의 시작 확률을 관리합니다. 기본값은 1입니다. 자세한 내용은 session.gc_divisor를 참고하십시오.
+    @ini_set("session.gc_divisor", 100); // session.gc_divisor는 session.gc_probability와 결합하여 각 세션 초기화 시에 gc(쓰레기 수거) 프로세스를 시작할 확률을 정의합니다. 확률은 gc_probability/gc_divisor를 사용하여 계산합니다. 즉, 1/100은 각 요청시에 GC 프로세스를 시작할 확률이 1%입니다. session.gc_divisor의 기본값은 100입니다.
 
-    session_set_cookie_params(0, '/');
-    ini_set("session.cookie_domain", G5_COOKIE_DOMAIN);
+    @session_set_cookie_params(0, '/');
+    @ini_set("session.cookie_domain", G5_COOKIE_DOMAIN);
 
     function chrome_domain_session_name(){
         // 크롬90버전대부터 아래 도메인을 포함된 주소로 접속시 특정조건에서 세션이 생성 안되는 문제가 있을수 있다.

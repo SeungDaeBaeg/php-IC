@@ -1,0 +1,29 @@
+
+div.btn_add_recommend {
+    position: absolute;
+    left:5px;
+    top:0px;
+    width:5rem;
+    height:5rem;
+    background-color: red
+}
+
+div.btn_wish {
+    position: absolute;
+    right:0px;
+    bottom:38px;
+    width:5rem;
+    height:5rem;
+    background-color: red
+}
+
+.chk_wish {
+    position: absolute;
+    right:0px;
+    top:0px;
+}
+
+.img_wish {
+    width:100%;
+    height:auto;
+}

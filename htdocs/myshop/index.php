@@ -15,16 +15,18 @@ $isAdmin = false;
 if(empty($mb_id)) {
     $mb_id = data::getLoginMember()['mb_id'];
     if(empty($mb_id)) {
-        util::alert("로그인해주세요.");
-        util::location(G5_URL);
+        util::alert("로그인해주세요.", function() {
+            return util::location(G5_URL);
+        });
     }
 
     $isAdmin = true;
 }
 
 if(!data::isInfluencer($mb_id)) {
-    util::alert("해당 회원은 인플루언서가 아닙니다.");
-    util::location(G5_URL);
+    util::alert("해당 회원은 인플루언서가 아닙니다.", function() {
+        return util::location(G5_URL);
+    });
 }
 
 //회원 정보 로드
@@ -61,7 +63,7 @@ if(empty($myshopData)) {
 $myshopName = $myshopData['in_myshop_name'] ?? $m['mb_name'] . '의 공구마켓';
 
 //상품 정보 로드
-$items = data::getAvailbleItems();
+$items = data::getAvailbleItems("AND it_id IN (SELECT it_id FROM g5_myshop_item WHERE mb_no={$m['mb_no']})");
 ?>
 
 <div style="width:100%; text-align: center;">
@@ -126,4 +128,4 @@ $items = data::getAvailbleItems();
         });
     });
 </script>
-<?include_once(G5_SHOP_PATH.'/shop.tail.php');
+<? include_once(G5_THEME_MSHOP_PATH.'/shop.tail.php');
