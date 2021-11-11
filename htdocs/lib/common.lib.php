@@ -1721,9 +1721,15 @@ function sql_update(string $table, array $record, string $where): bool {
     return $g5['connect_db']->autoExecute($table, $record, 'UPDATE', $where);
 }
 
+/**
+ * SQL DELETE
+ * @param string $table
+ * @param string $where
+ * @return bool
+ */
 function sql_delete(string $table, string $where): bool {
     global $g5;
-    return $g5['connect_db']->autoExecute($table, $record, 'UPDATE', $where);
+    return $g5['connect_db']->execute("DELETE FROM {$table} WHERE {$where}") > 0;
 }
 
 // $result에 대한 메모리(memory)에 있는 내용을 모두 제거한다.
