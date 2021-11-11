@@ -1,7 +1,24 @@
-<div>
+
+<div class="main_container_best">
     <a href="<?=$param['detail_url']?>">
-        <img style="width:100%;height:auto;" alt="" src="<?=url::getThumbnailUrl($param['it_img1'])?>" />
-        <p><b><?=$param['it_name']?></b></p>
-        <p>정상가 : <?=$param['it_cust_price']?> / 할인가 : <?=$param['it_price']?> / 할인율 : <?=util::percent($param['it_cust_price'], $param['it_price'])?>%</p>
+        <div class="label">
+            <p>판매당</p>
+            <span>170,000</span>원
+        </div>
+        <div class="product_body">
+            <img style="width:100%;height:auto;" alt="" src="<?=url::getThumbnailUrl($param['it_img1'])?>" />
+        </div>
+        <div class="product_foot">
+            <p class="font_style_product_title"><?=$param['it_name']?></p>
+            <span class="product_text main_font_color">
+                <span class="font_eng_number"><?=util::percent($param['it_cust_price'], $param['it_price'])?></span><span class="product_text_small">%</span>
+            </span>
+            <span class="product_text">
+                <span class="font_eng_number"><?=$param['it_price']?></span><span class="product_text_small">원</span>
+            </span>
+            <span class="product_text product_text_small">
+                <span class="font_eng_number"><?=$param['it_cust_price']?></span>원
+            </span>
+        </div>
     </a>
 </div>

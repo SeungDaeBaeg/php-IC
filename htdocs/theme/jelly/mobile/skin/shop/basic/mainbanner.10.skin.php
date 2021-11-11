@@ -54,7 +54,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         }
         echo '</li>'.PHP_EOL;
 
-       
+
     }
 }
 
@@ -63,7 +63,6 @@ if ($i > 0) {
 
     echo '</div>'.PHP_EOL;
 ?>
-
 <script>
 jQuery(function($){
     var slider = $('.slide-wrap').show().bxSlider({
@@ -72,13 +71,27 @@ jQuery(function($){
         auto: true,
         useCSS : false,
         controls:true,
-        pager:true,
         adaptiveHeight: true,
         onSlideAfter : function(){
             slider.startAuto();
+        },
+        onSlideBefore: function ($slideElement, oldIndex, newIndex){
+            var current_index = parseInt(newIndex + 1);
+            if(current_index > 8){
+                $('#main-counter .current').text(current_index);
+            }else{
+                $('#main-counter .current').text('0' + current_index);
+            };
         }
     });
+    if(slider.getSlideCount() > 9){
+        $('#main-counter .total').text(slider.getSlideCount());
+    }else{
+        $('#main-counter .total').text('0' + slider.getSlideCount());
+    };
+
 });
+
 </script>
 
 <?php

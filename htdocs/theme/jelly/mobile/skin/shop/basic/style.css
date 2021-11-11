@@ -24,11 +24,57 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f6fb', end
 #down{position:absolute;bottom:0;right:0;background:url(img/btn_sb_next.png) no-repeat 50% 50%;width:30px;height:20px;text-indent:-999px;overflow:hidden;border:1px solid #ccc;}
 
 /*메인배너*/
-#main_bn{width:100%;z-index:1;position:relative}
-#main_bn ul li {height:600px;-webkit-transition: all 0.30s ease-in-out;
+.mainbanner_box{
+    position: relative;
+}
+#main-counter{
+    position: absolute;
+    bottom:30px;
+    right:25px;
+    width: 75px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 25px;
+    z-index: 2;
+    background: rgba(0,0,0,0.6);
+    font-size:13px;
+    text-align: center;
+    color:#fff;
+}
+#main-counter .current{
+    position: absolute;
+    left: 12px;
+}
+#main-counter .total{
+    position: absolute;
+    left: 41px;
+}
+.counter_icon01{
+    position: absolute;
+    top: 0;
+    left:32px;
+    font-size:7px;
+}
+.counter_icon02{
+    position: absolute;
+    top:0px;
+    right:6px;
+    font-size:15px;
+}
+#main_bn{
+    padding:15px 10px 0 10px;
+    width:100%;
+    z-index:1;
+    position:relative;
+}
+#main_bn ul li {
+    border-radius: 20px 20px 0 0; overflow: hidden;
+    height:600px;-webkit-transition: all 0.30s ease-in-out;
 -moz-transition: all 0.30s ease-in-out;
 -ms-transition: all 0.30s ease-in-out;
--o-transition: all 0.30s ease-in-out;}
+-o-transition: all 0.30s ease-in-out;
+}
+
 #main_bn .bn-img{display:block;height:100%;width:100%;background-size:100% 100%;background-position:top center;
 background-size:cover; 
 -webkit-background-size: cover;

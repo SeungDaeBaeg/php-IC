@@ -38,7 +38,9 @@ if(data::isLogin()) {
 }
 
 ?>
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet">
 <header id="hd">
     <?php if ((!$bo_table || $w == 's' ) && defined('_INDEX_')) { ?><h1><?=$config['cf_title'] ?></h1><?php } ?>
 
@@ -66,11 +68,11 @@ if(data::isLogin()) {
                 </div>
 
                 <a href="<?=G5_SHOP_URL; ?>/">
-                    <img src="<?=G5_DATA_URL; ?>/common/logo.jpg" alt="<?=$config['cf_title']; ?> 메인">
+                    <img src="<?=G5_DATA_URL; ?>/common/logo.png" alt="<?=$config['cf_title']; ?> 메인">
                 </a>
 
                 <? if(!empty(data::getLoginInfo())) { ?>
-                    <div id="top_left_alram" class="visible-mobile" style="position:absolute;right:0px;top:0px;height:25px;line-height:25px;">
+                    <div id="top_left_alram" class="visible-mobile" >
                         <a href="/influencer/alarm/list.php"><i class="fa fa-bell"></i><span class="sound_only">알람</span>(<?=number_format($alarmCnt['cnt'])?>)</a>
                     </div>
                 <? } ?>
@@ -81,9 +83,9 @@ if(data::isLogin()) {
         </div>
 
         <!-- @todo: [승대] 상품 모바일용 검색창 -->
-        <div class="visible-mobile">
-            <input type="text" id="txt_search_mobile" style="width:79%;" value="<?=$searchTxt?>"/>
-            <button style="width:20%" id="btn_search_mobile">검색</button>
+        <div class="visible-mobile txt_search_mobile_box">
+            <input type="text" id="txt_search_mobile" placeholder="검색어를 입력하세요" value="<?=$searchTxt?>"/>
+            <button id="btn_search_mobile">검색</button>
         </div>
 
         <div class="visible-pc">
